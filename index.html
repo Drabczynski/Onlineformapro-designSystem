@@ -1,0 +1,2773 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design System - OnlineManager</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@300..900&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Geist:wght@100..900&family=Manrope:wght@200..800&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Overpass+Mono:wght@300..700&family=Overpass:ital,wght@0,100..900;1,100..900&family=Stack+Sans+Headline:wght@200..700&family=Yellowtail&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    :root {
+      /* Core Colors */
+      --a: #E2006E;
+      --a-rgb: 226, 0, 110;
+      --a1: #FFF0F6;
+      --a2: #FDDAED;
+
+      /* Neutral Colors */
+      --t1: #111827;
+      --t2: #4B5563;
+      --t3: #9CA3AF;
+      --bd: #E5E7EB;
+      --bg: #F3F4F6;
+      --ps: #F7F8FA;
+
+      /* Sidebar / Reporting colors */
+      --sb-dark: #13041c;
+      --sb-rep: #0A032D;
+
+      /* Sizes & Radius */
+      --sw: 220px;
+      --ch: 36px;
+      --r: 8px;
+      --rl: 12px;
+
+      /* System Transitions */
+      --trans: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fff;
+      color: var(--t1);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Layout */
+    .ds-sidebar {
+      width: 260px;
+      border-right: 1px solid var(--bd);
+      padding: 32px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      background: var(--ps);
+    }
+
+    .ds-main {
+      flex: 1;
+      padding: 60px 80px;
+      max-width: 1400px;
+    }
+
+    /* DS Menu */
+    .ds-logo {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--a);
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .ds-logo .dot {
+      width: 12px;
+      height: 12px;
+      background: var(--a);
+      border-radius: 4px;
+    }
+
+    .ds-nav-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--t3);
+      margin-bottom: 16px;
+      margin-top: 32px;
+    }
+
+    .ds-nav-item {
+      padding: 10px 0;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--t2);
+      cursor: pointer;
+      display: block;
+      text-decoration: none;
+      transition: var(--trans);
+    }
+
+    .ds-nav-item:hover {
+      color: var(--a);
+      padding-left: 4px;
+    }
+
+    /* Sections */
+    section {
+      margin-bottom: 80px;
+    }
+
+    .section-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--t1);
+    }
+
+    .section-desc {
+      font-size: 16px;
+      color: var(--t2);
+      margin-bottom: 40px;
+      line-height: 1.6;
+    }
+
+    /* Grid Display */
+    .ds-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    /* Color Swatch */
+    .swatch-card {
+      border: 1px solid var(--bd);
+      border-radius: var(--rl);
+      overflow: hidden;
+    }
+
+    .swatch-color {
+      height: 120px;
+    }
+
+    .swatch-info {
+      padding: 16px;
+    }
+
+    .swatch-name {
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .swatch-hex {
+      font-size: 12px;
+      color: var(--t3);
+      font-family: monospace;
+    }
+
+    /* Typography Showcase */
+    .typo-row {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--bd);
+    }
+
+    .typo-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--t3);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Component Preview */
+    .preview-box {
+      border: 1px solid var(--bd);
+      border-radius: var(--rl);
+      padding: 40px;
+      background: var(--bg);
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: relative;
+    }
+
+    .preview-label {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      background: #fff;
+      padding: 4px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--bd);
+      color: var(--t3);
+    }
+
+    .code-box {
+      background: #1e1e1e;
+      color: #dcdcdc;
+      padding: 20px;
+      border-radius: var(--r);
+      font-family: monospace;
+      font-size: 13px;
+      overflow-x: auto;
+      line-height: 1.5;
+    }
+
+    /* REPLICATING EXISTING CLASSES FROM TABLEAUX.HTML */
+
+    /* Buttons */
+    .btn {
+      height: 38px;
+      padding: 0 20px;
+      border-radius: var(--r);
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.1s;
+      border: 1px solid var(--bd);
+      background: #fff;
+      color: var(--t2);
+    }
+
+    .btn:hover {
+      background: var(--ps);
+    }
+
+    .btn.primary {
+      background: var(--a);
+      color: #fff;
+      border: none;
+    }
+
+    .btn.primary:hover {
+      background: #c2005d;
+    }
+
+    /* Blocks & Cards */
+    .fs-block {
+      background: rgba(255, 255, 255, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      border-radius: 12px;
+      padding: 20px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+    }
+
+    .fs-header {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 18px;
+      align-items: center;
+    }
+
+    .fs-icon {
+      width: 28px;
+      height: 28px;
+      background: #fff;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      color: var(--a);
+    }
+
+    .fs-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--t1);
+    }
+
+    .fs-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 16px;
+      border: 1px solid rgba(0, 0, 0, 0.03);
+    }
+
+    .pcard {
+      background: #fff;
+      border: 1px solid var(--bd);
+      border-radius: var(--rl);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, .04);
+      padding: 20px 24px;
+      position: relative
+    }
+
+    /* Badges */
+    .pbadge {
+      height: 24px;
+      padding: 0 12px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    .pbadge.filled {
+      background: var(--a);
+      color: #fff;
+    }
+
+    .pbadge.outline {
+      background: transparent;
+      border: 1.5px solid var(--a);
+      color: var(--a);
+    }
+
+    .pbadge.green {
+      background: #ECFDF5;
+      color: #059669;
+      border: 1px solid #A7F3D0;
+    }
+
+    .pbadge.gray {
+      background: var(--bg);
+      color: var(--t2);
+      border: 1px solid var(--bd);
+    }
+
+    /* Forms */
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-field label {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #64748B;
+    }
+
+    .form-input {
+      width: 100%;
+      height: 38px;
+      padding: 0 12px;
+      font-size: 13.5px;
+      font-family: inherit;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      outline: none;
+      transition: all 0.15s;
+    }
+
+    .form-input:focus {
+      border-color: #3B82F6;
+      box-shadow: 0 0 0 3px #EFF6FF;
+    }
+
+    /* Icons */
+    .icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      border: 1px solid var(--bd);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+    }
+
+    .icon-box svg {
+      width: 20px;
+      height: 20px;
+      stroke-width: 1.8;
+      color: var(--t2);
+    }
+
+    /* ── WIDGET STATS (Reporting / Lemlist-style) ── */
+    .w {
+      background: #fff;
+      border: 1px solid var(--bd);
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+
+    .w-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--bd);
+    }
+
+    .w-ico {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .w-ico svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    .w-title {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--t1);
+      flex: 1;
+    }
+
+    .w-info {
+      color: var(--t3);
+      display: flex;
+      align-items: center;
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    .w-info svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    .w-controls {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .w-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 40px;
+      height: 28px;
+      padding: 0 10px;
+      background: #2563EB;
+      color: #fff;
+      border-radius: 7px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .w-ctrl-btn {
+      height: 28px;
+      padding: 0 10px;
+      border: 1px solid var(--bd);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--t2);
+      font-size: 12.5px;
+      font-family: inherit;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .w-ctrl-btn:hover {
+      background: var(--ps);
+    }
+
+    .w-ctrl-btn svg {
+      width: 11px;
+      height: 11px;
+      flex-shrink: 0;
+    }
+
+    /* Ligne de filtres secondaire (sous le header) */
+    .w-filters {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-bottom: 1px solid var(--bd);
+    }
+
+    .w-filter-btn {
+      height: 28px;
+      padding: 0 10px;
+      border: 1px solid var(--bd);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--t2);
+      font-size: 12.5px;
+      font-family: inherit;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .w-filter-btn:hover {
+      background: var(--ps);
+    }
+
+    .w-filter-btn svg {
+      width: 11px;
+      height: 11px;
+    }
+
+    .w-filter-sep {
+      margin-left: auto;
+    }
+
+    .w-dots {
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 7px;
+      border: 1px solid var(--bd);
+      background: #fff;
+      cursor: pointer;
+      color: var(--t2);
+    }
+
+    .w-dots svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* ═══════════════════════════════════════
+       ── DROPDOWNS STYLE (from statistiques.html) ──
+    ═══════════════════════════════════════ */
+    .w-dd-wrap {
+      position: relative;
+      display: inline-block;
+    }
+
+    .w-dd-btn {
+      height: 32px;
+      padding: 0 12px;
+      border: none;
+      border-radius: 6px;
+      background: linear-gradient(0deg, #fbfbfb 0, #fff 100%);
+      box-shadow: 0 1px 3px 0 #0000000a, inset 0 0 0 1px #efefef !important;
+      color: #334155;
+      font-size: 13px;
+      font-family: inherit;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+
+    .w-dd-btn:hover {
+      background: #F8FAFC;
+    }
+
+    .w-dd-btn svg.chev {
+      width: 14px;
+      height: 14px;
+      color: #475569;
+      transition: transform 0.2s ease;
+    }
+
+    .w-dd-wrap.open .w-dd-btn svg.chev {
+      transform: rotate(180deg);
+    }
+
+    .w-dd-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 4px);
+      right: 0;
+      background: #fff;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      min-width: 160px;
+      z-index: 200;
+      padding: 6px 0;
+      flex-direction: column;
+    }
+
+    .w-dd-wrap.open .w-dd-menu {
+      display: flex;
+    }
+
+    .w-dd-item {
+      padding: 8px 16px;
+      font-size: 13px;
+      color: #334155;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: background 0.2s;
+    }
+
+    .w-dd-item:hover {
+      background: #F8FAFC;
+    }
+
+    .w-dd-item.active {
+      background: #EFF6FF;
+      color: #334155;
+    }
+
+    .w-dd-item input[type=checkbox] {
+      width: 14px;
+      height: 14px;
+      accent-color: var(--a);
+      flex-shrink: 0;
+    }
+
+    /* Corps vide — empty state */
+    .w-body {
+      flex: 1;
+      min-height: 260px;
+      background: #F5F6F8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 32px 24px;
+    }
+
+    .empty-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 5px;
+      opacity: 0.22;
+    }
+
+    .empty-bar {
+      background: var(--t3);
+      border-radius: 3px 3px 0 0;
+      width: 10px;
+    }
+
+    .empty-msg {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: #fff;
+      border: 1px solid var(--bd);
+      border-radius: 8px;
+      padding: 7px 14px;
+      font-size: 12.5px;
+      color: var(--t3);
+    }
+
+    .empty-msg svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+
+    /* Table des tailles */
+    .sizing-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border: 1px solid var(--bd);
+      border-radius: var(--rl);
+      overflow: hidden;
+    }
+
+    .sizing-table th,
+    .sizing-table td {
+      padding: 14px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--bd);
+    }
+
+    .sizing-table th {
+      background: var(--bg);
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--t3);
+    }
+
+    .sizing-table .var-value {
+      font-family: monospace;
+      background: var(--ps);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+
+    /* ── NEW FORM ELEMENTS (Refined) ── */
+    .form-card-check {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      border: 1px solid #E2E8F0;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+      background: #fff;
+      position: relative;
+    }
+
+    .form-card-check:hover {
+      border-color: #CBD5E1;
+      background: #F8FAFC;
+    }
+
+    .form-card-check input {
+      display: none;
+    }
+
+    .form-card-check .check-circle {
+      width: 22px;
+      height: 22px;
+      border: 1.5px solid #D1D5DB;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+      background: #fff;
+    }
+
+    .form-card-check.active {
+      border-color: var(--a);
+      background: #FFF1F7;
+    }
+
+    .form-card-check.active .check-circle {
+      border-color: var(--a);
+      border-width: 2px;
+    }
+
+    .form-card-check.active .check-circle::after {
+      content: '';
+      width: 10px;
+      height: 10px;
+      background: var(--a);
+      border-radius: 50%;
+    }
+
+    .form-card-check .check-label {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--t1);
+    }
+
+    /* Toggle Switch */
+    .form-switch {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+    }
+
+    .form-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .form-switch .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #D1D5DB;
+      transition: .3s;
+      border-radius: 34px;
+    }
+
+    .form-switch .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .3s;
+      border-radius: 50%;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-switch input:checked+.slider {
+      background-color: var(--a);
+    }
+
+    .form-switch input:checked+.slider:before {
+      transform: translateX(20px);
+    }
+
+      /* ── MODAL STYLES ── */
+      .modal-preview-wrap {
+        background: #F1F5F9;
+        border-radius: var(--rl);
+        padding: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--bd);
+      }
+
+      .modal-mock {
+        background: #fff;
+        border-radius: 16px;
+        width: 100%;
+        max-width: 520px;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        overflow: hidden;
+        border: 1px solid var(--bd);
+      }
+
+      .modal-header {
+        padding: 18px 24px;
+        border-bottom: 1px solid var(--bd);
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .modal-header .modal-icon {
+        width: 42px;
+        height: 42px;
+        background: #FFF1F7;
+        color: var(--a);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .modal-header .modal-title-wrap {
+        flex: 1;
+      }
+
+      .modal-header .modal-title {
+        font-size: 17px;
+        font-weight: 700;
+        color: var(--t1);
+        margin-bottom: 2px;
+      }
+
+      .modal-header .modal-subtitle {
+        font-size: 13px;
+        color: #64748B;
+      }
+
+      .modal-close {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        border: none;
+        background: #F1F5F9;
+        color: #64748B;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--trans);
+      }
+
+      .modal-close:hover {
+        background: #E2E8F0;
+        color: var(--t1);
+      }
+
+      .modal-body {
+        padding: 24px;
+      }
+
+      .modal-footer {
+        padding: 16px 24px;
+        border-top: 1px solid var(--bd);
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        background: #F8FAFC;
+      }
+
+      .drop-zone {
+        border: 2px dashed #E2E8F0;
+        border-radius: 14px;
+        padding: 40px;
+        text-align: center;
+        transition: var(--trans);
+        cursor: pointer;
+        background: #FBFCFE;
+      }
+
+      .drop-zone:hover {
+        border-color: var(--a);
+        background: #FFF1F7;
+      }
+
+      .drop-icon {
+        width: 56px;
+        height: 56px;
+        background: #fff;
+        border-radius: 50%;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        color: var(--a);
+        border: 1px solid #E2E8F0;
+      }
+
+      .drop-text {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--t1);
+        margin-bottom: 6px;
+      }
+
+      .drop-sub {
+        font-size: 13px;
+        color: #64748B;
+        margin-bottom: 20px;
+      }
+
+      /* Cropper Mockup */
+      .cropper-area {
+        position: relative;
+        border-radius: 12px;
+        overflow: hidden;
+        background: #000;
+        aspect-ratio: 16/10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .cropper-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.6;
+      }
+
+      .crop-mask {
+        position: absolute;
+        top: 15%;
+        left: 25%;
+        width: 50%;
+        height: 70%;
+        border: 2px dashed #fff;
+        box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.4);
+        z-index: 2;
+      }
+
+      .crop-handle {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background: #fff;
+        border-radius: 2px;
+        z-index: 3;
+      }
+
+      .handle-tl { top: -5px; left: -5px; }
+      .handle-tr { top: -5px; right: -5px; }
+      .handle-bl { bottom: -5px; left: -5px; }
+      .handle-br { bottom: -5px; right: -5px; }
+      .handle-tc { top: -5px; left: 50%; transform: translateX(-50%); }
+      .handle-bc { bottom: -5px; left: 50%; transform: translateX(-50%); }
+      .handle-lc { left: -5px; top: 50%; transform: translateY(-50%); }
+      .handle-rc { right: -5px; top: 50%; transform: translateY(-50%); }
+  </style>
+</head>
+
+<body>
+
+  <aside class="ds-sidebar">
+    <div class="ds-logo">
+      <div class="dot"></div>
+      Design System
+    </div>
+
+    <div class="ds-nav-title">Fondations</div>
+    <a href="#colors" class="ds-nav-item">Couleurs & Variables</a>
+    <a href="#typography" class="ds-nav-item">Typographie</a>
+    <a href="#sizing" class="ds-nav-item">Tailles & Espacements</a>
+
+    <div class="ds-nav-title">Composants</div>
+    <a href="#buttons" class="ds-nav-item">Boutons</a>
+    <a href="#badges" class="ds-nav-item">Badges & Tags</a>
+    <a href="#forms" class="ds-nav-item">Formulaires</a>
+    <a href="#dropdowns" class="ds-nav-item">Dropdowns</a>
+    <a href="#blocks" class="ds-nav-item">Blocs & Cartes</a>
+    <a href="#tables" class="ds-nav-item">Tableaux</a>
+    <a href="#icons" class="ds-nav-item">Iconographie</a>
+    <a href="#widgets" class="ds-nav-item">Widgets Stats</a>
+
+    <div class="ds-nav-title">Patterns & Layouts</div>
+    <a href="#layouts" class="ds-nav-item">Layouts (Grilles)</a>
+    <a href="#page-templates" class="ds-nav-item">Templates de Pages</a>
+    <a href="#navigation" class="ds-nav-item">Navigation & Topbar</a>
+    <a href="#modals" class="ds-nav-item">Modales & Overlays</a>
+    <a href="#states" class="ds-nav-item">États & Feedback</a>
+  </aside>
+
+  <main class="ds-main">
+
+    <!-- COLORS -->
+    <section id="colors">
+      <h2 class="section-title">Couleurs</h2>
+      <p class="section-desc">La palette de couleurs est construite autour d'un rose vibrant (Accent) et de neutres
+        profonds pour garantir élégance et lisibilité.</p>
+
+      <div class="ds-grid">
+        <div class="swatch-card">
+          <div class="swatch-color" style="background: var(--a);"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Accent (Global)</div>
+            <div class="swatch-hex">#E2006E</div>
+          </div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch-color" style="background: var(--sb-dark);"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Sidebar Gestion</div>
+            <div class="swatch-hex">#13041C</div>
+          </div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch-color" style="background: var(--sb-rep);"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Sidebar Reporting</div>
+            <div class="swatch-hex">#0A032D</div>
+          </div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch-color" style="background: var(--t1);"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Texte Principal</div>
+            <div class="swatch-hex">#111827</div>
+          </div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch-color" style="background: var(--t2);"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Texte Secondaire</div>
+            <div class="swatch-hex">#4B5563</div>
+          </div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch-color" style="background: var(--t3);"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Texte Tertiaire</div>
+            <div class="swatch-hex">#9CA3AF</div>
+          </div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch-color" style="background: var(--bd);"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Bordures</div>
+            <div class="swatch-hex">#E5E7EB</div>
+          </div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch-color" style="background: var(--bg);"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Fond Principal</div>
+            <div class="swatch-hex">#F3F4F6</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TYPOGRAPHY -->
+    <section id="typography">
+      <h2 class="section-title">Typographie</h2>
+      <p class="section-desc">Nous utilisons l'<b>Inter</b> pour tous les corps de texte et les composants, et la
+        <b>Geist</b> pour les titres de page, assurant une esthétique moderne et épurée. Voici les styles extraits des
+        fichiers de production.
+      </p>
+
+      <div class="typo-row">
+        <div class="typo-label">H1 - Page Header / Design System - font-weight: 700 / 32px</div>
+        <div style="font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 700;">Statistiques pré-formatées
+        </div>
+      </div>
+
+      <div class="typo-row">
+        <div class="typo-label">Page Title / H1 - Geist / font-weight: 600 / 22px / Letter-spacing: -0.01em</div>
+        <div style="font-family: Geist; font-size: 22px; font-weight: 600; letter-spacing: -0.01em; color: var(--t1);">
+          Statistiques pré-formatées</div>
+      </div>
+
+      <div class="typo-row">
+        <div class="typo-label">Widget Title - Inter / font-weight: 600 / 15px / Color: --t1</div>
+        <div style="font-family: Inter, sans-serif; font-size: 15px; font-weight: 600; color: var(--t1);">Modules par
+          mois</div>
+      </div>
+
+      <div class="typo-row">
+        <div class="typo-label">Body Text / Main - Inter / font-weight: 400 / 14px</div>
+        <div style="font-family: Inter, sans-serif; font-size: 14px; font-weight: 400; color: var(--t1);">Gérez vos
+          utilisateurs et vos formations depuis une interface intuitive.</div>
+      </div>
+
+      <div class="typo-row">
+        <div class="typo-label">Description Text - Inter / font-weight: 400 / 12.5px / Color: --t3</div>
+        <div style="font-family: Inter, sans-serif; font-size: 12.5px; font-weight: 400; color: var(--t3);">Dernière
+          mise à jour il y a 2 jours</div>
+      </div>
+
+      <div class="typo-row">
+        <div class="typo-label">Table Header - Inter / font-weight: 600 / 11.5px / Color: --t2 / Background: --ps</div>
+        <div
+          style="font-family: Inter, sans-serif; font-size: 11.5px; font-weight: 600; color: var(--t2); background: var(--ps); padding: 10px 12px; border-radius: 4px;">
+          Colonne tableau</div>
+      </div>
+
+      <div class="typo-row">
+        <div class="typo-label">Table Cell - Inter / font-weight: 400 / 13.5px / Color: --t1</div>
+        <div style="font-family: Inter, sans-serif; font-size: 13.5px; font-weight: 400; color: var(--t1);">Contenu de
+          cellule</div>
+      </div>
+
+      <div class="typo-row">
+        <div class="typo-label">Chart Label (X-Axis) - Inter / font-weight: 400 / 12px / Color: #6B7280</div>
+        <div style="font-family: Inter, sans-serif; font-size: 12px; font-weight: 400; color: #6B7280;">Jan · Fév · Mar
+        </div>
+      </div>
+
+      <div class="typo-row">
+        <div class="typo-label">Donut Legend - Inter / font-weight: 400 / 12.5px / Color: --t1 (with badge)</div>
+        <div style="display: flex; align-items: center; gap: 8px; font-family: Inter, sans-serif; font-size: 12.5px;">
+          <span style="width: 9px; height: 9px; background: var(--a); border-radius: 50%; flex-shrink: 0;"></span>
+          <span style="color: var(--t1);">RH Central</span>
+          <span
+            style="background: var(--bg); padding: 2px 8px; border-radius: 4px; font-weight: 600; color: var(--t1); font-size: 12px;">22%</span>
+        </div>
+      </div>
+
+      <div class="typo-row">
+        <div class="typo-label">Horizontal Bar Label - Inter / font-weight: 400 / 12.5px / Color: --t2 / Right-aligned
+        </div>
+        <div
+          style="font-family: Inter, sans-serif; font-size: 12.5px; font-weight: 400; color: var(--t2); text-align: right;">
+          Sécurité au travail</div>
+      </div>
+
+      <div class="typo-row">
+        <div class="typo-label">Horizontal Bar Value - Inter / font-weight: 600 / 12.5px / Color: --t1</div>
+        <div style="font-family: Inter, sans-serif; font-size: 12.5px; font-weight: 600; color: var(--t1);">91%</div>
+      </div>
+    </section>
+
+    <!-- SIZING & SPACING -->
+    <section id="sizing">
+      <h2 class="section-title">Tailles & Espacements</h2>
+      <p class="section-desc">Toutes les tailles et espacements du système OnlineManager, extraits des fichiers de
+        production.</p>
+
+      <table class="sizing-table">
+        <thead>
+          <tr>
+            <th>Catégorie</th>
+            <th>Variable CSS</th>
+            <th>Valeur</th>
+            <th>Utilisation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- SIZE VARIABLES -->
+          <tr>
+            <td colspan="4" style="background: var(--ps); font-weight: 600; padding: 12px 16px;">📏 Tailles de base</td>
+          </tr>
+          <tr>
+            <td>Sidebar Width</td>
+            <td class="var-name">--sw</td>
+            <td class="var-value">220px</td>
+            <td>Largeur de la barre latérale</td>
+          </tr>
+          <tr>
+            <td>Control Height</td>
+            <td class="var-name">--ch</td>
+            <td class="var-value">36px</td>
+            <td>Hauteur des boutons/contrôles au topbar</td>
+          </tr>
+          <tr>
+            <td>Border Radius</td>
+            <td class="var-name">--r</td>
+            <td class="var-value">8px</td>
+            <td>Arrondis standard pour boutons, inputs</td>
+          </tr>
+          <tr>
+            <td>Border Radius Large</td>
+            <td class="var-name">--rl</td>
+            <td class="var-value">12px</td>
+            <td>Arrondis pour cartes et blocs</td>
+          </tr>
+
+          <!-- ICON SIZES -->
+          <tr>
+            <td colspan="4" style="background: var(--ps); font-weight: 600; padding: 12px 16px;">🎨 Icônes & Glyphes
+            </td>
+          </tr>
+          <tr>
+            <td>Small Icon</td>
+            <td class="var-name">-</td>
+            <td class="var-value">12–14px</td>
+            <td>Labels, petits éléments (chev, close, etc.)</td>
+          </tr>
+          <tr>
+            <td>Default Icon</td>
+            <td class="var-name">-</td>
+            <td class="var-value">15–16px</td>
+            <td>Widget headers, menu icons</td>
+          </tr>
+          <tr>
+            <td>Large Icon</td>
+            <td class="var-name">-</td>
+            <td class="var-value">18–20px</td>
+            <td>Topbar icons, buttons</td>
+          </tr>
+          <tr>
+            <td>Stroke Width</td>
+            <td class="var-name">-</td>
+            <td class="var-value">1.8</td>
+            <td>SVG stroke-width pour tous les icons (finesse)</td>
+          </tr>
+
+          <!-- BUTTON/CONTROL SIZES -->
+          <tr>
+            <td colspan="4" style="background: var(--ps); font-weight: 600; padding: 12px 16px;">🔘 Boutons & Contrôles
+            </td>
+          </tr>
+          <tr>
+            <td>Button Height (Standard)</td>
+            <td class="var-name">-</td>
+            <td class="var-value">34–36px</td>
+            <td>Boutons primaires/secondaires</td>
+          </tr>
+          <tr>
+            <td>Button Height (Small)</td>
+            <td class="var-name">-</td>
+            <td class="var-value">28–32px</td>
+            <td>Petits boutons de contrôle (dans widgets)</td>
+          </tr>
+          <tr>
+            <td>Button Padding H</td>
+            <td class="var-name">-</td>
+            <td class="var-value">12–20px</td>
+            <td>Padding horizontal selon taille</td>
+          </tr>
+          <tr>
+            <td>Button Font Size</td>
+            <td class="var-name">-</td>
+            <td class="var-value">13–14px</td>
+            <td>Texte bouton</td>
+          </tr>
+
+          <!-- SPACING UNITS -->
+          <tr>
+            <td colspan="4" style="background: var(--ps); font-weight: 600; padding: 12px 16px;">📐 Espacements &
+              Padding</td>
+          </tr>
+          <tr>
+            <td>Micro Spacing</td>
+            <td class="var-name">-</td>
+            <td class="var-value">4–6px</td>
+            <td>Entre icône + texte dans un élément</td>
+          </tr>
+          <tr>
+            <td>Small Spacing</td>
+            <td class="var-name">-</td>
+            <td class="var-value">8–10px</td>
+            <td>Gap entre éléments adjacents</td>
+          </tr>
+          <tr>
+            <td>Medium Spacing</td>
+            <td class="var-name">-</td>
+            <td class="var-value">14–18px</td>
+            <td>Padding intérieur des cartes/blocs</td>
+          </tr>
+          <tr>
+            <td>Large Spacing</td>
+            <td class="var-name">-</td>
+            <td class="var-value">24–32px</td>
+            <td>Padding page, gap entre sections</td>
+          </tr>
+          <tr>
+            <td>XL Spacing</td>
+            <td class="var-name">-</td>
+            <td class="var-value">40–80px</td>
+            <td>Page padding, section margins</td>
+          </tr>
+
+          <!-- TEXT SIZES -->
+          <tr>
+            <td colspan="4" style="background: var(--ps); font-weight: 600; padding: 12px 16px;">📝 Tailles de texte
+            </td>
+          </tr>
+          <tr>
+            <td>Tiny (Captions)</td>
+            <td class="var-name">-</td>
+            <td class="var-value">10–11px</td>
+            <td>Labels uppercased, breadcrumbs</td>
+          </tr>
+          <tr>
+            <td>Small Text</td>
+            <td class="var-name">-</td>
+            <td class="var-value">12–12.5px</td>
+            <td>Helper text, secondary labels</td>
+          </tr>
+          <tr>
+            <td>Body Text</td>
+            <td class="var-name">-</td>
+            <td class="var-value">13–14px</td>
+            <td>Corps de texte, boutons, cellules</td>
+          </tr>
+          <tr>
+            <td>Heading 3</td>
+            <td class="var-name">-</td>
+            <td class="var-value">15px</td>
+            <td>Titres de widget</td>
+          </tr>
+          <tr>
+            <td>Heading 2</td>
+            <td class="var-name">-</td>
+            <td class="var-value">22px</td>
+            <td>Titres de page (avec Geist)</td>
+          </tr>
+          <tr>
+            <td>Heading 1</td>
+            <td class="var-name">-</td>
+            <td class="var-value">32px</td>
+            <td>Titres principaux (Inter, font-weight: 700)</td>
+          </tr>
+
+          <!-- COMPONENT SIZES -->
+          <tr>
+            <td colspan="4" style="background: var(--ps); font-weight: 600; padding: 12px 16px;">🎯 Tailles de
+              composants</td>
+          </tr>
+          <tr>
+            <td>Widget Icon</td>
+            <td class="var-name">-</td>
+            <td class="var-value">28x28px</td>
+            <td>Icône colorée dans widget header</td>
+          </tr>
+          <tr>
+            <td>Avatar / Initials</td>
+            <td class="var-name">-</td>
+            <td class="var-value">30x30px</td>
+            <td>Avatar circulaire au topbar</td>
+          </tr>
+          <tr>
+            <td>Topbar Logo</td>
+            <td class="var-name">-</td>
+            <td class="var-value">30x30px</td>
+            <td>Logo OnlineManager au topbar</td>
+          </tr>
+          <tr>
+            <td>Topbar Height</td>
+            <td class="var-name">-</td>
+            <td class="var-value">56px</td>
+            <td>Hauteur fixe de la barre supérieure</td>
+          </tr>
+          <tr>
+            <td>Widget Header</td>
+            <td class="var-name">-</td>
+            <td class="var-value">Padding: 14px 18px</td>
+            <td>Titre + contrôles du widget</td>
+          </tr>
+          <tr>
+            <td>Widget Body Min Height</td>
+            <td class="var-name">-</td>
+            <td class="var-value">280px</td>
+            <td>Hauteur minimum de la zone de contenu</td>
+          </tr>
+
+          <!-- CHART/GRAPH SIZES -->
+          <tr>
+            <td colspan="4" style="background: var(--ps); font-weight: 600; padding: 12px 16px;">📊 Graphiques & Cartes
+            </td>
+          </tr>
+          <tr>
+            <td>Chart Min Height</td>
+            <td class="var-name">-</td>
+            <td class="var-value">300–350px</td>
+            <td>Graphiques en barres/lignes</td>
+          </tr>
+          <tr>
+            <td>Bar Width</td>
+            <td class="var-name">-</td>
+            <td class="var-value">10px</td>
+            <td>Largeur des barres (histogramme)</td>
+          </tr>
+          <tr>
+            <td>Donut SVG</td>
+            <td class="var-name">-</td>
+            <td class="var-value">250x220px (viewBox)</td>
+            <td>Graphique donut centralisé</td>
+          </tr>
+          <tr>
+            <td>Donut Radius</td>
+            <td class="var-name">-</td>
+            <td class="var-value">70px (outer), 56px (inner)</td>
+            <td>Cercle externe & interne du donut</td>
+          </tr>
+
+          <!-- TRANSITIONS -->
+          <tr>
+            <td colspan="4" style="background: var(--ps); font-weight: 600; padding: 12px 16px;">⏱️ Animations &
+              Transitions</td>
+          </tr>
+          <tr>
+            <td>Standard Transition</td>
+            <td class="var-name">--trans</td>
+            <td class="var-value">all 0.2s cubic-bezier(0.4, 0, 0.2, 1)</td>
+            <td>Animation globale (boutons, hover, etc.)</td>
+          </tr>
+          <tr>
+            <td>Fast Transition</td>
+            <td class="var-name">-</td>
+            <td class="var-value">0.1s</td>
+            <td>Micro-interactions (hover rapide)</td>
+          </tr>
+          <tr>
+            <td>Chart Animation</td>
+            <td class="var-name">-</td>
+            <td class="var-value">0.4s ease</td>
+            <td>Barres qui montent progressivement</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- BUTTONS -->
+    <section id="buttons">
+      <h2 class="section-title">Boutons</h2>
+      <p class="section-desc">Les boutons sont le coeur de l'interaction. Ils sont larges, lisibles, avec des icônes SVG
+        intégrées pour clarifier l'action.</p>
+
+      <div class="preview-box">
+        <div class="preview-label">Live Preview</div>
+        <div style="display: flex; gap: 16px;">
+          <button class="btn primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" style="width:16px;height:16px">
+              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+              <polyline points="17 21 17 13 7 13 7 21" />
+              <polyline points="7 3 7 8 15 8" />
+            </svg>
+            Enregistrer
+          </button>
+
+          <button class="btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" style="width:16px;height:16px">
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            Exporter
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- DROPDOWNS -->
+    <section id="dropdowns">
+      <h2 class="section-title">Dropdowns</h2>
+      <p class="section-desc">Deux styles de dropdowns : le bouton élégant <b>w-dd-btn</b> (gradient blanc) et le
+        système <b>w-filter-btn</b> (filtres en ligne). Testez l'interaction ci-dessous.</p>
+
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;">
+        Style 1 — Dropdown bouton élégant (w-dd-wrap)</p>
+      <div class="preview-box">
+        <div class="preview-label">Live Preview (Clickable)</div>
+        <div style="display: flex; gap: 12px;">
+          <div class="w-dd-wrap">
+            <button class="w-dd-btn" onclick="toggleDD(this)">
+              Annuel
+              <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </button>
+            <div class="w-dd-menu">
+              <div class="w-dd-item">Mensuel</div>
+              <div class="w-dd-item active">Annuel</div>
+            </div>
+          </div>
+
+          <div class="w-dd-wrap">
+            <button class="w-dd-btn" onclick="toggleDD(this)">
+              Filtres
+              <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </button>
+            <div class="w-dd-menu">
+              <div class="w-dd-item"><input type="checkbox"> RH Central</div>
+              <div class="w-dd-item active"><input type="checkbox" checked> Marketing</div>
+              <div class="w-dd-item"><input type="checkbox"> Direction</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="code-box">
+        &lt;div class="w-dd-wrap"&gt;
+        &lt;button class="w-dd-btn" onclick="toggleDD(this)"&gt;
+        Annuel
+        &lt;svg class="chev" viewBox="0 0 24 24" ... &gt;...&lt;/svg&gt;
+        &lt;/button&gt;
+        &lt;div class="w-dd-menu"&gt;
+        &lt;div class="w-dd-item"&gt;Mensuel&lt;/div&gt;
+        &lt;div class="w-dd-item active"&gt;Annuel&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;/div&gt;
+      </div>
+
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:40px;">
+        Style 2 — Boutons de filtres en ligne</p>
+      <div class="preview-box">
+        <div class="preview-label">Live Preview</div>
+        <div class="w-filters"
+          style="background: #fff; border: 1px solid var(--bd); border-radius: var(--rl); margin: 0; padding: 16px;">
+          <button class="w-filter-btn">Tous les canaux <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2.5">
+              <polyline points="6 9 12 15 18 9" />
+            </svg></button>
+          <button class="w-filter-btn">Hebdomadaire <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2.5">
+              <polyline points="6 9 12 15 18 9" />
+            </svg></button>
+          <div class="w-filter-sep"></div>
+          <button class="w-dots"><svg viewBox="0 0 24 24" fill="currentColor">
+              <circle cx="5" cy="12" r="2" />
+              <circle cx="12" cy="12" r="2" />
+              <circle cx="19" cy="12" r="2" />
+            </svg></button>
+        </div>
+      </div>
+      <div class="code-box">
+        &lt;div class="w-filters"&gt;
+        &lt;button class="w-filter-btn"&gt;Tous les canaux ▾&lt;/button&gt;
+        &lt;button class="w-filter-btn"&gt;Hebdomadaire ▾&lt;/button&gt;
+        &lt;div class="w-filter-sep"&gt;&lt;/div&gt;
+        &lt;button class="w-dots"&gt;•••&lt;/button&gt;
+        &lt;/div&gt;
+      </div>
+    </section>
+
+    <!-- BADGES -->
+    <section id="badges">
+      <h2 class="section-title">Badges & Status</h2>
+      <p class="section-desc">Utilisés pour indiquer un état (Terminé, En cours, Non commencé) ou une catégorie (SA,
+        Siège Social).</p>
+
+      <div class="preview-box">
+        <div class="preview-label">Live Preview</div>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <span class="pbadge green">Terminé</span>
+          <span class="pbadge" style="background: rgba(226, 0, 110, 0.1); color: var(--a);">En cours</span>
+          <span class="pbadge gray">Non commencé</span>
+          <span class="pbadge filled">Premium</span>
+          <span class="pbadge outline">Mode Test</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOCKS -->
+    <section id="blocks">
+      <h2 class="section-title">Blocs & Cartes (Widgets)</h2>
+      <p class="section-desc">Les widgets de reporting utilisent des icônes colorées avec backgrounds spécifiques.
+        Chaque thème a sa propre couleur d'accent pour une meilleure organisation visuelle.</p>
+
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;">
+        Variantes d'icônes de widgets</p>
+      <div class="preview-box">
+        <div class="preview-label">Live Preview</div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+          <!-- Widget 1 : Vert (Stats) -->
+          <div class="w" style="max-width: 300px;">
+            <div class="w-head">
+              <div class="w-ico" style="background:#E0F8EF;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <line x1="18" y1="20" x2="18" y2="10" />
+                  <line x1="12" y1="20" x2="12" y2="4" />
+                  <line x1="6" y1="20" x2="6" y2="14" />
+                </svg>
+              </div>
+              <span class="w-title">Modules par mois</span>
+              <div class="w-info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="16" x2="12" y2="12" />
+                  <line x1="12" y1="8" x2="12.01" y2="8" />
+                </svg></div>
+            </div>
+            <div class="w-body" style="min-height: 180px;"></div>
+          </div>
+
+          <!-- Widget 2 : Violet (Inscriptions) -->
+          <div class="w" style="max-width: 300px;">
+            <div class="w-head">
+              <div class="w-ico" style="background:#EDE9FE;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+                </svg>
+              </div>
+              <span class="w-title">Inscriptions par mois</span>
+              <div class="w-info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="16" x2="12" y2="12" />
+                  <line x1="12" y1="8" x2="12.01" y2="8" />
+                </svg></div>
+            </div>
+            <div class="w-body" style="min-height: 180px;"></div>
+          </div>
+
+          <!-- Widget 3 : Rose (Répartition groupe) -->
+          <div class="w" style="max-width: 300px;">
+            <div class="w-head">
+              <div class="w-ico" style="background:#FFF0F6;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#E2006E" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <rect x="3" y="3" width="7" height="7" />
+                  <rect x="14" y="3" width="7" height="7" />
+                  <rect x="3" y="14" width="7" height="7" />
+                  <rect x="14" y="14" width="7" height="7" />
+                </svg>
+              </div>
+              <span class="w-title">Répartition par groupe</span>
+              <div class="w-info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="16" x2="12" y2="12" />
+                  <line x1="12" y1="8" x2="12.01" y2="8" />
+                </svg></div>
+            </div>
+            <div class="w-body" style="min-height: 180px;"></div>
+          </div>
+
+          <!-- Widget 4 : Bleu (Sous-thèmes) -->
+          <div class="w" style="max-width: 300px;">
+            <div class="w-head">
+              <div class="w-ico" style="background:#EFF6FF;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                  <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                </svg>
+              </div>
+              <span class="w-title">Par sous-thème</span>
+              <div class="w-info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="16" x2="12" y2="12" />
+                  <line x1="12" y1="8" x2="12.01" y2="8" />
+                </svg></div>
+            </div>
+            <div class="w-body" style="min-height: 180px;"></div>
+          </div>
+
+          <!-- Widget 5 : Cyan (Activité) -->
+          <div class="w" style="max-width: 300px;">
+            <div class="w-head">
+              <div class="w-ico" style="background:#E0F2FE;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
+              </div>
+              <span class="w-title">Activité par heure</span>
+              <div class="w-info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="16" x2="12" y2="12" />
+                  <line x1="12" y1="8" x2="12.01" y2="8" />
+                </svg></div>
+            </div>
+            <div class="w-body" style="min-height: 180px;"></div>
+          </div>
+
+          <!-- Widget 6 : Violet clair (Profils) -->
+          <div class="w" style="max-width: 300px;">
+            <div class="w-head">
+              <div class="w-ico" style="background:#F3E8FF;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#A855F7" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+                </svg>
+              </div>
+              <span class="w-title">Taux de complétion</span>
+              <div class="w-info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="16" x2="12" y2="12" />
+                  <line x1="12" y1="8" x2="12.01" y2="8" />
+                </svg></div>
+            </div>
+            <div class="w-body" style="min-height: 180px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:40px;">
+        Palette d'icônes par contexte</p>
+      <table class="sizing-table">
+        <thead>
+          <tr>
+            <th>Contexte</th>
+            <th>Background</th>
+            <th>Couleur SVG</th>
+            <th>Usage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Stats / Modules</td>
+            <td class="var-value" style="background:#E0F8EF;">#E0F8EF</td>
+            <td class="var-value" style="background:#E8F5E9;">#10B981</td>
+            <td>Graphiques à barres vert</td>
+          </tr>
+          <tr>
+            <td>Inscriptions / Utilisateurs</td>
+            <td class="var-value" style="background:#EDE9FE;">#EDE9FE</td>
+            <td class="var-value" style="background:#F3E8FF;">#7C3AED</td>
+            <td>Données de comptes violettes</td>
+          </tr>
+          <tr>
+            <td>Répartition / Groupes</td>
+            <td class="var-value" style="background:#FFF0F6;">#FFF0F6</td>
+            <td class="var-value" style="background:#FCE4EC;">#E2006E</td>
+            <td>Donut chart rose (accent)</td>
+          </tr>
+          <tr>
+            <td>Thèmes / Catégories</td>
+            <td class="var-value" style="background:#EFF6FF;">#EFF6FF</td>
+            <td class="var-value" style="background:#E3F2FD;">#3B82F6</td>
+            <td>Barres horizontales bleu</td>
+          </tr>
+          <tr>
+            <td>Activité / Temps</td>
+            <td class="var-value" style="background:#E0F2FE;">#E0F2FE</td>
+            <td class="var-value" style="background:#B3E5FC;">#0EA5E9</td>
+            <td>Line charts cyan</td>
+          </tr>
+          <tr>
+            <td>Profils / Utilisateurs</td>
+            <td class="var-value" style="background:#F3E8FF;">#F3E8FF</td>
+            <td class="var-value" style="background:#E1BEE7;">#A855F7</td>
+            <td>Données de profils violet clair</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- FORMS -->
+    <section id="forms">
+      <h2 class="section-title">Formulaires</h2>
+      <p class="section-desc">Entrées de texte et sélecteurs épurés avec des états de focus marqués pour
+        l'accessibilité.</p>
+
+      <div class="preview-box">
+        <div class="preview-label">Live Preview</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px;">
+          <div class="form-field">
+            <label>Nom de l'utilisateur</label>
+            <input type="text" class="form-input" placeholder="ex: Jean Dupont">
+          </div>
+          <div class="form-field">
+            <label>Plateforme de rattachement</label>
+            <select class="form-input"
+              style="background: #fff url('data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'10\' height=\'6\'%3E%3Cpath d=\'M0 0l5 6 5-6\' fill=\'%230F172A\'/%3E%3C/svg%3E') no-repeat right 12px center; appearance: none;">
+              <option>OnlineManager</option>
+              <option>Plateforme Externe</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 40px; border-top: 1px solid var(--bd); padding-top: 32px;">
+          <!-- Custom Radio Cards (Demande de formation) -->
+          <div>
+            <p style="font-size:11px; font-weight:700; text-transform:uppercase; color:#94A3B8; margin-bottom:16px; letter-spacing: 0.05em;">
+              Demande de formation</p>
+            <div style="display: flex; flex-direction: column; gap: 10px; max-width: 650px;">
+              <label class="form-card-check active">
+                <input type="radio" name="demande" checked onchange="toggleCard(this)">
+                <div class="check-circle"></div>
+                <div class="check-label">Validation requise par un administrateur des demandes apprenant</div>
+              </label>
+              <label class="form-card-check">
+                <input type="radio" name="demande" onchange="toggleCard(this)">
+                <div class="check-circle"></div>
+                <div class="check-label">Validation automatique des demandes apprenant</div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Toggles (Tutorat) -->
+          <div>
+            <p style="font-size:11px; font-weight:700; text-transform:uppercase; color:#94A3B8; margin-bottom:16px; letter-spacing: 0.05em;">
+              Tutorat</p>
+            <div style="display: flex; align-items: center; justify-content: space-between; max-width: 650px; padding: 4px 0;">
+              <div>
+                <div style="font-size: 15px; font-weight: 600; color: var(--t1);">Activer le tutorat Onlineformapro</div>
+                <div style="font-size: 13.5px; color: #64748B;">Associer des tuteurs aux apprenants pour un suivi personnalisé</div>
+              </div>
+              <label class="form-switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ICONS -->
+    <section id="icons">
+      <h2 class="section-title">Iconographie</h2>
+      <p class="section-desc">Système basé sur Lucide / Feather Icons. Utilisation de <b>Stroke-width: 1.8</b> pour plus
+        de finesse.</p>
+
+      <div class="ds-grid">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+          <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+              <polyline points="9 22 9 12 15 12 15 22" />
+            </svg></div>
+          <span style="font-size: 11px; color: var(--t3);">Accueil</span>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+          <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="16" x2="12" y2="12" />
+              <line x1="12" y1="8" x2="12.01" y2="8" />
+            </svg></div>
+          <span style="font-size: 11px; color: var(--t3);">Info</span>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+          <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+              <circle cx="8.5" cy="8.5" r="1.5" />
+              <polyline points="21 15 16 10 5 21" />
+            </svg></div>
+          <span style="font-size: 11px; color: var(--t3);">Image / Logo</span>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+          <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 20h9" />
+              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+            </svg></div>
+          <span style="font-size: 11px; color: var(--t3);">Édition / Signature</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- WIDGETS STATS -->
+    <section id="widgets" style="padding-bottom: 100px;">
+      <h2 class="section-title">Widgets Stats</h2>
+      <p class="section-desc">Gabarit de widget utilisé dans la section <b>Reporting → Stats pré-formatées</b>. Inspiré
+        du style Lemlist : icône colorée + titre + ⓘ dans le header, contrôles à droite, corps vide avec empty-state.
+      </p>
+
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;">
+        Variante 1 — Badge + Unité + Période</p>
+      <div class="preview-box" style="background:var(--bg); padding: 24px;">
+        <div class="preview-label">Live Preview</div>
+        <div class="w" style="max-width:560px;">
+          <div class="w-head">
+            <div class="w-ico" style="background:#E0F8EF;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <line x1="18" y1="20" x2="18" y2="10" />
+                <line x1="12" y1="20" x2="12" y2="4" />
+                <line x1="6" y1="20" x2="6" y2="14" />
+              </svg>
+            </div>
+            <span class="w-title">Modules par mois</span>
+            <div class="w-info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="16" x2="12" y2="12" />
+                <line x1="12" y1="8" x2="12.01" y2="8" />
+              </svg></div>
+            <div class="w-controls">
+              <span class="w-badge">4 821</span>
+              <button class="w-ctrl-btn">%</button>
+              <button class="w-ctrl-btn">Annuel <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2.5">
+                  <polyline points="6 9 12 15 18 9" />
+                </svg></button>
+            </div>
+          </div>
+          <div class="w-body">
+            <div class="empty-chart">
+              <div class="empty-bar" style="height:28px;"></div>
+              <div class="empty-bar" style="height:40px;"></div>
+              <div class="empty-bar" style="height:22px;"></div>
+              <div class="empty-bar" style="height:50px;"></div>
+              <div class="empty-bar" style="height:32px;"></div>
+            </div>
+            <div class="empty-msg">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="16" x2="12" y2="12" />
+                <line x1="12" y1="8" x2="12.01" y2="8" />
+              </svg>
+              Aucune donnée trouvée, essayez d'autres filtres
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:40px;">
+        Variante 2 — Ligne de filtres sous le header</p>
+      <div class="preview-box" style="background:var(--bg); padding: 24px;">
+        <div class="preview-label">Live Preview</div>
+        <div class="w" style="max-width:560px;">
+          <div class="w-head">
+            <div class="w-ico" style="background:#E0F2FE;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+            </div>
+            <span class="w-title">Activité par heure · Dernière semaine</span>
+            <div class="w-info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="16" x2="12" y2="12" />
+                <line x1="12" y1="8" x2="12.01" y2="8" />
+              </svg></div>
+          </div>
+          <div class="w-filters">
+            <button class="w-filter-btn">Tous les canaux <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5" style="width:11px;height:11px;">
+                <polyline points="6 9 12 15 18 9" />
+              </svg></button>
+            <button class="w-filter-btn">Hebdomadaire <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5" style="width:11px;height:11px;">
+                <polyline points="6 9 12 15 18 9" />
+              </svg></button>
+            <div class="w-filter-sep"></div>
+            <button class="w-dots"><svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;">
+                <circle cx="5" cy="12" r="2" />
+                <circle cx="12" cy="12" r="2" />
+                <circle cx="19" cy="12" r="2" />
+              </svg></button>
+          </div>
+          <div class="w-body">
+            <div class="empty-chart">
+              <div class="empty-bar" style="height:28px;"></div>
+              <div class="empty-bar" style="height:40px;"></div>
+              <div class="empty-bar" style="height:22px;"></div>
+              <div class="empty-bar" style="height:50px;"></div>
+              <div class="empty-bar" style="height:32px;"></div>
+            </div>
+            <div class="empty-msg">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="16" x2="12" y2="12" />
+                <line x1="12" y1="8" x2="12.01" y2="8" />
+              </svg>
+              Aucune donnée trouvée, essayez d'autres filtres
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TABLES -->
+    <section id="tables">
+      <h2 class="section-title">Tableaux</h2>
+      <p class="section-desc">Tables de données avec double en-tête : ligne 1 avec labels (background --ps), ligne 2
+        avec inputs de filtrage searchables.</p>
+
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;">
+        Structure HTML</p>
+      <div class="code-box">
+        &lt;table class="tab-table"&gt;
+        &lt;thead&gt;
+        &lt;!-- Ligne 1 : Labels des colonnes --&gt;
+        &lt;tr id="thr"&gt;
+        &lt;th&gt;Apprenant&lt;/th&gt;
+        &lt;th&gt;État&lt;/th&gt;
+        &lt;th&gt;Groupes&lt;/th&gt;
+        &lt;th&gt;Profil formations&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;!-- Ligne 2 : Inputs de filtrage --&gt;
+        &lt;tr id="thr-filter"&gt;
+        &lt;th&gt;&lt;input type="search" class="th-search" placeholder="Rechercher..."&gt;&lt;/th&gt;
+        &lt;th&gt;&lt;input type="search" class="th-search" placeholder="Rechercher..."&gt;&lt;/th&gt;
+        &lt;th&gt;&lt;input type="search" class="th-search" placeholder="Rechercher..."&gt;&lt;/th&gt;
+        &lt;th&gt;&lt;input type="search" class="th-search" placeholder="Rechercher..."&gt;&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+        &lt;tr&gt;
+        &lt;td&gt;Contenu&lt;/td&gt;
+        &lt;td&gt;Contenu&lt;/td&gt;
+        &lt;td&gt;Contenu&lt;/td&gt;
+        &lt;td&gt;Contenu&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/tbody&gt;
+        &lt;/table&gt;
+      </div>
+
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:40px;">
+        Live Preview</p>
+      <div class="preview-box" style="padding: 0; background: white;">
+        <div class="preview-label">Live Preview</div>
+        <div style="overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; table-layout: auto;">
+            <thead>
+              <!-- Ligne 1 : Labels (Normal case) -->
+              <tr>
+                <th
+                  style="padding: 10px 20px; font-size: 11.5px; font-weight: 600; color: var(--t2); text-align: left; background: var(--ps); border-bottom: 1px solid var(--bd);">
+                  Apprenant</th>
+                <th
+                  style="padding: 10px 20px; font-size: 11.5px; font-weight: 600; color: var(--t2); text-align: left; background: var(--ps); border-bottom: 1px solid var(--bd);">
+                  État</th>
+                <th
+                  style="padding: 10px 20px; font-size: 11.5px; font-weight: 600; color: var(--t2); text-align: left; background: var(--ps); border-bottom: 1px solid var(--bd);">
+                  Groupes</th>
+                <th
+                  style="padding: 10px 20px; font-size: 11.5px; font-weight: 600; color: var(--t2); text-align: left; background: var(--ps); border-bottom: 1px solid var(--bd);">
+                  Profil formations</th>
+              </tr>
+              <!-- Ligne 2 : Inputs de filtrage -->
+              <tr id="thr-filter" style="background: #fff;">
+                <th style="padding-top: 0; padding-bottom: 12px; border-bottom: 1px solid var(--bd);">
+                  <input type="search" placeholder=""
+                    style="height: 30px; padding: 0 8px; font-size: 12.5px; width: 100%; font-weight: 400; background: #fff; border: 1px solid var(--bd); border-radius: 6px; color: var(--t1); font-family: inherit;">
+                </th>
+                <th style="padding-top: 0; padding-bottom: 12px; border-bottom: 1px solid var(--bd);">
+                  <div style="width: 100%; display: flex; align-items: center;">
+                    <select
+                      style="height: 30px; padding: 0 8px; font-size: 12.5px; width: 100%; background: #fff url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2710%27 height=%276%27%3E%3Cpath d=%27M0 0l5 6 5-6z%27 fill=%27%239CA3AF%27/%3E%3C/svg%3E') no-repeat right 8px center; border: 1px solid var(--bd); border-radius: 6px; color: var(--t1); font-family: inherit; appearance: none; cursor: pointer;">
+                      <option></option>
+                      <option>Actif</option>
+                      <option>Inactif</option>
+                    </select>
+                  </div>
+                </th>
+                <th style="padding-top: 0; padding-bottom: 12px; border-bottom: 1px solid var(--bd);">
+                  <input type="search" placeholder=""
+                    style="height: 30px; padding: 0 8px; font-size: 12.5px; width: 100%; font-weight: 400; background: #fff; border: 1px solid var(--bd); border-radius: 6px; color: var(--t1); font-family: inherit;">
+                </th>
+                <th style="padding-top: 0; padding-bottom: 12px; border-bottom: 1px solid var(--bd);">
+                  <input type="search" placeholder=""
+                    style="height: 30px; padding: 0 8px; font-size: 12.5px; width: 100%; font-weight: 400; background: #fff; border: 1px solid var(--bd); border-radius: 6px; color: var(--t1); font-family: inherit;">
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: none;">
+                <td
+                  style="padding: 12px 20px; font-size: 13.5px; color: var(--t1); border-bottom: 1px solid var(--bg);">
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <div
+                      style="width: 36px; height: 36px; border-radius: 50%; background: #E0F8EF; color: #10B981; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 13px; flex-shrink: 0;">
+                      AL</div>
+                    <div>
+                      <div style="font-weight: 500; color: var(--t1); font-size: 13.5px;">Alice Fontaine</div>
+                      <div style="font-size: 12.5px; color: var(--t3);">alice@example.com</div>
+                    </div>
+                  </div>
+                </td>
+                <td
+                  style="padding: 12px 20px; font-size: 13.5px; color: var(--t1); border-bottom: 1px solid var(--bg);">
+                  <span
+                    style="display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--t1);">
+                    <span style="width: 8px; height: 8px; background: #10B981; border-radius: 50%;"></span> Actif
+                  </span>
+                </td>
+                <td
+                  style="padding: 12px 20px; font-size: 13.5px; color: var(--t1); border-bottom: 1px solid var(--bg);">
+                  RH Central</td>
+                <td
+                  style="padding: 12px 20px; font-size: 13.5px; color: var(--t1); border-bottom: 1px solid var(--bg);">
+                  <span
+                    style="display: inline-block; padding: 5px 14px; background: var(--a1); color: var(--a); border-radius: 8px; font-size: 13px; font-weight: 500; border: 1px solid var(--a2);">RH
+                    Avancé</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:40px;">
+        Styles des En-têtes</p>
+      <table class="sizing-table">
+        <thead>
+          <tr>
+            <th>Élément</th>
+            <th>Styles</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code
+                style="background: #f5f5f5; padding: 2px 6px; border-radius: 3px; font-size: 12px;">tr#thr th</code>
+            </td>
+            <td>padding: 10px 20px; font-size: 11.5px; font-weight: 600; color: --t2; background: --ps; border-bottom:
+              1px solid --bd;</td>
+            <td>Ligne 1 : Labels de colonnes (Normal case, PAS en majuscules)</td>
+          </tr>
+          <tr>
+            <td><code
+                style="background: #f5f5f5; padding: 2px 6px; border-radius: 3px; font-size: 12px;">tr#thr-filter th</code>
+            </td>
+            <td>padding-top: 0; padding-bottom: 12px; border-bottom: 1px solid --bd; background: #fff;</td>
+            <td>Ligne 2 : Conteneur des inputs</td>
+          </tr>
+          <tr>
+            <td><code
+                style="background: #f5f5f5; padding: 2px 6px; border-radius: 3px; font-size: 12px;">.th-search</code>
+            </td>
+            <td>height: 30px; padding: 0 8px; font-size: 12.5px; width: 100%; border: 1px solid --bd; border-radius:
+              6px; background: #fff;</td>
+            <td>Input de filtrage searchable</td>
+          </tr>
+          <tr>
+            <td><code
+                style="background: #f5f5f5; padding: 2px 6px; border-radius: 3px; font-size: 12px;">.th-search:focus</code>
+            </td>
+            <td>border-color: --a; box-shadow: 0 0 0 2px --a1;</td>
+            <td>État focus rose</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- LAYOUTS -->
+    <section id="layouts">
+      <h2 class="section-title">Layouts & Grilles</h2>
+      <p class="section-desc">Systèmes de grille et de layout pour composer les pages. Tous les layouts incluent sidebar
+        + main content area.</p>
+
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;">
+        Layout 1 — Grid 1 col (Full)</p>
+      <div class="preview-box" style="background: #f5f5f5; padding: 16px;">
+        <div
+          style="display: grid; grid-template-columns: 1fr; gap: 20px; background: white; border: 2px dashed #ddd; padding: 20px; border-radius: 8px;">
+          <div
+            style="height: 80px; background: var(--ps); border-radius: 8px; border: 1px dashed #bbb; display: flex; align-items: center; justify-content: center; color: #666; font-size: 12px;">
+            Widget pleine largeur</div>
+        </div>
+      </div>
+      <div class="code-box">
+        &lt;div style="display: grid; grid-template-columns: 1fr; gap: 20px;"&gt;
+        &lt;div&gt;Widget pleine largeur&lt;/div&gt;
+        &lt;/div&gt;
+      </div>
+
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:40px;">
+        Layout 2 — Grid 2 col (1:1)</p>
+      <div class="preview-box" style="background: #f5f5f5; padding: 16px;">
+        <div
+          style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; background: white; border: 2px dashed #ddd; padding: 20px; border-radius: 8px;">
+          <div
+            style="height: 120px; background: var(--ps); border-radius: 8px; border: 1px dashed #bbb; display: flex; align-items: center; justify-content: center; color: #666; font-size: 12px;">
+            Widget 50%</div>
+          <div
+            style="height: 120px; background: var(--ps); border-radius: 8px; border: 1px dashed #bbb; display: flex; align-items: center; justify-content: center; color: #666; font-size: 12px;">
+            Widget 50%</div>
+        </div>
+      </div>
+      <div class="code-box">
+        &lt;div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;"&gt;
+        &lt;div&gt;Widget 50%&lt;/div&gt;
+        &lt;div&gt;Widget 50%&lt;/div&gt;
+        &lt;/div&gt;
+      </div>
+
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:40px;">
+        Layout 3 — Grid 2 col (1:2) + Full</p>
+      <div class="preview-box" style="background: #f5f5f5; padding: 16px;">
+        <div
+          style="display: grid; grid-template-columns: 1fr 2fr; gap: 20px; background: white; border: 2px dashed #ddd; padding: 20px; border-radius: 8px;">
+          <div
+            style="height: 120px; background: var(--ps); border-radius: 8px; border: 1px dashed #bbb; display: flex; align-items: center; justify-content: center; color: #666; font-size: 12px;">
+            Widget 1/3</div>
+          <div
+            style="height: 120px; background: var(--ps); border-radius: 8px; border: 1px dashed #bbb; display: flex; align-items: center; justify-content: center; color: #666; font-size: 12px;">
+            Widget 2/3</div>
+          <div
+            style="height: 80px; background: var(--ps); border-radius: 8px; border: 1px dashed #bbb; display: flex; align-items: center; justify-content: center; color: #666; font-size: 12px; grid-column: span 2;">
+            Widget pleine largeur</div>
+        </div>
+      </div>
+      <div class="code-box">
+        &lt;div style="display: grid; grid-template-columns: 1fr 2fr; gap: 20px;"&gt;
+        &lt;div&gt;Widget 1/3&lt;/div&gt;
+        &lt;div&gt;Widget 2/3&lt;/div&gt;
+        &lt;div style="grid-column: span 2;"&gt;Widget full&lt;/div&gt;
+        &lt;/div&gt;
+      </div>
+
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:40px;">
+        Layout 4 — Grid 3 col (1:1:1)</p>
+      <div class="preview-box" style="background: #f5f5f5; padding: 16px;">
+        <div
+          style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; background: white; border: 2px dashed #ddd; padding: 20px; border-radius: 8px;">
+          <div
+            style="height: 120px; background: var(--ps); border-radius: 8px; border: 1px dashed #bbb; display: flex; align-items: center; justify-content: center; color: #666; font-size: 12px;">
+            Widget 33%</div>
+          <div
+            style="height: 120px; background: var(--ps); border-radius: 8px; border: 1px dashed #bbb; display: flex; align-items: center; justify-content: center; color: #666; font-size: 12px;">
+            Widget 33%</div>
+          <div
+            style="height: 120px; background: var(--ps); border-radius: 8px; border: 1px dashed #bbb; display: flex; align-items: center; justify-content: center; color: #666; font-size: 12px;">
+            Widget 33%</div>
+        </div>
+      </div>
+      <div class="code-box">
+        &lt;div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;"&gt;
+        &lt;div&gt;Widget 33%&lt;/div&gt;
+        &lt;div&gt;Widget 33%&lt;/div&gt;
+        &lt;div&gt;Widget 33%&lt;/div&gt;
+        &lt;/div&gt;
+      </div>
+    </section>
+
+    <!-- PAGE TEMPLATES -->
+    <section id="page-templates">
+      <h2 class="section-title">Templates de Pages</h2>
+      <p class="section-desc">Structures complètes de pages types. Chaque template inclut : topbar + sidebar + main
+        content + grid interne.</p>
+
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;">
+        Template 1 — Dashboard (Reporting)</p>
+      <div class="code-box">
+        &lt;!-- STRUCTURE GLOBALE --&gt;
+        &lt;header class="topbar"&gt;
+        &lt;div class="tb-slot"&gt;Logo + App Name&lt;/div&gt;
+        &lt;div class="tb-body"&gt;Store + Controls&lt;/div&gt;
+        &lt;div class="tb-ics"&gt;Icons + Avatar&lt;/div&gt;
+        &lt;/header&gt;
+
+        &lt;div class="layout"&gt;
+        &lt;aside class="sidebar"&gt;
+        &lt;div class="sb-s"&gt;Search&lt;/div&gt;
+        &lt;div class="sb-toggle"&gt;Gestion/Reporting toggle&lt;/div&gt;
+        &lt;nav class="nav"&gt;Menu items&lt;/nav&gt;
+        &lt;/aside&gt;
+
+        &lt;main class="main"&gt;
+        &lt;div class="content"&gt;
+        &lt;!-- PAGE HEADER --&gt;
+        &lt;div class="page-head"&gt;
+        &lt;h1&gt;Titre de page&lt;/h1&gt;
+        &lt;div class="head-actions"&gt;Date picker + Boutons&lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- GRID WIDGETS --&gt;
+        &lt;div class="wgrid"&gt;
+        &lt;div class="w"&gt;Widget 1&lt;/div&gt;
+        &lt;div class="w"&gt;Widget 2&lt;/div&gt;
+        &lt;div class="wrow3"&gt;
+        &lt;div class="w"&gt;Widget 3&lt;/div&gt;
+        &lt;div class="w"&gt;Widget 4&lt;/div&gt;
+        &lt;div class="w"&gt;Widget 5&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;/main&gt;
+        &lt;/div&gt;
+      </div>
+
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:40px;">
+        Variables de Layout (CSS)</p>
+      <table class="sizing-table">
+        <thead>
+          <tr>
+            <th>Élément</th>
+            <th>Variable CSS</th>
+            <th>Valeur</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Topbar Height</td>
+            <td class="var-name">-</td>
+            <td class="var-value">56px</td>
+            <td>Hauteur fixe du header</td>
+          </tr>
+          <tr>
+            <td>Sidebar Width</td>
+            <td class="var-name">--sw</td>
+            <td class="var-value">220px</td>
+            <td>Largeur fixe de la sidebar</td>
+          </tr>
+          <tr>
+            <td>Content Padding</td>
+            <td class="var-name">-</td>
+            <td class="var-value">28px 32px</td>
+            <td>Padding du contenu principal</td>
+          </tr>
+          <tr>
+            <td>Widget Gap</td>
+            <td class="var-name">-</td>
+            <td class="var-value">20px</td>
+            <td>Espacement entre widgets en grille</td>
+          </tr>
+          <tr>
+            <td>Main Min Height</td>
+            <td class="var-name">-</td>
+            <td class="var-value">100vh</td>
+            <td>Hauteur minimum = viewport</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- NAVIGATION -->
+    <section id="navigation">
+      <h2 class="section-title">Navigation & Topbar</h2>
+      <p class="section-desc">Composants de navigation : topbar, sidebar, menu items, avec leurs états.</p>
+
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;">
+        Topbar Structure</p>
+      <div class="code-box">
+        &lt;header class="topbar"&gt;
+        &lt;!-- Slot Gauche : Logo + App Name --&gt;
+        &lt;div class="tb-slot"&gt;
+        &lt;div class="tb-logo"&gt;&lt;svg&gt;...&lt;/svg&gt;&lt;/div&gt;
+        &lt;span class="tb-appn"&gt;OnlineManager&lt;/span&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Body : Store + Controls --&gt;
+        &lt;div class="tb-body"&gt;
+        &lt;span class="tb-store"&gt;Onlineformapro&lt;/span&gt;
+        &lt;div class="tb-cw"&gt;
+        &lt;span class="tb-cl"&gt;Comptes :&lt;/span&gt;
+        &lt;select class="tb-sel"&gt;
+        &lt;option&gt;INFREP&lt;/option&gt;
+        &lt;/select&gt;
+        &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Icons + Avatar --&gt;
+        &lt;div class="tb-ics"&gt;
+        &lt;button class="tbi"&gt;&lt;svg&gt;...&lt;/svg&gt;&lt;/button&gt;
+        &lt;div class="tbsep"&gt;&lt;/div&gt;
+        &lt;div class="tb-av"&gt;AL&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;/header&gt;
+      </div>
+
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:40px;">
+        Sidebar Navigation</p>
+      <div class="code-box">
+        &lt;aside class="sidebar"&gt;
+        &lt;!-- Search Bar --&gt;
+        &lt;div class="sb-s"&gt;
+        &lt;svg&gt;...&lt;/svg&gt;
+        &lt;span&gt;Rechercher&lt;/span&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Toggle Gestion/Reporting --&gt;
+        &lt;div class="sb-toggle"&gt;
+        &lt;div class="sbt-btn"&gt;Gestion&lt;/div&gt;
+        &lt;div class="sbt-btn"&gt;Reporting&lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Navigation Menu --&gt;
+        &lt;nav class="nav"&gt;
+        &lt;div class="ni act"&gt;
+        &lt;svg&gt;...&lt;/svg&gt;
+        Stats pré-formatées
+        &lt;/div&gt;
+        &lt;div class="ni"&gt;
+        &lt;svg&gt;...&lt;/svg&gt;
+        Autre page
+        &lt;/div&gt;
+        &lt;/nav&gt;
+        &lt;/aside&gt;
+      </div>
+
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:40px;">
+        Tailles de Navigation</p>
+      <table class="sizing-table">
+        <thead>
+          <tr>
+            <th>Élément</th>
+            <th>Taille</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Topbar Logo</td>
+            <td class="var-value">30x30px</td>
+            <td>Carré arrondi, background accent</td>
+          </tr>
+          <tr>
+            <td>Topbar Button</td>
+            <td class="var-value">36x36px</td>
+            <td>Circulaire, hover background</td>
+          </tr>
+          <tr>
+            <td>Topbar Avatar</td>
+            <td class="var-value">30x30px</td>
+            <td>Circulaire, initiales</td>
+          </tr>
+          <tr>
+            <td>Nav Item Icon</td>
+            <td class="var-value">15x15px</td>
+            <td>Stroke 1.8, flex-shrink: 0</td>
+          </tr>
+          <tr>
+            <td>Nav Item Padding</td>
+            <td class="var-value">8px 14px</td>
+            <td>Vertical/Horizontal</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- MODALS -->
+    <section id="modals">
+      <h2 class="section-title">Modales & Overlays</h2>
+      <p class="section-desc">Patterns pour les dialogs, popovers, date pickers et autres overlays.</p>
+
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:20px;">
+        Exemple : Import de photo</p>
+      
+      <div class="ds-grid" style="grid-template-columns: 1fr 1fr; align-items: start;">
+        <!-- STEP 1: IMPORT -->
+        <div class="modal-preview-wrap">
+          <div class="modal-mock">
+            <div class="modal-header">
+              <div class="modal-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+              </div>
+              <div class="modal-title-wrap">
+                <div class="modal-title">Importer une photo</div>
+                <div class="modal-subtitle">Choisissez ou glissez votre image</div>
+              </div>
+              <button class="modal-close">✕</button>
+            </div>
+            <div class="modal-body">
+              <div class="drop-zone">
+                <div class="drop-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                </div>
+                <div class="drop-text">Glissez-déposez votre photo</div>
+                <div class="drop-sub">Format : .jpeg, .png, .webp — taille max : 5 MB</div>
+                <button class="btn primary" style="height: 44px; padding: 0 24px; font-size: 15px;">Parcourir les fichiers</button>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn" style="height: 44px; padding: 0 24px;">Fermer</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 2: CROP -->
+        <div class="modal-preview-wrap">
+          <div class="modal-mock">
+            <div class="modal-header">
+              <div class="modal-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+              </div>
+              <div class="modal-title-wrap">
+                <div class="modal-title">Recadrer la photo</div>
+                <div class="modal-subtitle">Ajustez la zone de recadrage</div>
+              </div>
+              <button class="modal-close">✕</button>
+            </div>
+            <div class="modal-body" style="padding-bottom: 12px;">
+              <div class="cropper-area">
+                <img src="https://images.unsplash.com/photo-1436491865332-7a61a109c0f2?auto=format&fit=crop&q=80&w=800" class="cropper-img">
+                <div class="crop-mask">
+                  <div class="crop-handle handle-tl"></div>
+                  <div class="crop-handle handle-tr"></div>
+                  <div class="crop-handle handle-bl"></div>
+                  <div class="crop-handle handle-br"></div>
+                  <div class="crop-handle handle-tc"></div>
+                  <div class="crop-handle handle-bc"></div>
+                  <div class="crop-handle handle-lc"></div>
+                  <div class="crop-handle handle-rc"></div>
+                </div>
+              </div>
+              <div style="text-align: center; margin-top: 16px; font-size: 13px; color: #64748B;">
+                Faites glisser la zone · Tirez les poignées pour redimensionner
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn" style="height: 44px; padding: 0 24px;">Retour</button>
+              <button class="btn primary" style="height: 44px; padding: 0 24px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                Enregistrer
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:48px;">
+        Modal Structure (Code)</p>
+      <div class="code-box">
+        &lt;!-- MODAL DIALOG --&gt;
+        &lt;div class="modal"&gt;
+          &lt;div class="modal-header"&gt;
+            &lt;div class="modal-icon"&gt;...&lt;/div&gt;
+            &lt;div class="modal-title-wrap"&gt;
+              &lt;div class="modal-title"&gt;Titre&lt;/div&gt;
+              &lt;div class="modal-subtitle"&gt;Sous-titre&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;button class="modal-close"&gt;✕&lt;/button&gt;
+          &lt;/div&gt;
+          &lt;div class="modal-body"&gt;...&lt;/div&gt;
+          &lt;div class="modal-footer"&gt;
+            &lt;button class="btn"&gt;Annuler&lt;/button&gt;
+            &lt;button class="btn primary"&gt;Action&lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      </div>
+    </section>
+
+    <!-- STATES -->
+    <section id="states" style="padding-bottom: 100px;">
+      <h2 class="section-title">États & Feedback</h2>
+      <p class="section-desc">Tous les états des composants : hover, active, disabled, loading, error, success.</p>
+
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;">
+        États des Boutons</p>
+      <div class="preview-box">
+        <div class="preview-label">Live Preview</div>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <button class="btn primary">Normal</button>
+          <button class="btn primary" style="opacity: 0.6;">Disabled</button>
+          <button class="btn">Secondary Normal</button>
+          <button class="btn" style="opacity: 0.6;">Secondary Disabled</button>
+        </div>
+      </div>
+
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:40px;">
+        États des Inputs</p>
+      <div class="preview-box">
+        <div class="preview-label">Live Preview</div>
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div class="form-field">
+            <label>Input Normal</label>
+            <input type="text" class="form-input" placeholder="Type something..." value="Normal state">
+          </div>
+          <div class="form-field">
+            <label>Input Focus</label>
+            <input type="text" class="form-input" placeholder="Type something..."
+              style="border-color: #3B82F6; box-shadow: 0 0 0 3px #EFF6FF;" autofocus>
+          </div>
+          <div class="form-field">
+            <label>Input Disabled</label>
+            <input type="text" class="form-input" placeholder="Type something..." disabled>
+          </div>
+          <div class="form-field">
+            <label>Input Error</label>
+            <input type="text" class="form-input" placeholder="Type something..." style="border-color: #DC2626;">
+            <span style="font-size: 12px; color: #DC2626;">Ce champ est requis</span>
+          </div>
+        </div>
+      </div>
+
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:40px;">
+        États des Badges</p>
+      <div class="preview-box">
+        <div class="preview-label">Live Preview</div>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <span class="pbadge green">Terminé</span>
+          <span class="pbadge" style="background: rgba(226, 0, 110, 0.1); color: var(--a);">En cours</span>
+          <span class="pbadge gray">Non commencé</span>
+          <span class="pbadge" style="background: #FEE2E2; color: #DC2626;">Erreur</span>
+        </div>
+      </div>
+
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:40px;">
+        Messages & Notifications</p>
+      <table class="sizing-table">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Couleur</th>
+            <th>Icône</th>
+            <th>Usage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Success</td>
+            <td class="var-value" style="background:#ECFDF5; color: #059669;">✓ #059669</td>
+            <td>Check circle</td>
+            <td>Action réussie</td>
+          </tr>
+          <tr>
+            <td>Error</td>
+            <td class="var-value" style="background:#FEE2E2; color: #DC2626;">✕ #DC2626</td>
+            <td>Alert circle</td>
+            <td>Action échouée</td>
+          </tr>
+          <tr>
+            <td>Warning</td>
+            <td class="var-value" style="background:#FEF3C7; color: #D97706;">⚠ #D97706</td>
+            <td>Alert triangle</td>
+            <td>Attention requise</td>
+          </tr>
+          <tr>
+            <td>Info</td>
+            <td class="var-value" style="background:#EFF6FF; color: #3B82F6;">ℹ #3B82F6</td>
+            <td>Info circle</td>
+            <td>Information</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:40px;">
+        Transitions & Animations</p>
+      <table class="sizing-table">
+        <thead>
+          <tr>
+            <th>Élément</th>
+            <th>Transition</th>
+            <th>Timing</th>
+            <th>Use case</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Boutons</td>
+            <td class="var-value">background 0.2s</td>
+            <td>Easing: ease-out</td>
+            <td>Hover / Active</td>
+          </tr>
+          <tr>
+            <td>Dropdown chevron</td>
+            <td class="var-value">transform 0.2s</td>
+            <td>Easing: ease</td>
+            <td>Rotation 180°</td>
+          </tr>
+          <tr>
+            <td>Charts bars</td>
+            <td class="var-value">height 0.4s</td>
+            <td>Easing: ease</td>
+            <td>Data load animation</td>
+          </tr>
+          <tr>
+            <td>Page transitions</td>
+            <td class="var-value">opacity 0.3s</td>
+            <td>Easing: ease-in-out</td>
+            <td>Route change</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+
+  <script>
+    // Smooth scroll for nav
+    document.querySelectorAll('.ds-nav-item').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Toggle dropdown
+    function toggleDD(btn) {
+      const wrap = btn.closest('.w-dd-wrap');
+      const isOpen = wrap.classList.contains('open');
+
+      // Close all others
+      document.querySelectorAll('.w-dd-wrap').forEach(w => w.classList.remove('open'));
+
+      // Toggle current
+      if (!isOpen) wrap.classList.add('open');
+    }
+
+    // Close dropdown on outside click
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.w-dd-wrap')) {
+        document.querySelectorAll('.w-dd-wrap').forEach(w => w.classList.remove('open'));
+      }
+    });
+  </script>
+
+    <script>
+      function toggleCard(input) {
+        const name = input.getAttribute('name');
+        const cards = document.querySelectorAll(`input[name="${name}"]`);
+        cards.forEach(c => {
+          if (c.checked) {
+            c.parentElement.classList.add('active');
+          } else {
+            c.parentElement.classList.remove('active');
+          }
+        });
+      }
+    </script>
+</body>
+
+</html>
