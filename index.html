@@ -10,22 +10,23 @@
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
     :root {
-      /* Core Colors */
-      --a: #E2006E;
-      --a-rgb: 226, 0, 110;
-      --a1: #FFF0F6;
-      --a2: #FDDAED;
-      --a-h: #C2005D;
-      --a-p: #A30050;
+      /* Primary — Violet (couleur de marque) */
+      --a: #8A3AAF;
+      --a-rgb: 138, 58, 175;
+      --a1: #F8F1FB;
+      --a2: #E0CAEA;
+      --a-h: #783298;
+      --a-p: #662B81;
+      --a-dark: #9B4BC4;
 
-      /* Secondary Colors — Vert Émeraude */
-      --s: #0A7D63;
-      --s-rgb: 10, 125, 99;
-      --s-h: #086650;
-      --s-p: #06543F;
-      --s-t: #065C47;
-      --s1: #ECFAF5;
-      --s2: #C6EDDF;
+      /* Secondary — Bleu */
+      --s: #2876A7;
+      --s-rgb: 40, 118, 167;
+      --s-h: #22658E;
+      --s-p: #1C5376;
+      --s-t: #1A4E6E;
+      --s1: #F1F7FB;
+      --s2: #CADEEA;
 
       /* Destructive (état sémantique uniquement) */
       --d: #B42318;
@@ -304,7 +305,7 @@
       box-shadow: 0 0 0 3px var(--btn-ring);
     }
 
-    /* --- Variante : Primary (accent rose) — 1 seule par écran --- */
+    /* --- Variante : Primary (violet de marque) — 1 seule par écran --- */
     .btn.primary {
       --btn-ring: rgba(var(--a-rgb), 0.28);
       background: var(--a);
@@ -323,7 +324,7 @@
       border-color: var(--a-p);
     }
 
-    /* --- Variante : Secondary (vert émeraude) — valider / confirmer --- */
+    /* --- Variante : Secondary (bleu) — valider / confirmer --- */
     .btn.secondary {
       --btn-ring: rgba(var(--s-rgb), 0.28);
       background: var(--s);
@@ -342,7 +343,7 @@
       border-color: var(--s-p);
     }
 
-    /* --- Variante : Soft (vert teinté) — action secondaire récurrente --- */
+    /* --- Variante : Soft (bleu teinté) — action secondaire récurrente --- */
     .btn.soft {
       --btn-ring: rgba(var(--s-rgb), 0.2);
       background: var(--s1);
@@ -357,10 +358,10 @@
     }
 
     .btn.soft:active {
-      background: #B2E5D3;
+      background: #B4D5E7;
     }
 
-    /* --- Variante : Soft accent (rose teinté) --- */
+    /* --- Variante : Soft accent (violet teinté) --- */
     .btn.soft-accent {
       --btn-ring: rgba(var(--a-rgb), 0.2);
       background: var(--a1);
@@ -374,7 +375,7 @@
       color: var(--a-p);
     }
 
-    /* --- Variante : Outline (contour vert) --- */
+    /* --- Variante : Outline (contour bleu) --- */
     .btn.outline {
       --btn-ring: rgba(var(--s-rgb), 0.2);
       background: #fff;
@@ -555,6 +556,45 @@
       border: 1px solid var(--bd);
       padding: 0 6px;
       color: var(--t2);
+    }
+
+    /* --- Sur surfaces sombres (sidebars) --- */
+    /* Le violet de marque se fond dans les sidebars violettes : on l'éclaircit. */
+    .btn.primary.on-dark {
+      background: var(--a-dark);
+      border-color: var(--a-dark);
+    }
+
+    .btn.primary.on-dark:hover {
+      background: #A050C9;
+      border-color: #A050C9;
+    }
+
+    .btn.primary.on-dark:active {
+      background: #8E40B4;
+      border-color: #8E40B4;
+    }
+
+    /* Remplace la variante blanche, illisible sur fond sombre. */
+    .btn.neutral-dark {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.18);
+      color: #EDE7F0;
+    }
+
+    .btn.neutral-dark:hover {
+      background: rgba(255, 255, 255, 0.14);
+      border-color: rgba(255, 255, 255, 0.28);
+      color: #fff;
+    }
+
+    .btn.ghost.on-dark {
+      color: #B9A9C2;
+    }
+
+    .btn.ghost.on-dark:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
     }
 
     /* --- Groupe accolé --- */
@@ -833,8 +873,8 @@
     }
 
     .form-input:focus {
-      border-color: #3B82F6;
-      box-shadow: 0 0 0 3px #EFF6FF;
+      border-color: var(--s);
+      box-shadow: 0 0 0 3px var(--s1);
     }
 
     /* Icons */
@@ -1215,7 +1255,7 @@
 
     .form-card-check.active {
       border-color: var(--a);
-      background: #FFF1F7;
+      background: var(--a1);
     }
 
     .form-card-check.active .check-circle {
@@ -1316,7 +1356,7 @@
       .modal-header .modal-icon {
         width: 42px;
         height: 42px;
-        background: #FFF1F7;
+        background: var(--a1);
         color: var(--a);
         border-radius: 12px;
         display: flex;
@@ -1384,7 +1424,7 @@
 
       .drop-zone:hover {
         border-color: var(--a);
-        background: #FFF1F7;
+        background: var(--a1);
       }
 
       .drop-icon {
@@ -1500,23 +1540,24 @@
     <!-- COLORS -->
     <section id="colors">
       <h2 class="section-title">Couleurs</h2>
-      <p class="section-desc">La palette de couleurs est construite autour d'un rose vibrant (Accent) et de neutres
-        profonds pour garantir élégance et lisibilité. Un <b>vert émeraude</b> (<code>#0A7D63</code>) complète l'accent
-        pour les actions de validation — voir la section <a href="#buttons" style="color:var(--s-t);">Boutons</a>.</p>
+      <p class="section-desc">La palette suit une hiérarchie à trois niveaux : le <b>violet</b>
+        (<code>#8A3AAF</code>) porte la marque et l'action principale, le <b>bleu</b> (<code>#2876A7</code>) prend les
+        actions secondaires, et le <b>blanc</b> assure tout le reste. Les neutres profonds garantissent la lisibilité —
+        voir la section <a href="#buttons" style="color:var(--s-t);">Boutons</a>.</p>
 
       <div class="ds-grid">
         <div class="swatch-card">
           <div class="swatch-color" style="background: var(--a);"></div>
           <div class="swatch-info">
-            <div class="swatch-name">Accent (Global)</div>
-            <div class="swatch-hex">#E2006E</div>
+            <div class="swatch-name">Primary — Violet</div>
+            <div class="swatch-hex">#8A3AAF</div>
           </div>
         </div>
         <div class="swatch-card">
           <div class="swatch-color" style="background: var(--s);"></div>
           <div class="swatch-info">
-            <div class="swatch-name">Secondary (Actions)</div>
-            <div class="swatch-hex">#0A7D63</div>
+            <div class="swatch-name">Secondary — Bleu</div>
+            <div class="swatch-hex">#2876A7</div>
           </div>
         </div>
         <div class="swatch-card">
@@ -1969,65 +2010,87 @@
     <section id="buttons">
       <h2 class="section-title">Boutons</h2>
       <p class="section-desc">Le bouton est le composant le plus répété de l'interface : il doit porter une hiérarchie
-        lisible en un coup d'œil. Le système repose sur <b>8 variantes</b>, <b>4 tailles</b>, <b>6 états</b> et
-        <b>4 compositions</b>, tous pilotés par des tokens CSS locaux (<code>--btn-h</code>, <code>--btn-px</code>,
-        <code>--btn-fs</code>, <code>--btn-icon</code>) — changer de taille ne demande jamais de réécrire une règle.
+        lisible en un coup d'œil. Trois niveaux de couleur — <b>violet</b>, <b>bleu</b>, <b>blanc</b> — déclinés en
+        <b>8 variantes</b>, <b>4 tailles</b>, <b>6 états</b> et <b>4 compositions</b>, tous pilotés par des tokens CSS
+        locaux (<code>--btn-h</code>, <code>--btn-px</code>, <code>--btn-fs</code>, <code>--btn-icon</code>) — changer
+        de taille ne demande jamais de réécrire une règle.
       </p>
 
-      <!-- ============ 1. NOUVELLE COULEUR ============ -->
+      <!-- ============ 1. LA PALETTE D'ACTION ============ -->
       <p
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;">
-        1 — Nouvelle couleur d'action : Vert Émeraude</p>
+        1 — La palette d'action : violet, bleu, blanc</p>
       <p class="section-desc" style="margin-bottom:24px;">
-        Le rose <code>#E2006E</code> est la couleur de marque : elle doit rester rare pour garder son pouvoir d'appel.
-        Il manquait une <b>deuxième couleur d'action</b> pour tout ce qui valide, confirme, active ou publie.
-        Le choix retenu est un <b>vert émeraude profond <code>#0A7D63</code></b> (teinte 166°) : c'est la
-        <b>complémentaire quasi exacte</b> du rose de marque (331°), donc les deux couleurs se renforcent au lieu de se
-        concurrencer ; sa désaturation contrôlée (L 26 %) l'empêche de virer au « vert validation » criard ; et elle
-        tranche nettement sur les deux sidebars violettes <code>#13041C</code> et <code>#0A032D</code>.
+        La hiérarchie tient en trois niveaux, et un seul par écran monte d'un cran. Le <b>violet
+          <code>#8A3AAF</code></b> est la couleur de marque : il porte l'action principale, celle qui engage.
+        Le <b>bleu <code>#2876A7</code></b> prend tout le registre secondaire — valider, exporter, dupliquer, filtrer.
+        Le <b>blanc</b> ferme la marche pour tout ce qui est neutre ou réversible : annuler, fermer, revenir.
+        Les 128° qui séparent le violet du bleu suffisent à les distinguer d'un coup d'œil, y compris pour un
+        deutéranope, sans qu'aucun des deux ne prenne le pas sur le contenu.
       </p>
 
       <div class="ds-grid" style="margin-bottom:28px;">
         <div class="swatch-card">
+          <div class="swatch-color" style="background: var(--a);"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Primary — Violet</div>
+            <div class="swatch-hex">#8A3AAF &nbsp;·&nbsp; --a</div>
+          </div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch-color" style="background: var(--a-h);"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Primary — Hover</div>
+            <div class="swatch-hex">#783298 &nbsp;·&nbsp; --a-h</div>
+          </div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch-color" style="background: var(--a-p);"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Primary — Pressed</div>
+            <div class="swatch-hex">#662B81 &nbsp;·&nbsp; --a-p</div>
+          </div>
+        </div>
+        <div class="swatch-card">
           <div class="swatch-color" style="background: var(--s);"></div>
           <div class="swatch-info">
-            <div class="swatch-name">Secondary — Base</div>
-            <div class="swatch-hex">#0A7D63 &nbsp;·&nbsp; --s</div>
+            <div class="swatch-name">Secondary — Bleu</div>
+            <div class="swatch-hex">#2876A7 &nbsp;·&nbsp; --s</div>
           </div>
         </div>
         <div class="swatch-card">
           <div class="swatch-color" style="background: var(--s-h);"></div>
           <div class="swatch-info">
             <div class="swatch-name">Secondary — Hover</div>
-            <div class="swatch-hex">#086650 &nbsp;·&nbsp; --s-h</div>
+            <div class="swatch-hex">#22658E &nbsp;·&nbsp; --s-h</div>
           </div>
         </div>
         <div class="swatch-card">
           <div class="swatch-color" style="background: var(--s-p);"></div>
           <div class="swatch-info">
             <div class="swatch-name">Secondary — Pressed</div>
-            <div class="swatch-hex">#06543F &nbsp;·&nbsp; --s-p</div>
+            <div class="swatch-hex">#1C5376 &nbsp;·&nbsp; --s-p</div>
+          </div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch-color" style="background: var(--a2);"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Violet — Tint / Surface</div>
+            <div class="swatch-hex">#E0CAEA &nbsp;·&nbsp; #F8F1FB</div>
           </div>
         </div>
         <div class="swatch-card">
           <div class="swatch-color" style="background: var(--s2);"></div>
           <div class="swatch-info">
-            <div class="swatch-name">Secondary — Tint</div>
-            <div class="swatch-hex">#C6EDDF &nbsp;·&nbsp; --s2</div>
+            <div class="swatch-name">Bleu — Tint / Surface</div>
+            <div class="swatch-hex">#CADEEA &nbsp;·&nbsp; #F1F7FB</div>
           </div>
         </div>
         <div class="swatch-card">
-          <div class="swatch-color" style="background: var(--s1); border-bottom: 1px solid var(--bd);"></div>
+          <div class="swatch-color" style="background: #fff; border-bottom: 1px solid var(--bd);"></div>
           <div class="swatch-info">
-            <div class="swatch-name">Secondary — Surface</div>
-            <div class="swatch-hex">#ECFAF5 &nbsp;·&nbsp; --s1</div>
-          </div>
-        </div>
-        <div class="swatch-card">
-          <div class="swatch-color" style="background: var(--s-t);"></div>
-          <div class="swatch-info">
-            <div class="swatch-name">Secondary — Texte sur teinte</div>
-            <div class="swatch-hex">#065C47 &nbsp;·&nbsp; --s-t</div>
+            <div class="swatch-name">Tertiary — Blanc</div>
+            <div class="swatch-hex">#FFFFFF + bordure --bd</div>
           </div>
         </div>
       </div>
@@ -2043,53 +2106,66 @@
         </thead>
         <tbody>
           <tr>
-            <td>Texte blanc sur <span class="var-value">#0A7D63</span></td>
-            <td class="var-value">5.09:1</td>
+            <td>Texte blanc sur violet <span class="var-value">#8A3AAF</span></td>
+            <td class="var-value">6.35:1</td>
+            <td>AA (tout texte)</td>
+            <td>Bouton <code>.primary</code> au repos</td>
+          </tr>
+          <tr>
+            <td>Texte blanc sur <span class="var-value">#783298</span> puis <span class="var-value">#662B81</span></td>
+            <td class="var-value">7.75 → 9.43</td>
+            <td>AAA</td>
+            <td>Hover puis pressed — le contraste monte, jamais l'inverse</td>
+          </tr>
+          <tr>
+            <td>Violet sur fond blanc</td>
+            <td class="var-value">6.35:1</td>
+            <td>AA</td>
+            <td>Logo, liens, icônes, état actif de la navigation</td>
+          </tr>
+          <tr>
+            <td>Texte blanc sur bleu <span class="var-value">#2876A7</span></td>
+            <td class="var-value">4.95:1</td>
             <td>AA (tout texte)</td>
             <td>Bouton <code>.secondary</code> au repos</td>
           </tr>
           <tr>
-            <td>Texte blanc sur <span class="var-value">#086650</span></td>
-            <td class="var-value">6.94:1</td>
-            <td>AA (tout texte)</td>
-            <td>État hover — le contraste monte, jamais l'inverse</td>
+            <td>Texte blanc sur <span class="var-value">#22658E</span> puis <span class="var-value">#1C5376</span></td>
+            <td class="var-value">6.33 → 8.24</td>
+            <td>AA / AAA</td>
+            <td>Hover puis pressed</td>
           </tr>
           <tr>
-            <td>Texte blanc sur <span class="var-value">#06543F</span></td>
-            <td class="var-value">8.95:1</td>
-            <td>AAA</td>
-            <td>État pressed</td>
-          </tr>
-          <tr>
-            <td><span class="var-value">#065C47</span> sur <span class="var-value">#ECFAF5</span></td>
-            <td class="var-value">7.44:1</td>
+            <td><span class="var-value">#1A4E6E</span> sur surface <span class="var-value">#F1F7FB</span></td>
+            <td class="var-value">8.24:1</td>
             <td>AAA</td>
             <td>Variantes <code>.soft</code> et <code>.outline</code></td>
           </tr>
           <tr>
-            <td><span class="var-value">#0A7D63</span> sur fond blanc</td>
-            <td class="var-value">5.09:1</td>
-            <td>AA</td>
-            <td>Bordure et texte <code>.outline</code>, liens</td>
+            <td><span class="var-value">#662B81</span> sur surface <span class="var-value">#F8F1FB</span></td>
+            <td class="var-value">8.51:1</td>
+            <td>AAA</td>
+            <td>Variante <code>.soft-accent</code></td>
           </tr>
           <tr>
-            <td>Référence : blanc sur accent <span class="var-value">#E2006E</span></td>
-            <td class="var-value">4.71:1</td>
-            <td>AA</td>
-            <td>Le vert est légèrement plus lisible que le rose</td>
+            <td>Écart de teinte violet ↔ bleu</td>
+            <td class="var-value">78°</td>
+            <td>—</td>
+            <td>281° et 203° : deux familles distinctes, jamais confondues</td>
           </tr>
         </tbody>
       </table>
 
       <div class="code-box" style="margin-top:20px;">
         :root {<br>
-        &nbsp;&nbsp;--s: #0A7D63; &nbsp;&nbsp;&nbsp;&nbsp;/* base — fond du bouton secondaire */<br>
-        &nbsp;&nbsp;--s-rgb: 10, 125, 99; /* pour les anneaux de focus rgba() */<br>
-        &nbsp;&nbsp;--s-h: #086650; &nbsp;&nbsp;/* hover */<br>
-        &nbsp;&nbsp;--s-p: #06543F; &nbsp;&nbsp;/* pressed */<br>
-        &nbsp;&nbsp;--s-t: #065C47; &nbsp;&nbsp;/* texte sur surface claire */<br>
-        &nbsp;&nbsp;--s1: #ECFAF5; &nbsp;&nbsp;/* surface teintée */<br>
-        &nbsp;&nbsp;--s2: #C6EDDF; &nbsp;&nbsp;/* bordure teintée */<br>
+        &nbsp;&nbsp;/* Primary — violet de marque */<br>
+        &nbsp;&nbsp;--a: #8A3AAF; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--a-h: #783298; &nbsp;&nbsp;--a-p: #662B81;<br>
+        &nbsp;&nbsp;--a1: #F8F1FB; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--a2: #E0CAEA; &nbsp;&nbsp;--a-rgb: 138, 58, 175;<br>
+        &nbsp;&nbsp;--a-dark: #9B4BC4; &nbsp;/* violet éclairci pour les sidebars sombres */<br><br>
+        &nbsp;&nbsp;/* Secondary — bleu */<br>
+        &nbsp;&nbsp;--s: #2876A7; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--s-h: #22658E; &nbsp;&nbsp;--s-p: #1C5376;<br>
+        &nbsp;&nbsp;--s1: #F1F7FB; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--s2: #CADEEA; &nbsp;&nbsp;--s-t: #1A4E6E;<br>
+        &nbsp;&nbsp;--s-rgb: 40, 118, 167;<br>
         }
       </div>
 
@@ -2125,20 +2201,20 @@
           <tr>
             <td>Primary</td>
             <td class="var-name">.btn.primary</td>
-            <td class="var-value">--a &nbsp;#E2006E</td>
+            <td class="var-value">--a &nbsp;#8A3AAF</td>
             <td>L'action de marque, celle qui engage. <b>Une seule par écran.</b></td>
           </tr>
           <tr>
             <td>Secondary</td>
             <td class="var-name">.btn.secondary</td>
-            <td class="var-value">--s &nbsp;#0A7D63</td>
-            <td>Valider, confirmer, activer, publier — action positive fréquente</td>
+            <td class="var-value">--s &nbsp;#2876A7</td>
+            <td>Valider, exporter, dupliquer — tout le registre secondaire</td>
           </tr>
           <tr>
             <td>Outline</td>
             <td class="var-name">.btn.outline</td>
             <td class="var-value">bordure --s</td>
-            <td>Alternative au secondaire quand deux actions vertes cohabitent</td>
+            <td>Alternative au secondaire quand deux actions bleues cohabitent</td>
           </tr>
           <tr>
             <td>Soft</td>
@@ -2150,7 +2226,7 @@
             <td>Soft accent</td>
             <td class="var-name">.btn.soft-accent</td>
             <td class="var-value">--a1 / --a2</td>
-            <td>Rappel discret de la marque (widgets, empty states)</td>
+            <td>Rappel discret du violet de marque (widgets, empty states)</td>
           </tr>
           <tr>
             <td>Neutral (défaut)</td>
@@ -2167,7 +2243,7 @@
           <tr>
             <td>Link</td>
             <td class="var-name">.btn.link</td>
-            <td class="var-value">--s-t souligné</td>
+            <td class="var-value">--s-t souligné (bleu)</td>
             <td>Action tertiaire au fil du texte, sans encombrement visuel</td>
           </tr>
           <tr>
@@ -2387,7 +2463,7 @@
             <td>Disabled</td>
             <td class="var-name">:disabled / .is-disabled</td>
             <td>Fond --bg, texte --t3, <code>pointer-events:none</code></td>
-            <td>Remplace l'ancien <code>opacity:.6</code>, illisible sur le rose</td>
+            <td>Remplace l'ancien <code>opacity:.6</code>, illisible sur les fonds pleins</td>
           </tr>
           <tr>
             <td>Loading</td>
@@ -2479,21 +2555,23 @@
       <p
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
         7 — Sur les sidebars sombres</p>
-      <p class="section-desc" style="margin-bottom:24px;">Le vert garde sa lisibilité sur les deux fonds sombres du
-        produit : <code>#0A7D63</code> ressort à <b>3.89:1</b> sur <code>#13041C</code> comme sur <code>#0A032D</code>,
-        au-dessus du seuil de 3:1 exigé par le WCAG 1.4.11 pour la limite d'un composant — et le texte blanc y reste à
-        5.09:1. Aucune déclinaison « dark » n'est donc nécessaire. Seule la variante neutre change : sur ces surfaces
-        elle devient un fond blanc à 8 % d'opacité.</p>
+      <p class="section-desc" style="margin-bottom:24px;">C'est ici que la bascule vers le violet demande une
+        précaution. Les deux sidebars sont elles-mêmes violettes (<code>#13041C</code>, <code>#0A032D</code>) : le
+        violet de marque n'y ressort qu'à <b>3.11:1</b>, tout juste au-dessus du seuil de 3:1 du WCAG 1.4.11, et se
+        fond dans le décor. Sur ces surfaces uniquement, la variante primaire passe à
+        <code>--a-dark #9B4BC4</code> — <b>3.95:1</b> sur les deux fonds, texte blanc à 5.00:1. Le bleu, lui, n'a
+        besoin d'aucune correction : il tient <b>3.99:1</b> tel quel. La variante neutre devient un fond blanc à 8 %
+        d'opacité.</p>
 
       <div class="preview-box" style="background:var(--sb-dark);border-color:#2A1235;">
         <div class="preview-label" style="background:var(--sb-dark);color:#8B7A94;border-color:#2A1235;">Sidebar Gestion
           — #13041C</div>
         <div class="btn-demo">
-          <button class="btn secondary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Nouvelle formation</button>
-          <button class="btn primary">Publier</button>
-          <button class="btn"
-            style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18);color:#EDE7F0;">Annuler</button>
-          <button class="btn ghost" style="color:#B9A9C2;">Paramètres</button>
+          <button class="btn primary on-dark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Nouvelle formation</button>
+          <button class="btn secondary">Valider</button>
+          <button class="btn neutral-dark">Annuler</button>
+          <button class="btn ghost on-dark">Paramètres</button>
+          <button class="btn primary">Sans .on-dark</button>
         </div>
       </div>
 
@@ -2501,10 +2579,9 @@
         <div class="preview-label" style="background:var(--sb-rep);color:#8079B0;border-color:#1B1247;">Sidebar Reporting
           — #0A032D</div>
         <div class="btn-demo">
+          <button class="btn primary on-dark">Générer le rapport</button>
           <button class="btn secondary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Exporter</button>
-          <button class="btn primary">Générer le rapport</button>
-          <button class="btn"
-            style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18);color:#E4E2F2;">Annuler</button>
+          <button class="btn neutral-dark">Annuler</button>
         </div>
       </div>
 
@@ -2517,8 +2594,9 @@
         <div class="dd-card do">
           <h4>À faire</h4>
           <ul>
-            <li>Une seule action <code>.primary</code> rose par écran.</li>
-            <li>Utiliser <code>.secondary</code> vert pour tout ce qui valide, confirme ou publie.</li>
+            <li>Une seule action <code>.primary</code> violette par écran.</li>
+            <li>Utiliser <code>.secondary</code> bleu pour tout le registre secondaire : valider, exporter, dupliquer.</li>
+            <li>Sur les sidebars, ajouter <code>.on-dark</code> au primaire et <code>.neutral-dark</code> au neutre.</li>
             <li>Placer la confirmation en dernier, à droite, dans une barre d'actions.</li>
             <li>Un verbe à l'infinitif, 1 à 3 mots : « Enregistrer », « Exporter en PDF ».</li>
             <li>Toujours un <code>aria-label</code> sur un bouton icon-only.</li>
@@ -2529,11 +2607,12 @@
           <h4>À éviter</h4>
           <ul>
             <li>Deux boutons pleins de la même couleur côte à côte : la hiérarchie disparaît.</li>
-            <li>Le rose pour une action ordinaire — il perd sa valeur d'appel.</li>
+            <li>Le violet pour une action ordinaire — il perd sa valeur d'appel.</li>
             <li><code>opacity: 0.6</code> pour simuler un disabled : utiliser <code>:disabled</code>.</li>
             <li>Supprimer l'anneau de focus sans le remplacer.</li>
             <li>Mélanger deux tailles de boutons dans une même barre d'actions.</li>
-            <li>Le vert <code>.secondary</code> pour une action destructive, même « validée ».</li>
+            <li>Le bleu <code>.secondary</code> pour une action destructive, même « validée ».</li>
+            <li>Le violet de marque sur une sidebar sans <code>.on-dark</code> : il se fond dans le fond.</li>
           </ul>
         </div>
       </div>
@@ -2637,7 +2716,7 @@
         <div class="preview-label">Live Preview</div>
         <div style="display: flex; gap: 12px; flex-wrap: wrap;">
           <span class="pbadge green">Terminé</span>
-          <span class="pbadge" style="background: rgba(226, 0, 110, 0.1); color: var(--a);">En cours</span>
+          <span class="pbadge" style="background: rgba(var(--a-rgb), 0.1); color: var(--a);">En cours</span>
           <span class="pbadge gray">Non commencé</span>
           <span class="pbadge filled">Premium</span>
           <span class="pbadge outline">Mode Test</span>
@@ -2700,11 +2779,11 @@
             <div class="w-body" style="min-height: 180px;"></div>
           </div>
 
-          <!-- Widget 3 : Rose (Répartition groupe) -->
+          <!-- Widget 3 : Ambre (Répartition groupe) -->
           <div class="w" style="max-width: 300px;">
             <div class="w-head">
-              <div class="w-ico" style="background:#FFF0F6;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#E2006E" stroke-width="2" stroke-linecap="round"
+              <div class="w-ico" style="background:#FEF3C7;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#B45309" stroke-width="2" stroke-linecap="round"
                   stroke-linejoin="round">
                   <rect x="3" y="3" width="7" height="7" />
                   <rect x="14" y="3" width="7" height="7" />
@@ -2812,9 +2891,9 @@
           </tr>
           <tr>
             <td>Répartition / Groupes</td>
-            <td class="var-value" style="background:#FFF0F6;">#FFF0F6</td>
-            <td class="var-value" style="background:#FCE4EC;">#E2006E</td>
-            <td>Donut chart rose (accent)</td>
+            <td class="var-value" style="background:#FEF3C7;">#FEF3C7</td>
+            <td class="var-value" style="background:#FDE68A;">#B45309</td>
+            <td>Donut chart ambre — seule teinte chaude, aucune collision avec le violet de marque</td>
           </tr>
           <tr>
             <td>Thèmes / Catégories</td>
@@ -3221,7 +3300,7 @@
                 style="background: #f5f5f5; padding: 2px 6px; border-radius: 3px; font-size: 12px;">.th-search:focus</code>
             </td>
             <td>border-color: --a; box-shadow: 0 0 0 2px --a1;</td>
-            <td>État focus rose</td>
+            <td>État focus violet</td>
           </tr>
         </tbody>
       </table>
@@ -3685,7 +3764,7 @@
         <div class="preview-label">Live Preview</div>
         <div style="display: flex; gap: 12px; flex-wrap: wrap;">
           <span class="pbadge green">Terminé</span>
-          <span class="pbadge" style="background: rgba(226, 0, 110, 0.1); color: var(--a);">En cours</span>
+          <span class="pbadge" style="background: rgba(var(--a-rgb), 0.1); color: var(--a);">En cours</span>
           <span class="pbadge gray">Non commencé</span>
           <span class="pbadge" style="background: #FEE2E2; color: #DC2626;">Erreur</span>
         </div>
