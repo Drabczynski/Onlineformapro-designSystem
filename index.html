@@ -305,7 +305,15 @@
       box-shadow: 0 0 0 3px var(--btn-ring);
     }
 
-    /* --- Variante : Primary (violet de marque) — 1 seule par écran --- */
+    /* ----------------------------------------------------------
+       Deux axes independants, sur le modele de Shopify :
+         VARIANTE = le poids visuel  (primary / secondary / tertiary)
+         TON      = le sens          (auto / neutral / critical)
+       Sans classe de variante, le bouton est le palier "auto".
+       Tout le reste se compose : pas de troisieme axe, pas de liste a retenir.
+       ---------------------------------------------------------- */
+
+    /* --- Variante : Primary — violet plein. Une seule par ecran. --- */
     .btn.primary {
       --btn-ring: rgba(var(--a-rgb), 0.28);
       background: var(--a);
@@ -324,135 +332,113 @@
       border-color: var(--a-p);
     }
 
-    /* --- Variante : Secondary (bleu) — valider / confirmer --- */
+    /* --- Variante : Secondary — le bleu, en contour. --- */
     .btn.secondary {
-      --btn-ring: rgba(var(--s-rgb), 0.28);
-      background: var(--s);
-      border-color: var(--s);
-      color: #fff;
+      --btn-ring: rgba(var(--s-rgb), 0.26);
+      background: #fff;
+      border-color: var(--s2);
+      color: var(--s);
     }
 
     .btn.secondary:hover {
-      background: var(--s-h);
-      border-color: var(--s-h);
-      color: #fff;
+      background: var(--s1);
+      border-color: var(--s);
+      color: var(--s-p);
     }
 
     .btn.secondary:active {
-      background: var(--s-p);
-      border-color: var(--s-p);
-    }
-
-    /* --- Variante : Soft (bleu teinté) — action secondaire récurrente --- */
-    .btn.soft {
-      --btn-ring: rgba(var(--s-rgb), 0.2);
-      background: var(--s1);
-      border-color: var(--s2);
-      color: var(--s-t);
-    }
-
-    .btn.soft:hover {
       background: var(--s2);
-      border-color: var(--s2);
-      color: var(--s-p);
     }
 
-    .btn.soft:active {
-      background: #B4D5E7;
+    /* --- Variante : Tertiary — texte seul, aucun poids. --- */
+    .btn.tertiary {
+      --btn-ring: rgba(var(--s-rgb), 0.24);
+      --btn-px: 6px;
+      background: transparent;
+      border-color: transparent;
+      color: var(--s);
     }
 
-    /* --- Variante : Soft accent (violet teinté) --- */
-    .btn.soft-accent {
-      --btn-ring: rgba(var(--a-rgb), 0.2);
-      background: var(--a1);
-      border-color: var(--a2);
-      color: var(--a-p);
-    }
-
-    .btn.soft-accent:hover {
-      background: var(--a2);
-      border-color: var(--a2);
-      color: var(--a-p);
-    }
-
-    /* --- Variante : Outline (contour bleu) --- */
-    .btn.outline {
-      --btn-ring: rgba(var(--s-rgb), 0.2);
-      background: #fff;
-      border-color: var(--s);
-      color: var(--s-t);
-    }
-
-    .btn.outline:hover {
+    .btn.tertiary:hover {
       background: var(--s1);
-      border-color: var(--s-h);
+      border-color: transparent;
       color: var(--s-p);
     }
 
-    /* --- Variante : Ghost — barres d'outils, actions discrètes --- */
-    .btn.ghost {
+    .btn.tertiary:active {
+      background: var(--s2);
+    }
+
+    /* --- Ton : Neutral — retire la couleur, garde le poids --- */
+    .btn.neutral {
+      background: #fff;
+      border-color: var(--bd);
+      color: var(--t2);
+    }
+
+    .btn.neutral:hover {
+      background: var(--ps);
+      border-color: #D6DAE1;
+      color: var(--t1);
+    }
+
+    .btn.primary.neutral {
+      background: var(--t1);
+      border-color: var(--t1);
+      color: #fff;
+    }
+
+    .btn.primary.neutral:hover {
+      background: #000;
+      border-color: #000;
+    }
+
+    .btn.tertiary.neutral {
       background: transparent;
       border-color: transparent;
       color: var(--t2);
     }
 
-    .btn.ghost:hover {
+    .btn.tertiary.neutral:hover {
       background: var(--bg);
-      border-color: transparent;
       color: var(--t1);
     }
 
-    .btn.ghost:active {
-      background: #E7E9ED;
-    }
-
-    /* --- Variante : Link — action tertiaire dans un flux de texte --- */
-    .btn.link {
-      height: auto;
-      padding: 0;
-      background: transparent;
-      border-color: transparent;
-      color: var(--s-t);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      text-decoration-thickness: 1.5px;
-      text-decoration-color: var(--s2);
-    }
-
-    .btn.link:hover {
-      background: transparent;
-      color: var(--s-p);
-      text-decoration-color: var(--s);
-    }
-
-    .btn.link:active {
-      transform: none;
-    }
-
-    /* --- Variante : Danger — destructif, irréversible --- */
-    .btn.danger {
+    /* --- Ton : Critical — destructif, sur n'importe quel poids --- */
+    .btn.critical {
       --btn-ring: rgba(180, 35, 24, 0.26);
+      background: #fff;
+      border-color: var(--d2);
+      color: var(--d);
+    }
+
+    .btn.critical:hover {
+      background: var(--d1);
+      border-color: var(--d);
+      color: var(--d-h);
+    }
+
+    .btn.primary.critical {
       background: var(--d);
       border-color: var(--d);
       color: #fff;
     }
 
-    .btn.danger:hover {
+    .btn.primary.critical:hover {
       background: var(--d-h);
       border-color: var(--d-h);
       color: #fff;
     }
 
-    .btn.danger-soft {
-      --btn-ring: rgba(180, 35, 24, 0.2);
-      background: var(--d1);
-      border-color: var(--d2);
+    .btn.tertiary.critical {
+      background: transparent;
+      border-color: transparent;
       color: var(--d);
     }
 
-    .btn.danger-soft:hover {
-      background: var(--d2);
-      border-color: var(--d2);
+    .btn.tertiary.critical:hover {
+      background: var(--d1);
+      border-color: transparent;
       color: var(--d-h);
     }
 
@@ -499,8 +485,10 @@
     }
 
     /* --- États --- */
-    .btn:disabled,
-    .btn.is-disabled {
+    /* .btn.btn double la spécificité (0,3,0) : sans cela .btn.primary.critical
+       resterait rouge une fois désactivé. */
+    .btn.btn:disabled,
+    .btn.btn.is-disabled {
       cursor: not-allowed;
       pointer-events: none;
       background: var(--bg);
@@ -510,8 +498,8 @@
       transform: none;
     }
 
-    .btn.link:disabled,
-    .btn.ghost:disabled {
+    .btn.btn.tertiary:disabled,
+    .btn.btn.tertiary.is-disabled {
       background: transparent;
       border-color: transparent;
     }
@@ -551,7 +539,7 @@
       font-weight: 700;
     }
 
-    .btn:not(.primary):not(.secondary):not(.danger) .btn-count {
+    .btn:not(.primary):not(.secondary) .btn-count {
       background: #fff;
       border: 1px solid var(--bd);
       padding: 0 6px;
@@ -588,11 +576,11 @@
       color: #fff;
     }
 
-    .btn.ghost.on-dark {
+    .btn.tertiary.on-dark {
       color: #B9A9C2;
     }
 
-    .btn.ghost.on-dark:hover {
+    .btn.tertiary.on-dark:hover {
       background: rgba(255, 255, 255, 0.08);
       color: #fff;
     }
@@ -712,6 +700,96 @@
       text-transform: uppercase;
       letter-spacing: 0.06em;
       color: var(--t3);
+    }
+
+    /* --- Doc : les deux axes --- */
+    .axis-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 16px;
+    }
+
+    .axis-card {
+      border: 1px solid var(--bd);
+      border-radius: var(--rl);
+      padding: 20px 22px;
+      background: var(--ps);
+    }
+
+    .axis-num {
+      font-family: 'Overpass Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--a);
+      margin-bottom: 8px;
+    }
+
+    .axis-card h4 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--t1);
+      margin-bottom: 8px;
+    }
+
+    .axis-card p {
+      font-size: 13.5px;
+      line-height: 1.65;
+      color: var(--t2);
+    }
+
+    /* --- Doc : matrice poids x ton --- */
+    .tone-matrix {
+      display: grid;
+      grid-template-columns: auto repeat(3, 1fr);
+      gap: 12px 16px;
+      align-items: center;
+    }
+
+    .tone-matrix .tm-head {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--t3);
+    }
+
+    .tone-matrix .tm-row {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--t2);
+      padding-right: 8px;
+      white-space: nowrap;
+    }
+
+    /* --- Doc : note de migration --- */
+    .migration-note {
+      border: 1px solid var(--bd);
+      border-left: 3px solid var(--a);
+      border-radius: var(--r);
+      padding: 20px 22px;
+      background: var(--a1);
+      margin-top: 28px;
+    }
+
+    .migration-note h4 {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--a-p);
+      margin-bottom: 8px;
+    }
+
+    .migration-note>p {
+      font-size: 13.5px;
+      color: var(--t2);
+      line-height: 1.6;
+    }
+
+    .migration-note .sizing-table {
+      background: #fff;
     }
 
     .do-dont {
@@ -2010,10 +2088,11 @@
     <section id="buttons">
       <h2 class="section-title">Boutons</h2>
       <p class="section-desc">Le bouton est le composant le plus répété de l'interface : il doit porter une hiérarchie
-        lisible en un coup d'œil. Trois niveaux de couleur — <b>violet</b>, <b>bleu</b>, <b>blanc</b> — déclinés en
-        <b>8 variantes</b>, <b>4 tailles</b>, <b>6 états</b> et <b>4 compositions</b>, tous pilotés par des tokens CSS
-        locaux (<code>--btn-h</code>, <code>--btn-px</code>, <code>--btn-fs</code>, <code>--btn-icon</code>) — changer
-        de taille ne demande jamais de réécrire une règle.
+        lisible en un coup d'œil. Le système suit la démarche de Shopify : <b>deux axes indépendants</b> — le poids
+        (<code>variant</code>) et le sens (<code>tone</code>) — plutôt qu'un catalogue de variantes nommées. Soit
+        <b>4 poids</b>, <b>3 tons</b>, <b>4 tailles</b>, <b>6 états</b> et <b>4 compositions</b>, tous pilotés par des
+        tokens CSS locaux (<code>--btn-h</code>, <code>--btn-px</code>, <code>--btn-fs</code>, <code>--btn-icon</code>)
+        — changer de taille ne demande jamais de réécrire une règle.
       </p>
 
       <!-- ============ 1. LA PALETTE D'ACTION ============ -->
@@ -2139,13 +2218,13 @@
             <td><span class="var-value">#1A4E6E</span> sur surface <span class="var-value">#F1F7FB</span></td>
             <td class="var-value">8.24:1</td>
             <td>AAA</td>
-            <td>Variantes <code>.soft</code> et <code>.outline</code></td>
+            <td>Surface teintée bleue (hover de <code>.tertiary</code>)</td>
           </tr>
           <tr>
             <td><span class="var-value">#662B81</span> sur surface <span class="var-value">#F8F1FB</span></td>
             <td class="var-value">8.51:1</td>
             <td>AAA</td>
-            <td>Variante <code>.soft-accent</code></td>
+            <td>Surface teintée violette (badges, icônes de widget)</td>
           </tr>
           <tr>
             <td>Écart de teinte violet ↔ bleu</td>
@@ -2172,28 +2251,49 @@
       <!-- ============ 2. VARIANTES ============ -->
       <p
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
-        2 — Hiérarchie : les 8 variantes</p>
+        2 — Deux axes, pas une liste</p>
+      <p class="section-desc" style="margin-bottom:24px;">
+        Une liste de variantes nommées (<i>outline</i>, <i>soft</i>, <i>ghost</i>, <i>link</i>, <i>danger</i>…) oblige à
+        retenir un catalogue et laisse toujours un doute sur celle à prendre. Shopify sépare deux questions
+        indépendantes : <b>quel poids</b> l'action a dans la page (<code>variant</code>), et <b>quel sens</b> elle porte
+        (<code>tone</code>). Trois poids × trois tons couvrent tout, et rien ne se chevauche.
+      </p>
+
+      <div class="axis-grid">
+        <div class="axis-card">
+          <div class="axis-num">Axe 1 · variant</div>
+          <h4>Le poids</h4>
+          <p>Où l'action se situe dans la hiérarchie de l'écran, indépendamment de ce qu'elle fait :
+            <code>.primary</code>, <code>.secondary</code>, <code>.tertiary</code>, ou aucune classe.</p>
+        </div>
+        <div class="axis-card">
+          <div class="axis-num">Axe 2 · tone</div>
+          <h4>Le sens</h4>
+          <p>Ce que l'action signifie. Par défaut le ton suit la variante ; <code>.critical</code> la bascule en rouge,
+            <code>.neutral</code> lui retire sa couleur.</p>
+        </div>
+      </div>
+
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin:36px 0 12px;">
+        Axe 1 — le poids</p>
 
       <div class="preview-box">
         <div class="preview-label">Live Preview</div>
         <div class="btn-demo">
           <button class="btn primary">Publier la formation</button>
           <button class="btn secondary">Valider</button>
-          <button class="btn outline">Prévisualiser</button>
-          <button class="btn soft">Dupliquer</button>
-          <button class="btn">Annuler</button>
-          <button class="btn ghost">Filtrer</button>
-          <button class="btn danger">Supprimer</button>
-          <button class="btn link">En savoir plus</button>
+          <button class="btn">Exporter</button>
+          <button class="btn tertiary">En savoir plus</button>
         </div>
       </div>
 
       <table class="sizing-table">
         <thead>
           <tr>
-            <th>Variante</th>
+            <th>Poids</th>
             <th>Classe</th>
-            <th>Couleur</th>
+            <th>Traitement</th>
             <th>Quand l'utiliser</th>
           </tr>
         </thead>
@@ -2201,80 +2301,162 @@
           <tr>
             <td>Primary</td>
             <td class="var-name">.btn.primary</td>
-            <td class="var-value">--a &nbsp;#8A3AAF</td>
-            <td>L'action de marque, celle qui engage. <b>Une seule par écran.</b></td>
+            <td class="var-value">violet plein #8A3AAF</td>
+            <td>L'action qui engage. <b>Une seule par écran.</b></td>
           </tr>
           <tr>
             <td>Secondary</td>
             <td class="var-name">.btn.secondary</td>
-            <td class="var-value">--s &nbsp;#2876A7</td>
-            <td>Valider, exporter, dupliquer — tout le registre secondaire</td>
+            <td class="var-value">contour + texte #2876A7</td>
+            <td>L'action importante mais non engageante : valider, enregistrer, prévisualiser</td>
           </tr>
           <tr>
-            <td>Outline</td>
-            <td class="var-name">.btn.outline</td>
-            <td class="var-value">bordure --s</td>
-            <td>Alternative au secondaire quand deux actions bleues cohabitent</td>
-          </tr>
-          <tr>
-            <td>Soft</td>
-            <td class="var-name">.btn.soft</td>
-            <td class="var-value">--s1 / --s2</td>
-            <td>Action répétée en liste ou en tableau — présente sans crier</td>
-          </tr>
-          <tr>
-            <td>Soft accent</td>
-            <td class="var-name">.btn.soft-accent</td>
-            <td class="var-value">--a1 / --a2</td>
-            <td>Rappel discret du violet de marque (widgets, empty states)</td>
-          </tr>
-          <tr>
-            <td>Neutral (défaut)</td>
+            <td>Auto (défaut)</td>
             <td class="var-name">.btn</td>
-            <td class="var-value">#fff / --bd</td>
-            <td>Annuler, Fermer, Retour — toute action neutre</td>
+            <td class="var-value">blanc + bordure --bd</td>
+            <td>Les actions supplémentaires : annuler, fermer, exporter, filtrer, trier</td>
           </tr>
           <tr>
-            <td>Ghost</td>
-            <td class="var-name">.btn.ghost</td>
-            <td class="var-value">transparent</td>
-            <td>Barres d'outils, en-têtes de widget, actions de densité forte</td>
-          </tr>
-          <tr>
-            <td>Link</td>
-            <td class="var-name">.btn.link</td>
-            <td class="var-value">--s-t souligné (bleu)</td>
-            <td>Action tertiaire au fil du texte, sans encombrement visuel</td>
-          </tr>
-          <tr>
-            <td>Danger</td>
-            <td class="var-name">.btn.danger</td>
-            <td class="var-value">--d &nbsp;#B42318</td>
-            <td>Destructif et irréversible. Toujours derrière une confirmation.</td>
+            <td>Tertiary</td>
+            <td class="var-name">.btn.tertiary</td>
+            <td class="var-value">texte #2876A7 seul</td>
+            <td>Aucun poids visuel : au fil du texte, en tableau dense, ou icône seule en barre d'outils</td>
           </tr>
         </tbody>
       </table>
 
-      <div class="preview-box" style="margin-top:24px;">
-        <div class="preview-label">Variantes teintées</div>
-        <div class="btn-demo">
-          <button class="btn soft">Soft</button>
-          <button class="btn soft-accent">Soft accent</button>
-          <button class="btn danger-soft">Danger soft</button>
+      <p class="section-desc" style="margin:20px 0 0;font-size:14px;">
+        <b>Le bleu porte directement le texte.</b> Sur <code>.tertiary</code>, <code>#2876A7</code> est appliqué tel
+        quel — pas de version assombrie : 4.95:1 sur blanc, ce qui passe l'AA pour du texte normal. Inutile de le
+        foncer, et le garder identique au contour du <code>.secondary</code> fait lire les deux comme un seul registre.
+      </p>
+
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin:40px 0 12px;">
+        Axe 2 — le ton, sur n'importe quel poids</p>
+
+      <div class="preview-box">
+        <div class="preview-label">Live Preview — chaque ligne est un poids, chaque colonne un ton</div>
+        <div class="tone-matrix">
+          <div class="tm-head"></div>
+          <div class="tm-head">Auto</div>
+          <div class="tm-head">Neutral</div>
+          <div class="tm-head">Critical</div>
+
+          <div class="tm-row">Primary</div>
+          <div><button class="btn primary">Publier</button></div>
+          <div><button class="btn primary neutral">Publier</button></div>
+          <div><button class="btn primary critical">Supprimer</button></div>
+
+          <div class="tm-row">Secondary</div>
+          <div><button class="btn secondary">Valider</button></div>
+          <div><button class="btn neutral">Valider</button></div>
+          <div><button class="btn critical">Supprimer</button></div>
+
+          <div class="tm-row">Tertiary</div>
+          <div><button class="btn tertiary">Détails</button></div>
+          <div><button class="btn tertiary neutral">Détails</button></div>
+          <div><button class="btn tertiary critical">Retirer</button></div>
         </div>
       </div>
 
+      <table class="sizing-table">
+        <thead>
+          <tr>
+            <th>Ton</th>
+            <th>Classe</th>
+            <th>Effet</th>
+            <th>Quand l'utiliser</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Auto (défaut)</td>
+            <td class="var-name">—</td>
+            <td>La couleur de la variante</td>
+            <td>Tout le temps, sauf les deux cas ci-dessous</td>
+          </tr>
+          <tr>
+            <td>Critical</td>
+            <td class="var-name">.critical</td>
+            <td>Rouge <span class="var-value">#B42318</span></td>
+            <td>Destructif. <code>.critical</code> seul pour proposer,
+              <code>.primary.critical</code> pour la confirmation finale — l'unique bouton rouge plein du système.</td>
+          </tr>
+          <tr>
+            <td>Neutral</td>
+            <td class="var-name">.neutral</td>
+            <td>Gris <span class="var-value">--t2</span> / noir <span class="var-value">--t1</span></td>
+            <td>Retire la couleur sans changer le poids : barres d'outils, actions répétées en tableau</td>
+          </tr>
+        </tbody>
+      </table>
+
       <div class="code-box">
+        &lt;!-- Axe 1 : le poids --&gt;<br>
         &lt;button class="btn primary"&gt;Publier la formation&lt;/button&gt;<br>
         &lt;button class="btn secondary"&gt;Valider&lt;/button&gt;<br>
-        &lt;button class="btn outline"&gt;Prévisualiser&lt;/button&gt;<br>
-        &lt;button class="btn soft"&gt;Dupliquer&lt;/button&gt;<br>
-        &lt;button class="btn"&gt;Annuler&lt;/button&gt;<br>
-        &lt;button class="btn ghost"&gt;Filtrer&lt;/button&gt;<br>
-        &lt;button class="btn danger"&gt;Supprimer&lt;/button&gt;<br>
-        &lt;button class="btn link"&gt;En savoir plus&lt;/button&gt;
+        &lt;button class="btn"&gt;Exporter&lt;/button&gt;<br>
+        &lt;button class="btn tertiary"&gt;En savoir plus&lt;/button&gt;<br><br>
+        &lt;!-- Axe 2 : le ton se pose par-dessus --&gt;<br>
+        &lt;button class="btn critical"&gt;Supprimer&lt;/button&gt;<br>
+        &lt;button class="btn primary critical"&gt;Supprimer définitivement&lt;/button&gt;<br>
+        &lt;button class="btn tertiary neutral"&gt;Filtrer&lt;/button&gt;<br><br>
+        &lt;!-- Un bouton qui navigue reste un bouton : &lt;a&gt; + les mêmes classes --&gt;<br>
+        &lt;a href="/rapports" class="btn secondary"&gt;Voir les rapports&lt;/a&gt;<br>
+        &lt;button type="submit" class="btn primary"&gt;Enregistrer&lt;/button&gt;
       </div>
 
+      <div class="migration-note">
+        <h4>Ce qui disparaît</h4>
+        <p>Sept classes sont supprimées : chacune n'était qu'une combinaison des deux axes, écrite en dur.</p>
+        <table class="sizing-table" style="margin-top:14px;">
+          <thead>
+            <tr>
+              <th>Avant</th>
+              <th>Après</th>
+              <th>Pourquoi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="var-name">.btn.outline</td>
+              <td class="var-name">.btn.secondary</td>
+              <td>C'était déjà le contour bleu</td>
+            </tr>
+            <tr>
+              <td class="var-name">.btn.soft</td>
+              <td class="var-name">.btn.secondary</td>
+              <td>Un quatrième poids intermédiaire que personne ne savait situer</td>
+            </tr>
+            <tr>
+              <td class="var-name">.btn.soft-accent</td>
+              <td class="var-name">.btn.tertiary</td>
+              <td>Le violet n'a pas à exister en version faible : c'est le rôle du primary</td>
+            </tr>
+            <tr>
+              <td class="var-name">.btn.ghost</td>
+              <td class="var-name">.btn.tertiary.neutral</td>
+              <td>Poids tertiaire + ton neutre</td>
+            </tr>
+            <tr>
+              <td class="var-name">.btn.link</td>
+              <td class="var-name">.btn.tertiary</td>
+              <td>Doublon exact du ghost coloré</td>
+            </tr>
+            <tr>
+              <td class="var-name">.btn.danger</td>
+              <td class="var-name">.btn.primary.critical</td>
+              <td>Le rouge est un ton, pas un poids</td>
+            </tr>
+            <tr>
+              <td class="var-name">.btn.danger-soft</td>
+              <td class="var-name">.btn.critical</td>
+              <td>Idem, au poids par défaut</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
       <!-- ============ 3. TAILLES ============ -->
       <p
@@ -2345,82 +2527,161 @@
       <!-- ============ 4. ICONES & FORMES ============ -->
       <p
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
-        4 — Icônes &amp; formes</p>
-      <p class="section-desc" style="margin-bottom:24px;">L'icône se place <b>avant</b> le libellé quand elle décrit
-        l'action, <b>après</b> quand elle annonce une suite (navigation, menu). Un bouton icon-only devient carré
-        (largeur = hauteur) et exige un <code>aria-label</code>.</p>
+        4 — Icônes</p>
+      <p class="section-desc" style="margin-bottom:24px;">
+        L'icône ne décore pas : elle accélère la reconnaissance d'une action déjà nommée. Elle se place <b>avant</b> le
+        libellé quand elle décrit l'action, <b>après</b> quand elle annonce une suite (navigation, menu déroulant). Un
+        bouton n'a jamais deux icônes.
+      </p>
+
+      <div class="preview-box">
+        <div class="preview-label">Icône + libellé</div>
+        <div class="btn-demo">
+          <button class="btn primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Nouvelle formation</button>
+          <button class="btn secondary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>Enregistrer</button>
+          <button class="btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Exporter</button>
+          <button class="btn tertiary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Dupliquer</button>
+        </div>
+        <div class="btn-demo">
+          <button class="btn primary">Étape suivante <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+          <button class="btn">Trier <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <button class="btn tertiary neutral"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>Filtrer<span class="btn-count">3</span></button>
+        </div>
+      </div>
+
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin:36px 0 12px;">
+        Icône seule</p>
+      <p class="section-desc" style="margin-bottom:24px;">
+        Réservée aux interfaces denses — barres d'outils, en-têtes de widget, cellules de tableau — et uniquement pour
+        des icônes universellement comprises. Le poids par défaut d'une icône seule est <code>.tertiary</code> : dans
+        une barre d'outils, dix boutons bordés font un damier. Le bouton devient carré (largeur = hauteur) et
+        <b>exige un <code>aria-label</code></b> : sans libellé visible, c'est la seule chose qu'un lecteur d'écran
+        annonce.
+      </p>
 
       <div class="preview-box">
         <div class="preview-label">Live Preview</div>
         <div class="btn-demo">
-          <button class="btn secondary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>Enregistrer</button>
-          <button class="btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Exporter</button>
-          <button class="btn primary">Étape suivante <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-          <button class="btn soft">Trier <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <button class="btn ghost"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>Filtrer<span class="btn-count">3</span></button>
-          <button class="btn secondary pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Terminé</button>
+          <button class="btn tertiary neutral icon-only" aria-label="Dupliquer la formation"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+          <button class="btn tertiary neutral icon-only" aria-label="Prévisualiser la formation"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+          <button class="btn tertiary neutral icon-only" aria-label="Plus d'actions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button>
+          <button class="btn tertiary critical icon-only" aria-label="Supprimer la formation"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
         </div>
         <div class="btn-demo">
           <button class="btn icon-only" aria-label="Modifier"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></button>
-          <button class="btn secondary icon-only" aria-label="Ajouter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
-          <button class="btn ghost icon-only" aria-label="Plus d'options"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button>
-          <button class="btn danger-soft icon-only" aria-label="Supprimer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
-          <button class="btn icon-only sm" aria-label="Rafraîchir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></button>
-          <button class="btn icon-only xs" aria-label="Fermer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+          <button class="btn primary icon-only" aria-label="Ajouter une formation"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+          <button class="btn secondary icon-only" aria-label="Enregistrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg></button>
+          <button class="btn icon-only sm" aria-label="Modifier"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></button>
+          <button class="btn icon-only xs" aria-label="Modifier"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></button>
         </div>
+      </div>
+
+      <table class="sizing-table">
+        <thead>
+          <tr>
+            <th>Règle</th>
+            <th>Détail</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Taille</td>
+            <td>13 / 14 / 16 / 18px selon xs / sm / md / lg — pilotée par <code>--btn-icon</code>, jamais en dur</td>
+          </tr>
+          <tr>
+            <td>Épaisseur</td>
+            <td><code>stroke-width: 1.8</code> pour tout le système, quelle que soit la taille</td>
+          </tr>
+          <tr>
+            <td>Couleur</td>
+            <td><code>stroke="currentColor"</code> — l'icône suit le texte, donc la variante et le ton</td>
+          </tr>
+          <tr>
+            <td>Écart au libellé</td>
+            <td>5 / 6 / 8 / 10px selon la taille — <code>--btn-gap</code></td>
+          </tr>
+          <tr>
+            <td>Icône seule</td>
+            <td><code>aria-label</code> obligatoire, décrivant l'action et son objet : « Supprimer la formation »,
+              pas « Supprimer »</td>
+          </tr>
+          <tr>
+            <td>Décoratif</td>
+            <td>Une icône accompagnée d'un libellé est redondante pour l'assistance :
+              <code>aria-hidden="true"</code> sur le SVG</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="code-box">
+        &lt;!-- Icône avant : décrit l'action --&gt;<br>
+        &lt;button class="btn secondary"&gt;&lt;svg aria-hidden="true"&gt;…&lt;/svg&gt;Enregistrer&lt;/button&gt;<br><br>
+        &lt;!-- Icône après : annonce une suite --&gt;<br>
+        &lt;button class="btn primary"&gt;Étape suivante&lt;svg aria-hidden="true"&gt;…&lt;/svg&gt;&lt;/button&gt;<br><br>
+        &lt;!-- Icône seule : tertiary + aria-label décrivant l'objet --&gt;<br>
+        &lt;button class="btn tertiary neutral icon-only" aria-label="Supprimer la formation"&gt;<br>
+        &nbsp;&nbsp;&lt;svg&gt;…&lt;/svg&gt;<br>
+        &lt;/button&gt;
+      </div>
+
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin:40px 0 12px;">
+        Formes</p>
+
+      <div class="preview-box">
+        <div class="preview-label">Pleine largeur · pilule · compteur</div>
         <div style="max-width:420px;">
-          <button class="btn secondary lg block"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Valider les 24 inscriptions</button>
+          <button class="btn primary lg block"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>Valider les 24 inscriptions</button>
+        </div>
+        <div class="btn-demo">
+          <button class="btn secondary pill">Terminé</button>
+          <button class="btn">Filtrer<span class="btn-count">3</span></button>
+          <button class="btn primary">Sélection<span class="btn-count">12</span></button>
         </div>
       </div>
 
       <div class="code-box">
-        &lt;!-- Icône avant : décrit l'action --&gt;<br>
-        &lt;button class="btn secondary"&gt;&lt;svg&gt;…&lt;/svg&gt;Enregistrer&lt;/button&gt;<br><br>
-        &lt;!-- Icône après : annonce une suite --&gt;<br>
-        &lt;button class="btn primary"&gt;Étape suivante&lt;svg&gt;…&lt;/svg&gt;&lt;/button&gt;<br><br>
-        &lt;!-- Icon-only : aria-label obligatoire --&gt;<br>
-        &lt;button class="btn ghost icon-only" aria-label="Plus d'options"&gt;&lt;svg&gt;…&lt;/svg&gt;&lt;/button&gt;<br><br>
-        &lt;!-- Pleine largeur / pilule / compteur --&gt;<br>
-        &lt;button class="btn secondary lg block"&gt;Valider&lt;/button&gt;<br>
+        &lt;button class="btn primary lg block"&gt;Valider&lt;/button&gt;<br>
         &lt;button class="btn secondary pill"&gt;Terminé&lt;/button&gt;<br>
-        &lt;button class="btn ghost"&gt;Filtrer&lt;span class="btn-count"&gt;3&lt;/span&gt;&lt;/button&gt;
+        &lt;button class="btn"&gt;Filtrer&lt;span class="btn-count"&gt;3&lt;/span&gt;&lt;/button&gt;
       </div>
 
       <!-- ============ 5. ETATS ============ -->
       <p
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
         5 — Les 6 états</p>
-      <p class="section-desc" style="margin-bottom:24px;">Chaque variante assombrit au survol et s'enfonce d'1px au clic.
-        Le focus utilise <code>:focus-visible</code> (anneau au clavier uniquement, jamais à la souris) et l'anneau
-        reprend la teinte de la variante.</p>
+      <p class="section-desc" style="margin-bottom:24px;">Chaque variante assombrit au survol et s'enfonce d'1px au
+        clic. Le focus utilise <code>:focus-visible</code> (anneau au clavier uniquement, jamais à la souris) et
+        l'anneau reprend la teinte de la variante.</p>
 
       <div class="preview-box">
         <div class="preview-label">Live Preview — survolez, cliquez, puis naviguez au clavier (Tab)</div>
         <div class="btn-demo" style="align-items:flex-end;">
           <div class="btn-spec"><span class="spec-label">Default</span>
-            <button class="btn secondary">Valider</button>
+            <button class="btn primary">Publier</button>
           </div>
           <div class="btn-spec"><span class="spec-label">Hover</span>
-            <button class="btn secondary" style="background:var(--s-h);border-color:var(--s-h);">Valider</button>
+            <button class="btn primary" style="background:var(--a-h);border-color:var(--a-h);">Publier</button>
           </div>
           <div class="btn-spec"><span class="spec-label">Pressed</span>
-            <button class="btn secondary"
-              style="background:var(--s-p);border-color:var(--s-p);transform:translateY(1px);">Valider</button>
+            <button class="btn primary"
+              style="background:var(--a-p);border-color:var(--a-p);transform:translateY(1px);">Publier</button>
           </div>
           <div class="btn-spec"><span class="spec-label">Focus</span>
-            <button class="btn secondary" style="box-shadow:0 0 0 3px rgba(var(--s-rgb),.28);">Valider</button>
+            <button class="btn primary" style="box-shadow:0 0 0 3px rgba(var(--a-rgb),.28);">Publier</button>
           </div>
           <div class="btn-spec"><span class="spec-label">Disabled</span>
-            <button class="btn secondary" disabled>Valider</button>
+            <button class="btn primary" disabled>Publier</button>
           </div>
           <div class="btn-spec"><span class="spec-label">Loading</span>
-            <button class="btn secondary is-loading"><span>Valider</span></button>
+            <button class="btn primary is-loading"><span>Publication…</span></button>
           </div>
         </div>
         <div class="btn-demo" style="border-top:1px solid var(--bd);padding-top:20px;">
           <span style="font-size:12.5px;color:var(--t3);">Démo réelle :</span>
-          <button class="btn secondary" onclick="demoLoading(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg><span>Enregistrer</span></button>
           <button class="btn primary" onclick="demoLoading(this)"><span>Publier</span></button>
+          <button class="btn secondary" onclick="demoLoading(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg><span>Enregistrer</span></button>
           <button class="btn" onclick="demoLoading(this)"><span>Exporter</span></button>
         </div>
       </div>
@@ -2444,13 +2705,13 @@
           <tr>
             <td>Hover</td>
             <td class="var-name">:hover</td>
-            <td>Fond assombri (--*-h), bordure suivie</td>
+            <td>Fond assombri, bordure suivie</td>
             <td>Transition 0.15s ease</td>
           </tr>
           <tr>
             <td>Pressed</td>
             <td class="var-name">:active</td>
-            <td>Fond --*-p + <code>translateY(1px)</code></td>
+            <td>Fond encore assombri + <code>translateY(1px)</code></td>
             <td>Transition 0.06s : le clic doit être instantané</td>
           </tr>
           <tr>
@@ -2461,9 +2722,9 @@
           </tr>
           <tr>
             <td>Disabled</td>
-            <td class="var-name">:disabled / .is-disabled</td>
+            <td class="var-name">:disabled</td>
             <td>Fond --bg, texte --t3, <code>pointer-events:none</code></td>
-            <td>Remplace l'ancien <code>opacity:.6</code>, illisible sur les fonds pleins</td>
+            <td>Voir ci-dessous — c'est l'état le plus souvent mal employé</td>
           </tr>
           <tr>
             <td>Loading</td>
@@ -2474,10 +2735,106 @@
         </tbody>
       </table>
 
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin:40px 0 12px;">
+        Le cas du disabled</p>
+      <p class="section-desc" style="margin-bottom:24px;">
+        Un bouton désactivé est un cul-de-sac : il ne répond pas, ne prend pas le focus clavier, et n'est donc
+        <b>jamais annoncé</b> par un lecteur d'écran. L'utilisateur voit qu'il ne peut pas continuer sans jamais
+        apprendre pourquoi. La règle : <b>désactiver seulement quand la raison est visible à côté du bouton</b>.
+        Sinon, laisser le bouton actif et expliquer le blocage au clic.
+      </p>
+
+      <div class="do-dont">
+        <div class="dd-card do">
+          <h4>Désactiver est justifié</h4>
+          <ul>
+            <li>La raison est écrite juste à côté : « Sélectionnez au moins une formation ».</li>
+            <li>Une étape précédente n'est pas finie et cela se voit à l'écran.</li>
+            <li>Le bouton est déjà en cours de traitement — mais alors c'est <code>.is-loading</code>, pas
+              <code>disabled</code>.</li>
+          </ul>
+        </div>
+        <div class="dd-card dont">
+          <h4>Préférer un bouton actif</h4>
+          <ul>
+            <li>Un formulaire incomplet : laisser soumettre et signaler les champs en erreur.</li>
+            <li>Un droit manquant : afficher le bouton et expliquer au clic qui contacter.</li>
+            <li>Toute règle que l'utilisateur ne peut pas deviner en regardant l'écran.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="preview-box" style="margin-top:22px;">
+        <div class="preview-label">Live Preview — disabled avec sa raison</div>
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <button class="btn primary" disabled>Inscrire les apprenants</button>
+          <span style="display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:var(--t2);">
+            <span style="width:15px;height:15px;color:var(--t3);display:inline-flex;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
+            Sélectionnez au moins un apprenant dans la liste
+          </span>
+        </div>
+        <div class="btn-demo" style="border-top:1px solid var(--bd);padding-top:20px;">
+          <button class="btn primary" disabled>Primary</button>
+          <button class="btn secondary" disabled>Secondary</button>
+          <button class="btn" disabled>Défaut</button>
+          <button class="btn tertiary" disabled>Tertiary</button>
+          <button class="btn primary critical" disabled>Critical</button>
+          <button class="btn icon-only" disabled aria-label="Modifier"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg></button>
+        </div>
+      </div>
+
+      <table class="sizing-table">
+        <thead>
+          <tr>
+            <th>Point</th>
+            <th>Traitement retenu</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Rendu</td>
+            <td>Toutes les variantes pleines ou bordées convergent vers le même gris : fond <code>--bg</code>,
+              texte <code>--t3</code>, bordure <code>--bd</code>. Un disabled ne doit pas laisser deviner son poids,
+              sinon il ressemble à un bouton actif terne. Seul <code>.tertiary</code> garde sa transparence — un
+              rectangle gris à la place d'un lien serait plus visible désactivé qu'actif.</td>
+          </tr>
+          <tr>
+            <td>Jamais d'opacité</td>
+            <td><code>opacity: .6</code> délave aussi la bordure et le fond de la page à travers le bouton, et donne
+              un résultat différent sur chaque surface. Le gris est explicite et stable.</td>
+          </tr>
+          <tr>
+            <td>Contraste</td>
+            <td>2.54:1 texte sur fond. Sous WCAG 1.4.3, un composant inactif est exempté — c'est volontaire :
+              un disabled trop lisible se confond avec un bouton actif.</td>
+          </tr>
+          <tr>
+            <td>Attribut</td>
+            <td><code>disabled</code> natif, pas une classe. Il retire le bouton de l'ordre de tabulation et bloque
+              la soumission du formulaire, ce qu'une classe ne fait pas.
+              <code>.is-disabled</code> n'existe que pour un <code>&lt;a&gt;</code>, qui n'accepte pas l'attribut.</td>
+          </tr>
+          <tr>
+            <td>Icône seule</td>
+            <td>L'<code>aria-label</code> reste obligatoire même désactivé : le bouton redeviendra actif.</td>
+          </tr>
+          <tr>
+            <td>Disabled ≠ loading</td>
+            <td>Disabled = « pas encore possible ». Loading = « en cours, patientez ». Pendant un envoi, utiliser
+              <code>.is-loading</code> : le spinner dit que quelque chose se passe, le gris ne dit rien.</td>
+          </tr>
+        </tbody>
+      </table>
+
       <div class="code-box">
-        &lt;button class="btn secondary" disabled&gt;Valider&lt;/button&gt;<br>
-        &lt;!-- Loading : envelopper le contenu dans un élément pour qu'il soit masqué --&gt;<br>
-        &lt;button class="btn secondary is-loading"&gt;&lt;span&gt;Valider&lt;/span&gt;&lt;/button&gt;
+        &lt;!-- Disabled : l'attribut natif, et la raison à côté --&gt;<br>
+        &lt;button class="btn primary" disabled&gt;Inscrire les apprenants&lt;/button&gt;<br>
+        &lt;span class="hint"&gt;Sélectionnez au moins un apprenant&lt;/span&gt;<br><br>
+        &lt;!-- Loading : envelopper le contenu pour qu'il soit masqué --&gt;<br>
+        &lt;button class="btn primary is-loading"&gt;&lt;span&gt;Publication…&lt;/span&gt;&lt;/button&gt;<br><br>
+        &lt;!-- Un lien ne prend pas disabled : classe + aria --&gt;<br>
+        &lt;a class="btn is-disabled" aria-disabled="true"&gt;Voir le rapport&lt;/a&gt;
       </div>
 
       <!-- ============ 6. COMPOSITIONS ============ -->
@@ -2520,10 +2877,10 @@
         <div class="preview-label">Barre d'actions — pied de modale</div>
         <div class="btn-bar"
           style="background:#fff;border:1px solid var(--bd);border-radius:var(--rl);padding:16px 20px;">
-          <button class="btn danger-soft"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>Supprimer</button>
+          <button class="btn critical"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>Supprimer</button>
           <span class="spacer"></span>
           <button class="btn">Annuler</button>
-          <button class="btn secondary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Enregistrer</button>
+          <button class="btn primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Enregistrer</button>
         </div>
         <p style="font-size:12.5px;color:var(--t3);line-height:1.6;">
           Ordre de lecture : action destructive à gauche, isolée par le <code>spacer</code> ; action de confirmation
@@ -2544,10 +2901,10 @@
         &nbsp;&nbsp;&lt;button class="active"&gt;Jour&lt;/button&gt;&lt;button&gt;Semaine&lt;/button&gt;<br>
         &lt;/div&gt;<br><br>
         &lt;div class="btn-bar"&gt;<br>
-        &nbsp;&nbsp;&lt;button class="btn danger-soft"&gt;Supprimer&lt;/button&gt;<br>
+        &nbsp;&nbsp;&lt;button class="btn critical"&gt;Supprimer&lt;/button&gt;<br>
         &nbsp;&nbsp;&lt;span class="spacer"&gt;&lt;/span&gt;<br>
         &nbsp;&nbsp;&lt;button class="btn"&gt;Annuler&lt;/button&gt;<br>
-        &nbsp;&nbsp;&lt;button class="btn secondary"&gt;Enregistrer&lt;/button&gt;<br>
+        &nbsp;&nbsp;&lt;button class="btn primary"&gt;Enregistrer&lt;/button&gt;<br>
         &lt;/div&gt;
       </div>
 
@@ -2570,7 +2927,7 @@
           <button class="btn primary on-dark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Nouvelle formation</button>
           <button class="btn secondary">Valider</button>
           <button class="btn neutral-dark">Annuler</button>
-          <button class="btn ghost on-dark">Paramètres</button>
+          <button class="btn tertiary on-dark">Paramètres</button>
           <button class="btn primary">Sans .on-dark</button>
         </div>
       </div>
@@ -2595,23 +2952,24 @@
           <h4>À faire</h4>
           <ul>
             <li>Une seule action <code>.primary</code> violette par écran.</li>
-            <li>Utiliser <code>.secondary</code> bleu pour tout le registre secondaire : valider, exporter, dupliquer.</li>
-            <li>Sur les sidebars, ajouter <code>.on-dark</code> au primaire et <code>.neutral-dark</code> au neutre.</li>
-            <li>Placer la confirmation en dernier, à droite, dans une barre d'actions.</li>
+            <li>Choisir d'abord le <b>poids</b>, puis le <b>ton</b> — jamais l'inverse.</li>
             <li>Un verbe à l'infinitif, 1 à 3 mots : « Enregistrer », « Exporter en PDF ».</li>
-            <li>Toujours un <code>aria-label</code> sur un bouton icon-only.</li>
+            <li>Placer la confirmation en dernier, à droite, dans une barre d'actions.</li>
+            <li>Toujours un <code>aria-label</code> sur un bouton icon-only, décrivant l'objet.</li>
             <li>Passer en <code>.is-loading</code> dès la soumission pour bloquer le double-clic.</li>
+            <li>Sur les sidebars, ajouter <code>.on-dark</code> au primaire et <code>.neutral-dark</code> au neutre.</li>
           </ul>
         </div>
         <div class="dd-card dont">
           <h4>À éviter</h4>
           <ul>
-            <li>Deux boutons pleins de la même couleur côte à côte : la hiérarchie disparaît.</li>
+            <li>Recréer une classe pour un cas particulier : c'est toujours un poids × un ton.</li>
+            <li>Deux <code>.primary</code> côte à côte : la hiérarchie disparaît.</li>
             <li>Le violet pour une action ordinaire — il perd sa valeur d'appel.</li>
-            <li><code>opacity: 0.6</code> pour simuler un disabled : utiliser <code>:disabled</code>.</li>
+            <li><code>opacity: 0.6</code> pour simuler un disabled : utiliser l'attribut <code>disabled</code>.</li>
+            <li>Désactiver un bouton sans écrire pourquoi juste à côté.</li>
             <li>Supprimer l'anneau de focus sans le remplacer.</li>
             <li>Mélanger deux tailles de boutons dans une même barre d'actions.</li>
-            <li>Le bleu <code>.secondary</code> pour une action destructive, même « validée ».</li>
             <li>Le violet de marque sur une sidebar sans <code>.on-dark</code> : il se fond dans le fond.</li>
           </ul>
         </div>
