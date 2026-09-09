@@ -763,35 +763,6 @@
       white-space: nowrap;
     }
 
-    /* --- Doc : note de migration --- */
-    .migration-note {
-      border: 1px solid var(--bd);
-      border-left: 3px solid var(--a);
-      border-radius: var(--r);
-      padding: 20px 22px;
-      background: var(--a1);
-      margin-top: 28px;
-    }
-
-    .migration-note h4 {
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--a-p);
-      margin-bottom: 8px;
-    }
-
-    .migration-note>p {
-      font-size: 13.5px;
-      color: var(--t2);
-      line-height: 1.6;
-    }
-
-    .migration-note .sizing-table {
-      background: #fff;
-    }
-
     .do-dont {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -2253,10 +2224,10 @@
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
         2 — Deux axes, pas une liste</p>
       <p class="section-desc" style="margin-bottom:24px;">
-        Une liste de variantes nommées (<i>outline</i>, <i>soft</i>, <i>ghost</i>, <i>link</i>, <i>danger</i>…) oblige à
-        retenir un catalogue et laisse toujours un doute sur celle à prendre. Shopify sépare deux questions
-        indépendantes : <b>quel poids</b> l'action a dans la page (<code>variant</code>), et <b>quel sens</b> elle porte
-        (<code>tone</code>). Trois poids × trois tons couvrent tout, et rien ne se chevauche.
+        Un système de boutons dérive toujours de la même façon : on ajoute une variante par cas particulier, et au
+        bout de dix classes plus personne ne sait laquelle prendre — plusieurs se chevauchent. Shopify évite la dérive
+        en séparant deux questions indépendantes : <b>quel poids</b> l'action a dans la page (<code>variant</code>), et
+        <b>quel sens</b> elle porte (<code>tone</code>). Un nouveau cas se compose au lieu d'ajouter une classe.
       </p>
 
       <div class="axis-grid">
@@ -2405,57 +2376,6 @@
         &lt;!-- Un bouton qui navigue reste un bouton : &lt;a&gt; + les mêmes classes --&gt;<br>
         &lt;a href="/rapports" class="btn secondary"&gt;Voir les rapports&lt;/a&gt;<br>
         &lt;button type="submit" class="btn primary"&gt;Enregistrer&lt;/button&gt;
-      </div>
-
-      <div class="migration-note">
-        <h4>Ce qui disparaît</h4>
-        <p>Sept classes sont supprimées : chacune n'était qu'une combinaison des deux axes, écrite en dur.</p>
-        <table class="sizing-table" style="margin-top:14px;">
-          <thead>
-            <tr>
-              <th>Avant</th>
-              <th>Après</th>
-              <th>Pourquoi</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="var-name">.btn.outline</td>
-              <td class="var-name">.btn.secondary</td>
-              <td>C'était déjà le contour bleu</td>
-            </tr>
-            <tr>
-              <td class="var-name">.btn.soft</td>
-              <td class="var-name">.btn.secondary</td>
-              <td>Un quatrième poids intermédiaire que personne ne savait situer</td>
-            </tr>
-            <tr>
-              <td class="var-name">.btn.soft-accent</td>
-              <td class="var-name">.btn.tertiary</td>
-              <td>Le violet n'a pas à exister en version faible : c'est le rôle du primary</td>
-            </tr>
-            <tr>
-              <td class="var-name">.btn.ghost</td>
-              <td class="var-name">.btn.tertiary.neutral</td>
-              <td>Poids tertiaire + ton neutre</td>
-            </tr>
-            <tr>
-              <td class="var-name">.btn.link</td>
-              <td class="var-name">.btn.tertiary</td>
-              <td>Doublon exact du ghost coloré</td>
-            </tr>
-            <tr>
-              <td class="var-name">.btn.danger</td>
-              <td class="var-name">.btn.primary.critical</td>
-              <td>Le rouge est un ton, pas un poids</td>
-            </tr>
-            <tr>
-              <td class="var-name">.btn.danger-soft</td>
-              <td class="var-name">.btn.critical</td>
-              <td>Idem, au poids par défaut</td>
-            </tr>
-          </tbody>
-        </table>
       </div>
 
       <!-- ============ 3. TAILLES ============ -->
