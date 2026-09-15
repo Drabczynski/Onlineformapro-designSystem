@@ -2497,8 +2497,9 @@ textarea.form-input {
   justify-content: space-between;
 }
 
-/* Valeur non choisie : le libelle est un placeholder, pas une option */
-.w-dd-btn .ph {
+/* Valeur non choisie : le libelle est un placeholder, pas une option.
+   Classe propre au dropdown : .ph est deja l'en-tete de page. */
+.w-dd-btn .dd-ph {
   color: var(--t3);
 }
 

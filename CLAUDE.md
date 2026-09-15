@@ -83,7 +83,7 @@ La topbar et le menu gauche sont ceux de l'application, à reprendre sans modifi
   <span class="tb-store">Onlineformapro</span>
   <div class="tb-cw"><span class="tb-cl">Comptes :</span>
   <div class="w-dd-wrap">
-  <button class="w-dd-btn tb" onclick="toggleDD(this)"><span class="ph">Sélectionnez un compte</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  <button class="w-dd-btn tb" onclick="toggleDD(this)"><span class="dd-ph">Sélectionnez un compte</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
   <div class="w-dd-menu">
   <div class="w-dd-item">INFREP</div>
   <div class="w-dd-item">OCB Formation</div>
