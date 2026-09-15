@@ -44,7 +44,7 @@
 
       /* Lignes de tableau */
       --row-even: #F9FAFB;
-      --row-hover: #EDEFF2;
+      --row-hover: #F1F3F5;
       --row-active: #E3E6EA;
       /* Menu gauche : etat actif, repris de l'application */
       --nav-act: #E2006E;
@@ -722,11 +722,6 @@
       inset: 0;
       z-index: 9000;
       background: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 48px 32px;
       overflow-y: auto;
     }
 
@@ -741,103 +736,176 @@
       display: none;
     }
 
-    .lc-inner {
-      width: 100%;
-      max-width: 1000px;
+    .lc-head {
+      border-bottom: 1px solid var(--bd);
+      background: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 2;
     }
 
-    .lc-logo {
+    .lc-head-in {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 18px 40px;
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 8px;
+      gap: 24px;
     }
 
-    .lc-logo .dot {
-      width: 14px;
-      height: 14px;
-      background: var(--a);
-      border-radius: 5px;
-    }
-
-    .lc-logo span {
-      font-size: 22px;
+    .lc-brand {
+      font-size: 20px;
       font-weight: 700;
-      color: var(--a);
+      letter-spacing: -0.015em;
+      color: var(--t1);
+      white-space: nowrap;
     }
 
-    .lc-sub {
-      font-size: 15px;
-      color: var(--t2);
-      margin-bottom: 40px;
+    .lc-brand b {
+      font-weight: inherit;
+      color: var(--nav-act);
+    }
+
+    .lc-brand small {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--t3);
+      margin-left: 8px;
+      letter-spacing: .04em;
+    }
+
+    .lc-search {
+      flex: 1;
+      max-width: 420px;
+      height: 36px;
+      padding: 0 12px 0 36px;
+      font-size: 13.5px;
+      font-family: inherit;
+      border: 1px solid var(--bd);
+      border-radius: var(--r);
+      background: var(--ps) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E") no-repeat 12px center;
+      color: var(--t1);
+      outline: none;
+      transition: border-color .15s, box-shadow .15s;
+    }
+
+    .lc-search:focus {
+      border-color: var(--a);
+      box-shadow: 0 0 0 3px var(--a1);
+      background-color: #fff;
+    }
+
+    .lc-search::placeholder {
+      color: var(--t3);
+    }
+
+    .lc-body {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 36px 40px 72px;
     }
 
     .lc-group {
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .1em;
-      color: var(--t3);
-      margin: 32px 0 14px;
+      font-family: Geist, 'Inter', sans-serif;
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--t1);
+      margin: 44px 0 18px;
     }
 
-    .lc-group:first-of-type {
+    .lc-group:first-child {
       margin-top: 0;
     }
 
     .lc-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-      gap: 12px;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 18px;
     }
 
     .lc-card {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 14px 16px;
+      display: block;
       border: 1px solid var(--bd);
       border-radius: var(--rl);
       background: #fff;
-      color: var(--t1);
-      font-size: 14px;
-      font-weight: 500;
+      color: inherit;
       text-decoration: none;
+      overflow: hidden;
       cursor: pointer;
-      transition: border-color .15s, background .15s, transform .06s;
+      transition: border-color .15s, box-shadow .15s, transform .12s;
     }
 
     .lc-card:hover {
-      border-color: var(--a);
-      background: var(--a1);
+      border-color: #D0D5DD;
+      box-shadow: 0 6px 20px rgba(17, 24, 39, .07);
+      transform: translateY(-2px);
     }
 
-    .lc-card:active {
-      transform: translateY(1px);
+    .lc-card:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(var(--a-rgb), .28);
     }
 
-    .lc-card .ic {
-      width: 30px;
-      height: 30px;
-      border-radius: 8px;
-      background: var(--a1);
-      color: var(--a);
+    .lc-card.dim {
+      display: none;
+    }
+
+    .lc-thumb {
+      height: 160px;
+      background: var(--ps);
+      border-bottom: 1px solid var(--bd);
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
+      overflow: hidden;
     }
 
-    .lc-card .ic svg {
-      width: 16px;
-      height: 16px;
-      stroke-width: 1.8;
+    .lc-thumb svg {
+      width: 200px;
+      height: 120px;
+      display: block;
     }
 
-    .lc-all {
-      margin-top: 36px;
+    .lc-txt {
+      padding: 16px 18px 18px;
+    }
+
+    .lc-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--t1);
+      margin-bottom: 5px;
+    }
+
+    .lc-desc {
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--t2);
+    }
+
+    .lc-foot {
+      margin-top: 52px;
+      padding-top: 24px;
+      border-top: 1px solid var(--bd);
       display: flex;
-      justify-content: center;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .lc-foot .hint {
+      font-size: 12.5px;
+      color: var(--t3);
+    }
+
+    .lc-empty {
+      display: none;
+      padding: 48px 0;
+      text-align: center;
+      font-size: 14px;
+      color: var(--t3);
     }
 
     /* Bouton de retour a l'accueil, dans la colonne de gauche */
@@ -945,12 +1013,6 @@
       box-shadow: 0 0 0 2px var(--a1);
     }
 
-    select.th-search {
-      cursor: pointer;
-      padding-right: 24px;
-      appearance: none;
-      background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 8px center;
-    }
 
     .tcard thead th.srt {
       cursor: pointer;
@@ -1039,10 +1101,6 @@
 
     .tcard tbody tr:hover {
       background: var(--row-hover) !important;
-    }
-
-    .tcard tbody tr:hover td:first-child {
-      box-shadow: inset 3px 0 0 var(--a);
     }
 
     .tcard tbody tr:active {
@@ -1598,27 +1656,42 @@
       transition: background 0.2s;
     }
 
-    .tb-logo {
-      width: 30px;
-      height: 30px;
-      background: var(--a);
-      border-radius: 8px;
+    .tb-appn {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+
+    .tb-appn b {
+      font-weight: inherit;
+      color: var(--nav-act);
+    }
+
+    .tb-burger {
+      margin-left: auto;
+      width: 28px;
+      height: 28px;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background 0.2s;
-    }
-
-    .tb-logo svg {
-      width: 16px;
-      height: 16px;
-      fill: #fff;
-    }
-
-    .tb-appn {
-      font-size: 14px;
-      font-weight: 600;
+      border: none;
+      border-radius: 6px;
+      background: transparent;
       color: #fff;
+      cursor: pointer;
+      transition: background .12s;
+    }
+
+    .tb-burger:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .tb-burger svg {
+      width: 18px;
+      height: 18px;
+      stroke-width: 2;
     }
 
     .tb-body {
@@ -1652,25 +1725,7 @@
       white-space: nowrap;
     }
 
-    .tb-sel {
-      height: var(--ch);
-      padding: 0 28px 0 10px;
-      font-size: 13px;
-      font-family: inherit;
-      border: 1px solid var(--bd);
-      border-radius: var(--r);
-      background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 8px center;
-      appearance: none;
-      color: var(--t2);
-      cursor: pointer;
-      outline: none;
-      min-width: 220px;
-    }
 
-    .tb-sel:focus {
-      border-color: var(--a);
-      box-shadow: 0 0 0 2px var(--a1);
-    }
 
     .tb-ics {
       margin-left: auto;
@@ -1866,7 +1921,7 @@
       gap: 9px;
       padding: 8px 14px;
       margin: 1px 8px;
-      border-radius: var(--r);
+      border-radius: 4px;
       font-size: 13px;
       color: rgba(255, 255, 255, 0.65);
       cursor: pointer;
@@ -2206,27 +2261,7 @@
       cursor: text;
     }
 
-    /* Select natif : regle autonome, chevron en data-URI */
-    .form-select {
-      width: 100%;
-      height: 38px;
-      padding: 0 32px 0 12px;
-      font-size: 13.5px;
-      font-family: inherit;
-      border: 1px solid #E2E8F0;
-      border-radius: 8px;
-      background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 11px center;
-      appearance: none;
-      color: #0F172A;
-      cursor: default;
-      outline: none;
-    }
 
-    .form-select:disabled {
-      background-color: #fff;
-      color: #0F172A;
-      font-weight: 500;
-    }
 
     /* Zone de texte */
     textarea.form-input {
@@ -2671,8 +2706,43 @@
     }
 
     .w-dd-item.active {
-      background: #EFF6FF;
-      color: #334155;
+      background: var(--a1);
+      color: var(--a-p);
+    }
+
+    /* Le dropdown en champ de formulaire : pleine largeur, 38px comme les inputs */
+    .w-dd-wrap.block {
+      display: block;
+      width: 100%;
+    }
+
+    .w-dd-wrap.block .w-dd-btn {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .w-dd-wrap.block .w-dd-menu {
+      left: 0;
+      right: 0;
+    }
+
+    .w-dd-btn.field {
+      height: 38px;
+      font-size: 13.5px;
+    }
+
+    /* En filtre de colonne : 30px, comme .th-search */
+    .w-dd-btn.sm {
+      height: 30px;
+      padding: 0 8px;
+      font-size: 12.5px;
+    }
+
+    /* En topbar : la largeur du selecteur de compte */
+    .w-dd-btn.tb {
+      height: var(--ch);
+      min-width: 220px;
+      justify-content: space-between;
     }
 
     .w-dd-item input[type=checkbox] {
@@ -3050,43 +3120,136 @@
 
 <body class="lc-open">
   <div class="launcher" id="launcher">
-    <div class="lc-inner">
-      <div class="lc-logo">
-        <span class="dot"></span><span>Design System</span>
+    <div class="lc-head">
+      <div class="lc-head-in">
+        <div class="lc-brand">Online<b>Manager</b> DS<small>v1</small></div>
+        <input type="search" class="lc-search" id="lc-search" placeholder="Rechercher une section…"
+          oninput="filterCards(this.value)" autocomplete="off">
       </div>
-      <p class="lc-sub">OnlineManager — choisissez une section, ou ouvrez la page entière.</p>
-      <div class="lc-group">Fondations</div>
+    </div>
+    <div class="lc-body">
+      <h2 class="lc-group">Fondations</h2>
       <div class="lc-grid">
-        <a class="lc-card" href="#colors" onclick="pickSection(event, '#colors')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="10.5" r="2.5"/><circle cx="8.5" cy="7.5" r="2.5"/><circle cx="6.5" cy="12.5" r="2.5"/><path d="M12 2a10 10 0 0 0 0 20c.55 0 1-.45 1-1v-1a2 2 0 0 1 2-2h2a5 5 0 0 0 5-5 10 10 0 0 0-10-11z"/></svg></span>Couleurs & Variables</a>
-        <a class="lc-card" href="#typography" onclick="pickSection(event, '#typography')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg></span>Typographie</a>
-        <a class="lc-card" href="#sizing" onclick="pickSection(event, '#sizing')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3H3v18h18V3z"/><path d="M7 7v10"/><path d="M11 7v4"/><path d="M15 7v10"/></svg></span>Tailles & Espacements</a>
+        <a class="lc-card" href="#colors" data-q="couleurs & variables la palette : violet de marque, rouge du menu, neutres. chaque valeur existe en token." onclick="pickSection(event, '#colors')">
+          <div class="lc-thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="34" y="38" width="22" height="44" rx="5" fill="#8A3AAF"/><rect x="62" y="38" width="22" height="44" rx="5" fill="#E2006E"/><rect x="90" y="38" width="22" height="44" rx="5" fill="#111827"/><rect x="118" y="38" width="22" height="44" rx="5" fill="#4B5563"/><rect x="146" y="38" width="22" height="44" rx="5" fill="#9CA3AF"/></svg></div>
+          <div class="lc-txt">
+            <div class="lc-title">Couleurs & Variables</div>
+            <div class="lc-desc">La palette : violet de marque, rouge du menu, neutres. Chaque valeur existe en token.</div>
+          </div>
+        </a>
+        <a class="lc-card" href="#typography" data-q="typographie inter pour le corps et les composants, geist pour les titres. les onze styles du produit." onclick="pickSection(event, '#typography')">
+          <div class="lc-thumb"><svg viewBox="0 0 200 120" fill="none"><text x="30" y="82" font-family="Inter,sans-serif" font-size="56" font-weight="700" fill="#4B5563">Aa</text><rect x="112" y="52" width="58" height="4" rx="2" fill="#C9CFD9"/><rect x="112" y="64" width="46" height="4" rx="2" fill="#C9CFD9"/><rect x="112" y="76" width="52" height="4" rx="2" fill="#C9CFD9"/></svg></div>
+          <div class="lc-txt">
+            <div class="lc-title">Typographie</div>
+            <div class="lc-desc">Inter pour le corps et les composants, Geist pour les titres. Les onze styles du produit.</div>
+          </div>
+        </a>
       </div>
-      <div class="lc-group">Composants</div>
+      <h2 class="lc-group">Composants</h2>
       <div class="lc-grid">
-        <a class="lc-card" href="#buttons" onclick="pickSection(event, '#buttons')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="10" rx="4"/><circle cx="8" cy="12" r="2"/></svg></span>Boutons</a>
-        <a class="lc-card" href="#badges" onclick="pickSection(event, '#badges')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></span>Badges & Tags</a>
-        <a class="lc-card" href="#forms" onclick="pickSection(event, '#forms')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="14" x2="13" y2="14"/></svg></span>Formulaires</a>
-        <a class="lc-card" href="#dropdowns" onclick="pickSection(event, '#dropdowns')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>Dropdowns</a>
-        <a class="lc-card" href="#blocks" onclick="pickSection(event, '#blocks')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></span>Blocs & Cartes</a>
-        <a class="lc-card" href="#tables" onclick="pickSection(event, '#tables')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="9" x2="9" y2="21"/></svg></span>Tableaux</a>
-        <a class="lc-card" href="#icons" onclick="pickSection(event, '#icons')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>Iconographie</a>
-        <a class="lc-card" href="#widgets" onclick="pickSection(event, '#widgets')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span>Widgets Stats</a>
+        <a class="lc-card" href="#buttons" data-q="boutons quatre poids et trois tons, quatre tailles, six états, les compositions." onclick="pickSection(event, '#buttons')">
+          <div class="lc-thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="38" y="42" width="62" height="34" rx="8" fill="#8A3AAF"/><rect x="52" y="57" width="34" height="4" rx="2" fill="#FFFFFF"/><rect x="108" y="42" width="56" height="34" rx="8" fill="#FFFFFF" stroke="#C9CFD9"/><rect x="122" y="57" width="28" height="4" rx="2" fill="#C9CFD9"/></svg></div>
+          <div class="lc-txt">
+            <div class="lc-title">Boutons</div>
+            <div class="lc-desc">Quatre poids et trois tons, quatre tailles, six états, les compositions.</div>
+          </div>
+        </a>
+        <a class="lc-card" href="#badges" data-q="badges & tags indiquer un état ou une catégorie : terminé, en cours, premium, mode test." onclick="pickSection(event, '#badges')">
+          <div class="lc-thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="34" y="36" width="58" height="22" rx="11" fill="#8A3AAF"/><rect x="46" y="45" width="34" height="4" rx="2" fill="#FFFFFF"/><rect x="100" y="36" width="66" height="22" rx="11" fill="#DDE1E8"/><rect x="112" y="45" width="42" height="4" rx="2" fill="#C9CFD9"/><rect x="48" y="66" width="50" height="22" rx="11" fill="#E2006E"/><rect x="60" y="75" width="26" height="4" rx="2" fill="#FFFFFF"/><rect x="106" y="66" width="58" height="22" rx="11" fill="#DDE1E8"/><rect x="118" y="75" width="34" height="4" rx="2" fill="#C9CFD9"/></svg></div>
+          <div class="lc-txt">
+            <div class="lc-title">Badges & Tags</div>
+            <div class="lc-desc">Indiquer un état ou une catégorie : terminé, en cours, premium, mode test.</div>
+          </div>
+        </a>
+        <a class="lc-card" href="#forms" data-q="formulaires anatomie d'un champ, grille, groupement en sections, import de fichier, layout de réglages." onclick="pickSection(event, '#forms')">
+          <div class="lc-thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="52" y="28" width="40" height="4" rx="2" fill="#C9CFD9"/><rect x="52" y="38" width="96" height="26" rx="5" fill="#FFFFFF" stroke="#C9CFD9"/><rect x="52" y="74" width="52" height="4" rx="2" fill="#C9CFD9"/><rect x="52" y="84" width="96" height="26" rx="5" fill="#FFFFFF" stroke="#C9CFD9"/></svg></div>
+          <div class="lc-txt">
+            <div class="lc-title">Formulaires</div>
+            <div class="lc-desc">Anatomie d'un champ, grille, groupement en sections, import de fichier, layout de réglages.</div>
+          </div>
+        </a>
+        <a class="lc-card" href="#dropdowns" data-q="dropdowns le sélecteur du système, en bouton de widget, en champ de formulaire et en filtre de colonne." onclick="pickSection(event, '#dropdowns')">
+          <div class="lc-thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="58" y="26" width="84" height="28" rx="6" fill="#FFFFFF" stroke="#C9CFD9"/><rect x="70" y="38" width="36" height="4" rx="2" fill="#C9CFD9"/><path d="M124 37l5 5 5-5" stroke="#C9CFD9" stroke-width="2" stroke-linecap="round"/><rect x="58" y="60" width="84" height="44" rx="6" fill="#FFFFFF" stroke="#C9CFD9"/><rect x="58" y="60" width="84" height="15" rx="4" fill="#F8F1FB"/><rect x="70" y="66" width="40" height="4" rx="2" fill="#8A3AAF"/><rect x="70" y="81" width="44" height="4" rx="2" fill="#C9CFD9"/><rect x="70" y="95" width="36" height="4" rx="2" fill="#C9CFD9"/></svg></div>
+          <div class="lc-txt">
+            <div class="lc-title">Dropdowns</div>
+            <div class="lc-desc">Le sélecteur du système, en bouton de widget, en champ de formulaire et en filtre de colonne.</div>
+          </div>
+        </a>
+        <a class="lc-card" href="#blocks" data-q="blocs & cartes les widgets de reporting : icône colorée, titre, contrôles, corps vide." onclick="pickSection(event, '#blocks')">
+          <div class="lc-thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="46" y="26" width="108" height="68" rx="8" fill="#FFFFFF" stroke="#C9CFD9"/><rect x="58" y="38" width="20" height="20" rx="5" fill="#F8F1FB"/><rect x="64" y="44" width="8" height="8" rx="2" fill="#8A3AAF"/><rect x="86" y="42" width="42" height="4" rx="2" fill="#C9CFD9"/><rect x="86" y="53" width="30" height="4" rx="2" fill="#C9CFD9"/><rect x="58" y="72" width="84" height="4" rx="2" fill="#DDE1E8"/></svg></div>
+          <div class="lc-txt">
+            <div class="lc-title">Blocs & Cartes</div>
+            <div class="lc-desc">Les widgets de reporting : icône colorée, titre, contrôles, corps vide.</div>
+          </div>
+        </a>
+        <a class="lc-card" href="#tables" data-q="tableaux en-tête sur deux lignes, filtres, redimensionnement, édition des colonnes, actions de ligne." onclick="pickSection(event, '#tables')">
+          <div class="lc-thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="34" y="26" width="132" height="68" rx="6" fill="#FFFFFF" stroke="#C9CFD9"/><rect x="34" y="26" width="132" height="16" rx="6" fill="#DDE1E8"/><rect x="46" y="50" width="40" height="4" rx="2" fill="#C9CFD9"/><rect x="96" y="50" width="24" height="4" rx="2" fill="#C9CFD9"/><circle cx="150" cy="52" r="2.5" fill="#8A3AAF"/><rect x="46" y="64" width="40" height="4" rx="2" fill="#C9CFD9"/><rect x="96" y="64" width="24" height="4" rx="2" fill="#C9CFD9"/><circle cx="150" cy="66" r="2.5" fill="#C9CFD9"/><rect x="46" y="78" width="40" height="4" rx="2" fill="#C9CFD9"/><rect x="96" y="78" width="24" height="4" rx="2" fill="#C9CFD9"/><circle cx="150" cy="80" r="2.5" fill="#8A3AAF"/></svg></div>
+          <div class="lc-txt">
+            <div class="lc-title">Tableaux</div>
+            <div class="lc-desc">En-tête sur deux lignes, filtres, redimensionnement, édition des colonnes, actions de ligne.</div>
+          </div>
+        </a>
+        <a class="lc-card" href="#icons" data-q="iconographie eva icons en outline, grille 24, trait 1.8. tailles et couleur selon le composant porteur." onclick="pickSection(event, '#icons')">
+          <div class="lc-thumb"><svg viewBox="0 0 200 120" fill="none"><circle cx="58" cy="44" r="9" stroke="#C9CFD9" stroke-width="2"/><circle cx="100" cy="76" r="9" stroke="#C9CFD9" stroke-width="2"/><circle cx="142" cy="44" r="9" stroke="#C9CFD9" stroke-width="2"/><circle cx="184" cy="76" r="9" stroke="#C9CFD9" stroke-width="2"/><path d="M96 48l6 6 10-12" stroke="#8A3AAF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="lc-txt">
+            <div class="lc-title">Iconographie</div>
+            <div class="lc-desc">Eva Icons en outline, grille 24, trait 1.8. Tailles et couleur selon le composant porteur.</div>
+          </div>
+        </a>
+        <a class="lc-card" href="#widgets" data-q="widgets stats le gabarit des statistiques pré-formatées : header, filtres, états vides." onclick="pickSection(event, '#widgets')">
+          <div class="lc-thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="38" y="22" width="124" height="76" rx="8" fill="#FFFFFF" stroke="#C9CFD9"/><rect x="50" y="32" width="44" height="4" rx="2" fill="#C9CFD9"/><rect x="54" y="68" width="10" height="18" rx="2" fill="#DDE1E8"/><rect x="72" y="56" width="10" height="30" rx="2" fill="#DDE1E8"/><rect x="90" y="62" width="10" height="24" rx="2" fill="#DDE1E8"/><rect x="108" y="46" width="10" height="40" rx="2" fill="#8A3AAF"/><rect x="126" y="58" width="10" height="28" rx="2" fill="#DDE1E8"/><rect x="144" y="52" width="10" height="34" rx="2" fill="#DDE1E8"/></svg></div>
+          <div class="lc-txt">
+            <div class="lc-title">Widgets Stats</div>
+            <div class="lc-desc">Le gabarit des statistiques pré-formatées : header, filtres, états vides.</div>
+          </div>
+        </a>
       </div>
-      <div class="lc-group">Patterns & Layouts</div>
+      <h2 class="lc-group">Patterns & Layouts</h2>
       <div class="lc-grid">
-        <a class="lc-card" href="#layouts" onclick="pickSection(event, '#layouts')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg></span>Layouts (Grilles)</a>
-        <a class="lc-card" href="#page-templates" onclick="pickSection(event, '#page-templates')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/></svg></span>Templates de Pages</a>
-        <a class="lc-card" href="#navigation" onclick="pickSection(event, '#navigation')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></span>Navigation & Topbar</a>
-        <a class="lc-card" href="#modals" onclick="pickSection(event, '#modals')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><circle cx="17" cy="7" r=".6"/></svg></span>Modales & Overlays</a>
-        <a class="lc-card" href="#states" onclick="pickSection(event, '#states')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>États & Feedback</a>
+        <a class="lc-card" href="#layouts" data-q="layouts (grilles) une, deux ou trois colonnes pour composer une page de widgets." onclick="pickSection(event, '#layouts')">
+          <div class="lc-thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="34" y="26" width="132" height="68" rx="6" fill="#FFFFFF" stroke="#C9CFD9"/><rect x="42" y="34" width="52" height="52" rx="4" fill="#DDE1E8"/><rect x="102" y="34" width="56" height="22" rx="4" fill="#DDE1E8"/><rect x="102" y="64" width="56" height="22" rx="4" fill="#DDE1E8"/></svg></div>
+          <div class="lc-txt">
+            <div class="lc-title">Layouts (Grilles)</div>
+            <div class="lc-desc">Une, deux ou trois colonnes pour composer une page de widgets.</div>
+          </div>
+        </a>
+        <a class="lc-card" href="#page-templates" data-q="templates de pages les structures complètes : topbar, menu, en-tête de page, grille." onclick="pickSection(event, '#page-templates')">
+          <div class="lc-thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="34" y="24" width="132" height="72" rx="6" fill="#FFFFFF" stroke="#C9CFD9"/><rect x="34" y="24" width="132" height="12" rx="6" fill="#13041C"/><rect x="34" y="36" width="34" height="60" fill="#150625"/><rect x="76" y="46" width="44" height="4" rx="2" fill="#DDE1E8"/><rect x="76" y="58" width="36" height="28" rx="3" fill="#DDE1E8"/><rect x="118" y="58" width="38" height="28" rx="3" fill="#DDE1E8"/></svg></div>
+          <div class="lc-txt">
+            <div class="lc-title">Templates de Pages</div>
+            <div class="lc-desc">Les structures complètes : topbar, menu, en-tête de page, grille.</div>
+          </div>
+        </a>
+        <a class="lc-card" href="#navigation" data-q="navigation & topbar la topbar, le menu gauche sombre et le menu applications." onclick="pickSection(event, '#navigation')">
+          <div class="lc-thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="34" y="18" width="132" height="84" rx="6" fill="#FFFFFF" stroke="#C9CFD9"/><rect x="34" y="18" width="132" height="14" rx="6" fill="#13041C"/><rect x="34" y="32" width="46" height="70" fill="#150625"/><rect x="42" y="42" width="24" height="3" rx="2" fill="rgba(255,255,255,.4)"/><rect x="40" y="52" width="34" height="9" rx="2" fill="#E2006E"/><rect x="42" y="68" width="26" height="3" rx="2" fill="rgba(255,255,255,.4)"/><rect x="42" y="80" width="22" height="3" rx="2" fill="rgba(255,255,255,.4)"/><rect x="90" y="44" width="40" height="4" rx="2" fill="#DDE1E8"/><rect x="90" y="58" width="56" height="4" rx="2" fill="#DDE1E8"/><rect x="90" y="72" width="48" height="4" rx="2" fill="#DDE1E8"/></svg></div>
+          <div class="lc-txt">
+            <div class="lc-title">Navigation & Topbar</div>
+            <div class="lc-desc">La topbar, le menu gauche sombre et le menu applications.</div>
+          </div>
+        </a>
+        <a class="lc-card" href="#modals" data-q="modales & overlays dialogues, import avec recadrage, sélecteurs de date." onclick="pickSection(event, '#modals')">
+          <div class="lc-thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="20" y="10" width="160" height="100" rx="8" fill="#E5E7EB"/><rect x="56" y="32" width="88" height="56" rx="8" fill="#FFFFFF" stroke="#C9CFD9"/><rect x="68" y="44" width="40" height="4" rx="2" fill="#C9CFD9"/><rect x="68" y="56" width="56" height="4" rx="2" fill="#DDE1E8"/><rect x="68" y="64" width="48" height="4" rx="2" fill="#DDE1E8"/><rect x="102" y="72" width="30" height="10" rx="4" fill="#8A3AAF"/></svg></div>
+          <div class="lc-txt">
+            <div class="lc-title">Modales & Overlays</div>
+            <div class="lc-desc">Dialogues, import avec recadrage, sélecteurs de date.</div>
+          </div>
+        </a>
+        <a class="lc-card" href="#states" data-q="états & feedback succès, erreur, avertissement, information, et les transitions." onclick="pickSection(event, '#states')">
+          <div class="lc-thumb"><svg viewBox="0 0 200 120" fill="none"><circle cx="60" cy="60" r="16" fill="#ECFDF5" stroke="#10B981" stroke-width="2"/><path d="M53 60l5 5 9-10" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M100 44l16 28H84z" fill="#FEF3C7" stroke="#B45309" stroke-width="2" stroke-linejoin="round"/><line x1="100" y1="54" x2="100" y2="62" stroke="#B45309" stroke-width="2.5" stroke-linecap="round"/><circle cx="100" cy="67" r="1.5" fill="#B45309"/><circle cx="140" cy="60" r="16" stroke="#DDE1E8" stroke-width="4"/><path d="M140 44a16 16 0 0 1 16 16" stroke="#8A3AAF" stroke-width="4" stroke-linecap="round"/></svg></div>
+          <div class="lc-txt">
+            <div class="lc-title">États & Feedback</div>
+            <div class="lc-desc">Succès, erreur, avertissement, information, et les transitions.</div>
+          </div>
+        </a>
       </div>
-      <div class="lc-all">
-        <button class="btn" onclick="showAll()">Ouvrir la page entière</button>
+      <div class="lc-empty" id="lc-empty">Aucune section ne correspond.</div>
+      <div class="lc-foot">
+        <span class="hint">Choisissez une section, ou ouvrez la page entière. Le bouton Accueil de la colonne de
+          gauche ramène ici.</span>
+        <button class="btn primary" onclick="showAll()">Ouvrir la page entière</button>
       </div>
     </div>
   </div>
-
-
 
   <aside class="ds-sidebar">
     <div class="ds-logo">
@@ -3104,7 +3267,6 @@
     <div class="ds-nav-title">Fondations</div>
     <a href="#colors" class="ds-nav-item">Couleurs & Variables</a>
     <a href="#typography" class="ds-nav-item">Typographie</a>
-    <a href="#sizing" class="ds-nav-item">Tailles & Espacements</a>
 
     <div class="ds-nav-title">Composants</div>
     <a href="#buttons" class="ds-nav-item">Boutons</a>
@@ -3287,312 +3449,6 @@
         <div class="typo-label">Horizontal Bar Value - Inter / font-weight: 600 / 12.5px / Color: --t1</div>
         <div style="font-family: Inter, sans-serif; font-size: 12.5px; font-weight: 600; color: var(--t1);">91%</div>
       </div>
-    </section>
-
-    <!-- SIZING & SPACING -->
-    <section id="sizing">
-      <h2 class="section-title">Tailles & Espacements</h2>
-      <p class="section-desc">Toutes les tailles et espacements du système OnlineManager, extraits des fichiers de
-        production.</p>
-
-      <table class="sizing-table">
-        <thead>
-          <tr>
-            <th>Catégorie</th>
-            <th>Variable CSS</th>
-            <th>Valeur</th>
-            <th>Utilisation</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- SIZE VARIABLES -->
-          <tr>
-            <td colspan="4" style="background: var(--ps); font-weight: 600; padding: 12px 16px;">📏 Tailles de base</td>
-          </tr>
-          <tr>
-            <td>Sidebar Width</td>
-            <td class="var-name">--sw</td>
-            <td class="var-value">220px</td>
-            <td>Largeur de la barre latérale</td>
-          </tr>
-          <tr>
-            <td>Control Height</td>
-            <td class="var-name">--ch</td>
-            <td class="var-value">36px</td>
-            <td>Hauteur des boutons/contrôles au topbar</td>
-          </tr>
-          <tr>
-            <td>Border Radius</td>
-            <td class="var-name">--r</td>
-            <td class="var-value">8px</td>
-            <td>Arrondis standard pour boutons, inputs</td>
-          </tr>
-          <tr>
-            <td>Border Radius Large</td>
-            <td class="var-name">--rl</td>
-            <td class="var-value">12px</td>
-            <td>Arrondis pour cartes et blocs</td>
-          </tr>
-
-          <!-- ICON SIZES -->
-          <tr>
-            <td colspan="4" style="background: var(--ps); font-weight: 600; padding: 12px 16px;">🎨 Icônes & Glyphes
-            </td>
-          </tr>
-          <tr>
-            <td>Small Icon</td>
-            <td class="var-name">-</td>
-            <td class="var-value">12–14px</td>
-            <td>Labels, petits éléments (chev, close, etc.)</td>
-          </tr>
-          <tr>
-            <td>Default Icon</td>
-            <td class="var-name">-</td>
-            <td class="var-value">15–16px</td>
-            <td>Widget headers, menu icons</td>
-          </tr>
-          <tr>
-            <td>Large Icon</td>
-            <td class="var-name">-</td>
-            <td class="var-value">18–20px</td>
-            <td>Topbar icons, buttons</td>
-          </tr>
-          <tr>
-            <td>Stroke Width</td>
-            <td class="var-name">-</td>
-            <td class="var-value">1.8</td>
-            <td>SVG stroke-width pour tous les icons (finesse)</td>
-          </tr>
-
-          <!-- BUTTON/CONTROL SIZES -->
-          <tr>
-            <td colspan="4" style="background: var(--ps); font-weight: 600; padding: 12px 16px;">🔘 Boutons & Contrôles
-            </td>
-          </tr>
-          <tr>
-            <td>Button Height — md (défaut)</td>
-            <td class="var-name">--ch</td>
-            <td class="var-value">36px</td>
-            <td>Taille standard : formulaires, topbar, actions de page</td>
-          </tr>
-          <tr>
-            <td>Button Height — lg</td>
-            <td class="var-name">.btn.lg</td>
-            <td class="var-value">44px</td>
-            <td>CTA isolé, empty states, footer de modale</td>
-          </tr>
-          <tr>
-            <td>Button Height — sm</td>
-            <td class="var-name">.btn.sm</td>
-            <td class="var-value">30px</td>
-            <td>Contrôles de widget, barres de filtres</td>
-          </tr>
-          <tr>
-            <td>Button Height — xs</td>
-            <td class="var-name">.btn.xs</td>
-            <td class="var-value">26px</td>
-            <td>Actions inline dans une cellule de tableau</td>
-          </tr>
-          <tr>
-            <td>Button Padding H</td>
-            <td class="var-name">--btn-px</td>
-            <td class="var-value">10 / 12 / 16 / 22px</td>
-            <td>xs / sm / md / lg — icon-only : padding 0, width = height</td>
-          </tr>
-          <tr>
-            <td>Button Font Size</td>
-            <td class="var-name">--btn-fs</td>
-            <td class="var-value">12 / 12.5 / 13.5 / 15px</td>
-            <td>xs / sm / md / lg — font-weight 600</td>
-          </tr>
-          <tr>
-            <td>Button Icon Size</td>
-            <td class="var-name">--btn-icon</td>
-            <td class="var-value">13 / 14 / 16 / 18px</td>
-            <td>xs / sm / md / lg — stroke-width 1.8</td>
-          </tr>
-          <tr>
-            <td>Button Focus Ring</td>
-            <td class="var-name">--btn-ring</td>
-            <td class="var-value">0 0 0 3px (25% alpha)</td>
-            <td>Anneau :focus-visible, teinté selon la variante</td>
-          </tr>
-
-          <!-- SPACING UNITS -->
-          <tr>
-            <td colspan="4" style="background: var(--ps); font-weight: 600; padding: 12px 16px;">📐 Espacements &
-              Padding</td>
-          </tr>
-          <tr>
-            <td>Micro Spacing</td>
-            <td class="var-name">-</td>
-            <td class="var-value">4–6px</td>
-            <td>Entre icône + texte dans un élément</td>
-          </tr>
-          <tr>
-            <td>Small Spacing</td>
-            <td class="var-name">-</td>
-            <td class="var-value">8–10px</td>
-            <td>Gap entre éléments adjacents</td>
-          </tr>
-          <tr>
-            <td>Medium Spacing</td>
-            <td class="var-name">-</td>
-            <td class="var-value">14–18px</td>
-            <td>Padding intérieur des cartes/blocs</td>
-          </tr>
-          <tr>
-            <td>Large Spacing</td>
-            <td class="var-name">-</td>
-            <td class="var-value">24–32px</td>
-            <td>Padding page, gap entre sections</td>
-          </tr>
-          <tr>
-            <td>XL Spacing</td>
-            <td class="var-name">-</td>
-            <td class="var-value">40–80px</td>
-            <td>Page padding, section margins</td>
-          </tr>
-
-          <!-- TEXT SIZES -->
-          <tr>
-            <td colspan="4" style="background: var(--ps); font-weight: 600; padding: 12px 16px;">📝 Tailles de texte
-            </td>
-          </tr>
-          <tr>
-            <td>Tiny (Captions)</td>
-            <td class="var-name">-</td>
-            <td class="var-value">10–11px</td>
-            <td>Labels uppercased, breadcrumbs</td>
-          </tr>
-          <tr>
-            <td>Small Text</td>
-            <td class="var-name">-</td>
-            <td class="var-value">12–12.5px</td>
-            <td>Helper text, secondary labels</td>
-          </tr>
-          <tr>
-            <td>Body Text</td>
-            <td class="var-name">-</td>
-            <td class="var-value">13–14px</td>
-            <td>Corps de texte, boutons, cellules</td>
-          </tr>
-          <tr>
-            <td>Heading 3</td>
-            <td class="var-name">-</td>
-            <td class="var-value">15px</td>
-            <td>Titres de widget</td>
-          </tr>
-          <tr>
-            <td>Heading 2</td>
-            <td class="var-name">-</td>
-            <td class="var-value">22px</td>
-            <td>Titres de page (avec Geist)</td>
-          </tr>
-          <tr>
-            <td>Heading 1</td>
-            <td class="var-name">-</td>
-            <td class="var-value">32px</td>
-            <td>Titres principaux (Inter, font-weight: 700)</td>
-          </tr>
-
-          <!-- COMPONENT SIZES -->
-          <tr>
-            <td colspan="4" style="background: var(--ps); font-weight: 600; padding: 12px 16px;">🎯 Tailles de
-              composants</td>
-          </tr>
-          <tr>
-            <td>Widget Icon</td>
-            <td class="var-name">-</td>
-            <td class="var-value">28x28px</td>
-            <td>Icône colorée dans widget header</td>
-          </tr>
-          <tr>
-            <td>Avatar / Initials</td>
-            <td class="var-name">-</td>
-            <td class="var-value">30x30px</td>
-            <td>Avatar circulaire au topbar</td>
-          </tr>
-          <tr>
-            <td>Topbar Logo</td>
-            <td class="var-name">-</td>
-            <td class="var-value">30x30px</td>
-            <td>Logo OnlineManager au topbar</td>
-          </tr>
-          <tr>
-            <td>Topbar Height</td>
-            <td class="var-name">-</td>
-            <td class="var-value">56px</td>
-            <td>Hauteur fixe de la barre supérieure</td>
-          </tr>
-          <tr>
-            <td>Widget Header</td>
-            <td class="var-name">-</td>
-            <td class="var-value">Padding: 14px 18px</td>
-            <td>Titre + contrôles du widget</td>
-          </tr>
-          <tr>
-            <td>Widget Body Min Height</td>
-            <td class="var-name">-</td>
-            <td class="var-value">280px</td>
-            <td>Hauteur minimum de la zone de contenu</td>
-          </tr>
-
-          <!-- CHART/GRAPH SIZES -->
-          <tr>
-            <td colspan="4" style="background: var(--ps); font-weight: 600; padding: 12px 16px;">📊 Graphiques & Cartes
-            </td>
-          </tr>
-          <tr>
-            <td>Chart Min Height</td>
-            <td class="var-name">-</td>
-            <td class="var-value">300–350px</td>
-            <td>Graphiques en barres/lignes</td>
-          </tr>
-          <tr>
-            <td>Bar Width</td>
-            <td class="var-name">-</td>
-            <td class="var-value">10px</td>
-            <td>Largeur des barres (histogramme)</td>
-          </tr>
-          <tr>
-            <td>Donut SVG</td>
-            <td class="var-name">-</td>
-            <td class="var-value">250x220px (viewBox)</td>
-            <td>Graphique donut centralisé</td>
-          </tr>
-          <tr>
-            <td>Donut Radius</td>
-            <td class="var-name">-</td>
-            <td class="var-value">70px (outer), 56px (inner)</td>
-            <td>Cercle externe & interne du donut</td>
-          </tr>
-
-          <!-- TRANSITIONS -->
-          <tr>
-            <td colspan="4" style="background: var(--ps); font-weight: 600; padding: 12px 16px;">⏱️ Animations &
-              Transitions</td>
-          </tr>
-          <tr>
-            <td>Standard Transition</td>
-            <td class="var-name">--trans</td>
-            <td class="var-value">all 0.2s cubic-bezier(0.4, 0, 0.2, 1)</td>
-            <td>Animation globale (boutons, hover, etc.)</td>
-          </tr>
-          <tr>
-            <td>Fast Transition</td>
-            <td class="var-name">-</td>
-            <td class="var-value">0.1s</td>
-            <td>Micro-interactions (hover rapide)</td>
-          </tr>
-          <tr>
-            <td>Chart Animation</td>
-            <td class="var-name">-</td>
-            <td class="var-value">0.4s ease</td>
-            <td>Barres qui montent progressivement</td>
-          </tr>
-        </tbody>
-      </table>
     </section>
 
     <!-- BUTTONS -->
@@ -4808,11 +4664,14 @@
           </div>
           <div class="form-field">
             <label>Sélecteur</label>
-            <select class="form-select">
-              <option>France</option>
-              <option>Suisse</option>
-              <option>Belgique</option>
-            </select>
+            <div class="w-dd-wrap block">
+              <button class="w-dd-btn field" onclick="toggleDD(this)"><span>France</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+              <div class="w-dd-menu">
+                <div class="w-dd-item active">France</div>
+                <div class="w-dd-item">Suisse</div>
+                <div class="w-dd-item">Belgique</div>
+              </div>
+            </div>
           </div>
           <div class="form-field">
             <label>Focus</label>
@@ -4914,10 +4773,13 @@
             <div class="form-field"><label>Forme juridique</label><input type="text" class="form-input" value="SA">
             </div>
             <div class="form-field"><label>Capital</label><input type="text" class="form-input" value="1 100 000"></div>
-            <div class="form-field"><label>Devise</label><select class="form-select">
-                <option>EUR (€)</option>
-                <option>USD ($)</option>
-              </select></div>
+            <div class="form-field"><label>Devise</label><div class="w-dd-wrap block">
+  <button class="w-dd-btn field" onclick="toggleDD(this)"><span>EUR (€)</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  <div class="w-dd-menu">
+    <div class="w-dd-item active">EUR (€)</div>
+    <div class="w-dd-item">USD ($)</div>
+  </div>
+</div></div>
           </div>
         </div>
       </div>
@@ -5122,8 +4984,9 @@
           </tr>
           <tr>
             <td>Sélecteur</td>
-            <td class="var-name">.form-select</td>
-            <td>Au-delà de 5 options, ou quand les libellés se passent d'explication</td>
+            <td class="var-name">.w-dd-wrap.block</td>
+            <td>Au-delà de 5 options, ou quand les libellés se passent d'explication — le dropdown du système,
+              en pleine largeur et à 38px</td>
           </tr>
           <tr>
             <td>Bascule</td>
@@ -5198,9 +5061,12 @@
                 <div class="form-grid">
                   <div class="form-field"><label>Forme juridique</label><input type="text" class="form-input"
                       value="SA"></div>
-                  <div class="form-field"><label>Devise</label><select class="form-select">
-                      <option>EUR (€)</option>
-                    </select></div>
+                  <div class="form-field"><label>Devise</label><div class="w-dd-wrap block">
+  <button class="w-dd-btn field" onclick="toggleDD(this)"><span>EUR (€)</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  <div class="w-dd-menu">
+    <div class="w-dd-item active">EUR (€)</div>
+  </div>
+</div></div>
                 </div>
                 <div class="form-grid">
                   <div class="form-field"><label>CODE APE (NAF)</label><input type="text" class="form-input"
@@ -5435,78 +5301,24 @@
                   <th class="gsth"></th>
                   <th><input type="search" class="th-search" placeholder="Rechercher"></th>
                   <th><input type="search" class="th-search" placeholder="Rechercher"></th>
-                  <th><select class="th-search">
-                      <option>Tous</option>
-                      <option>Actif</option>
-                      <option>Inactif</option>
-                    </select></th>
-                  <th><select class="th-search">
-                      <option>Tous</option>
-                      <option>RH Central</option>
-                      <option>Produit</option>
-                    </select></th>
+                  <th><div class="w-dd-wrap block">
+  <button class="w-dd-btn sm" onclick="toggleDD(this)"><span>Tous</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  <div class="w-dd-menu">
+    <div class="w-dd-item active">Tous</div>
+    <div class="w-dd-item">Actif</div>
+    <div class="w-dd-item">Inactif</div>
+  </div>
+</div></th>
+                  <th><div class="w-dd-wrap block">
+  <button class="w-dd-btn sm" onclick="toggleDD(this)"><span>Tous</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  <div class="w-dd-menu">
+    <div class="w-dd-item active">Tous</div>
+    <div class="w-dd-item">RH Central</div>
+    <div class="w-dd-item">Produit</div>
+  </div>
+</div></th>
                   <th><input type="search" class="th-search" placeholder="Rechercher"></th>
-                  <th class="cgear-th">
-                    <button class="cgear" aria-label="Choisir les colonnes" onclick="togCols(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
-                    <div class="cpanel">
-                      <div class="cph">
-                        <span class="cpt">Colonnes</span>
-                        <button class="cprst">Réinitialiser</button>
-                      </div>
-                      <div class="cplist">
-              <div class="crow lk">
-                <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
-                <input type="checkbox" class="cck" checked disabled>
-                <span class="clbl">Apprenant</span>
-              </div>
-              <div class="crow" draggable="true">
-                <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
-                <input type="checkbox" class="cck" checked>
-                <span class="clbl">État</span>
-              </div>
-              <div class="crow" draggable="true">
-                <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
-                <input type="checkbox" class="cck">
-                <span class="clbl">E-mail</span>
-              </div>
-              <div class="crow" draggable="true">
-                <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
-                <input type="checkbox" class="cck">
-                <span class="clbl">Identifiant</span>
-              </div>
-              <div class="crow" draggable="true">
-                <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
-                <input type="checkbox" class="cck" checked>
-                <span class="clbl">Groupes</span>
-              </div>
-              <div class="crow" draggable="true">
-                <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
-                <input type="checkbox" class="cck">
-                <span class="clbl">Département</span>
-              </div>
-              <div class="crow" draggable="true">
-                <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
-                <input type="checkbox" class="cck">
-                <span class="clbl">Rôle</span>
-              </div>
-              <div class="crow" draggable="true">
-                <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
-                <input type="checkbox" class="cck" checked>
-                <span class="clbl">Profil formations</span>
-              </div>
-              <div class="crow" draggable="true">
-                <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
-                <input type="checkbox" class="cck">
-                <span class="clbl">Dernière connexion</span>
-              </div>
-              <div class="crow" draggable="true">
-                <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
-                <input type="checkbox" class="cck" checked>
-                <span class="clbl">Date de création</span>
-              </div>
-                      </div>
-                    </div>
-                  </th>
+                  <th class="cgear-th"></th>
                 </tr>
               </thead>
               <tbody>
@@ -5602,9 +5414,8 @@
       <p
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
         2 — Couleurs de ligne</p>
-      <p class="section-desc" style="margin-bottom:24px;">Les fonds de ligne sont neutres : dans un tableau de 25
-        lignes, une teinte colorée au survol fatigue et entre en concurrence avec les statuts, qui eux portent du sens.
-        Le seul rappel de marque est le filet violet de 3px à gauche de la ligne survolée.</p>
+      <p class="section-desc" style="margin-bottom:24px;">Les fonds de ligne sont neutres : une teinte colorée au survol
+        entre en concurrence avec les statuts, qui eux portent du sens.</p>
 
       <div class="preview-box" style="padding:40px 20px 20px;">
         <div class="preview-label">Live Preview</div>
@@ -5623,9 +5434,9 @@
                   <td class="dc">#F9FAFB</td>
                 </tr>
                 <tr style="background:var(--row-hover);">
-                  <td style="font-weight:500;box-shadow:inset 3px 0 0 var(--a);">Survol</td>
-                  <td class="cv">--row-hover + filet 3px --a</td>
-                  <td class="dc">#EDEFF2</td>
+                  <td style="font-weight:500;">Survol</td>
+                  <td class="cv">--row-hover</td>
+                  <td class="dc">#F1F3F5</td>
                 </tr>
                 <tr style="background:var(--row-active);">
                   <td style="font-weight:500;">Clic maintenu</td>
@@ -5654,18 +5465,13 @@
           </tr>
           <tr>
             <td class="var-name">--row-hover</td>
-            <td class="var-value">#EDEFF2</td>
+            <td class="var-value">#F1F3F5</td>
             <td>Survol — lisible aussi bien sur une ligne blanche que sur une ligne paire</td>
           </tr>
           <tr>
             <td class="var-name">--row-active</td>
             <td class="var-value">#E3E6EA</td>
             <td>Clic maintenu, un cran plus foncé</td>
-          </tr>
-          <tr>
-            <td class="var-name">inset 3px 0 0 --a</td>
-            <td class="var-value">#8A3AAF</td>
-            <td>Filet gauche sur la ligne survolée, seul rappel de marque du tableau</td>
           </tr>
         </tbody>
       </table>
@@ -5719,13 +5525,143 @@
             <td class="var-name">.gsth / .gbtn</td>
             <td class="var-value">colonne 44px, bouton 36px, actif sur --a1</td>
           </tr>
+          <tr>
+            <td>Colonnes</td>
+            <td class="var-name">.cgear-th</td>
+            <td class="var-value">colonne 44px en fin de ligne, porte la roue crantée — voir 4</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ============ 3b. EDITION DES COLONNES ============ -->
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
+        4 — Édition des colonnes</p>
+      <p class="section-desc" style="margin-bottom:24px;">La roue crantée ferme la ligne de filtres. Elle ouvre le
+        panneau des colonnes : une case pour afficher ou masquer, une poignée pour réordonner par glisser-déposer. La
+        première colonne est verrouillée.</p>
+
+      <div class="preview-box" style="padding:40px 20px 20px;">
+        <div class="preview-label">Live Preview — glissez une ligne du panneau</div>
+        <div style="display:flex;gap:40px;align-items:flex-start;flex-wrap:wrap;">
+          <div class="btn-spec">
+            <span class="spec-label">Roue crantée</span>
+            <div style="display:flex;gap:10px;align-items:center;">
+              <button class="cgear" aria-label="Choisir les colonnes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
+              <button class="cgear on" aria-label="Choisir les colonnes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
+              <span class="dc">repos · ouvert</span>
+            </div>
+          </div>
+          <div class="btn-spec">
+            <span class="spec-label">Panneau</span>
+            <div class="cpanel oo" style="position:relative;top:0;right:auto;">
+                  <div class="cph">
+                    <span class="cpt">Colonnes</span>
+                    <button class="cprst">Réinitialiser</button>
+                  </div>
+                  <div class="cplist">
+                          <div class="crow lk">
+            <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+            <input type="checkbox" class="cck" checked disabled>
+            <span class="clbl">Apprenant</span>
+                          </div>
+                          <div class="crow" draggable="true">
+            <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+            <input type="checkbox" class="cck" checked>
+            <span class="clbl">État</span>
+                          </div>
+                          <div class="crow" draggable="true">
+            <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+            <input type="checkbox" class="cck">
+            <span class="clbl">E-mail</span>
+                          </div>
+                          <div class="crow" draggable="true">
+            <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+            <input type="checkbox" class="cck">
+            <span class="clbl">Identifiant</span>
+                          </div>
+                          <div class="crow" draggable="true">
+            <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+            <input type="checkbox" class="cck" checked>
+            <span class="clbl">Groupes</span>
+                          </div>
+                          <div class="crow" draggable="true">
+            <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+            <input type="checkbox" class="cck">
+            <span class="clbl">Département</span>
+                          </div>
+                          <div class="crow" draggable="true">
+            <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+            <input type="checkbox" class="cck">
+            <span class="clbl">Rôle</span>
+                          </div>
+                          <div class="crow" draggable="true">
+            <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+            <input type="checkbox" class="cck" checked>
+            <span class="clbl">Profil formations</span>
+                          </div>
+                          <div class="crow" draggable="true">
+            <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+            <input type="checkbox" class="cck">
+            <span class="clbl">Dernière connexion</span>
+                          </div>
+                          <div class="crow" draggable="true">
+            <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+            <input type="checkbox" class="cck" checked>
+            <span class="clbl">Date de création</span>
+                          </div>
+                  </div>
+                </div>
+          </div>
+        </div>
+      </div>
+
+      <table class="sizing-table">
+        <thead>
+          <tr>
+            <th>Élément</th>
+            <th>Classe</th>
+            <th>Traitement</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Roue crantée</td>
+            <td class="var-name">.cgear / .cgear.on</td>
+            <td class="var-value">30px · --t3 · ouvert sur --a1 et --a</td>
+          </tr>
+          <tr>
+            <td>Panneau</td>
+            <td class="var-name">.cpanel</td>
+            <td class="var-value">248px · ancré à droite sous la roue · ombre 0 8px 28px</td>
+          </tr>
+          <tr>
+            <td>En-tête</td>
+            <td class="var-name">.cph / .cprst</td>
+            <td class="var-value">« Colonnes » en 11.5px capitales, « Réinitialiser » en --a</td>
+          </tr>
+          <tr>
+            <td>Ligne</td>
+            <td class="var-name">.crow</td>
+            <td class="var-value">poignée --bd · case --a · libellé 13px · curseur grab</td>
+          </tr>
+          <tr>
+            <td>En déplacement</td>
+            <td class="var-name">.crow.dg</td>
+            <td class="var-value">fond --a1, opacité .7</td>
+          </tr>
+          <tr>
+            <td>Verrouillée</td>
+            <td class="var-name">.crow.lk</td>
+            <td class="var-value">poignée et case atténuées, pas de glisser</td>
+          </tr>
         </tbody>
       </table>
 
       <!-- ============ 4. ACTIONS DE LIGNE ============ -->
       <p
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
-        4 — Actions de ligne</p>
+        5 — Actions de ligne</p>
       <p class="section-desc" style="margin-bottom:24px;">Le bouton <code>.rdots</code> reste masqué et n'apparaît qu'au
         survol de la ligne, dans une colonne <code>.catd</code> de 44px réservée à gauche.</p>
 
@@ -5748,7 +5684,7 @@
       <!-- ============ 5. PIED DE TABLEAU ============ -->
       <p
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
-        5 — Pied de tableau &amp; densité</p>
+        6 — Pied de tableau &amp; densité</p>
 
       <div class="preview-box" style="padding:40px 20px 20px;">
         <div class="preview-label">Live Preview</div>
@@ -6033,20 +5969,21 @@
       <div class="nav-stage" style="height:56px;">
         <header class="topbar">
         <div class="tb-slot">
-        <div class="tb-logo"><svg viewBox="0 0 24 24">
-        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" />
-        </svg></div>
-        <span class="tb-appn">OnlineManager</span>
-        </div>
+      <span class="tb-appn">Online<b>Manager</b></span>
+      <button class="tb-burger" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+    </div>
         <div class="tb-body">
         <span class="tb-store">Onlineformapro</span>
         <div class="tb-cw"><span class="tb-cl">Comptes :</span>
-        <select class="tb-sel">
-        <option>Sélectionnez un compte</option>
-        <option>INFREP</option>
-        <option>OCB Formation</option>
-        <option>Cap Petite Enfance</option>
-        </select>
+        <div class="w-dd-wrap">
+          <button class="w-dd-btn tb" onclick="toggleDD(this)"><span>Sélectionnez un compte</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="w-dd-menu">
+            <div class="w-dd-item active">Sélectionnez un compte</div>
+            <div class="w-dd-item">INFREP</div>
+            <div class="w-dd-item">OCB Formation</div>
+            <div class="w-dd-item">Cap Petite Enfance</div>
+          </div>
+        </div>
         </div>
 
         <div class="tb-ics">
@@ -6134,10 +6071,10 @@
             <td>Position absolue, <code>z-index: 100</code>, flotte au-dessus du contenu</td>
           </tr>
           <tr>
-            <td>Bloc logo</td>
+            <td>Bloc marque</td>
             <td class="var-name">.tb-slot</td>
             <td class="var-value">--sw 220px · #13041C</td>
-            <td>Logo 30px en <code>--a</code> + nom de l'application</td>
+            <td>« Online » en blanc, « Manager » en <code>--nav-act</code>, burger à droite</td>
           </tr>
           <tr>
             <td>Corps</td>
@@ -6147,9 +6084,9 @@
           </tr>
           <tr>
             <td>Sélecteur</td>
-            <td class="var-name">.tb-sel</td>
-            <td class="var-value">--ch 36px · min-width 160px</td>
-            <td>Chevron en data-URI, focus <code>--a</code> + anneau 2px</td>
+            <td class="var-name">.w-dd-btn.tb</td>
+            <td class="var-value">--ch 36px · min-width 220px</td>
+            <td>Le dropdown du système, voir la section Dropdowns</td>
           </tr>
           <tr>
             <td>Icônes</td>
@@ -6348,20 +6285,21 @@
       <div class="nav-stage" style="height:460px;">
         <header class="topbar">
         <div class="tb-slot">
-        <div class="tb-logo"><svg viewBox="0 0 24 24">
-        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" />
-        </svg></div>
-        <span class="tb-appn">OnlineManager</span>
-        </div>
+      <span class="tb-appn">Online<b>Manager</b></span>
+      <button class="tb-burger" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+    </div>
         <div class="tb-body">
         <span class="tb-store">Onlineformapro</span>
         <div class="tb-cw"><span class="tb-cl">Comptes :</span>
-        <select class="tb-sel">
-        <option>Sélectionnez un compte</option>
-        <option>INFREP</option>
-        <option>OCB Formation</option>
-        <option>Cap Petite Enfance</option>
-        </select>
+        <div class="w-dd-wrap">
+          <button class="w-dd-btn tb" onclick="toggleDD(this)"><span>Sélectionnez un compte</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="w-dd-menu">
+            <div class="w-dd-item active">Sélectionnez un compte</div>
+            <div class="w-dd-item">INFREP</div>
+            <div class="w-dd-item">OCB Formation</div>
+            <div class="w-dd-item">Cap Petite Enfance</div>
+          </div>
+        </div>
         </div>
 
         <div class="tb-ics">
@@ -6514,7 +6452,7 @@
 
       <div class="code-box">
         &lt;header class="topbar"&gt;<br>
-        &nbsp;&nbsp;&lt;div class="tb-slot"&gt;logo + nom de l'application&lt;/div&gt;<br>
+        &nbsp;&nbsp;&lt;div class="tb-slot"&gt;Online&lt;b&gt;Manager&lt;/b&gt; + burger&lt;/div&gt;<br>
         &nbsp;&nbsp;&lt;div class="tb-body"&gt;entité, sélecteur, &lt;div class="tb-ics"&gt;icônes&lt;/div&gt;&lt;/div&gt;<br>
         &lt;/header&gt;<br><br>
         &lt;aside class="sidebar"&gt;<br>
@@ -6800,6 +6738,23 @@
       document.querySelectorAll('.ds-nav-item').forEach(a => {
         a.style.color = (hash !== 'all' && a.getAttribute('href') === hash) ? 'var(--a)' : '';
       });
+    }
+
+    function filterCards(q) {
+      q = (q || '').trim().toLowerCase();
+      let shown = 0;
+      document.querySelectorAll('.lc-card').forEach(c => {
+        const hit = !q || c.dataset.q.includes(q);
+        c.classList.toggle('dim', !hit);
+        if (hit) shown++;
+      });
+      document.querySelectorAll('.lc-group').forEach(h => {
+        const grid = h.nextElementSibling;
+        const any = grid && grid.querySelector('.lc-card:not(.dim)');
+        h.hidden = !any;
+        if (grid) grid.hidden = !any;
+      });
+      document.getElementById('lc-empty').style.display = shown ? 'none' : 'block';
     }
 
     function pickSection(e, hash) {
