@@ -42,6 +42,10 @@
       --bg: #F3F4F6;
       --ps: #F7F8FA;
 
+      /* Lignes de tableau */
+      --row-even: #F9FAFB;
+      --row-hover: #EDEFF2;
+      --row-active: #E3E6EA;
       /* Sidebar / Reporting colors */
       --sb-dark: #13041c;
       --sb-rep: #0A032D;
@@ -700,6 +704,950 @@
       text-transform: uppercase;
       letter-spacing: 0.06em;
       color: var(--t3);
+    }
+
+    /* ==========================================================
+       TABLEAUX
+       Valeurs de l'application, sauf les fonds de ligne :
+       even / hover / active passent par des tokens neutres.
+       ========================================================== */
+
+    .tcard {
+      background: #fff;
+      border: 1px solid var(--bd);
+      border-radius: var(--rl);
+      overflow: visible;
+      position: relative;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, .04);
+    }
+
+    .tw {
+      overflow: hidden;
+      border-radius: var(--rl);
+    }
+
+    .tcard table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: auto;
+    }
+
+    .tcard thead tr {
+      background: var(--ps);
+    }
+
+    .tcard thead th {
+      padding: 10px 14px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--t2);
+      text-align: left;
+      white-space: nowrap;
+      position: relative;
+      user-select: none;
+      letter-spacing: .01em;
+    }
+
+    /* Double en-tete : ligne 1 les libelles, ligne 2 les filtres */
+    .tcard .thr th {
+      padding-bottom: 6px;
+      border-bottom: none;
+    }
+
+    .tcard .thr-filter th {
+      padding-top: 0;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--bd);
+    }
+
+    .th-search {
+      height: 30px;
+      padding: 0 8px;
+      font-size: 12.5px;
+      width: 100%;
+      font-weight: 400;
+      text-transform: none;
+      letter-spacing: normal;
+      background: #fff;
+      border: 1px solid var(--bd);
+      border-radius: 6px;
+      color: var(--t1);
+      outline: none;
+      transition: border-color .15s, box-shadow .15s;
+      font-family: inherit;
+    }
+
+    .th-search:focus {
+      border-color: var(--a);
+      box-shadow: 0 0 0 2px var(--a1);
+    }
+
+    select.th-search {
+      cursor: pointer;
+      padding-right: 24px;
+      appearance: none;
+      background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239CA3AF'/%3E%3C/svg%3E") no-repeat right 8px center;
+    }
+
+    .tcard thead th.srt {
+      cursor: pointer;
+    }
+
+    .tcard thead th.srt:hover {
+      color: var(--t1);
+    }
+
+    /* Poignee de redimensionnement de colonne */
+    .rez {
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 100%;
+      width: 8px;
+      cursor: col-resize;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .rez::after {
+      content: '';
+      width: 2px;
+      height: 40%;
+      background: var(--bd);
+      border-radius: 2px;
+      transition: background .15s, height .15s;
+    }
+
+    .rez:hover::after,
+    .rez.rz::after {
+      background: var(--a);
+      height: 65%;
+    }
+
+    /* Colonne de groupement */
+    .gsth {
+      width: 44px;
+      text-align: center !important;
+      padding: 0 !important;
+    }
+
+    .gbtn {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--r);
+      cursor: pointer;
+      color: var(--t3);
+      background: transparent;
+      border: none;
+      margin: 0 auto;
+      transition: all .12s;
+    }
+
+    .gbtn:hover,
+    .gbtn.on {
+      background: var(--a1);
+      color: var(--a);
+    }
+
+    .gbtn svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* --- Lignes --- */
+    .tcard tbody tr {
+      border-bottom: 1px solid var(--bg);
+      transition: background .08s;
+      cursor: pointer;
+    }
+
+    .tcard tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    .tcard tbody tr:nth-child(even) {
+      background: var(--row-even);
+    }
+
+    .tcard tbody tr:hover {
+      background: var(--row-hover) !important;
+    }
+
+    .tcard tbody tr:hover td:first-child {
+      box-shadow: inset 3px 0 0 var(--a);
+    }
+
+    .tcard tbody tr:active {
+      background: var(--row-active) !important;
+    }
+
+    .tcard td {
+      padding: 11px 14px;
+      font-size: 13px;
+      color: var(--t1);
+      vertical-align: middle;
+    }
+
+    .tcard td.catd {
+      width: 44px;
+      padding: 0;
+      text-align: center;
+      position: relative;
+    }
+
+    /* Mode compact */
+    .tcard.cmp .ava,
+    .tcard.cmp .nsub {
+      display: none;
+    }
+
+    .tcard.cmp td {
+      padding: 5px 14px;
+    }
+
+    /* --- Contenu de cellule --- */
+    .cn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .ava {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 600;
+      flex-shrink: 0;
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 1.5px var(--bd);
+    }
+
+    .nmain {
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .nsub {
+      font-size: 11.5px;
+      color: var(--t3);
+      margin-top: 2px;
+    }
+
+    .stb {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12.5px;
+      font-weight: 500;
+    }
+
+    .stdon,
+    .stdoff {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .stdon {
+      background: #10B981;
+    }
+
+    .stdoff {
+      background: var(--t3);
+    }
+
+    .ston {
+      color: #059669;
+    }
+
+    .stoff {
+      color: var(--t3);
+    }
+
+    .cv {
+      color: var(--t2);
+      font-size: 13px;
+    }
+
+    .npill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 18px;
+      padding: 0 7px;
+      background: var(--a1);
+      color: var(--a);
+      border-radius: 9px;
+      font-size: 11px;
+      font-weight: 600;
+      margin-left: 4px;
+    }
+
+    .dc {
+      font-size: 12.5px;
+      color: var(--t3);
+      white-space: nowrap;
+    }
+
+    .mcel {
+      font-family: 'Overpass Mono', monospace;
+      font-size: 11.5px;
+      color: var(--t3);
+      background: var(--ps);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    /* Infobulle de cellule */
+    .mwrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .mwrap:hover .mtip {
+      display: block;
+    }
+
+    .mtip {
+      display: none;
+      position: absolute;
+      bottom: calc(100% + 7px);
+      left: 0;
+      background: var(--t1);
+      border-radius: 9px;
+      padding: 9px 13px;
+      min-width: 180px;
+      z-index: 300;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .2);
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .mtip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 14px;
+      border: 5px solid transparent;
+      border-top-color: var(--t1);
+    }
+
+    .mtit {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: var(--t3);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-bottom: 7px;
+    }
+
+    .mit {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 2px 0;
+      font-size: 12px;
+      color: #fff;
+    }
+
+    .mdt {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--a);
+      flex-shrink: 0;
+    }
+
+    /* --- Actions de ligne --- */
+    .rdots {
+      width: 26px;
+      height: 26px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      cursor: pointer;
+      color: var(--t2);
+      border: 1px solid var(--bd);
+      background: #fff;
+      margin: 0 auto;
+    }
+
+    .rdots:hover {
+      background: var(--ps);
+    }
+
+    .rdots svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .tcard tbody tr:hover .rdots {
+      display: flex;
+    }
+
+    .rmenu {
+      display: none;
+      position: absolute;
+      right: 4px;
+      top: 100%;
+      background: #fff;
+      border: 1px solid var(--bd);
+      border-radius: 10px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, .12);
+      min-width: 220px;
+      z-index: 400;
+      overflow: hidden;
+      margin-top: 2px;
+    }
+
+    .rmenu.oo {
+      display: block;
+    }
+
+    .rmi {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      font-size: 13.5px;
+      color: var(--t1);
+      cursor: pointer;
+      transition: background .08s;
+    }
+
+    .rmi:hover {
+      background: var(--ps);
+    }
+
+    .rmi svg {
+      width: 17px;
+      height: 17px;
+      color: var(--t2);
+      flex-shrink: 0;
+    }
+
+    .rmi.dn,
+    .rmi.dn svg {
+      color: var(--d);
+    }
+
+    .rmdiv {
+      height: 1px;
+      background: var(--bg);
+      margin: 3px 0;
+    }
+
+    /* --- Pied de tableau --- */
+    .tfoot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      border-top: 1px solid var(--bg);
+      background: var(--ps);
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .fi {
+      font-size: 12.5px;
+      color: var(--t3);
+    }
+
+    .pgn {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .pb {
+      height: 28px;
+      min-width: 28px;
+      padding: 0 9px;
+      font-size: 12.5px;
+      font-weight: 500;
+      font-family: inherit;
+      border: 1px solid var(--bd);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--t2);
+      cursor: pointer;
+      transition: background .1s;
+    }
+
+    .pb:hover {
+      background: var(--ps);
+    }
+
+    .pb.on {
+      background: var(--t1);
+      color: #fff;
+      border-color: var(--t1);
+    }
+
+    .pb:disabled {
+      opacity: .4;
+      cursor: not-allowed;
+    }
+
+    .lpp-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .lpp-lbl {
+      font-size: 12.5px;
+      color: var(--t3);
+    }
+
+    .lpp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      height: 28px;
+      padding: 0 10px;
+      font-size: 12.5px;
+      font-weight: 500;
+      font-family: inherit;
+      border: 1px solid var(--bd);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--t2);
+      cursor: pointer;
+      transition: background .1s;
+    }
+
+    .lpp-btn:hover {
+      background: var(--ps);
+    }
+
+    .lpp-btn svg {
+      width: 10px;
+      height: 10px;
+    }
+
+    /* ==========================================================
+       NAVIGATION — topbar + menu gauche
+       Valeurs reprises de l'application.
+       ========================================================== */
+
+    /* --- Scene de demonstration --- */
+    .nav-stage {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--bd);
+      border-radius: var(--rl);
+      background: var(--bg);
+    }
+
+    .nav-stage .topbar {
+      position: absolute;
+    }
+
+    /* --- Topbar --- */
+    .topbar {
+      height: 56px;
+      display: flex;
+      align-items: stretch;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(7px);
+      -webkit-backdrop-filter: blur(7px);
+      flex-shrink: 0;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+    }
+
+    .tb-slot {
+      width: var(--sw);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 16px;
+      background: #13041c;
+      border-right: 1px solid rgba(255, 255, 255, 0.05);
+      transition: background 0.2s;
+    }
+
+    .tb-logo {
+      width: 30px;
+      height: 30px;
+      background: var(--a);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .tb-logo svg {
+      width: 16px;
+      height: 16px;
+      fill: #fff;
+    }
+
+    .tb-appn {
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .tb-body {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      padding: 0 32px;
+      gap: 10px;
+      min-width: 0;
+      border-bottom: 1px solid var(--bd);
+    }
+
+    .tb-store {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--t1);
+      flex-shrink: 0;
+    }
+
+    .tb-cw {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+      margin-left: 32px;
+    }
+
+    .tb-cl {
+      font-size: 12px;
+      color: var(--t3);
+      width: 100%;
+    }
+
+    .tb-sel {
+      height: var(--ch);
+      padding: 0 28px 0 10px;
+      font-size: 13px;
+      font-family: inherit;
+      border: 1px solid var(--bd);
+      border-radius: var(--r);
+      background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239CA3AF'/%3E%3C/svg%3E") no-repeat right 8px center;
+      appearance: none;
+      color: var(--t2);
+      cursor: pointer;
+      outline: none;
+      min-width: 160px;
+    }
+
+    .tb-sel:focus {
+      border-color: var(--a);
+      box-shadow: 0 0 0 2px var(--a1);
+    }
+
+    .tb-ics {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 1px;
+    }
+
+    .tbi {
+      width: var(--ch);
+      height: var(--ch);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--r);
+      border: none;
+      background: transparent;
+      color: var(--t2);
+      cursor: pointer;
+      transition: background .1s;
+      position: relative;
+    }
+
+    .tbi:hover {
+      background: var(--ps);
+      color: var(--t1);
+    }
+
+    .tbi svg {
+      width: 18px;
+      height: 18px;
+      display: block;
+    }
+
+    .tbi.red {
+      color: #DC2626;
+    }
+
+    .tbi.red:hover {
+      background: #FEF2F2;
+    }
+
+    .tbsep {
+      width: 1px;
+      height: 20px;
+      background: var(--bd);
+      margin: 0 4px;
+      flex-shrink: 0;
+    }
+
+    .tb-av {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--a1);
+      color: var(--a);
+      font-size: 11px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: 2px solid var(--a2);
+      margin-left: 4px;
+    }
+
+    /* --- Menu applications --- */
+    .apps-wrap {
+      position: relative;
+    }
+
+    .apps-drop {
+      display: none;
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      background: #fff;
+      border: 1px solid var(--bd);
+      border-radius: var(--rl);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, .12);
+      min-width: 230px;
+      z-index: 500;
+      padding: 8px;
+    }
+
+    .apps-drop.oo {
+      display: block;
+    }
+
+    .apps-hd {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--t3);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      padding: 5px 8px 6px;
+    }
+
+    .app-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: var(--r);
+      cursor: pointer;
+      transition: background .1s;
+    }
+
+    .app-row:hover {
+      background: var(--ps);
+    }
+
+    .app-ic {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .app-ic svg {
+      width: 18px;
+      height: 18px;
+      fill: #fff;
+    }
+
+    .app-nm {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--t1);
+    }
+
+    .app-sub {
+      font-size: 11.5px;
+      color: var(--t3);
+    }
+
+    /* --- Menu gauche --- */
+    .sidebar {
+      width: var(--sw);
+      background-color: #150625;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      overflow-y: auto;
+      padding-top: 56px;
+    }
+
+    .sb-s {
+      margin: 10px 12px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--r);
+      padding: 7px 10px;
+    }
+
+    .sb-s svg {
+      width: 13px;
+      height: 13px;
+      color: rgba(255, 255, 255, 0.5);
+      flex-shrink: 0;
+    }
+
+    .sb-s span {
+      font-size: 12.5px;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .sb-s kbd {
+      margin-left: auto;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 10px;
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-family: inherit;
+    }
+
+    .nav {
+      padding: 4px 0;
+      flex: 1;
+    }
+
+    .ni {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 14px;
+      margin: 1px 8px;
+      border-radius: var(--r);
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.65);
+      cursor: pointer;
+      transition: background .1s, color .1s;
+    }
+
+    .ni:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+
+    .ni.act {
+      background: var(--a);
+      color: #fff;
+      font-weight: 500;
+    }
+
+    .ni svg {
+      width: 15px;
+      height: 15px;
+      flex-shrink: 0;
+    }
+
+    .ni-group .chevron {
+      width: 16px;
+      height: 16px;
+      margin-left: auto;
+      transition: transform 0.2s;
+      opacity: 0.5;
+    }
+
+    .ni-group.open .chevron {
+      transform: rotate(180deg);
+    }
+
+    .sub-nav {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      padding-left: 42px;
+      margin-top: 4px;
+      margin-bottom: 4px;
+    }
+
+    .ni-group.open .sub-nav {
+      display: flex;
+    }
+
+    .ni-sub {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.6);
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .ni-sub:hover,
+    .ni-sub.act {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .nb {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 8px 0;
+    }
+
+    /* --- Bascule Gestion / Reporting --- */
+    .sb-toggle {
+      margin: 0 12px 10px;
+      display: flex;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 6px;
+      padding: 4px;
+    }
+
+    .sbt-btn {
+      flex: 1;
+      text-align: center;
+      padding: 6px 0;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.5);
+      background: transparent;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+
+    .sbt-btn.on {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.1);
     }
 
     /* --- Doc : les deux axes --- */
@@ -2293,11 +3241,9 @@
     <section id="buttons">
       <h2 class="section-title">Boutons</h2>
       <p class="section-desc">Le bouton est le composant le plus répété de l'interface : il doit porter une hiérarchie
-        lisible en un coup d'œil. Le système suit la démarche de Shopify : <b>deux axes indépendants</b> — le poids
-        (<code>variant</code>) et le sens (<code>tone</code>) — plutôt qu'un catalogue de variantes nommées. Soit
-        <b>4 poids</b>, <b>3 tons</b>, <b>4 tailles</b>, <b>6 états</b> et <b>4 compositions</b>, tous pilotés par des
-        tokens CSS locaux (<code>--btn-h</code>, <code>--btn-px</code>, <code>--btn-fs</code>, <code>--btn-icon</code>)
-        — changer de taille ne demande jamais de réécrire une règle.
+        lisible en un coup d'œil. <b>4 poids</b>, <b>3 tons</b>, <b>4 tailles</b>, <b>6 états</b> et
+        <b>4 compositions</b>, pilotés par des tokens CSS locaux (<code>--btn-h</code>, <code>--btn-px</code>,
+        <code>--btn-fs</code>, <code>--btn-icon</code>) : une classe de taille suffit à tout redimensionner.
       </p>
 
       <!-- ============ 1. LA PALETTE D'ACTION ============ -->
@@ -2305,12 +3251,9 @@
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;">
         1 — La palette d'action : violet, bleu, blanc</p>
       <p class="section-desc" style="margin-bottom:24px;">
-        La hiérarchie tient en trois niveaux, et un seul par écran monte d'un cran. Le <b>violet
-          <code>#8A3AAF</code></b> est la couleur de marque : il porte l'action principale, celle qui engage.
-        Le <b>bleu <code>#2876A7</code></b> prend tout le registre secondaire — valider, exporter, dupliquer, filtrer.
-        Le <b>blanc</b> ferme la marche pour tout ce qui est neutre ou réversible : annuler, fermer, revenir.
-        Les 128° qui séparent le violet du bleu suffisent à les distinguer d'un coup d'œil, y compris pour un
-        deutéranope, sans qu'aucun des deux ne prenne le pas sur le contenu.
+        Trois niveaux. <b>Violet <code>#8A3AAF</code></b> : la marque et l'action qui engage, une seule par écran.
+        <b>Bleu <code>#2876A7</code></b> : valider, exporter, dupliquer, filtrer. <b>Blanc</b> : annuler, fermer,
+        revenir. 128° séparent le violet du bleu, soit deux familles distinctes y compris en deutéranopie.
       </p>
 
       <div class="ds-grid" style="margin-bottom:28px;">
@@ -2458,10 +3401,9 @@
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
         2 — Deux axes, pas une liste</p>
       <p class="section-desc" style="margin-bottom:24px;">
-        Un système de boutons dérive toujours de la même façon : on ajoute une variante par cas particulier, et au
-        bout de dix classes plus personne ne sait laquelle prendre — plusieurs se chevauchent. Shopify évite la dérive
-        en séparant deux questions indépendantes : <b>quel poids</b> l'action a dans la page (<code>variant</code>), et
-        <b>quel sens</b> elle porte (<code>tone</code>). Un nouveau cas se compose au lieu d'ajouter une classe.
+        Deux axes indépendants, sur le modèle de Shopify : <b>le poids</b> de l'action dans la page
+        (<code>variant</code>) et <b>le sens</b> qu'elle porte (<code>tone</code>). Un nouveau cas se compose à partir
+        des deux, sans ajouter de classe.
       </p>
 
       <div class="axis-grid">
@@ -2532,8 +3474,8 @@
 
       <p class="section-desc" style="margin:20px 0 0;font-size:14px;">
         <b>Le bleu porte directement le texte.</b> Sur <code>.tertiary</code>, <code>#2876A7</code> est appliqué tel
-        quel — pas de version assombrie : 4.95:1 sur blanc, ce qui passe l'AA pour du texte normal. Inutile de le
-        foncer, et le garder identique au contour du <code>.secondary</code> fait lire les deux comme un seul registre.
+        quel : 4.95:1 sur blanc, AA pour du texte normal. Identique au contour du <code>.secondary</code>, les deux
+        se lisent comme un seul registre.
       </p>
 
       <p
@@ -2683,9 +3625,8 @@
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
         4 — Icônes</p>
       <p class="section-desc" style="margin-bottom:24px;">
-        L'icône ne décore pas : elle accélère la reconnaissance d'une action déjà nommée. Elle se place <b>avant</b> le
-        libellé quand elle décrit l'action, <b>après</b> quand elle annonce une suite (navigation, menu déroulant). Un
-        bouton n'a jamais deux icônes.
+        L'icône se place <b>avant</b> le libellé quand elle décrit l'action, <b>après</b> quand elle annonce une suite
+        (navigation, menu déroulant). Jamais deux icônes sur un même bouton.
       </p>
 
       <div class="preview-box">
@@ -2707,11 +3648,9 @@
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin:36px 0 12px;">
         Icône seule</p>
       <p class="section-desc" style="margin-bottom:24px;">
-        Réservée aux interfaces denses — barres d'outils, en-têtes de widget, cellules de tableau — et uniquement pour
-        des icônes universellement comprises. Le poids par défaut d'une icône seule est <code>.tertiary</code> : dans
-        une barre d'outils, dix boutons bordés font un damier. Le bouton devient carré (largeur = hauteur) et
-        <b>exige un <code>aria-label</code></b> : sans libellé visible, c'est la seule chose qu'un lecteur d'écran
-        annonce.
+        Réservée aux interfaces denses — barres d'outils, en-têtes de widget, cellules de tableau — et aux icônes
+        universellement comprises. Poids par défaut <code>.tertiary</code>. Le bouton devient carré (largeur = hauteur)
+        et <b>exige un <code>aria-label</code></b>, seule chose qu'un lecteur d'écran puisse annoncer.
       </p>
 
       <div class="preview-box">
@@ -2893,10 +3832,9 @@
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin:40px 0 12px;">
         Le cas du disabled</p>
       <p class="section-desc" style="margin-bottom:24px;">
-        Un bouton désactivé est un cul-de-sac : il ne répond pas, ne prend pas le focus clavier, et n'est donc
-        <b>jamais annoncé</b> par un lecteur d'écran. L'utilisateur voit qu'il ne peut pas continuer sans jamais
-        apprendre pourquoi. La règle : <b>désactiver seulement quand la raison est visible à côté du bouton</b>.
-        Sinon, laisser le bouton actif et expliquer le blocage au clic.
+        Un bouton désactivé ne prend pas le focus clavier et n'est donc <b>jamais annoncé</b> par un lecteur d'écran.
+        Règle : <b>désactiver seulement quand la raison est visible à côté du bouton</b>. Sinon, le laisser actif et
+        expliquer le blocage au clic.
       </p>
 
       <div class="do-dont">
@@ -3066,13 +4004,10 @@
       <p
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
         7 — Sur les sidebars sombres</p>
-      <p class="section-desc" style="margin-bottom:24px;">C'est ici que la bascule vers le violet demande une
-        précaution. Les deux sidebars sont elles-mêmes violettes (<code>#13041C</code>, <code>#0A032D</code>) : le
-        violet de marque n'y ressort qu'à <b>3.11:1</b>, tout juste au-dessus du seuil de 3:1 du WCAG 1.4.11, et se
-        fond dans le décor. Sur ces surfaces uniquement, la variante primaire passe à
-        <code>--a-dark #9B4BC4</code> — <b>3.95:1</b> sur les deux fonds, texte blanc à 5.00:1. Le bleu, lui, n'a
-        besoin d'aucune correction : il tient <b>3.99:1</b> tel quel. La variante neutre devient un fond blanc à 8 %
-        d'opacité.</p>
+      <p class="section-desc" style="margin-bottom:24px;">Les deux sidebars sont violettes (<code>#13041C</code>, <code>#0A032D</code>) : le violet de marque n'y
+        ressort qu'à <b>3.11:1</b>, au seuil de 3:1 du WCAG 1.4.11. Sur ces surfaces, la variante primaire passe à
+        <code>--a-dark #9B4BC4</code> — <b>3.95:1</b> sur les deux fonds, texte blanc à 5.00:1. Le bleu tient
+        <b>3.99:1</b> sans correction. La variante neutre devient un fond blanc à 8 % d'opacité.</p>
 
       <div class="preview-box" style="background:var(--sb-dark);border-color:#2A1235;">
         <div class="preview-label" style="background:var(--sb-dark);color:#8B7A94;border-color:#2A1235;">Sidebar Gestion
@@ -3432,9 +4367,8 @@
     <!-- FORMS -->
     <section id="forms">
       <h2 class="section-title">Formulaires</h2>
-      <p class="section-desc">Les formulaires du produit ne sont pas des suites de champs : ce sont des pages de
-        réglages longues, découpées en sections, sur deux colonnes. Les motifs ci-dessous sont extraits de la page
-        <b>Paramètres → Carte de visite</b>, la plus dense du produit, et portés sur les tokens du système.</p>
+      <p class="section-desc">Pages de réglages longues, découpées en sections, sur deux colonnes. Motifs extraits de la page
+        <b>Paramètres → Carte de visite</b>.</p>
 
       <!-- ============ 1. ANATOMIE ============ -->
       <p
@@ -3590,18 +4524,17 @@
       </table>
 
       <p class="section-desc" style="margin:20px 0 0;font-size:14px;">
-        <b>Lecture seule n'est pas désactivé.</b> Un champ en lecture seule contient une valeur qui compte — un numéro
-        d'agrément, un SIRET — que l'on veut pouvoir lire et copier : il garde le texte en <code>--t1</code>. Un champ
-        désactivé ne s'applique pas au contexte : il s'efface en <code>--t3</code>.
+        <b>Lecture seule n'est pas désactivé.</b> Lecture seule : la valeur compte et doit rester lisible et
+        copiable — texte en <code>#0F172A</code>, poids 500. Désactivé : le champ ne s'applique pas au contexte —
+        texte en <code>--t3</code>.
       </p>
 
       <!-- ============ 3. LA GRILLE ============ -->
       <p
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
         3 — La grille de champs</p>
-      <p class="section-desc" style="margin-bottom:24px;">Les champs se posent dans une <code>.form-grid</code> dont on
-        change le nombre de colonnes selon la <b>longueur attendue de la valeur</b>, pas selon la place disponible. Un
-        code postal sur toute la largeur est aussi faux qu'une adresse sur un tiers.</p>
+      <p class="section-desc" style="margin-bottom:24px;">Le nombre de colonnes de la <code>.form-grid</code> suit la
+        <b>longueur attendue de la valeur</b>, pas la place disponible.</p>
 
       <div class="preview-box">
         <div class="preview-label">Live Preview</div>
@@ -3672,10 +4605,9 @@
       <p
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
         4 — Groupement en sections</p>
-      <p class="section-desc" style="margin-bottom:24px;">Au-delà de six ou sept champs, une liste devient illisible.
-        Les champs se regroupent alors en <code>.fs-block</code> — un en-tête à icône, puis une
-        <code>.fs-card</code> blanche qui contient les grilles. L'icône n'est pas décorative : elle donne un repère
-        visuel pour retrouver la section en faisant défiler une page longue.</p>
+      <p class="section-desc" style="margin-bottom:24px;">Au-delà de sept champs, regrouper en <code>.fs-block</code> :
+        un en-tête à icône, puis une <code>.fs-card</code> blanche qui contient les grilles. L'icône sert de repère au
+        défilement.</p>
 
       <div class="preview-box">
         <div class="preview-label">Live Preview</div>
@@ -3726,10 +4658,9 @@
       <p
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
         5 — Import de fichier</p>
-      <p class="section-desc" style="margin-bottom:24px;">Deux formats selon l'enjeu. La <b>zone large</b> quand
-        l'import est l'action principale du bloc — poser un logo sur une fiche vide. La <b>ligne compacte</b> quand
-        c'est un réglage parmi d'autres. Dans les deux cas, les contraintes (poids, formats) sont écrites
-        <b>avant</b> la sélection, pas dans un message d'erreur après.</p>
+      <p class="section-desc" style="margin-bottom:24px;"><b>Zone large</b> quand l'import est l'action principale du
+        bloc, <b>ligne compacte</b> quand c'est un réglage parmi d'autres. Contraintes de poids et de format écrites
+        <b>avant</b> la sélection.</p>
 
       <div class="preview-box">
         <div class="preview-label">Zone large — l'import est l'action principale</div>
@@ -3860,10 +4791,9 @@
       <p
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
         7 — Layout d'une page de réglages</p>
-      <p class="section-desc" style="margin-bottom:24px;">Le squelette de la page Carte de visite : un bandeau
-        d'identité sur toute la largeur, puis deux colonnes de sections. Les sections ne sont pas réparties par
-        équilibre visuel mais par <b>fréquence de modification</b> — ce qui change souvent à gauche, ce qui ne bouge
-        presque jamais (références légales, signature) à droite.</p>
+      <p class="section-desc" style="margin-bottom:24px;">Bandeau d'identité sur toute la largeur, puis deux colonnes de
+        sections, réparties par <b>fréquence de modification</b> : ce qui change souvent à gauche, ce qui est stable
+        (références légales, signature) à droite.</p>
 
       <div class="preview-box" style="background:var(--bg);">
         <div class="preview-label">Live Preview</div>
@@ -4168,170 +5098,447 @@
     <!-- TABLES -->
     <section id="tables">
       <h2 class="section-title">Tableaux</h2>
-      <p class="section-desc">Tables de données avec double en-tête : ligne 1 avec labels (background --ps), ligne 2
-        avec inputs de filtrage searchables.</p>
+      <p class="section-desc">Le tableau est la vue principale du produit. En-tête sur deux lignes — libellés puis
+        filtres —, actions au survol de la ligne, pied de tableau avec pagination.</p>
 
+      <!-- ============ 1. TABLEAU COMPLET ============ -->
       <p
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;">
-        Structure HTML</p>
-      <div class="code-box">
-        &lt;table class="tab-table"&gt;
-        &lt;thead&gt;
-        &lt;!-- Ligne 1 : Labels des colonnes --&gt;
-        &lt;tr id="thr"&gt;
-        &lt;th&gt;Apprenant&lt;/th&gt;
-        &lt;th&gt;État&lt;/th&gt;
-        &lt;th&gt;Groupes&lt;/th&gt;
-        &lt;th&gt;Profil formations&lt;/th&gt;
-        &lt;/tr&gt;
-        &lt;!-- Ligne 2 : Inputs de filtrage --&gt;
-        &lt;tr id="thr-filter"&gt;
-        &lt;th&gt;&lt;input type="search" class="th-search" placeholder="Rechercher..."&gt;&lt;/th&gt;
-        &lt;th&gt;&lt;input type="search" class="th-search" placeholder="Rechercher..."&gt;&lt;/th&gt;
-        &lt;th&gt;&lt;input type="search" class="th-search" placeholder="Rechercher..."&gt;&lt;/th&gt;
-        &lt;th&gt;&lt;input type="search" class="th-search" placeholder="Rechercher..."&gt;&lt;/th&gt;
-        &lt;/tr&gt;
-        &lt;/thead&gt;
-        &lt;tbody&gt;
-        &lt;tr&gt;
-        &lt;td&gt;Contenu&lt;/td&gt;
-        &lt;td&gt;Contenu&lt;/td&gt;
-        &lt;td&gt;Contenu&lt;/td&gt;
-        &lt;td&gt;Contenu&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;/tbody&gt;
-        &lt;/table&gt;
-      </div>
+        1 — Tableau complet</p>
 
-      <p
-        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:40px;">
-        Live Preview</p>
-      <div class="preview-box" style="padding: 0; background: white;">
-        <div class="preview-label">Live Preview</div>
-        <div style="overflow-x: auto;">
-          <table style="width: 100%; border-collapse: collapse; table-layout: auto;">
-            <thead>
-              <!-- Ligne 1 : Labels (Normal case) -->
-              <tr>
-                <th
-                  style="padding: 10px 20px; font-size: 11.5px; font-weight: 600; color: var(--t2); text-align: left; background: var(--ps); border-bottom: 1px solid var(--bd);">
-                  Apprenant</th>
-                <th
-                  style="padding: 10px 20px; font-size: 11.5px; font-weight: 600; color: var(--t2); text-align: left; background: var(--ps); border-bottom: 1px solid var(--bd);">
-                  État</th>
-                <th
-                  style="padding: 10px 20px; font-size: 11.5px; font-weight: 600; color: var(--t2); text-align: left; background: var(--ps); border-bottom: 1px solid var(--bd);">
-                  Groupes</th>
-                <th
-                  style="padding: 10px 20px; font-size: 11.5px; font-weight: 600; color: var(--t2); text-align: left; background: var(--ps); border-bottom: 1px solid var(--bd);">
-                  Profil formations</th>
-              </tr>
-              <!-- Ligne 2 : Inputs de filtrage -->
-              <tr id="thr-filter" style="background: #fff;">
-                <th style="padding-top: 0; padding-bottom: 12px; border-bottom: 1px solid var(--bd);">
-                  <input type="search" placeholder=""
-                    style="height: 30px; padding: 0 8px; font-size: 12.5px; width: 100%; font-weight: 400; background: #fff; border: 1px solid var(--bd); border-radius: 6px; color: var(--t1); font-family: inherit;">
-                </th>
-                <th style="padding-top: 0; padding-bottom: 12px; border-bottom: 1px solid var(--bd);">
-                  <div style="width: 100%; display: flex; align-items: center;">
-                    <select
-                      style="height: 30px; padding: 0 8px; font-size: 12.5px; width: 100%; background: #fff url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2710%27 height=%276%27%3E%3Cpath d=%27M0 0l5 6 5-6z%27 fill=%27%239CA3AF%27/%3E%3C/svg%3E') no-repeat right 8px center; border: 1px solid var(--bd); border-radius: 6px; color: var(--t1); font-family: inherit; appearance: none; cursor: pointer;">
-                      <option></option>
+      <div class="preview-box" style="padding:40px 20px 20px;">
+        <div class="preview-label">Live Preview — survolez une ligne</div>
+        <div class="tcard">
+          <div class="tw">
+            <table>
+              <thead>
+                <tr class="thr">
+                  <th class="gsth"><button class="gbtn" aria-label="Grouper"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></button></th>
+                  <th class="srt">Nom<span class="rez"></span></th>
+                  <th class="srt">E-mail<span class="rez"></span></th>
+                  <th class="srt">Statut<span class="rez"></span></th>
+                  <th class="srt">Groupe<span class="rez"></span></th>
+                  <th class="srt">Inscription</th>
+                </tr>
+                <tr class="thr-filter">
+                  <th class="gsth"></th>
+                  <th><input type="search" class="th-search" placeholder="Rechercher"></th>
+                  <th><input type="search" class="th-search" placeholder="Rechercher"></th>
+                  <th><select class="th-search">
+                      <option>Tous</option>
                       <option>Actif</option>
                       <option>Inactif</option>
-                    </select>
-                  </div>
-                </th>
-                <th style="padding-top: 0; padding-bottom: 12px; border-bottom: 1px solid var(--bd);">
-                  <input type="search" placeholder=""
-                    style="height: 30px; padding: 0 8px; font-size: 12.5px; width: 100%; font-weight: 400; background: #fff; border: 1px solid var(--bd); border-radius: 6px; color: var(--t1); font-family: inherit;">
-                </th>
-                <th style="padding-top: 0; padding-bottom: 12px; border-bottom: 1px solid var(--bd);">
-                  <input type="search" placeholder=""
-                    style="height: 30px; padding: 0 8px; font-size: 12.5px; width: 100%; font-weight: 400; background: #fff; border: 1px solid var(--bd); border-radius: 6px; color: var(--t1); font-family: inherit;">
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style="border-bottom: none;">
-                <td
-                  style="padding: 12px 20px; font-size: 13.5px; color: var(--t1); border-bottom: 1px solid var(--bg);">
-                  <div style="display: flex; align-items: center; gap: 12px;">
-                    <div
-                      style="width: 36px; height: 36px; border-radius: 50%; background: #E0F8EF; color: #10B981; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 13px; flex-shrink: 0;">
-                      AL</div>
+                    </select></th>
+                  <th><select class="th-search">
+                      <option>Tous</option>
+                      <option>RH Central</option>
+                      <option>Produit</option>
+                    </select></th>
+                  <th><input type="search" class="th-search" placeholder="Rechercher"></th>
+                </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td class="catd"><button class="rdots" aria-label="Actions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></td>
+                <td>
+                  <div class="cn">
+                    <div class="ava" style="background:#F8F1FB;color:#8A3AAF;">MG</div>
                     <div>
-                      <div style="font-weight: 500; color: var(--t1); font-size: 13.5px;">Alice Fontaine</div>
-                      <div style="font-size: 12.5px; color: var(--t3);">alice@example.com</div>
+                      <div class="nmain">Michèle GUERRIN</div>
+                      <div class="nsub">PDG</div>
                     </div>
                   </div>
                 </td>
-                <td
-                  style="padding: 12px 20px; font-size: 13.5px; color: var(--t1); border-bottom: 1px solid var(--bg);">
-                  <span
-                    style="display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--t1);">
-                    <span style="width: 8px; height: 8px; background: #10B981; border-radius: 50%;"></span> Actif
-                  </span>
-                </td>
-                <td
-                  style="padding: 12px 20px; font-size: 13.5px; color: var(--t1); border-bottom: 1px solid var(--bg);">
-                  RH Central</td>
-                <td
-                  style="padding: 12px 20px; font-size: 13.5px; color: var(--t1); border-bottom: 1px solid var(--bg);">
-                  <span
-                    style="display: inline-block; padding: 5px 14px; background: var(--a1); color: var(--a); border-radius: 8px; font-size: 13px; font-weight: 500; border: 1px solid var(--a2);">RH
-                    Avancé</span>
-                </td>
+                <td class="cv">m.guerrin@onlineformapro.com</td>
+                <td><span class="stb ston"><span class="stdon"></span>Actif</span></td>
+                <td>RH Central<span class="npill">3</span></td>
+                <td class="dc">12 mars 2026</td>
               </tr>
-            </tbody>
-          </table>
+              <tr>
+                <td class="catd"><button class="rdots" aria-label="Actions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></td>
+                <td>
+                  <div class="cn">
+                    <div class="ava" style="background:#F1F7FB;color:#2876A7;">AD</div>
+                    <div>
+                      <div class="nmain">Alan DRABCZYNSKI</div>
+                      <div class="nsub">Designer</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="cv">a.drabczynski@onlineformapro.com</td>
+                <td><span class="stb ston"><span class="stdon"></span>Actif</span></td>
+                <td>Produit</td>
+                <td class="dc">9 mars 2026</td>
+              </tr>
+              <tr>
+                <td class="catd"><button class="rdots" aria-label="Actions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></td>
+                <td>
+                  <div class="cn">
+                    <div class="ava" style="background:#FEF3C7;color:#B45309;">JD</div>
+                    <div>
+                      <div class="nmain">Jean DUPONT</div>
+                      <div class="nsub">Formateur</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="cv">j.dupont@onlineformapro.com</td>
+                <td><span class="stb stoff"><span class="stdoff"></span>Inactif</span></td>
+                <td>Sécurité au travail</td>
+                <td class="dc">2 févr. 2026</td>
+              </tr>
+              <tr>
+                <td class="catd"><button class="rdots" aria-label="Actions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></td>
+                <td>
+                  <div class="cn">
+                    <div class="ava" style="background:#F8F1FB;color:#8A3AAF;">SL</div>
+                    <div>
+                      <div class="nmain">Sophie LEROY</div>
+                      <div class="nsub">Gestionnaire</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="cv">s.leroy@onlineformapro.com</td>
+                <td><span class="stb ston"><span class="stdon"></span>Actif</span></td>
+                <td>Management<span class="npill">2</span></td>
+                <td class="dc">28 janv. 2026</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tfoot">
+            <span class="fi">4 résultats sur 128</span>
+            <div class="pgn">
+              <button class="pb" disabled>Précédent</button>
+              <button class="pb on">1</button>
+              <button class="pb">2</button>
+              <button class="pb">3</button>
+              <button class="pb">Suivant</button>
+            </div>
+            <div class="lpp-wrap">
+              <span class="lpp-lbl">Par page</span>
+              <button class="lpp-btn">25 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+            </div>
+          </div>
         </div>
       </div>
 
+      <!-- ============ 2. COULEURS DE LIGNE ============ -->
       <p
-        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:40px;">
-        Styles des En-têtes</p>
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
+        2 — Couleurs de ligne</p>
+      <p class="section-desc" style="margin-bottom:24px;">Les fonds de ligne sont neutres : dans un tableau de 25
+        lignes, une teinte colorée au survol fatigue et entre en concurrence avec les statuts, qui eux portent du sens.
+        Le seul rappel de marque est le filet violet de 3px à gauche de la ligne survolée.</p>
+
+      <div class="preview-box" style="padding:40px 20px 20px;">
+        <div class="preview-label">Live Preview</div>
+        <div class="tcard">
+          <div class="tw">
+            <table>
+              <tbody>
+                <tr>
+                  <td style="width:170px;font-weight:500;">Ligne impaire</td>
+                  <td class="cv">Fond blanc</td>
+                  <td class="dc">#FFFFFF</td>
+                </tr>
+                <tr>
+                  <td style="font-weight:500;">Ligne paire</td>
+                  <td class="cv">--row-even</td>
+                  <td class="dc">#F9FAFB</td>
+                </tr>
+                <tr style="background:var(--row-hover);">
+                  <td style="font-weight:500;box-shadow:inset 3px 0 0 var(--a);">Survol</td>
+                  <td class="cv">--row-hover + filet 3px --a</td>
+                  <td class="dc">#EDEFF2</td>
+                </tr>
+                <tr style="background:var(--row-active);">
+                  <td style="font-weight:500;">Clic maintenu</td>
+                  <td class="cv">--row-active</td>
+                  <td class="dc">#E3E6EA</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
       <table class="sizing-table">
         <thead>
           <tr>
-            <th>Élément</th>
-            <th>Styles</th>
-            <th>Notes</th>
+            <th>Token</th>
+            <th>Valeur</th>
+            <th>Usage</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><code
-                style="background: #f5f5f5; padding: 2px 6px; border-radius: 3px; font-size: 12px;">tr#thr th</code>
-            </td>
-            <td>padding: 10px 20px; font-size: 11.5px; font-weight: 600; color: --t2; background: --ps; border-bottom:
-              1px solid --bd;</td>
-            <td>Ligne 1 : Labels de colonnes (Normal case, PAS en majuscules)</td>
+            <td class="var-name">--row-even</td>
+            <td class="var-value">#F9FAFB</td>
+            <td>Zébrure une ligne sur deux, assez faible pour ne pas hacher la lecture</td>
           </tr>
           <tr>
-            <td><code
-                style="background: #f5f5f5; padding: 2px 6px; border-radius: 3px; font-size: 12px;">tr#thr-filter th</code>
-            </td>
-            <td>padding-top: 0; padding-bottom: 12px; border-bottom: 1px solid --bd; background: #fff;</td>
-            <td>Ligne 2 : Conteneur des inputs</td>
+            <td class="var-name">--row-hover</td>
+            <td class="var-value">#EDEFF2</td>
+            <td>Survol — lisible aussi bien sur une ligne blanche que sur une ligne paire</td>
           </tr>
           <tr>
-            <td><code
-                style="background: #f5f5f5; padding: 2px 6px; border-radius: 3px; font-size: 12px;">.th-search</code>
-            </td>
-            <td>height: 30px; padding: 0 8px; font-size: 12.5px; width: 100%; border: 1px solid --bd; border-radius:
-              6px; background: #fff;</td>
-            <td>Input de filtrage searchable</td>
+            <td class="var-name">--row-active</td>
+            <td class="var-value">#E3E6EA</td>
+            <td>Clic maintenu, un cran plus foncé</td>
           </tr>
           <tr>
-            <td><code
-                style="background: #f5f5f5; padding: 2px 6px; border-radius: 3px; font-size: 12px;">.th-search:focus</code>
-            </td>
-            <td>border-color: --a; box-shadow: 0 0 0 2px --a1;</td>
-            <td>État focus violet</td>
+            <td class="var-name">inset 3px 0 0 --a</td>
+            <td class="var-value">#8A3AAF</td>
+            <td>Filet gauche sur la ligne survolée, seul rappel de marque du tableau</td>
           </tr>
         </tbody>
       </table>
+
+      <!-- ============ 3. EN-TETE ============ -->
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
+        3 — En-tête sur deux lignes</p>
+
+      <table class="sizing-table">
+        <thead>
+          <tr>
+            <th>Élément</th>
+            <th>Classe</th>
+            <th>Traitement</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Fond</td>
+            <td class="var-name">thead tr</td>
+            <td class="var-value">--ps · 11.5px · 600 · --t2 · casse normale</td>
+          </tr>
+          <tr>
+            <td>Ligne 1 — libellés</td>
+            <td class="var-name">.thr th</td>
+            <td class="var-value">padding 10px 14px, padding-bottom 6px, sans filet</td>
+          </tr>
+          <tr>
+            <td>Ligne 2 — filtres</td>
+            <td class="var-name">.thr-filter th</td>
+            <td class="var-value">padding-top 0, padding-bottom 12px, filet bas --bd</td>
+          </tr>
+          <tr>
+            <td>Champ de filtre</td>
+            <td class="var-name">.th-search</td>
+            <td class="var-value">30px · radius 6px · focus --a + anneau 2px --a1</td>
+          </tr>
+          <tr>
+            <td>Colonne triable</td>
+            <td class="var-name">th.srt</td>
+            <td class="var-value">curseur pointer, texte --t1 au survol</td>
+          </tr>
+          <tr>
+            <td>Redimensionnement</td>
+            <td class="var-name">.rez</td>
+            <td class="var-value">8px de large, filet 2px qui passe en --a et grandit au survol</td>
+          </tr>
+          <tr>
+            <td>Groupement</td>
+            <td class="var-name">.gsth / .gbtn</td>
+            <td class="var-value">colonne 44px, bouton 36px, actif sur --a1</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ============ 4. CONTENU DE CELLULE ============ -->
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
+        4 — Contenu de cellule</p>
+
+      <div class="preview-box" style="padding:40px 20px 20px;">
+        <div class="preview-label">Live Preview</div>
+        <div class="tcard">
+          <div class="tw">
+            <table>
+              <tbody>
+                <tr>
+                  <td style="width:190px;" class="cv">Identité</td>
+                  <td>
+                    <div class="cn">
+                      <div class="ava" style="background:#F8F1FB;color:#8A3AAF;">MG</div>
+                      <div>
+                        <div class="nmain">Michèle GUERRIN</div>
+                        <div class="nsub">PDG</div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="cv">Statut</td>
+                  <td><span class="stb ston"><span class="stdon"></span>Actif</span> &nbsp;&nbsp;
+                    <span class="stb stoff"><span class="stdoff"></span>Inactif</span></td>
+                </tr>
+                <tr>
+                  <td class="cv">Compteur</td>
+                  <td>RH Central<span class="npill">3</span></td>
+                </tr>
+                <tr>
+                  <td class="cv">Valeur secondaire</td>
+                  <td class="dc">12 mars 2026</td>
+                </tr>
+                <tr>
+                  <td class="cv">Identifiant technique</td>
+                  <td><span class="mcel">USR-4821-A</span></td>
+                </tr>
+                <tr>
+                  <td class="cv">Infobulle</td>
+                  <td>
+                    <span class="mwrap">
+                      <span style="border-bottom:1px dashed var(--t3);cursor:default;">3 modules</span>
+                      <span class="mtip">
+                        <div class="mtit">Modules suivis</div>
+                        <div class="mit"><span class="mdt"></span>Sécurité au travail</div>
+                        <div class="mit"><span class="mdt"></span>Management d'équipe</div>
+                        <div class="mit"><span class="mdt"></span>RGPD</div>
+                      </span>
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ 5. ACTIONS DE LIGNE ============ -->
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
+        5 — Actions de ligne</p>
+      <p class="section-desc" style="margin-bottom:24px;">Le bouton <code>.rdots</code> reste masqué et n'apparaît qu'au
+        survol de la ligne, dans une colonne <code>.catd</code> de 44px réservée à gauche.</p>
+
+      <div class="preview-box" style="padding:40px 20px 20px;">
+        <div class="preview-label">Live Preview</div>
+        <div style="display:flex;gap:32px;align-items:flex-start;flex-wrap:wrap;">
+          <div class="rmenu oo" style="position:relative;right:auto;top:auto;margin:0;">
+            <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Voir la fiche</div>
+            <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>Modifier</div>
+            <div class="rmdiv"></div>
+            <div class="rmi dn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>Supprimer</div>
+          </div>
+          <div>
+            <button class="rdots" style="display:flex;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button>
+            <div class="dc" style="margin-top:8px;">.rdots — 26px, visible au survol</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ 6. PIED DE TABLEAU ============ -->
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
+        6 — Pied de tableau &amp; densité</p>
+
+      <div class="preview-box" style="padding:40px 20px 20px;">
+        <div class="preview-label">Mode compact — .tcard.cmp masque avatars et sous-titres</div>
+        <div class="tcard cmp">
+          <div class="tw">
+            <table>
+              <tbody>
+              <tr>
+                <td class="catd"><button class="rdots" aria-label="Actions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></td>
+                <td>
+                  <div class="cn">
+                    <div class="ava" style="background:#F8F1FB;color:#8A3AAF;">MG</div>
+                    <div>
+                      <div class="nmain">Michèle GUERRIN</div>
+                      <div class="nsub">PDG</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="cv">m.guerrin@onlineformapro.com</td>
+                <td><span class="stb ston"><span class="stdon"></span>Actif</span></td>
+                <td>RH Central<span class="npill">3</span></td>
+                <td class="dc">12 mars 2026</td>
+              </tr>
+              <tr>
+                <td class="catd"><button class="rdots" aria-label="Actions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></td>
+                <td>
+                  <div class="cn">
+                    <div class="ava" style="background:#F1F7FB;color:#2876A7;">AD</div>
+                    <div>
+                      <div class="nmain">Alan DRABCZYNSKI</div>
+                      <div class="nsub">Designer</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="cv">a.drabczynski@onlineformapro.com</td>
+                <td><span class="stb ston"><span class="stdon"></span>Actif</span></td>
+                <td>Produit</td>
+                <td class="dc">9 mars 2026</td>
+              </tr>
+              <tr>
+                <td class="catd"><button class="rdots" aria-label="Actions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></td>
+                <td>
+                  <div class="cn">
+                    <div class="ava" style="background:#FEF3C7;color:#B45309;">JD</div>
+                    <div>
+                      <div class="nmain">Jean DUPONT</div>
+                      <div class="nsub">Formateur</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="cv">j.dupont@onlineformapro.com</td>
+                <td><span class="stb stoff"><span class="stdoff"></span>Inactif</span></td>
+                <td>Sécurité au travail</td>
+                <td class="dc">2 févr. 2026</td>
+              </tr>
+              <tr>
+                <td class="catd"><button class="rdots" aria-label="Actions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></td>
+                <td>
+                  <div class="cn">
+                    <div class="ava" style="background:#F8F1FB;color:#8A3AAF;">SL</div>
+                    <div>
+                      <div class="nmain">Sophie LEROY</div>
+                      <div class="nsub">Gestionnaire</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="cv">s.leroy@onlineformapro.com</td>
+                <td><span class="stb ston"><span class="stdon"></span>Actif</span></td>
+                <td>Management<span class="npill">2</span></td>
+                <td class="dc">28 janv. 2026</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tfoot">
+            <span class="fi">4 résultats sur 128</span>
+            <div class="pgn">
+              <button class="pb" disabled>Précédent</button>
+              <button class="pb on">1</button>
+              <button class="pb">2</button>
+              <button class="pb">Suivant</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        &lt;div class="tcard"&gt;<br>
+        &nbsp;&nbsp;&lt;div class="tw"&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;table&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;thead&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;tr class="thr"&gt;&lt;th class="srt"&gt;Nom&lt;span class="rez"&gt;&lt;/span&gt;&lt;/th&gt;…&lt;/tr&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;tr class="thr-filter"&gt;&lt;th&gt;&lt;input class="th-search"&gt;&lt;/th&gt;…&lt;/tr&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/thead&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;tbody&gt;…&lt;/tbody&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/table&gt;<br>
+        &nbsp;&nbsp;&lt;/div&gt;<br>
+        &nbsp;&nbsp;&lt;div class="tfoot"&gt;compteur + pagination + par page&lt;/div&gt;<br>
+        &lt;/div&gt;
+      </div>
+
+      <p class="section-desc" style="margin:20px 0 0;font-size:14px;">
+        L'application source cible les deux lignes d'en-tête par <code>id</code> (<code>#thr</code>,
+        <code>#thr-filter</code>). Le système les expose en classes, un identifiant ne pouvant pas se répéter sur
+        plusieurs tableaux d'une même page.
+      </p>
     </section>
 
     <!-- LAYOUTS -->
@@ -4525,110 +5732,527 @@
 
     <!-- NAVIGATION -->
     <section id="navigation">
-      <h2 class="section-title">Navigation & Topbar</h2>
-      <p class="section-desc">Composants de navigation : topbar, sidebar, menu items, avec leurs états.</p>
+      <h2 class="section-title">Navigation &amp; Topbar</h2>
+      <p class="section-desc">Deux composants fixes encadrent chaque écran : la topbar sur 56px et le menu gauche sur
+        220px (<code>--sw</code>). Le bloc logo de la topbar occupe la largeur du menu et partage son fond sombre, de
+        sorte que les deux ne forment qu'une seule colonne à l'œil.</p>
 
+      <!-- ============ 1. TOPBAR ============ -->
       <p
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;">
-        Topbar Structure</p>
-      <div class="code-box">
-        &lt;header class="topbar"&gt;
-        &lt;!-- Slot Gauche : Logo + App Name --&gt;
-        &lt;div class="tb-slot"&gt;
-        &lt;div class="tb-logo"&gt;&lt;svg&gt;...&lt;/svg&gt;&lt;/div&gt;
-        &lt;span class="tb-appn"&gt;OnlineManager&lt;/span&gt;
-        &lt;/div&gt;
+        1 — Topbar</p>
 
-        &lt;!-- Body : Store + Controls --&gt;
-        &lt;div class="tb-body"&gt;
-        &lt;span class="tb-store"&gt;Onlineformapro&lt;/span&gt;
-        &lt;div class="tb-cw"&gt;
-        &lt;span class="tb-cl"&gt;Comptes :&lt;/span&gt;
-        &lt;select class="tb-sel"&gt;
-        &lt;option&gt;INFREP&lt;/option&gt;
-        &lt;/select&gt;
-        &lt;/div&gt;
-        &lt;/div&gt;
+      <div class="nav-stage" style="height:120px;">
+        <header class="topbar">
+        <div class="tb-slot">
+        <div class="tb-logo"><svg viewBox="0 0 24 24">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" />
+        </svg></div>
+        <span class="tb-appn">OnlineManager</span>
+        </div>
+        <div class="tb-body">
+        <span class="tb-store">Onlineformapro</span>
+        <div class="tb-cw"><span class="tb-cl">Comptes :</span>
+        <select class="tb-sel">
+        <option>Sélectionnez un compte</option>
+        <option>INFREP</option>
+        <option>OCB Formation</option>
+        <option>Cap Petite Enfance</option>
+        </select>
+        </div>
 
-        &lt;!-- Icons + Avatar --&gt;
-        &lt;div class="tb-ics"&gt;
-        &lt;button class="tbi"&gt;&lt;svg&gt;...&lt;/svg&gt;&lt;/button&gt;
-        &lt;div class="tbsep"&gt;&lt;/div&gt;
-        &lt;div class="tb-av"&gt;AL&lt;/div&gt;
-        &lt;/div&gt;
-        &lt;/header&gt;
+        <div class="tb-ics">
+        <button class="tbi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+        <polyline points="9 22 9 12 15 12 15 22" />
+        </svg></button>
+        <button class="tbi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8" />
+        <path d="m21 21-4.35-4.35" />
+        </svg></button>
+        <button class="tbi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+        stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <line x1="2" y1="12" x2="22" y2="12" />
+        <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
+        </svg></button>
+        <div class="tbsep"></div>
+        <div class="apps-wrap">
+        <button class="tbi">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+        <circle cx="5" cy="5" r="1.8" />
+        <circle cx="12" cy="5" r="1.8" />
+        <circle cx="19" cy="5" r="1.8" />
+        <circle cx="5" cy="12" r="1.8" />
+        <circle cx="12" cy="12" r="1.8" />
+        <circle cx="19" cy="12" r="1.8" />
+        <circle cx="5" cy="19" r="1.8" />
+        <circle cx="12" cy="19" r="1.8" />
+        <circle cx="19" cy="19" r="1.8" />
+        </svg>
+        </button>
+        <div class="apps-drop">
+        <div class="apps-hd">Applications</div>
+        <div class="app-row">
+        <div class="app-ic" style="background:#7C3AED"><svg viewBox="0 0 24 24">
+        <path
+        d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
+        </svg></div>
+        <div>
+        <div class="app-nm">OnlineAuteur</div>
+        <div class="app-sub">Création de contenus</div>
+        </div>
+        </div>
+        <div class="app-row">
+        <div class="app-ic" style="background:#059669"><svg viewBox="0 0 24 24">
+        <path
+        d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5zm15 8a2 2 0 012 2v4a2 2 0 01-2 2h-2l-3 3v-3H9a2 2 0 01-2-2v-1h1a3 3 0 003-3V9h8a2 2 0 012 2z" />
+        </svg></div>
+        <div>
+        <div class="app-nm">OnlineAgora</div>
+        <div class="app-sub">Espace collaboratif</div>
+        </div>
+        </div>
+        </div>
+        </div>
+        <button class="tbi red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
+        <polyline points="16 17 21 12 16 7" />
+        <line x1="21" y1="12" x2="9" y2="12" />
+        </svg></button>
+        <div class="tb-av">AL</div>
+        </div>
+        </div>
+        </header>
       </div>
 
-      <p
-        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:40px;">
-        Sidebar Navigation</p>
-      <div class="code-box">
-        &lt;aside class="sidebar"&gt;
-        &lt;!-- Search Bar --&gt;
-        &lt;div class="sb-s"&gt;
-        &lt;svg&gt;...&lt;/svg&gt;
-        &lt;span&gt;Rechercher&lt;/span&gt;
-        &lt;/div&gt;
-
-        &lt;!-- Toggle Gestion/Reporting --&gt;
-        &lt;div class="sb-toggle"&gt;
-        &lt;div class="sbt-btn"&gt;Gestion&lt;/div&gt;
-        &lt;div class="sbt-btn"&gt;Reporting&lt;/div&gt;
-        &lt;/div&gt;
-
-        &lt;!-- Navigation Menu --&gt;
-        &lt;nav class="nav"&gt;
-        &lt;div class="ni act"&gt;
-        &lt;svg&gt;...&lt;/svg&gt;
-        Stats pré-formatées
-        &lt;/div&gt;
-        &lt;div class="ni"&gt;
-        &lt;svg&gt;...&lt;/svg&gt;
-        Autre page
-        &lt;/div&gt;
-        &lt;/nav&gt;
-        &lt;/aside&gt;
-      </div>
-
-      <p
-        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:40px;">
-        Tailles de Navigation</p>
       <table class="sizing-table">
         <thead>
           <tr>
-            <th>Élément</th>
-            <th>Taille</th>
-            <th>Notes</th>
+            <th>Zone</th>
+            <th>Classe</th>
+            <th>Traitement</th>
+            <th>Contenu</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>Topbar Logo</td>
-            <td class="var-value">30x30px</td>
-            <td>Carré arrondi, background accent</td>
+            <td>Barre</td>
+            <td class="var-name">.topbar</td>
+            <td class="var-value">56px · rgba(255,255,255,.7) · blur(7px)</td>
+            <td>Position absolue, <code>z-index: 100</code>, flotte au-dessus du contenu</td>
           </tr>
           <tr>
-            <td>Topbar Button</td>
-            <td class="var-value">36x36px</td>
-            <td>Circulaire, hover background</td>
+            <td>Bloc logo</td>
+            <td class="var-name">.tb-slot</td>
+            <td class="var-value">--sw 220px · #13041C</td>
+            <td>Logo 30px en <code>--a</code> + nom de l'application</td>
           </tr>
           <tr>
-            <td>Topbar Avatar</td>
-            <td class="var-value">30x30px</td>
-            <td>Circulaire, initiales</td>
+            <td>Corps</td>
+            <td class="var-name">.tb-body</td>
+            <td class="var-value">padding 0 32px · bordure basse --bd</td>
+            <td>Entité courante, puis sélecteur de compte à 32px</td>
           </tr>
           <tr>
-            <td>Nav Item Icon</td>
-            <td class="var-value">15x15px</td>
-            <td>Stroke 1.8, flex-shrink: 0</td>
+            <td>Sélecteur</td>
+            <td class="var-name">.tb-sel</td>
+            <td class="var-value">--ch 36px · min-width 160px</td>
+            <td>Chevron en data-URI, focus <code>--a</code> + anneau 2px</td>
           </tr>
           <tr>
-            <td>Nav Item Padding</td>
-            <td class="var-value">8px 14px</td>
-            <td>Vertical/Horizontal</td>
+            <td>Icônes</td>
+            <td class="var-name">.tbi</td>
+            <td class="var-value">36 × 36px · svg 18px</td>
+            <td>Poussées à droite par <code>.tb-ics { margin-left: auto }</code></td>
+          </tr>
+          <tr>
+            <td>Séparateur</td>
+            <td class="var-name">.tbsep</td>
+            <td class="var-value">1 × 20px · --bd</td>
+            <td>Sépare les icônes de service du menu applications</td>
+          </tr>
+          <tr>
+            <td>Avatar</td>
+            <td class="var-name">.tb-av</td>
+            <td class="var-value">30px · --a1 sur bordure --a2</td>
+            <td>Initiales, dernier élément de la barre</td>
           </tr>
         </tbody>
       </table>
+
+      <!-- ============ 2. MENU APPLICATIONS ============ -->
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
+        2 — Menu applications</p>
+
+      <div class="preview-box">
+        <div class="preview-label">Live Preview</div>
+        <div class="apps-drop oo" style="position:relative;top:0;">
+          <div class="apps-hd">Applications</div>
+          <div class="app-row">
+            <div class="app-ic" style="background:#7C3AED"><svg viewBox="0 0 20 20" fill="currentColor">
+                <path
+                  d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
+              </svg></div>
+            <div>
+              <div class="app-nm">OnlineFormapro</div>
+              <div class="app-sub">Plateforme de formation</div>
+            </div>
+          </div>
+          <div class="app-row">
+            <div class="app-ic" style="background:#0EA5E9"><svg viewBox="0 0 20 20" fill="currentColor">
+                <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
+              </svg></div>
+            <div>
+              <div class="app-nm">Reporting</div>
+              <div class="app-sub">Statistiques et exports</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ 3. MENU GAUCHE ============ -->
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
+        3 — Menu gauche</p>
+
+      <div class="nav-stage" style="height:520px;display:flex;">
+        <aside class="sidebar">
+        <div class="sb-s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+        stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8" />
+        <path d="m21 21-4.35-4.35" />
+        </svg><span>Rechercher</span><kbd>⌘K</kbd></div>
+        <div class="sb-toggle"
+        style="margin: 0 12px 10px; display:flex; background:rgba(255,255,255,0.05); border-radius:6px; padding:4px;">
+        <div class="sbt-btn on"
+        style="flex:1; text-align:center; padding:6px 0; font-size:12px; font-weight:600; color:#fff; background:rgba(255,255,255,0.1); cursor:pointer; border-radius:4px; transition:all 0.2s;">
+        Gestion</div>
+        <div class="sbt-btn"
+        style="flex:1; text-align:center; padding:6px 0; font-size:12px; font-weight:600; color:rgba(255,255,255,0.5); background:transparent; cursor:pointer; border-radius:4px; transition:all 0.2s;">
+        Reporting</div>
+        </div>
+        <nav class="nav">
+        <div class="ni-group">
+        <div class="ni">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+        stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3" />
+        <path d="M19.07 4.93a10 10 0 010 14.14M4.93 19.07a10 10 0 010-14.14M12 2v2M12 20v2M2 12h2M20 12h2" />
+        </svg>
+        Administration
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+        </div>
+        <div class="sub-nav">
+        <div class="ni-sub">Gérer le menu usager</div>
+        <div class="ni-sub">Mon compte</div>
+        <div class="ni-sub">Carte de visite</div>
+        </div>
+        </div>
+        <div class="ni">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+        stroke-linejoin="round">
+        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+        </svg>
+        Gestionnaires
+        </div>
+        <div class="ni act"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+        <circle cx="12" cy="7" r="4" />
+        </svg>Apprenants</div>
+        <div class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+        stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 11 12 14 22 4" />
+        <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
+        </svg>Évaluations</div>
+        <div class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+        <path d="M6 12v5c3 3 9 3 12 0v-5" />
+        </svg>Certifications</div>
+        <div class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" />
+        </svg>Parcours</div>
+        <div class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+        stroke-linecap="round" stroke-linejoin="round">
+        <line x1="8" y1="6" x2="21" y2="6" />
+        <line x1="8" y1="12" x2="21" y2="12" />
+        <line x1="8" y1="18" x2="21" y2="18" />
+        <line x1="3" y1="6" x2="3.01" y2="6" />
+        <line x1="3" y1="12" x2="3.01" y2="12" />
+        <line x1="3" y1="18" x2="3.01" y2="18" />
+        </svg>Enquêtes</div>
+        <div class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+        stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="23 7 16 12 23 17 23 7" />
+        <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
+        </svg>Visio</div>
+        </nav>
+        </aside>
+        <div style="flex:1;background:var(--bg);"></div>
+      </div>
+
+      <table class="sizing-table">
+        <thead>
+          <tr>
+            <th>Élément</th>
+            <th>Classe</th>
+            <th>Traitement</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Colonne</td>
+            <td class="var-name">.sidebar</td>
+            <td class="var-value">--sw 220px · #150625 · padding-top 56px</td>
+          </tr>
+          <tr>
+            <td>Recherche</td>
+            <td class="var-name">.sb-s</td>
+            <td class="var-value">blanc 5 % sur bordure blanc 10 % · raccourci en <code>kbd</code></td>
+          </tr>
+          <tr>
+            <td>Bascule</td>
+            <td class="var-name">.sb-toggle / .sbt-btn.on</td>
+            <td class="var-value">Gestion / Reporting · l'onglet actif passe à blanc 10 %</td>
+          </tr>
+          <tr>
+            <td>Entrée</td>
+            <td class="var-name">.ni</td>
+            <td class="var-value">13px · blanc 65 % · padding 8px 14px · marge 1px 8px</td>
+          </tr>
+          <tr>
+            <td>Survol</td>
+            <td class="var-name">.ni:hover</td>
+            <td class="var-value">fond blanc 10 %, texte blanc</td>
+          </tr>
+          <tr>
+            <td>Actif</td>
+            <td class="var-name">.ni.act</td>
+            <td class="var-value">fond <code>--a</code>, texte blanc, poids 500</td>
+          </tr>
+          <tr>
+            <td>Groupe</td>
+            <td class="var-name">.ni-group.open</td>
+            <td class="var-value">chevron à 180°, <code>.sub-nav</code> déplié</td>
+          </tr>
+          <tr>
+            <td>Sous-entrée</td>
+            <td class="var-name">.ni-sub</td>
+            <td class="var-value">retrait 42px · 13px · blanc 60 %</td>
+          </tr>
+          <tr>
+            <td>Bas de menu</td>
+            <td class="var-name">.nb</td>
+            <td class="var-value">filet haut blanc 8 %, padding 8px 0</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ============ 4. ASSEMBLE ============ -->
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
+        4 — Les deux assemblés</p>
+      <p class="section-desc" style="margin-bottom:24px;">Le <code>.tb-slot</code> et la <code>.sidebar</code> partagent
+        la même largeur et la même famille de fond : la colonne sombre est continue du haut de l'écran jusqu'en bas.</p>
+
+      <div class="nav-stage" style="height:460px;">
+        <header class="topbar">
+        <div class="tb-slot">
+        <div class="tb-logo"><svg viewBox="0 0 24 24">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" />
+        </svg></div>
+        <span class="tb-appn">OnlineManager</span>
+        </div>
+        <div class="tb-body">
+        <span class="tb-store">Onlineformapro</span>
+        <div class="tb-cw"><span class="tb-cl">Comptes :</span>
+        <select class="tb-sel">
+        <option>Sélectionnez un compte</option>
+        <option>INFREP</option>
+        <option>OCB Formation</option>
+        <option>Cap Petite Enfance</option>
+        </select>
+        </div>
+
+        <div class="tb-ics">
+        <button class="tbi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+        <polyline points="9 22 9 12 15 12 15 22" />
+        </svg></button>
+        <button class="tbi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8" />
+        <path d="m21 21-4.35-4.35" />
+        </svg></button>
+        <button class="tbi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+        stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <line x1="2" y1="12" x2="22" y2="12" />
+        <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
+        </svg></button>
+        <div class="tbsep"></div>
+        <div class="apps-wrap">
+        <button class="tbi">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+        <circle cx="5" cy="5" r="1.8" />
+        <circle cx="12" cy="5" r="1.8" />
+        <circle cx="19" cy="5" r="1.8" />
+        <circle cx="5" cy="12" r="1.8" />
+        <circle cx="12" cy="12" r="1.8" />
+        <circle cx="19" cy="12" r="1.8" />
+        <circle cx="5" cy="19" r="1.8" />
+        <circle cx="12" cy="19" r="1.8" />
+        <circle cx="19" cy="19" r="1.8" />
+        </svg>
+        </button>
+        <div class="apps-drop">
+        <div class="apps-hd">Applications</div>
+        <div class="app-row">
+        <div class="app-ic" style="background:#7C3AED"><svg viewBox="0 0 24 24">
+        <path
+        d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
+        </svg></div>
+        <div>
+        <div class="app-nm">OnlineAuteur</div>
+        <div class="app-sub">Création de contenus</div>
+        </div>
+        </div>
+        <div class="app-row">
+        <div class="app-ic" style="background:#059669"><svg viewBox="0 0 24 24">
+        <path
+        d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5zm15 8a2 2 0 012 2v4a2 2 0 01-2 2h-2l-3 3v-3H9a2 2 0 01-2-2v-1h1a3 3 0 003-3V9h8a2 2 0 012 2z" />
+        </svg></div>
+        <div>
+        <div class="app-nm">OnlineAgora</div>
+        <div class="app-sub">Espace collaboratif</div>
+        </div>
+        </div>
+        </div>
+        </div>
+        <button class="tbi red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
+        <polyline points="16 17 21 12 16 7" />
+        <line x1="21" y1="12" x2="9" y2="12" />
+        </svg></button>
+        <div class="tb-av">AL</div>
+        </div>
+        </div>
+        </header>
+        <div style="display:flex;height:100%;">
+          <aside class="sidebar">
+          <div class="sb-s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+          stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" />
+          </svg><span>Rechercher</span><kbd>⌘K</kbd></div>
+          <div class="sb-toggle"
+          style="margin: 0 12px 10px; display:flex; background:rgba(255,255,255,0.05); border-radius:6px; padding:4px;">
+          <div class="sbt-btn on"
+          style="flex:1; text-align:center; padding:6px 0; font-size:12px; font-weight:600; color:#fff; background:rgba(255,255,255,0.1); cursor:pointer; border-radius:4px; transition:all 0.2s;">
+          Gestion</div>
+          <div class="sbt-btn"
+          style="flex:1; text-align:center; padding:6px 0; font-size:12px; font-weight:600; color:rgba(255,255,255,0.5); background:transparent; cursor:pointer; border-radius:4px; transition:all 0.2s;">
+          Reporting</div>
+          </div>
+          <nav class="nav">
+          <div class="ni-group">
+          <div class="ni">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+          stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3" />
+          <path d="M19.07 4.93a10 10 0 010 14.14M4.93 19.07a10 10 0 010-14.14M12 2v2M12 20v2M2 12h2M20 12h2" />
+          </svg>
+          Administration
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+          </div>
+          <div class="sub-nav">
+          <div class="ni-sub">Gérer le menu usager</div>
+          <div class="ni-sub">Mon compte</div>
+          <div class="ni-sub">Carte de visite</div>
+          </div>
+          </div>
+          <div class="ni">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+          <circle cx="9" cy="7" r="4" />
+          <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+          </svg>
+          Gestionnaires
+          </div>
+          <div class="ni act"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+          <circle cx="12" cy="7" r="4" />
+          </svg>Apprenants</div>
+          <div class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+          stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 11 12 14 22 4" />
+          <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
+          </svg>Évaluations</div>
+          <div class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+          <path d="M6 12v5c3 3 9 3 12 0v-5" />
+          </svg>Certifications</div>
+          <div class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" />
+          </svg>Parcours</div>
+          <div class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="8" y1="6" x2="21" y2="6" />
+          <line x1="8" y1="12" x2="21" y2="12" />
+          <line x1="8" y1="18" x2="21" y2="18" />
+          <line x1="3" y1="6" x2="3.01" y2="6" />
+          <line x1="3" y1="12" x2="3.01" y2="12" />
+          <line x1="3" y1="18" x2="3.01" y2="18" />
+          </svg>Enquêtes</div>
+          <div class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+          stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="23 7 16 12 23 17 23 7" />
+          <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
+          </svg>Visio</div>
+          </nav>
+          </aside>
+          <div style="flex:1;background:var(--bg);padding:80px 32px 0;">
+            <div style="font-family:Geist;font-size:22px;font-weight:600;letter-spacing:-.01em;color:var(--t1);">
+              Apprenants</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        &lt;header class="topbar"&gt;<br>
+        &nbsp;&nbsp;&lt;div class="tb-slot"&gt;logo + nom de l'application&lt;/div&gt;<br>
+        &nbsp;&nbsp;&lt;div class="tb-body"&gt;entité, sélecteur, &lt;div class="tb-ics"&gt;icônes&lt;/div&gt;&lt;/div&gt;<br>
+        &lt;/header&gt;<br><br>
+        &lt;aside class="sidebar"&gt;<br>
+        &nbsp;&nbsp;&lt;div class="sb-s"&gt;recherche&lt;/div&gt;<br>
+        &nbsp;&nbsp;&lt;div class="sb-toggle"&gt;Gestion / Reporting&lt;/div&gt;<br>
+        &nbsp;&nbsp;&lt;nav class="nav"&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="ni-group"&gt;&lt;div class="ni"&gt;…&lt;/div&gt;&lt;div class="sub-nav"&gt;…&lt;/div&gt;&lt;/div&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="ni act"&gt;&lt;svg&gt;…&lt;/svg&gt;Apprenants&lt;/div&gt;<br>
+        &nbsp;&nbsp;&lt;/nav&gt;<br>
+        &lt;/aside&gt;
+      </div>
     </section>
 
     <!-- MODALS -->
