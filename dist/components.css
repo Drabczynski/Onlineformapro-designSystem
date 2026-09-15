@@ -1587,6 +1587,8 @@
   flex: 1;
 }
 
+/* L'entree peut etre un <a> quand la page existe : meme rendu, la
+   navigation en plus. */
 .ni {
   display: flex;
   align-items: center;
@@ -1596,6 +1598,7 @@
   border-radius: 4px;
   font-size: 13px;
   color: rgba(255, 255, 255, 0.65);
+  text-decoration: none;
   cursor: pointer;
   transition: background .1s, color .1s;
 }
@@ -1643,10 +1646,12 @@
 }
 
 .ni-sub {
+  display: block;
   font-size: 13px;
   color: rgba(255, 255, 255, 0.6);
   padding: 6px 12px;
   border-radius: 6px;
+  text-decoration: none;
   cursor: pointer;
   transition: all 0.15s;
 }
