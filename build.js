@@ -92,9 +92,17 @@ function dedent(block) {
 
 const HEADER = (what) => `/* OnlineManager — ${what}\n   Version ${VERSION} — sortie le ${RELEASED}\n   Généré par build.js depuis index.html. Ne pas modifier à la main. */\n\n`;
 
-const componentsOut = HEADER('composants') +
+let componentsOut = HEADER('composants') +
   tokensCss.map(dedent).join('\n\n') + '\n\n' +
   componentsCss.map(dedent).join('\n\n') + '\n';
+
+// ---------------------------------------------------------------- image de fond
+// Le menu porte la vague de l'application. On l'embarque en base64 pour que
+// dist/ reste autoportant : deux fichiers a livrer, pas trois.
+const WAVE = 'bg-menu.jpg';
+if (!componentsOut.includes(`url("${WAVE}")`)) throw new Error(`url("${WAVE}") introuvable dans le CSS`);
+const wave = fs.readFileSync(path.join(ROOT, WAVE)).toString('base64');
+componentsOut = componentsOut.replace(`url("${WAVE}")`, `url("data:image/jpeg;base64,${wave}")`);
 
 // ---------------------------------------------------------------- JS
 const script = html.slice(html.lastIndexOf('<script>') + 8, html.lastIndexOf('</script>'));
