@@ -815,40 +815,42 @@
       border: 1px solid rgba(255, 255, 255, 0.8);
       border-radius: 12px;
       padding: 20px;
-      backdrop-filter: blur(10px);
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
 
     .fs-header {
       display: flex;
-      gap: 12px;
-      margin-bottom: 18px;
       align-items: center;
+      gap: 12px;
     }
 
     .fs-icon {
       width: 28px;
       height: 28px;
-      background: #fff;
-      border-radius: 8px;
+      border-radius: 6px;
+      background: #E0F8EF;
+      color: #10B981;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-      color: var(--a);
+      flex-shrink: 0;
     }
 
     .fs-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--t1);
+      font-size: 16px;
+      font-weight: 800;
+      color: #0F172A;
     }
 
     .fs-card {
-      background: #fff;
-      border-radius: 10px;
-      padding: 16px;
-      border: 1px solid rgba(0, 0, 0, 0.03);
+      background: #ffffff;
+      border: 1px solid var(--bd);
+      border-radius: 8px;
+      padding: 24px 32px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
     }
 
     .pcard {
@@ -906,14 +908,12 @@
     .form-field label {
       font-size: 12.5px;
       font-weight: 700;
-      color: var(--t2);
+      color: #64748B;
+      text-align: left;
     }
 
-    /* Marqueur de champ obligatoire */
-    .req {
-      color: var(--a);
-      margin-left: 3px;
-    }
+    /* Marqueur de champ obligatoire : aucun style dans la page source —
+       il est collé au label et en reprend la couleur. */
 
     .form-input {
       width: 100%;
@@ -921,33 +921,51 @@
       padding: 0 12px;
       font-size: 13.5px;
       font-family: inherit;
-      border: 1px solid var(--bd);
-      border-radius: var(--r);
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
       background: #fff;
-      color: var(--t1);
+      color: #0F172A;
       outline: none;
-      transition: border-color 0.15s, box-shadow 0.15s;
+      transition: all 0.15s;
     }
 
     .form-input::placeholder {
       color: var(--t3);
     }
 
-    .form-input:hover:not(:focus):not(:disabled) {
-      border-color: #D6DAE1;
-    }
-
     .form-input:focus {
-      border-color: var(--s);
-      box-shadow: 0 0 0 3px var(--s1);
+      border-color: #3B82F6;
+      box-shadow: 0 0 0 3px #EFF6FF;
     }
 
-    /* Select natif : le chevron est un data-URI, pas une icone posee par-dessus */
+    /* Lecture seule : la valeur compte, la saisie non */
+    .form-input.ro {
+      border-color: #E2E8F0;
+      color: #0F172A;
+      font-weight: 500;
+      cursor: text;
+    }
+
+    /* Select natif : regle autonome, chevron en data-URI */
     .form-select {
+      width: 100%;
+      height: 38px;
+      padding: 0 32px 0 12px;
+      font-size: 13.5px;
+      font-family: inherit;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%230F172A'/%3E%3C/svg%3E") no-repeat right 12px center;
       appearance: none;
-      padding-right: 32px;
-      cursor: pointer;
-      background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239CA3AF'/%3E%3C/svg%3E") no-repeat right 12px center;
+      color: #0F172A;
+      cursor: default;
+      outline: none;
+    }
+
+    .form-select:disabled {
+      background-color: #fff;
+      color: #0F172A;
+      font-weight: 500;
     }
 
     /* Zone de texte */
@@ -959,18 +977,7 @@
       resize: vertical;
     }
 
-    /* Lecture seule : la valeur compte, pas la saisie */
-    .form-input[readonly] {
-      background: var(--ps);
-      border-color: var(--bd);
-      color: var(--t1);
-      cursor: default;
-    }
-
-    .form-input[readonly]:focus {
-      border-color: var(--bd);
-      box-shadow: none;
-    }
+    /* Erreur : ajout du systeme, absent de la page source */
 
     /* Desactive */
     .form-input:disabled {
@@ -1036,8 +1043,8 @@
     .form-body {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      align-items: start;
+      gap: 32px;
+      background: transparent;
     }
 
     .form-body>.col {
@@ -3506,7 +3513,7 @@
           </div>
           <div class="form-field">
             <label>Sélecteur</label>
-            <select class="form-input form-select">
+            <select class="form-select">
               <option>France</option>
               <option>Suisse</option>
               <option>Belgique</option>
@@ -3519,7 +3526,7 @@
           </div>
           <div class="form-field">
             <label>Lecture seule</label>
-            <input type="text" class="form-input" value="43 7000 41070" readonly>
+            <input type="text" class="form-input ro" value="43 7000 41070" readonly>
             <span class="form-hint">Attribué par la DREETS</span>
           </div>
           <div class="form-field">
@@ -3613,7 +3620,7 @@
             <div class="form-field"><label>Forme juridique</label><input type="text" class="form-input" value="SA">
             </div>
             <div class="form-field"><label>Capital</label><input type="text" class="form-input" value="1 100 000"></div>
-            <div class="form-field"><label>Devise</label><select class="form-input form-select">
+            <div class="form-field"><label>Devise</label><select class="form-select">
                 <option>EUR (€)</option>
                 <option>USD ($)</option>
               </select></div>
@@ -3674,7 +3681,7 @@
         <div class="preview-label">Live Preview</div>
         <div class="fs-block" style="max-width:700px;">
           <div class="fs-header">
-            <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
             <div class="fs-title">Informations générales</div>
           </div>
           <div class="fs-card">
@@ -3736,7 +3743,7 @@
         <div class="preview-label">Ligne compacte — un réglage parmi d'autres</div>
         <div class="fs-block" style="max-width:700px;">
           <div class="fs-header">
-            <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+            <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
             <div class="fs-title">Logo de l'entité</div>
           </div>
           <div class="fs-card">
@@ -3880,7 +3887,7 @@
           <div class="col">
             <div class="fs-block">
               <div class="fs-header">
-                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
                 <div class="fs-title">Informations générales</div>
               </div>
               <div class="fs-card">
@@ -3898,7 +3905,7 @@
             </div>
             <div class="fs-block">
               <div class="fs-header">
-                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
                 <div class="fs-title">Logo de l'entité</div>
               </div>
               <div class="fs-card">
@@ -3919,21 +3926,21 @@
           <div class="col">
             <div class="fs-block">
               <div class="fs-header">
-                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
                 <div class="fs-title">Références légales</div>
               </div>
               <div class="fs-card">
                 <div class="form-grid">
                   <div class="form-field"><label>Forme juridique</label><input type="text" class="form-input"
                       value="SA"></div>
-                  <div class="form-field"><label>Devise</label><select class="form-input form-select">
+                  <div class="form-field"><label>Devise</label><select class="form-select">
                       <option>EUR (€)</option>
                     </select></div>
                 </div>
                 <div class="form-grid">
                   <div class="form-field"><label>CODE APE (NAF)</label><input type="text" class="form-input"
                       value="8559A"></div>
-                  <div class="form-field"><label>N° SIRET</label><input type="text" class="form-input"
+                  <div class="form-field"><label>N° SIRET</label><input type="text" class="form-input ro"
                       value="42478033600014" readonly></div>
                 </div>
               </div>
