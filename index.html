@@ -906,7 +906,13 @@
     .form-field label {
       font-size: 12.5px;
       font-weight: 700;
-      color: #64748B;
+      color: var(--t2);
+    }
+
+    /* Marqueur de champ obligatoire */
+    .req {
+      color: var(--a);
+      margin-left: 3px;
     }
 
     .form-input {
@@ -915,15 +921,236 @@
       padding: 0 12px;
       font-size: 13.5px;
       font-family: inherit;
-      border: 1px solid #E2E8F0;
-      border-radius: 8px;
+      border: 1px solid var(--bd);
+      border-radius: var(--r);
+      background: #fff;
+      color: var(--t1);
       outline: none;
-      transition: all 0.15s;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .form-input::placeholder {
+      color: var(--t3);
+    }
+
+    .form-input:hover:not(:focus):not(:disabled) {
+      border-color: #D6DAE1;
     }
 
     .form-input:focus {
       border-color: var(--s);
       box-shadow: 0 0 0 3px var(--s1);
+    }
+
+    /* Select natif : le chevron est un data-URI, pas une icone posee par-dessus */
+    .form-select {
+      appearance: none;
+      padding-right: 32px;
+      cursor: pointer;
+      background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239CA3AF'/%3E%3C/svg%3E") no-repeat right 12px center;
+    }
+
+    /* Zone de texte */
+    textarea.form-input {
+      height: auto;
+      min-height: 88px;
+      padding: 10px 12px;
+      line-height: 1.55;
+      resize: vertical;
+    }
+
+    /* Lecture seule : la valeur compte, pas la saisie */
+    .form-input[readonly] {
+      background: var(--ps);
+      border-color: var(--bd);
+      color: var(--t1);
+      cursor: default;
+    }
+
+    .form-input[readonly]:focus {
+      border-color: var(--bd);
+      box-shadow: none;
+    }
+
+    /* Desactive */
+    .form-input:disabled {
+      background: var(--bg);
+      border-color: var(--bd);
+      color: var(--t3);
+      cursor: not-allowed;
+    }
+
+    /* Erreur */
+    .form-input.has-error {
+      border-color: var(--d);
+    }
+
+    .form-input.has-error:focus {
+      border-color: var(--d);
+      box-shadow: 0 0 0 3px var(--d1);
+    }
+
+    /* Textes sous le champ */
+    .form-hint {
+      font-size: 12px;
+      color: var(--t3);
+      line-height: 1.5;
+    }
+
+    .form-error {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      color: var(--d);
+      font-weight: 500;
+    }
+
+    .form-error svg {
+      width: 13px;
+      height: 13px;
+      stroke-width: 2;
+      flex-shrink: 0;
+    }
+
+    /* --- Grille de champs --- */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px 24px;
+    }
+
+    .form-grid.col-full {
+      grid-template-columns: 1fr;
+    }
+
+    .form-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .form-grid+.form-grid {
+      margin-top: 18px;
+    }
+
+    /* --- Layout d'une page de reglages : deux colonnes de sections --- */
+    .form-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .form-body>.col {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      min-width: 0;
+    }
+
+    .form-body>.full {
+      grid-column: 1 / -1;
+    }
+
+    /* --- Import de fichier : ligne compacte --- */
+    .upload-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .upload-side {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      min-width: 0;
+    }
+
+    .upload-ic {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--r);
+      background: var(--ps);
+      border: 1px dashed var(--bd);
+      color: var(--t3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .upload-ic svg {
+      width: 22px;
+      height: 22px;
+      stroke-width: 1.8;
+    }
+
+    .upload-name {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--t1);
+    }
+
+    .upload-sub {
+      font-size: 12px;
+      color: var(--t3);
+      line-height: 1.5;
+      margin-top: 2px;
+    }
+
+    /* --- Import de fichier : zone large --- */
+    .upload-zone {
+      width: 220px;
+      height: 120px;
+      border-radius: var(--rl);
+      background: var(--ps);
+      border: 2px dashed var(--bd);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-shrink: 0;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .upload-zone:hover {
+      border-color: var(--a);
+      background: var(--a1);
+    }
+
+    .upload-zone svg {
+      width: 28px;
+      height: 28px;
+      color: var(--a);
+      stroke-width: 1.8;
+    }
+
+    .upload-zone span {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--a);
+    }
+
+    /* --- Case a cocher en ligne --- */
+    .form-check-inline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12.5px;
+      color: var(--t2);
+      cursor: pointer;
+    }
+
+    .form-check-inline input[type=checkbox] {
+      width: 15px;
+      height: 15px;
+      accent-color: var(--a);
+      cursor: pointer;
+      margin: 0;
+      flex-shrink: 0;
     }
 
     /* Icons */
@@ -3198,60 +3425,576 @@
     <!-- FORMS -->
     <section id="forms">
       <h2 class="section-title">Formulaires</h2>
-      <p class="section-desc">Entrées de texte et sélecteurs épurés avec des états de focus marqués pour
-        l'accessibilité.</p>
+      <p class="section-desc">Les formulaires du produit ne sont pas des suites de champs : ce sont des pages de
+        réglages longues, découpées en sections, sur deux colonnes. Les motifs ci-dessous sont extraits de la page
+        <b>Paramètres → Carte de visite</b>, la plus dense du produit, et portés sur les tokens du système.</p>
+
+      <!-- ============ 1. ANATOMIE ============ -->
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;">
+        1 — Anatomie d'un champ</p>
 
       <div class="preview-box">
         <div class="preview-label">Live Preview</div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px;">
+        <div class="form-grid" style="max-width:640px;">
           <div class="form-field">
-            <label>Nom de l'utilisateur</label>
-            <input type="text" class="form-input" placeholder="ex: Jean Dupont">
+            <label>Raison sociale<span class="req">*</span></label>
+            <input type="text" class="form-input" value="ONLINEFORMAPRO">
           </div>
           <div class="form-field">
-            <label>Plateforme de rattachement</label>
-            <select class="form-input"
-              style="background: #fff url('data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'10\' height=\'6\'%3E%3Cpath d=\'M0 0l5 6 5-6\' fill=\'%230F172A\'/%3E%3C/svg%3E') no-repeat right 12px center; appearance: none;">
-              <option>OnlineManager</option>
-              <option>Plateforme Externe</option>
-            </select>
+            <label>N° SIRET</label>
+            <input type="text" class="form-input" value="42478033600014">
+            <span class="form-hint">14 chiffres, sans espaces</span>
           </div>
         </div>
+      </div>
 
-        <div style="display: flex; flex-direction: column; gap: 40px; border-top: 1px solid var(--bd); padding-top: 32px;">
-          <!-- Custom Radio Cards (Demande de formation) -->
-          <div>
-            <p style="font-size:11px; font-weight:700; text-transform:uppercase; color:#94A3B8; margin-bottom:16px; letter-spacing: 0.05em;">
-              Demande de formation</p>
-            <div style="display: flex; flex-direction: column; gap: 10px; max-width: 650px;">
-              <label class="form-card-check active">
-                <input type="radio" name="demande" checked onchange="toggleCard(this)">
-                <div class="check-circle"></div>
-                <div class="check-label">Validation requise par un administrateur des demandes apprenant</div>
-              </label>
-              <label class="form-card-check">
-                <input type="radio" name="demande" onchange="toggleCard(this)">
-                <div class="check-circle"></div>
-                <div class="check-label">Validation automatique des demandes apprenant</div>
-              </label>
+      <table class="sizing-table">
+        <thead>
+          <tr>
+            <th>Élément</th>
+            <th>Traitement</th>
+            <th>Règle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Label</td>
+            <td class="var-value">12.5px · 700 · --t2</td>
+            <td>Toujours au-dessus, jamais à l'intérieur : un placeholder qui sert de label disparaît à la saisie</td>
+          </tr>
+          <tr>
+            <td>Obligatoire</td>
+            <td class="var-name">&lt;span class="req"&gt;*&lt;/span&gt;</td>
+            <td>Astérisque violet collé au label. Quand une majorité de champs est obligatoire, marquer plutôt les
+              champs facultatifs — moins de bruit</td>
+          </tr>
+          <tr>
+            <td>Champ</td>
+            <td class="var-value">38px · --r · bordure --bd</td>
+            <td>Plus haut que les boutons sm (30px) : la cible de saisie doit être confortable</td>
+          </tr>
+          <tr>
+            <td>Aide</td>
+            <td class="var-name">.form-hint</td>
+            <td>Sous le champ, 12px --t3. Pour le format attendu, jamais pour répéter le label</td>
+          </tr>
+          <tr>
+            <td>Erreur</td>
+            <td class="var-name">.form-error</td>
+            <td>Remplace l'aide, avec l'icône. Dit quoi corriger, pas seulement qu'il y a une erreur</td>
+          </tr>
+          <tr>
+            <td>Espacement</td>
+            <td class="var-value">gap 8px</td>
+            <td>Entre le label et le champ, et entre le champ et son aide</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ============ 2. CONTROLES & ETATS ============ -->
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
+        2 — Contrôles &amp; états</p>
+
+      <div class="preview-box">
+        <div class="preview-label">Live Preview</div>
+        <div class="form-grid cols-3">
+          <div class="form-field">
+            <label>Texte</label>
+            <input type="text" class="form-input" placeholder="ex : Jean Dupont">
+          </div>
+          <div class="form-field">
+            <label>Sélecteur</label>
+            <select class="form-input form-select">
+              <option>France</option>
+              <option>Suisse</option>
+              <option>Belgique</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label>Focus</label>
+            <input type="text" class="form-input" value="En saisie"
+              style="border-color:var(--s);box-shadow:0 0 0 3px var(--s1);">
+          </div>
+          <div class="form-field">
+            <label>Lecture seule</label>
+            <input type="text" class="form-input" value="43 7000 41070" readonly>
+            <span class="form-hint">Attribué par la DREETS</span>
+          </div>
+          <div class="form-field">
+            <label>Désactivé</label>
+            <input type="text" class="form-input" value="Non applicable" disabled>
+          </div>
+          <div class="form-field">
+            <label>Erreur<span class="req">*</span></label>
+            <input type="text" class="form-input has-error" value="700">
+            <span class="form-error"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Le code postal doit compter 5 chiffres</span>
+          </div>
+        </div>
+        <div class="form-grid col-full" style="margin-top:4px;">
+          <div class="form-field">
+            <label>Zone de texte</label>
+            <textarea class="form-input" placeholder="Commentaire interne, visible par les administrateurs"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <table class="sizing-table">
+        <thead>
+          <tr>
+            <th>État</th>
+            <th>Sélecteur</th>
+            <th>Traitement</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Repos</td>
+            <td class="var-name">.form-input</td>
+            <td>Fond blanc, bordure --bd</td>
+          </tr>
+          <tr>
+            <td>Survol</td>
+            <td class="var-name">:hover</td>
+            <td>Bordure #D6DAE1 — signale la cible avant le clic</td>
+          </tr>
+          <tr>
+            <td>Focus</td>
+            <td class="var-name">:focus</td>
+            <td>Bordure --s + anneau 3px --s1 : le bleu secondaire, comme les boutons</td>
+          </tr>
+          <tr>
+            <td>Lecture seule</td>
+            <td class="var-name">[readonly]</td>
+            <td>Fond --ps, texte --t1 conservé — la valeur reste lisible et sélectionnable</td>
+          </tr>
+          <tr>
+            <td>Désactivé</td>
+            <td class="var-name">:disabled</td>
+            <td>Fond --bg, texte --t3 — même traitement que les boutons désactivés</td>
+          </tr>
+          <tr>
+            <td>Erreur</td>
+            <td class="var-name">.has-error</td>
+            <td>Bordure et anneau --d, message sous le champ</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="section-desc" style="margin:20px 0 0;font-size:14px;">
+        <b>Lecture seule n'est pas désactivé.</b> Un champ en lecture seule contient une valeur qui compte — un numéro
+        d'agrément, un SIRET — que l'on veut pouvoir lire et copier : il garde le texte en <code>--t1</code>. Un champ
+        désactivé ne s'applique pas au contexte : il s'efface en <code>--t3</code>.
+      </p>
+
+      <!-- ============ 3. LA GRILLE ============ -->
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
+        3 — La grille de champs</p>
+      <p class="section-desc" style="margin-bottom:24px;">Les champs se posent dans une <code>.form-grid</code> dont on
+        change le nombre de colonnes selon la <b>longueur attendue de la valeur</b>, pas selon la place disponible. Un
+        code postal sur toute la largeur est aussi faux qu'une adresse sur un tiers.</p>
+
+      <div class="preview-box">
+        <div class="preview-label">Live Preview</div>
+        <div class="fs-card" style="max-width:700px;">
+          <div class="form-grid col-full">
+            <div class="form-field"><label>Adresse<span class="req">*</span></label><input type="text"
+                class="form-input" value="Espace de la Motte"></div>
+          </div>
+          <div class="form-grid">
+            <div class="form-field"><label>Code postal<span class="req">*</span></label><input type="text"
+                class="form-input" value="70000"></div>
+            <div class="form-field"><label>Ville<span class="req">*</span></label><input type="text" class="form-input"
+                value="VESOUL"></div>
+          </div>
+          <div class="form-grid cols-3">
+            <div class="form-field"><label>Forme juridique</label><input type="text" class="form-input" value="SA">
+            </div>
+            <div class="form-field"><label>Capital</label><input type="text" class="form-input" value="1 100 000"></div>
+            <div class="form-field"><label>Devise</label><select class="form-input form-select">
+                <option>EUR (€)</option>
+                <option>USD ($)</option>
+              </select></div>
+          </div>
+        </div>
+      </div>
+
+      <table class="sizing-table">
+        <thead>
+          <tr>
+            <th>Classe</th>
+            <th>Colonnes</th>
+            <th>Pour quelles valeurs</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="var-name">.form-grid.col-full</td>
+            <td class="var-value">1</td>
+            <td>Adresse, raison sociale, intitulé, zone de texte</td>
+          </tr>
+          <tr>
+            <td class="var-name">.form-grid</td>
+            <td class="var-value">2 (défaut)</td>
+            <td>Le cas courant : nom/prénom, téléphone/fax, e-mail/site</td>
+          </tr>
+          <tr>
+            <td class="var-name">.form-grid.cols-3</td>
+            <td class="var-value">3</td>
+            <td>Valeurs courtes et de même nature : code APE, capital, devise</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="code-box">
+        &lt;div class="form-grid col-full"&gt;<br>
+        &nbsp;&nbsp;&lt;div class="form-field"&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;label&gt;Adresse&lt;span class="req"&gt;*&lt;/span&gt;&lt;/label&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="text" class="form-input"&gt;<br>
+        &nbsp;&nbsp;&lt;/div&gt;<br>
+        &lt;/div&gt;<br>
+        &lt;div class="form-grid"&gt;&lt;!-- 2 colonnes --&gt;<br>
+        &nbsp;&nbsp;&lt;div class="form-field"&gt;…&lt;/div&gt;<br>
+        &nbsp;&nbsp;&lt;div class="form-field"&gt;…&lt;/div&gt;<br>
+        &lt;/div&gt;
+      </div>
+
+      <!-- ============ 4. GROUPEMENT EN SECTIONS ============ -->
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
+        4 — Groupement en sections</p>
+      <p class="section-desc" style="margin-bottom:24px;">Au-delà de six ou sept champs, une liste devient illisible.
+        Les champs se regroupent alors en <code>.fs-block</code> — un en-tête à icône, puis une
+        <code>.fs-card</code> blanche qui contient les grilles. L'icône n'est pas décorative : elle donne un repère
+        visuel pour retrouver la section en faisant défiler une page longue.</p>
+
+      <div class="preview-box">
+        <div class="preview-label">Live Preview</div>
+        <div class="fs-block" style="max-width:700px;">
+          <div class="fs-header">
+            <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div class="fs-title">Informations générales</div>
+          </div>
+          <div class="fs-card">
+            <div class="form-grid col-full">
+              <div class="form-field"><label>Raison sociale<span class="req">*</span></label><input type="text"
+                  class="form-input" value="ONLINEFORMAPRO"></div>
+            </div>
+            <div class="form-grid">
+              <div class="form-field"><label>Nom du responsable<span class="req">*</span></label><input type="text"
+                  class="form-input" value="GUERRIN"></div>
+              <div class="form-field"><label>Prénom du responsable<span class="req">*</span></label><input type="text"
+                  class="form-input" value="Michèle"></div>
+            </div>
+            <div class="form-grid col-full">
+              <div class="form-field"><label>Fonction du responsable<span class="req">*</span></label><input
+                  type="text" class="form-input" value="PDG"></div>
+            </div>
+            <div class="form-grid">
+              <div class="form-field"><label>Téléphone</label><input type="text" class="form-input"
+                  value="03 84 76 52 44"></div>
+              <div class="form-field"><label>E-mail</label><input type="email" class="form-input"
+                  value="projet@onlineformapro.com"></div>
             </div>
           </div>
+        </div>
+      </div>
 
-          <!-- Toggles (Tutorat) -->
-          <div>
-            <p style="font-size:11px; font-weight:700; text-transform:uppercase; color:#94A3B8; margin-bottom:16px; letter-spacing: 0.05em;">
-              Tutorat</p>
-            <div style="display: flex; align-items: center; justify-content: space-between; max-width: 650px; padding: 4px 0;">
-              <div>
-                <div style="font-size: 15px; font-weight: 600; color: var(--t1);">Activer le tutorat Onlineformapro</div>
-                <div style="font-size: 13.5px; color: #64748B;">Associer des tuteurs aux apprenants pour un suivi personnalisé</div>
+      <div class="code-box">
+        &lt;div class="fs-block"&gt;<br>
+        &nbsp;&nbsp;&lt;div class="fs-header"&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="fs-icon"&gt;&lt;svg&gt;…&lt;/svg&gt;&lt;/div&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="fs-title"&gt;Informations générales&lt;/div&gt;<br>
+        &nbsp;&nbsp;&lt;/div&gt;<br>
+        &nbsp;&nbsp;&lt;div class="fs-card"&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="form-grid col-full"&gt;…&lt;/div&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="form-grid"&gt;…&lt;/div&gt;<br>
+        &nbsp;&nbsp;&lt;/div&gt;<br>
+        &lt;/div&gt;
+      </div>
+
+      <!-- ============ 5. IMPORT DE FICHIER ============ -->
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
+        5 — Import de fichier</p>
+      <p class="section-desc" style="margin-bottom:24px;">Deux formats selon l'enjeu. La <b>zone large</b> quand
+        l'import est l'action principale du bloc — poser un logo sur une fiche vide. La <b>ligne compacte</b> quand
+        c'est un réglage parmi d'autres. Dans les deux cas, les contraintes (poids, formats) sont écrites
+        <b>avant</b> la sélection, pas dans un message d'erreur après.</p>
+
+      <div class="preview-box">
+        <div class="preview-label">Zone large — l'import est l'action principale</div>
+        <div class="upload-zone">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span>Définir le logo</span>
+        </div>
+      </div>
+
+      <div class="preview-box">
+        <div class="preview-label">Ligne compacte — un réglage parmi d'autres</div>
+        <div class="fs-block" style="max-width:700px;">
+          <div class="fs-header">
+            <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+            <div class="fs-title">Logo de l'entité</div>
+          </div>
+          <div class="fs-card">
+            <div class="upload-row">
+              <div class="upload-side">
+                <div class="upload-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+                <div>
+                  <div class="upload-name">Importez le logo</div>
+                  <div class="upload-sub">Poids maximum 20 Mo · Formats : .png, .jpg, .svg</div>
+                  <label class="form-check-inline" style="margin-top:8px;">
+                    <input type="checkbox"> Appliquer à toutes les entités
+                  </label>
+                </div>
               </div>
-              <label class="form-switch">
-                <input type="checkbox" checked>
-                <span class="slider"></span>
-              </label>
+              <button class="btn secondary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>Importer</button>
             </div>
           </div>
+        </div>
+        <div class="fs-block" style="max-width:700px;">
+          <div class="fs-header">
+            <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+            <div class="fs-title">Signature visuelle</div>
+          </div>
+          <div class="fs-card">
+            <div class="upload-row">
+              <div class="upload-side">
+                <div class="upload-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+                <div>
+                  <div class="upload-name">Importez la signature</div>
+                  <div class="upload-sub">Poids maximum 20 Mo · Sera apposée sur les documents officiels</div>
+                </div>
+              </div>
+              <button class="btn secondary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>Importer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ 6. CHOIX ============ -->
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
+        6 — Choix &amp; bascules</p>
+
+      <div class="preview-box">
+        <div class="preview-label">Cartes de choix — options exclusives à expliquer</div>
+        <div style="display: flex; flex-direction: column; gap: 10px; max-width: 650px;">
+          <label class="form-card-check active">
+            <input type="radio" name="demande" checked onchange="toggleCard(this)">
+            <div class="check-circle"></div>
+            <div class="check-label">Validation requise par un administrateur des demandes apprenant</div>
+          </label>
+          <label class="form-card-check">
+            <input type="radio" name="demande" onchange="toggleCard(this)">
+            <div class="check-circle"></div>
+            <div class="check-label">Validation automatique des demandes apprenant</div>
+          </label>
+        </div>
+      </div>
+
+      <div class="preview-box">
+        <div class="preview-label">Bascule — un réglage qui s'applique immédiatement</div>
+        <div
+          style="display: flex; align-items: center; justify-content: space-between; max-width: 650px; padding: 4px 0;">
+          <div>
+            <div style="font-size: 15px; font-weight: 600; color: var(--t1);">Activer le tutorat Onlineformapro</div>
+            <div style="font-size: 13.5px; color: var(--t2);">Associer des tuteurs aux apprenants pour un suivi
+              personnalisé</div>
+          </div>
+          <label class="form-switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div style="border-top:1px solid var(--bd); padding-top:18px;">
+          <label class="form-check-inline">
+            <input type="checkbox" checked> Envoyer une notification aux apprenants concernés
+          </label>
+        </div>
+      </div>
+
+      <table class="sizing-table">
+        <thead>
+          <tr>
+            <th>Contrôle</th>
+            <th>Classe</th>
+            <th>Quand l'utiliser</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Carte de choix</td>
+            <td class="var-name">.form-card-check</td>
+            <td>2 à 4 options exclusives dont chacune demande une phrase d'explication</td>
+          </tr>
+          <tr>
+            <td>Sélecteur</td>
+            <td class="var-name">.form-select</td>
+            <td>Au-delà de 5 options, ou quand les libellés se passent d'explication</td>
+          </tr>
+          <tr>
+            <td>Bascule</td>
+            <td class="var-name">.form-switch</td>
+            <td>Un réglage binaire qui prend effet <b>immédiatement</b>, sans enregistrer</td>
+          </tr>
+          <tr>
+            <td>Case à cocher</td>
+            <td class="var-name">.form-check-inline</td>
+            <td>Une option secondaire qui n'est appliquée qu'à l'enregistrement du formulaire</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ============ 7. LAYOUT DE PAGE ============ -->
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
+        7 — Layout d'une page de réglages</p>
+      <p class="section-desc" style="margin-bottom:24px;">Le squelette de la page Carte de visite : un bandeau
+        d'identité sur toute la largeur, puis deux colonnes de sections. Les sections ne sont pas réparties par
+        équilibre visuel mais par <b>fréquence de modification</b> — ce qui change souvent à gauche, ce qui ne bouge
+        presque jamais (références légales, signature) à droite.</p>
+
+      <div class="preview-box" style="background:var(--bg);">
+        <div class="preview-label">Live Preview</div>
+        <div class="form-body">
+          <div class="full">
+            <div class="pcard" style="display:flex; align-items:center; gap:28px; margin-bottom:0;">
+              <div class="upload-zone" style="width:170px;height:96px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <span>Définir le logo</span>
+              </div>
+              <div style="flex:1; min-width:0;">
+                <div style="font-size:22px;font-weight:600;color:var(--t1);margin-bottom:10px;">ONLINEFORMAPRO</div>
+                <div class="pbadges">
+                  <span class="pbadge green">Siège social</span>
+                  <span class="pbadge" style="background:var(--a1);color:var(--a-p);">SA</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="fs-block">
+              <div class="fs-header">
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+                <div class="fs-title">Informations générales</div>
+              </div>
+              <div class="fs-card">
+                <div class="form-grid col-full">
+                  <div class="form-field"><label>Raison sociale<span class="req">*</span></label><input type="text"
+                      class="form-input" value="ONLINEFORMAPRO"></div>
+                </div>
+                <div class="form-grid">
+                  <div class="form-field"><label>Code postal<span class="req">*</span></label><input type="text"
+                      class="form-input" value="70000"></div>
+                  <div class="form-field"><label>Ville<span class="req">*</span></label><input type="text"
+                      class="form-input" value="VESOUL"></div>
+                </div>
+              </div>
+            </div>
+            <div class="fs-block">
+              <div class="fs-header">
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+                <div class="fs-title">Logo de l'entité</div>
+              </div>
+              <div class="fs-card">
+                <div class="upload-row">
+                  <div class="upload-side">
+                    <div class="upload-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+                    <div>
+                      <div class="upload-name">Importez le logo</div>
+                      <div class="upload-sub">20 Mo max · .png, .jpg</div>
+                    </div>
+                  </div>
+                  <button class="btn secondary sm">Importer</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="fs-block">
+              <div class="fs-header">
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+                <div class="fs-title">Références légales</div>
+              </div>
+              <div class="fs-card">
+                <div class="form-grid">
+                  <div class="form-field"><label>Forme juridique</label><input type="text" class="form-input"
+                      value="SA"></div>
+                  <div class="form-field"><label>Devise</label><select class="form-input form-select">
+                      <option>EUR (€)</option>
+                    </select></div>
+                </div>
+                <div class="form-grid">
+                  <div class="form-field"><label>CODE APE (NAF)</label><input type="text" class="form-input"
+                      value="8559A"></div>
+                  <div class="form-field"><label>N° SIRET</label><input type="text" class="form-input"
+                      value="42478033600014" readonly></div>
+                </div>
+              </div>
+            </div>
+            <div class="fs-block">
+              <div class="fs-header">
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+                <div class="fs-title">Signature visuelle</div>
+              </div>
+              <div class="fs-card">
+                <div class="upload-row">
+                  <div class="upload-side">
+                    <div class="upload-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+                    <div>
+                      <div class="upload-name">Importez la signature</div>
+                      <div class="upload-sub">Documents officiels</div>
+                    </div>
+                  </div>
+                  <button class="btn secondary sm">Importer</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-box">
+        &lt;div class="form-body"&gt;<br>
+        &nbsp;&nbsp;&lt;div class="full"&gt;&lt;!-- bandeau d'identité, pleine largeur --&gt;&lt;/div&gt;<br>
+        &nbsp;&nbsp;&lt;div class="col"&gt;&lt;!-- sections modifiées souvent --&gt;&lt;/div&gt;<br>
+        &nbsp;&nbsp;&lt;div class="col"&gt;&lt;!-- sections stables --&gt;&lt;/div&gt;<br>
+        &lt;/div&gt;
+      </div>
+
+      <!-- ============ 8. REGLES ============ -->
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
+        8 — Règles d'usage</p>
+
+      <div class="do-dont">
+        <div class="dd-card do">
+          <h4>À faire</h4>
+          <ul>
+            <li>Le label au-dessus du champ, toujours.</li>
+            <li>Choisir le nombre de colonnes selon la longueur de la valeur attendue.</li>
+            <li>Écrire le format attendu en <code>.form-hint</code> avant la saisie.</li>
+            <li>Regrouper en <code>.fs-block</code> dès sept champs.</li>
+            <li>Garder le texte lisible sur un champ en lecture seule.</li>
+            <li>Un message d'erreur qui dit quoi corriger, pas seulement qu'il y a une erreur.</li>
+          </ul>
+        </div>
+        <div class="dd-card dont">
+          <h4>À éviter</h4>
+          <ul>
+            <li>Le placeholder comme label : il disparaît dès la première frappe.</li>
+            <li>Une bascule pour un réglage qui n'est appliqué qu'après « Enregistrer ».</li>
+            <li>Désactiver un champ là où la lecture seule suffit.</li>
+            <li>Annoncer les contraintes de fichier seulement après un import raté.</li>
+            <li>Un astérisque sur presque tous les champs : marquer les facultatifs à la place.</li>
+            <li>Des couleurs en dur : tout passe par les tokens.</li>
+          </ul>
         </div>
       </div>
     </section>
