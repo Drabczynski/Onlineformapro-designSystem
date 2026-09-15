@@ -267,6 +267,7 @@
       line-height: 1;
       letter-spacing: -0.005em;
       white-space: nowrap;
+      text-decoration: none;
       cursor: pointer;
       user-select: none;
       position: relative;
@@ -1747,6 +1748,13 @@
 
     .nav-stage .topbar {
       position: absolute;
+    }
+
+    /* La vague appartient a l'application, pas a la documentation : les
+       apercus montrent le menu sur son fond uni. Regle propre a la doc,
+       elle n'est pas exportee dans dist/. */
+    .nav-stage .sidebar {
+      background-image: none;
     }
 
     .nav-stage .layout {

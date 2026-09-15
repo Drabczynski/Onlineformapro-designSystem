@@ -87,6 +87,7 @@
   line-height: 1;
   letter-spacing: -0.005em;
   white-space: nowrap;
+  text-decoration: none;
   cursor: pointer;
   user-select: none;
   position: relative;
