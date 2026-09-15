@@ -3,8 +3,7 @@
  * build.js — dérive dist/ depuis index.html.
  *
  * index.html reste la source unique. Ce script en extrait :
- *   dist/tokens.css      les variables :root (entre @tokens:start / @tokens:end)
- *   dist/components.css  le CSS des composants, sans les styles propres à la doc
+ *   dist/components.css  les variables :root et le CSS des composants, sans les styles propres à la doc
  *   dist/components.js   le JS des composants (entre @components:start / @components:end)
  *
  * Usage : node build.js        (à relancer après chaque modification d'index.html)
@@ -57,7 +56,7 @@ const DOC_ONLY = [
   /^\.ds-/, /^\.section-/, /^section\b/, /^\.swatch/, /^\.typo-/, /^\.preview-/,
   /^\.code-box/, /^\.sizing-table/, /^\.btn-demo/, /^\.btn-spec/, /^\.spec-label/,
   /^\.do-dont/, /^\.dd-card/, /^\.axis-/, /^\.tone-matrix/, /^\.tm-/, /^\.nav-stage/,
-  /^\.launcher/, /^\.lc-/, /^\.ico-/, /^\.icon-box/, /^body\b/, /^body\./,
+  /^\.launcher/, /^\.lc-/, /^\.ico-/, /^\.icon-box/, /^\.rs-/, /^body\b/, /^body\./,
 ];
 function isDocOnly(selector) {
   return selector.split(',').every(s => DOC_ONLY.some(re => re.test(s.trim())));
@@ -88,9 +87,8 @@ function dedent(block) {
 
 const HEADER = (what) => `/* OnlineManager — ${what}\n   Généré par build.js depuis index.html. Ne pas modifier à la main. */\n\n`;
 
-const tokensOut = HEADER('tokens') + tokensCss.map(dedent).join('\n\n') + '\n';
 const componentsOut = HEADER('composants') +
-  `@import url("./tokens.css");\n\n` +
+  tokensCss.map(dedent).join('\n\n') + '\n\n' +
   componentsCss.map(dedent).join('\n\n') + '\n';
 
 // ---------------------------------------------------------------- JS
@@ -102,7 +100,6 @@ const jsOut = `/* OnlineManager — composants (JS)\n   Généré par build.js d
 
 // ---------------------------------------------------------------- écriture / vérification
 const files = {
-  'tokens.css': tokensOut,
   'components.css': componentsOut,
   'components.js': jsOut,
 };

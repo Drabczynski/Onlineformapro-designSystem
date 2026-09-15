@@ -809,65 +809,10 @@
       padding: 0;
     }
 
-    .lc-head {
-      border-bottom: 1px solid var(--bd);
-      background: #fff;
-      position: sticky;
-      top: 0;
-      z-index: 2;
-    }
-
-    .lc-head-in {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 18px 40px;
-      display: flex;
-      align-items: center;
-      gap: 24px;
-    }
-
-    .lc-brand {
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: -0.015em;
-      color: var(--t1);
-      white-space: nowrap;
-    }
-
-    .lc-brand b {
-      font-weight: inherit;
-      color: var(--nav-act);
-    }
-
-    .lc-search {
-      flex: 1;
-      max-width: 420px;
-      height: 36px;
-      padding: 0 12px 0 36px;
-      font-size: 13.5px;
-      font-family: inherit;
-      border: 1px solid var(--bd);
-      border-radius: var(--r);
-      background: var(--ps) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E") no-repeat 12px center;
-      color: var(--t1);
-      outline: none;
-      transition: border-color .15s, box-shadow .15s;
-    }
-
-    .lc-search:focus {
-      border-color: var(--a);
-      box-shadow: 0 0 0 3px var(--a1);
-      background-color: #fff;
-    }
-
-    .lc-search::placeholder {
-      color: var(--t3);
-    }
-
     .lc-body {
       max-width: 1120px;
       margin: 0 auto;
-      padding: 36px 40px 40px;
+      padding: 48px 40px 40px;
     }
 
     .lc-group {
@@ -910,10 +855,6 @@
     .lc-card:focus-visible {
       outline: none;
       box-shadow: 0 0 0 3px rgba(var(--a-rgb), .28);
-    }
-
-    .lc-card.dim {
-      display: none;
     }
 
     .lc-thumb {
@@ -962,14 +903,6 @@
 
     .lc-foot .hint {
       font-size: 12.5px;
-      color: var(--t3);
-    }
-
-    .lc-empty {
-      display: none;
-      padding: 48px 0;
-      text-align: center;
-      font-size: 14px;
       color: var(--t3);
     }
 
@@ -1043,62 +976,6 @@
     .content {
       padding: 24px 32px;
       flex: 1;
-    }
-
-    /* Fil d'Ariane */
-    .bc-wrap {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 24px;
-    }
-
-    .bc-item {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 13.5px;
-      color: var(--t2);
-      font-weight: 500;
-      cursor: pointer;
-      text-decoration: none;
-      transition: color .15s;
-    }
-
-    .bc-item:hover {
-      color: var(--t1);
-    }
-
-    .bc-item svg,
-    .bc-cur svg {
-      width: 16px;
-      height: 16px;
-      stroke-width: 1.8;
-    }
-
-    .bc-item svg {
-      color: var(--t3);
-    }
-
-    .bc-sep {
-      display: flex;
-      align-items: center;
-      color: var(--t3);
-    }
-
-    .bc-sep svg {
-      width: 14px;
-      height: 14px;
-      stroke-width: 2;
-    }
-
-    .bc-cur {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 13.5px;
-      color: var(--t1);
-      font-weight: 600;
     }
 
     /* En-tete de page */
@@ -2263,15 +2140,6 @@
     }
 
     /* --- Doc : ressources --- */
-    .rs-group {
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      color: var(--t3);
-      margin: 28px 0 12px;
-    }
-
     .rs-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -2755,6 +2623,221 @@
       font-size: 13px;
       font-weight: 600;
       color: var(--a);
+    }
+
+    /* --- Plage de dates --- */
+    .drp {
+      position: relative;
+      display: inline-block;
+    }
+
+    .drp-btn {
+      height: 32px;
+      padding: 0 10px 0 12px;
+      border: none;
+      border-radius: 6px;
+      background: linear-gradient(0deg, #fbfbfb 0, #fff 100%);
+      box-shadow: 0 1px 3px 0 #0000000a, inset 0 0 0 1px #efefef;
+      color: #334155;
+      font-size: 13px;
+      font-family: inherit;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    .drp-btn svg.cal {
+      width: 15px;
+      height: 15px;
+      color: var(--a);
+      stroke-width: 1.8;
+    }
+
+    .drp-btn svg.chev {
+      width: 14px;
+      height: 14px;
+      color: #475569;
+      transition: transform 0.2s ease;
+    }
+
+    .drp.open .drp-btn svg.chev {
+      transform: rotate(180deg);
+    }
+
+    .drp .arr {
+      color: var(--t3);
+    }
+
+    .drp-pop {
+      display: none;
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      width: 640px;
+      background: #fff;
+      border: 1px solid var(--bd);
+      border-radius: 14px;
+      box-shadow: 0 12px 32px rgba(17, 24, 39, .12);
+      z-index: 300;
+    }
+
+    .drp.open .drp-pop,
+    .drp-pop.pin {
+      display: block;
+    }
+
+    .drp-pop.pin {
+      position: relative;
+      top: 0;
+    }
+
+    .drp-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 16px 12px;
+    }
+
+    .drp-head .form-input {
+      height: 36px;
+      width: 150px;
+    }
+
+    .drp-body {
+      display: flex;
+    }
+
+    .drp-cal {
+      flex: 1;
+      padding: 8px 16px 16px;
+    }
+
+    .drp-cal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .drp-cal-head .ttl {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--t1);
+    }
+
+    .drp-nav {
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--bd);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--t2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .drp-nav:hover {
+      background: var(--ps);
+    }
+
+    .drp-nav svg {
+      width: 14px;
+      height: 14px;
+      stroke-width: 2;
+    }
+
+    .drp-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 3px 0;
+    }
+
+    .drp-dow {
+      text-align: center;
+      font-size: 11.5px;
+      color: var(--t3);
+      padding: 4px 0 6px;
+    }
+
+    .drp-day {
+      height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: var(--t1);
+      border-radius: 6px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .drp-day:hover {
+      background: var(--ps);
+    }
+
+    .drp-day.muted {
+      color: var(--t3);
+    }
+
+    .drp-day.in {
+      background: var(--a1);
+      color: var(--a);
+      border-radius: 0;
+    }
+
+    .drp-day.start,
+    .drp-day.end {
+      background: var(--a);
+      color: #fff;
+      border-radius: 50%;
+      font-weight: 600;
+    }
+
+    .drp-sug {
+      width: 210px;
+      border-left: 1px solid var(--bd);
+      padding: 14px 16px 16px;
+    }
+
+    .drp-sug-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--a);
+      margin-bottom: 8px;
+    }
+
+    .drp-sug-item {
+      padding: 6px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .drp-sug-item:hover {
+      background: var(--ps);
+    }
+
+    .drp-sug-item b {
+      display: block;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--t1);
+    }
+
+    .drp-sug-item span {
+      font-size: 11.5px;
+      color: var(--t3);
+    }
+
+    .drp-foot {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      padding: 12px 16px 16px;
+      border-top: 1px solid var(--bd);
     }
 
     /* --- Case a cocher en ligne --- */
@@ -3492,24 +3575,17 @@
 
   <main class="ds-main">
   <section class="launcher" id="home">
-    <div class="lc-head">
-      <div class="lc-head-in">
-        <div class="lc-brand">Online<b>Manager</b></div>
-        <input type="search" class="lc-search" id="lc-search" placeholder="Rechercher une section…"
-          oninput="filterCards(this.value)" autocomplete="off">
-      </div>
-    </div>
     <div class="lc-body">
       <h2 class="lc-group">Fondations</h2>
       <div class="lc-grid">
-        <a class="lc-card" href="#colors" data-q="couleurs & variables la palette : violet de marque, rouge du menu, neutres. chaque valeur existe en token." onclick="pickSection(event, '#colors')">
+        <a class="lc-card" href="#colors" onclick="pickSection(event, '#colors')">
           <div class="lc-thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="34" y="38" width="22" height="44" rx="5" fill="#8A3AAF"/><rect x="62" y="38" width="22" height="44" rx="5" fill="#E2006E"/><rect x="90" y="38" width="22" height="44" rx="5" fill="#111827"/><rect x="118" y="38" width="22" height="44" rx="5" fill="#4B5563"/><rect x="146" y="38" width="22" height="44" rx="5" fill="#9CA3AF"/></svg></div>
           <div class="lc-txt">
             <div class="lc-title">Couleurs & Variables</div>
             <div class="lc-desc">La palette : violet de marque, rouge du menu, neutres. Chaque valeur existe en token.</div>
           </div>
         </a>
-        <a class="lc-card" href="#typography" data-q="typographie inter pour le corps et les composants, geist pour les titres. les onze styles du produit." onclick="pickSection(event, '#typography')">
+        <a class="lc-card" href="#typography" onclick="pickSection(event, '#typography')">
           <div class="lc-thumb"><svg viewBox="0 0 200 120" fill="none"><text x="30" y="82" font-family="Inter,sans-serif" font-size="56" font-weight="700" fill="#4B5563">Aa</text><rect x="112" y="52" width="58" height="4" rx="2" fill="#C9CFD9"/><rect x="112" y="64" width="46" height="4" rx="2" fill="#C9CFD9"/><rect x="112" y="76" width="52" height="4" rx="2" fill="#C9CFD9"/></svg></div>
           <div class="lc-txt">
             <div class="lc-title">Typographie</div>
@@ -3519,56 +3595,56 @@
       </div>
       <h2 class="lc-group">Composants</h2>
       <div class="lc-grid">
-        <a class="lc-card" href="#buttons" data-q="boutons quatre poids et trois tons, quatre tailles, six états, les compositions." onclick="pickSection(event, '#buttons')">
+        <a class="lc-card" href="#buttons" onclick="pickSection(event, '#buttons')">
           <div class="lc-thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="38" y="42" width="62" height="34" rx="8" fill="#8A3AAF"/><rect x="52" y="57" width="34" height="4" rx="2" fill="#FFFFFF"/><rect x="108" y="42" width="56" height="34" rx="8" fill="#FFFFFF" stroke="#C9CFD9"/><rect x="122" y="57" width="28" height="4" rx="2" fill="#C9CFD9"/></svg></div>
           <div class="lc-txt">
             <div class="lc-title">Boutons</div>
             <div class="lc-desc">Quatre poids et trois tons, quatre tailles, six états, les compositions.</div>
           </div>
         </a>
-        <a class="lc-card" href="#badges" data-q="badges & tags indiquer un état ou une catégorie : terminé, en cours, premium, mode test." onclick="pickSection(event, '#badges')">
+        <a class="lc-card" href="#badges" onclick="pickSection(event, '#badges')">
           <div class="lc-thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="34" y="36" width="58" height="22" rx="11" fill="#8A3AAF"/><rect x="46" y="45" width="34" height="4" rx="2" fill="#FFFFFF"/><rect x="100" y="36" width="66" height="22" rx="11" fill="#DDE1E8"/><rect x="112" y="45" width="42" height="4" rx="2" fill="#C9CFD9"/><rect x="48" y="66" width="50" height="22" rx="11" fill="#E2006E"/><rect x="60" y="75" width="26" height="4" rx="2" fill="#FFFFFF"/><rect x="106" y="66" width="58" height="22" rx="11" fill="#DDE1E8"/><rect x="118" y="75" width="34" height="4" rx="2" fill="#C9CFD9"/></svg></div>
           <div class="lc-txt">
             <div class="lc-title">Badges & Tags</div>
             <div class="lc-desc">Indiquer un état ou une catégorie : terminé, en cours, premium, mode test.</div>
           </div>
         </a>
-        <a class="lc-card" href="#forms" data-q="formulaires anatomie d'un champ, grille, groupement en sections, import de fichier, layout de réglages." onclick="pickSection(event, '#forms')">
+        <a class="lc-card" href="#forms" onclick="pickSection(event, '#forms')">
           <div class="lc-thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="52" y="28" width="40" height="4" rx="2" fill="#C9CFD9"/><rect x="52" y="38" width="96" height="26" rx="5" fill="#FFFFFF" stroke="#C9CFD9"/><rect x="52" y="74" width="52" height="4" rx="2" fill="#C9CFD9"/><rect x="52" y="84" width="96" height="26" rx="5" fill="#FFFFFF" stroke="#C9CFD9"/></svg></div>
           <div class="lc-txt">
             <div class="lc-title">Formulaires</div>
             <div class="lc-desc">Anatomie d'un champ, grille, groupement en sections, import de fichier, layout de réglages.</div>
           </div>
         </a>
-        <a class="lc-card" href="#dropdowns" data-q="dropdowns le sélecteur du système, en bouton de widget, en champ de formulaire et en filtre de colonne." onclick="pickSection(event, '#dropdowns')">
+        <a class="lc-card" href="#dropdowns" onclick="pickSection(event, '#dropdowns')">
           <div class="lc-thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="58" y="26" width="84" height="28" rx="6" fill="#FFFFFF" stroke="#C9CFD9"/><rect x="70" y="38" width="36" height="4" rx="2" fill="#C9CFD9"/><path d="M124 37l5 5 5-5" stroke="#C9CFD9" stroke-width="2" stroke-linecap="round"/><rect x="58" y="60" width="84" height="44" rx="6" fill="#FFFFFF" stroke="#C9CFD9"/><rect x="58" y="60" width="84" height="15" rx="4" fill="#F8F1FB"/><rect x="70" y="66" width="40" height="4" rx="2" fill="#8A3AAF"/><rect x="70" y="81" width="44" height="4" rx="2" fill="#C9CFD9"/><rect x="70" y="95" width="36" height="4" rx="2" fill="#C9CFD9"/></svg></div>
           <div class="lc-txt">
             <div class="lc-title">Dropdowns</div>
             <div class="lc-desc">Le sélecteur du système, en bouton de widget, en champ de formulaire et en filtre de colonne.</div>
           </div>
         </a>
-        <a class="lc-card" href="#blocks" data-q="blocs & cartes les widgets de reporting : icône colorée, titre, contrôles, corps vide." onclick="pickSection(event, '#blocks')">
+        <a class="lc-card" href="#blocks" onclick="pickSection(event, '#blocks')">
           <div class="lc-thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="46" y="26" width="108" height="68" rx="8" fill="#FFFFFF" stroke="#C9CFD9"/><rect x="58" y="38" width="20" height="20" rx="5" fill="#F8F1FB"/><rect x="64" y="44" width="8" height="8" rx="2" fill="#8A3AAF"/><rect x="86" y="42" width="42" height="4" rx="2" fill="#C9CFD9"/><rect x="86" y="53" width="30" height="4" rx="2" fill="#C9CFD9"/><rect x="58" y="72" width="84" height="4" rx="2" fill="#DDE1E8"/></svg></div>
           <div class="lc-txt">
             <div class="lc-title">Blocs & Cartes</div>
             <div class="lc-desc">Les widgets de reporting : icône colorée, titre, contrôles, corps vide.</div>
           </div>
         </a>
-        <a class="lc-card" href="#tables" data-q="tableaux en-tête sur deux lignes, filtres, redimensionnement, édition des colonnes, actions de ligne." onclick="pickSection(event, '#tables')">
+        <a class="lc-card" href="#tables" onclick="pickSection(event, '#tables')">
           <div class="lc-thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="34" y="26" width="132" height="68" rx="6" fill="#FFFFFF" stroke="#C9CFD9"/><rect x="34" y="26" width="132" height="16" rx="6" fill="#DDE1E8"/><rect x="46" y="50" width="40" height="4" rx="2" fill="#C9CFD9"/><rect x="96" y="50" width="24" height="4" rx="2" fill="#C9CFD9"/><circle cx="150" cy="52" r="2.5" fill="#8A3AAF"/><rect x="46" y="64" width="40" height="4" rx="2" fill="#C9CFD9"/><rect x="96" y="64" width="24" height="4" rx="2" fill="#C9CFD9"/><circle cx="150" cy="66" r="2.5" fill="#C9CFD9"/><rect x="46" y="78" width="40" height="4" rx="2" fill="#C9CFD9"/><rect x="96" y="78" width="24" height="4" rx="2" fill="#C9CFD9"/><circle cx="150" cy="80" r="2.5" fill="#8A3AAF"/></svg></div>
           <div class="lc-txt">
             <div class="lc-title">Tableaux</div>
             <div class="lc-desc">En-tête sur deux lignes, filtres, redimensionnement, édition des colonnes, actions de ligne.</div>
           </div>
         </a>
-        <a class="lc-card" href="#icons" data-q="iconographie eva icons en outline, grille 24, trait 1.8. tailles et couleur selon le composant porteur." onclick="pickSection(event, '#icons')">
+        <a class="lc-card" href="#icons" onclick="pickSection(event, '#icons')">
           <div class="lc-thumb"><svg viewBox="0 0 200 120" fill="none"><circle cx="58" cy="44" r="9" stroke="#C9CFD9" stroke-width="2"/><circle cx="100" cy="76" r="9" stroke="#C9CFD9" stroke-width="2"/><circle cx="142" cy="44" r="9" stroke="#C9CFD9" stroke-width="2"/><circle cx="184" cy="76" r="9" stroke="#C9CFD9" stroke-width="2"/><path d="M96 48l6 6 10-12" stroke="#8A3AAF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           <div class="lc-txt">
             <div class="lc-title">Iconographie</div>
             <div class="lc-desc">Eva Icons en outline, grille 24, trait 1.8. Tailles et couleur selon le composant porteur.</div>
           </div>
         </a>
-        <a class="lc-card" href="#widgets" data-q="widgets stats le gabarit des statistiques pré-formatées : header, filtres, états vides." onclick="pickSection(event, '#widgets')">
+        <a class="lc-card" href="#widgets" onclick="pickSection(event, '#widgets')">
           <div class="lc-thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="38" y="22" width="124" height="76" rx="8" fill="#FFFFFF" stroke="#C9CFD9"/><rect x="50" y="32" width="44" height="4" rx="2" fill="#C9CFD9"/><rect x="54" y="68" width="10" height="18" rx="2" fill="#DDE1E8"/><rect x="72" y="56" width="10" height="30" rx="2" fill="#DDE1E8"/><rect x="90" y="62" width="10" height="24" rx="2" fill="#DDE1E8"/><rect x="108" y="46" width="10" height="40" rx="2" fill="#8A3AAF"/><rect x="126" y="58" width="10" height="28" rx="2" fill="#DDE1E8"/><rect x="144" y="52" width="10" height="34" rx="2" fill="#DDE1E8"/></svg></div>
           <div class="lc-txt">
             <div class="lc-title">Widgets Stats</div>
@@ -3578,35 +3654,35 @@
       </div>
       <h2 class="lc-group">Patterns & Layouts</h2>
       <div class="lc-grid">
-        <a class="lc-card" href="#layouts" data-q="layouts (grilles) une, deux ou trois colonnes pour composer une page de widgets." onclick="pickSection(event, '#layouts')">
+        <a class="lc-card" href="#layouts" onclick="pickSection(event, '#layouts')">
           <div class="lc-thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="34" y="26" width="132" height="68" rx="6" fill="#FFFFFF" stroke="#C9CFD9"/><rect x="42" y="34" width="52" height="52" rx="4" fill="#DDE1E8"/><rect x="102" y="34" width="56" height="22" rx="4" fill="#DDE1E8"/><rect x="102" y="64" width="56" height="22" rx="4" fill="#DDE1E8"/></svg></div>
           <div class="lc-txt">
             <div class="lc-title">Layouts (Grilles)</div>
             <div class="lc-desc">Une, deux ou trois colonnes pour composer une page de widgets.</div>
           </div>
         </a>
-        <a class="lc-card" href="#page-templates" data-q="templates de pages les structures complètes : topbar, menu, en-tête de page, grille." onclick="pickSection(event, '#page-templates')">
+        <a class="lc-card" href="#page-templates" onclick="pickSection(event, '#page-templates')">
           <div class="lc-thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="34" y="24" width="132" height="72" rx="6" fill="#FFFFFF" stroke="#C9CFD9"/><rect x="34" y="24" width="132" height="12" rx="6" fill="#13041C"/><rect x="34" y="36" width="34" height="60" fill="#150625"/><rect x="76" y="46" width="44" height="4" rx="2" fill="#DDE1E8"/><rect x="76" y="58" width="36" height="28" rx="3" fill="#DDE1E8"/><rect x="118" y="58" width="38" height="28" rx="3" fill="#DDE1E8"/></svg></div>
           <div class="lc-txt">
             <div class="lc-title">Templates de Pages</div>
             <div class="lc-desc">Les structures complètes : topbar, menu, en-tête de page, grille.</div>
           </div>
         </a>
-        <a class="lc-card" href="#navigation" data-q="navigation & topbar la topbar, le menu gauche sombre et le menu applications." onclick="pickSection(event, '#navigation')">
+        <a class="lc-card" href="#navigation" onclick="pickSection(event, '#navigation')">
           <div class="lc-thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="34" y="18" width="132" height="84" rx="6" fill="#FFFFFF" stroke="#C9CFD9"/><rect x="34" y="18" width="132" height="14" rx="6" fill="#13041C"/><rect x="34" y="32" width="46" height="70" fill="#150625"/><rect x="42" y="42" width="24" height="3" rx="2" fill="rgba(255,255,255,.4)"/><rect x="40" y="52" width="34" height="9" rx="2" fill="#E2006E"/><rect x="42" y="68" width="26" height="3" rx="2" fill="rgba(255,255,255,.4)"/><rect x="42" y="80" width="22" height="3" rx="2" fill="rgba(255,255,255,.4)"/><rect x="90" y="44" width="40" height="4" rx="2" fill="#DDE1E8"/><rect x="90" y="58" width="56" height="4" rx="2" fill="#DDE1E8"/><rect x="90" y="72" width="48" height="4" rx="2" fill="#DDE1E8"/></svg></div>
           <div class="lc-txt">
             <div class="lc-title">Navigation & Topbar</div>
             <div class="lc-desc">La topbar, le menu gauche sombre et le menu applications.</div>
           </div>
         </a>
-        <a class="lc-card" href="#modals" data-q="modales & overlays dialogues, import avec recadrage, sélecteurs de date." onclick="pickSection(event, '#modals')">
+        <a class="lc-card" href="#modals" onclick="pickSection(event, '#modals')">
           <div class="lc-thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="20" y="10" width="160" height="100" rx="8" fill="#E5E7EB"/><rect x="56" y="32" width="88" height="56" rx="8" fill="#FFFFFF" stroke="#C9CFD9"/><rect x="68" y="44" width="40" height="4" rx="2" fill="#C9CFD9"/><rect x="68" y="56" width="56" height="4" rx="2" fill="#DDE1E8"/><rect x="68" y="64" width="48" height="4" rx="2" fill="#DDE1E8"/><rect x="102" y="72" width="30" height="10" rx="4" fill="#8A3AAF"/></svg></div>
           <div class="lc-txt">
             <div class="lc-title">Modales & Overlays</div>
             <div class="lc-desc">Dialogues, import avec recadrage, sélecteurs de date.</div>
           </div>
         </a>
-        <a class="lc-card" href="#states" data-q="états & feedback succès, erreur, avertissement, information, et les transitions." onclick="pickSection(event, '#states')">
+        <a class="lc-card" href="#states" onclick="pickSection(event, '#states')">
           <div class="lc-thumb"><svg viewBox="0 0 200 120" fill="none"><circle cx="60" cy="60" r="16" fill="#ECFDF5" stroke="#10B981" stroke-width="2"/><path d="M53 60l5 5 9-10" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M100 44l16 28H84z" fill="#FEF3C7" stroke="#B45309" stroke-width="2" stroke-linejoin="round"/><line x1="100" y1="54" x2="100" y2="62" stroke="#B45309" stroke-width="2.5" stroke-linecap="round"/><circle cx="100" cy="67" r="1.5" fill="#B45309"/><circle cx="140" cy="60" r="16" stroke="#DDE1E8" stroke-width="4"/><path d="M140 44a16 16 0 0 1 16 16" stroke="#8A3AAF" stroke-width="4" stroke-linecap="round"/></svg></div>
           <div class="lc-txt">
             <div class="lc-title">États & Feedback</div>
@@ -3616,16 +3692,15 @@
       </div>
       <h2 class="lc-group">Utiliser le système</h2>
       <div class="lc-grid">
-        <a class="lc-card" href="#resources" data-q="ressources téléchargements dist css js templates catalog claude check" onclick="pickSection(event, '#resources')">
+        <a class="lc-card" href="#resources" onclick="pickSection(event, '#resources')">
           <div class="lc-thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="58" y="22" width="84" height="76" rx="8" fill="#FFFFFF" stroke="#C9CFD9"/><path d="M100 40v30" stroke="#8A3AAF" stroke-width="3" stroke-linecap="round"/><path d="M88 60l12 12 12-12" stroke="#8A3AAF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><rect x="72" y="82" width="56" height="4" rx="2" fill="#DDE1E8"/></svg></div>
           <div class="lc-txt">
             <div class="lc-title">Ressources &amp; téléchargements</div>
-            <div class="lc-desc">Le CSS et le JS à importer, les pages de départ, les règles pour l'IA et le vérificateur.</div>
+            <div class="lc-desc">Le CSS et le JS à importer dans chaque page du produit.</div>
           </div>
         </a>
       </div>
 
-      <div class="lc-empty" id="lc-empty">Aucune section ne correspond.</div>
       <div class="lc-foot">
         <span class="hint">Choisissez une section, ou ouvrez la page entière. Le bouton Accueil de la colonne de
           gauche ramène ici.</span>
@@ -5353,10 +5428,162 @@
         </tbody>
       </table>
 
-      <!-- ============ 7. LAYOUT DE PAGE ============ -->
+      <!-- ============ 7. PLAGE DE DATES ============ -->
       <p
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
-        7 — Layout d'une page de réglages</p>
+        7 — Plage de dates</p>
+      <p class="section-desc" style="margin-bottom:24px;">Le déclencheur a le gabarit d'un dropdown de widget, icône
+        calendrier en <code>--a</code>. Le panneau : les deux bornes en champs, un calendrier mensuel, une colonne de
+        suggestions. La plage se lit en <code>--a1</code>, ses bornes en <code>--a</code>. Rien n'est appliqué avant
+        « Appliquer ».</p>
+
+      <div class="preview-box" style="padding:40px 20px 24px;">
+        <div class="preview-label">Live Preview — fermé</div>
+        <div class="drp">
+          <button class="drp-btn" onclick="drpOpen(this)"><svg class="cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span class="lbl">janv. 1, 2025</span><span class="arr">→</span><span class="lbl2">déc. 31, 2025</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="drp-pop" data-y="2025" data-m="11" data-start="2025-01-01" data-end="2025-12-31">
+            <div class="drp-head">
+              <input type="text" class="form-input" readonly>
+              <span class="arr">→</span>
+              <input type="text" class="form-input" readonly>
+            </div>
+            <div class="drp-body">
+              <div class="drp-cal">
+                <div class="drp-cal-head">
+                  <button class="drp-nav" aria-label="Mois précédent" onclick="drpNav(this,-1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+                  <span class="ttl"></span>
+                  <button class="drp-nav" aria-label="Mois suivant" onclick="drpNav(this,1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+                </div>
+                <div class="drp-grid">
+                  <div class="drp-dow">lun.</div><div class="drp-dow">mar.</div><div class="drp-dow">mer.</div><div class="drp-dow">jeu.</div><div class="drp-dow">ven.</div><div class="drp-dow">sam.</div><div class="drp-dow">dim.</div>
+                </div>
+              </div>
+              <div class="drp-sug">
+                <div class="drp-sug-title">Suggestions</div>
+                <div class="drp-sug-item" data-k="today" onclick="drpSug(this)"><b>Aujourd'hui</b><span></span></div>
+                <div class="drp-sug-item" data-k="week" onclick="drpSug(this)"><b>Cette semaine</b><span></span></div>
+                <div class="drp-sug-item" data-k="7d" onclick="drpSug(this)"><b>Les 7 derniers jours</b><span></span></div>
+                <div class="drp-sug-item" data-k="30d" onclick="drpSug(this)"><b>Les 30 derniers jours</b><span></span></div>
+                <div class="drp-sug-item" data-k="month" onclick="drpSug(this)"><b>Ce mois-ci</b><span></span></div>
+                <div class="drp-sug-item" data-k="year" onclick="drpSug(this)"><b>Cette année</b><span></span></div>
+                <div class="drp-sug-item" data-k="lastmonth" onclick="drpSug(this)"><b>Le mois dernier</b><span></span></div>
+                <div class="drp-sug-item" data-k="lastyear" onclick="drpSug(this)"><b>L'année dernière</b><span></span></div>
+              </div>
+            </div>
+            <div class="drp-foot">
+              <button class="btn" onclick="drpCancel(this)">Annuler</button>
+              <button class="btn primary" onclick="drpApply(this)">Appliquer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="preview-box" style="padding:40px 20px 24px;">
+        <div class="preview-label">Live Preview — ouvert, cliquez deux jours ou une suggestion</div>
+        <div class="drp">
+          <button class="drp-btn" onclick="drpOpen(this)"><svg class="cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span class="lbl">janv. 1, 2025</span><span class="arr">→</span><span class="lbl2">déc. 31, 2025</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="drp-pop pin" data-y="2025" data-m="11" data-start="2025-01-01" data-end="2025-12-31">
+            <div class="drp-head">
+              <input type="text" class="form-input" readonly>
+              <span class="arr">→</span>
+              <input type="text" class="form-input" readonly>
+            </div>
+            <div class="drp-body">
+              <div class="drp-cal">
+                <div class="drp-cal-head">
+                  <button class="drp-nav" aria-label="Mois précédent" onclick="drpNav(this,-1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+                  <span class="ttl"></span>
+                  <button class="drp-nav" aria-label="Mois suivant" onclick="drpNav(this,1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+                </div>
+                <div class="drp-grid">
+                  <div class="drp-dow">lun.</div><div class="drp-dow">mar.</div><div class="drp-dow">mer.</div><div class="drp-dow">jeu.</div><div class="drp-dow">ven.</div><div class="drp-dow">sam.</div><div class="drp-dow">dim.</div>
+                </div>
+              </div>
+              <div class="drp-sug">
+                <div class="drp-sug-title">Suggestions</div>
+                <div class="drp-sug-item" data-k="today" onclick="drpSug(this)"><b>Aujourd'hui</b><span></span></div>
+                <div class="drp-sug-item" data-k="week" onclick="drpSug(this)"><b>Cette semaine</b><span></span></div>
+                <div class="drp-sug-item" data-k="7d" onclick="drpSug(this)"><b>Les 7 derniers jours</b><span></span></div>
+                <div class="drp-sug-item" data-k="30d" onclick="drpSug(this)"><b>Les 30 derniers jours</b><span></span></div>
+                <div class="drp-sug-item" data-k="month" onclick="drpSug(this)"><b>Ce mois-ci</b><span></span></div>
+                <div class="drp-sug-item" data-k="year" onclick="drpSug(this)"><b>Cette année</b><span></span></div>
+                <div class="drp-sug-item" data-k="lastmonth" onclick="drpSug(this)"><b>Le mois dernier</b><span></span></div>
+                <div class="drp-sug-item" data-k="lastyear" onclick="drpSug(this)"><b>L'année dernière</b><span></span></div>
+              </div>
+            </div>
+            <div class="drp-foot">
+              <button class="btn" onclick="drpCancel(this)">Annuler</button>
+              <button class="btn primary" onclick="drpApply(this)">Appliquer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <table class="sizing-table">
+        <thead>
+          <tr>
+            <th>Élément</th>
+            <th>Classe</th>
+            <th>Traitement</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Déclencheur</td>
+            <td class="var-name">.drp-btn</td>
+            <td class="var-value">32px · même fond que .w-dd-btn · icône calendrier --a · chevron</td>
+          </tr>
+          <tr>
+            <td>Panneau</td>
+            <td class="var-name">.drp-pop</td>
+            <td class="var-value">640px · radius 14px · ombre 0 12px 32px</td>
+          </tr>
+          <tr>
+            <td>Bornes</td>
+            <td class="var-name">.drp-head .form-input</td>
+            <td class="var-value">36px · 150px · lecture seule, remplies par le calendrier</td>
+          </tr>
+          <tr>
+            <td>Jour</td>
+            <td class="var-name">.drp-day</td>
+            <td class="var-value">46px · 13px · autre mois en --t3</td>
+          </tr>
+          <tr>
+            <td>Dans la plage</td>
+            <td class="var-name">.drp-day.in</td>
+            <td class="var-value">fond --a1, texte --a</td>
+          </tr>
+          <tr>
+            <td>Bornes de la plage</td>
+            <td class="var-name">.drp-day.start / .end</td>
+            <td class="var-value">disque --a, texte blanc 600</td>
+          </tr>
+          <tr>
+            <td>Suggestions</td>
+            <td class="var-name">.drp-sug-item</td>
+            <td class="var-value">libellé 13.5px + dates en 11.5px --t3, calculées à l'ouverture</td>
+          </tr>
+          <tr>
+            <td>Pied</td>
+            <td class="var-name">.drp-foot</td>
+            <td class="var-value">Annuler puis Appliquer en .primary, filet haut</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="code-box">
+        &lt;div class="drp"&gt;<br>
+        &nbsp;&nbsp;&lt;button class="drp-btn" onclick="drpOpen(this)"&gt;&lt;svg class="cal"&gt;…&lt;/svg&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;span class="lbl"&gt;janv. 1, 2025&lt;/span&gt;&lt;span class="arr"&gt;→&lt;/span&gt;&lt;span class="lbl2"&gt;déc. 31, 2025&lt;/span&gt;&lt;svg class="chev"&gt;…&lt;/svg&gt;<br>
+        &nbsp;&nbsp;&lt;/button&gt;<br>
+        &nbsp;&nbsp;&lt;div class="drp-pop" data-y="2025" data-m="11" data-start="2025-01-01" data-end="2025-12-31"&gt;…&lt;/div&gt;<br>
+        &lt;/div&gt;
+      </div>
+
+      <!-- ============ 8. LAYOUT DE PAGE ============ -->
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
+        8 — Layout d'une page de réglages</p>
       <p class="section-desc" style="margin-bottom:24px;">Deux colonnes de sections, réparties par <b>fréquence de
         modification</b> : ce qui change souvent à gauche, ce qui est stable (références légales, signature) à
         droite.</p>
@@ -6892,15 +7119,14 @@
     <!-- PAGE TEMPLATES -->
     <section id="page-templates">
       <h2 class="section-title">Templates de Pages</h2>
-      <p class="section-desc">Trois pages complètes — topbar, menu gauche, fil d'Ariane, en-tête de page, contenu.
-        Chaque aperçu est le fichier de <code>templates/</code> rendu tel quel : c'est le point de départ d'une
-        nouvelle page, on ne touche qu'au contenu de <code>.content</code>.</p>
+      <p class="section-desc">Le squelette d'une page : la topbar, le menu gauche, et le contenu vide. Seule l'entrée
+        active du menu change d'une page à l'autre.</p>
 
       <!-- ============ 1. LISTE ============ -->
       <p
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;">
-        1 — Liste · <code>templates/liste.html</code></p>
-      <div class="nav-stage" style="height:600px;">
+        1 — Liste · une entrée de premier niveau active</p>
+      <div class="nav-stage" style="height:380px;">
         <header class="topbar">
         <div class="tb-slot">
         <span class="tb-appn">Online<b>Manager</b></span>
@@ -7058,196 +7284,7 @@
           </nav>
           </aside>
           <main class="main">
-            <div class="content">
-              <nav class="bc-wrap" aria-label="Fil d'Ariane">
-              <a class="bc-item" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Accueil</a>
-              <span class="bc-sep"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
-              <span class="bc-cur">Apprenants</span>
-              </nav>
-
-              <div class="ph">
-              <div class="ph-l">
-              <h1 class="ph-title">Apprenants</h1>
-              <span class="ph-ct"><strong>128</strong> apprenants</span>
-              </div>
-              <div class="ph-actions">
-              <button class="btn">Exporter</button>
-              <button class="btn primary">Ajouter un apprenant</button>
-              </div>
-              </div>
-
-              <div class="tcard">
-              <div class="tw">
-              <table>
-              <thead>
-              <tr class="thr">
-              <th class="srt">Nom<span class="rez"></span></th>
-              <th class="srt">E-mail<span class="rez"></span></th>
-              <th class="srt">Statut<span class="rez"></span></th>
-              <th class="srt">Groupe<span class="rez"></span></th>
-              <th class="srt">Inscription<span class="rez"></span></th>
-              <th class="cgear-th"></th>
-              </tr>
-              <tr class="thr-filter">
-              <th><input type="search" class="th-search" placeholder="Rechercher"></th>
-              <th><input type="search" class="th-search" placeholder="Rechercher"></th>
-              <th><div class="w-dd-wrap block"><button class="w-dd-btn sm" onclick="toggleDD(this)"><span>Tous</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button><div class="w-dd-menu"><div class="w-dd-item active">Tous</div><div class="w-dd-item">Actif</div><div class="w-dd-item">Inactif</div></div></div></th>
-              <th><div class="w-dd-wrap block"><button class="w-dd-btn sm" onclick="toggleDD(this)"><span>Tous</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button><div class="w-dd-menu"><div class="w-dd-item active">Tous</div><div class="w-dd-item">RH Central</div><div class="w-dd-item">Produit</div><div class="w-dd-item">Management</div></div></div></th>
-              <th><input type="search" class="th-search" placeholder="Rechercher"></th>
-              <th class="cgear-th"></th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-              <td>
-              <div class="cn">
-              <div class="ava" style="background:#F8F1FB;color:#8A3AAF;">MG</div>
-              <div>
-              <div class="nmain">Michèle GUERRIN</div>
-              <div class="nsub">PDG</div>
-              </div>
-              </div>
-              </td>
-              <td class="cv">m.guerrin@onlineformapro.com</td>
-              <td><span class="stb ston"><span class="stdon"></span>Actif</span></td>
-              <td>RH Central</td>
-              <td class="dc">12 mars 2026</td>
-              <td class="catd">
-              <button class="rdots" aria-label="Actions" onclick="togRow(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
-              <div class="rmenu">
-              <div class="rmi">Modifier l'apprenant</div>
-              <div class="rmi">Affecter une formation</div>
-              <div class="rmi">Ajouter au groupe</div>
-              <div class="rmdiv"></div>
-              <div class="rmi">Désactiver</div>
-              <div class="rmi dn">Supprimer</div>
-              </div>
-              </td>
-              </tr>
-              <tr>
-              <td>
-              <div class="cn">
-              <div class="ava" style="background:#F3F4F6;color:#4B5563;">AD</div>
-              <div>
-              <div class="nmain">Alan DRABCZYNSKI</div>
-              <div class="nsub">Designer</div>
-              </div>
-              </div>
-              </td>
-              <td class="cv">a.drabczynski@onlineformapro.com</td>
-              <td><span class="stb ston"><span class="stdon"></span>Actif</span></td>
-              <td>Produit</td>
-              <td class="dc">9 mars 2026</td>
-              <td class="catd">
-              <button class="rdots" aria-label="Actions" onclick="togRow(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
-              <div class="rmenu">
-              <div class="rmi">Modifier l'apprenant</div>
-              <div class="rmi">Affecter une formation</div>
-              <div class="rmi">Ajouter au groupe</div>
-              <div class="rmdiv"></div>
-              <div class="rmi">Désactiver</div>
-              <div class="rmi dn">Supprimer</div>
-              </div>
-              </td>
-              </tr>
-              <tr>
-              <td>
-              <div class="cn">
-              <div class="ava" style="background:#FEF3C7;color:#B45309;">JD</div>
-              <div>
-              <div class="nmain">Jean DUPONT</div>
-              <div class="nsub">Formateur</div>
-              </div>
-              </div>
-              </td>
-              <td class="cv">j.dupont@onlineformapro.com</td>
-              <td><span class="stb stoff"><span class="stdoff"></span>Inactif</span></td>
-              <td>Sécurité au travail</td>
-              <td class="dc">2 févr. 2026</td>
-              <td class="catd">
-              <button class="rdots" aria-label="Actions" onclick="togRow(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
-              <div class="rmenu">
-              <div class="rmi">Modifier l'apprenant</div>
-              <div class="rmi">Affecter une formation</div>
-              <div class="rmi">Ajouter au groupe</div>
-              <div class="rmdiv"></div>
-              <div class="rmi">Désactiver</div>
-              <div class="rmi dn">Supprimer</div>
-              </div>
-              </td>
-              </tr>
-              <tr>
-              <td>
-              <div class="cn">
-              <div class="ava" style="background:#F8F1FB;color:#8A3AAF;">SL</div>
-              <div>
-              <div class="nmain">Sophie LEROY</div>
-              <div class="nsub">Gestionnaire</div>
-              </div>
-              </div>
-              </td>
-              <td class="cv">s.leroy@onlineformapro.com</td>
-              <td><span class="stb ston"><span class="stdon"></span>Actif</span></td>
-              <td>Management</td>
-              <td class="dc">28 janv. 2026</td>
-              <td class="catd">
-              <button class="rdots" aria-label="Actions" onclick="togRow(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
-              <div class="rmenu">
-              <div class="rmi">Modifier l'apprenant</div>
-              <div class="rmi">Affecter une formation</div>
-              <div class="rmi">Ajouter au groupe</div>
-              <div class="rmdiv"></div>
-              <div class="rmi">Désactiver</div>
-              <div class="rmi dn">Supprimer</div>
-              </div>
-              </td>
-              </tr>
-              <tr>
-              <td>
-              <div class="cn">
-              <div class="ava" style="background:#F3F4F6;color:#4B5563;">TB</div>
-              <div>
-              <div class="nmain">Thomas BERNARD</div>
-              <div class="nsub">Formateur</div>
-              </div>
-              </div>
-              </td>
-              <td class="cv">t.bernard@onlineformapro.com</td>
-              <td><span class="stb ston"><span class="stdon"></span>Actif</span></td>
-              <td>Sécurité au travail</td>
-              <td class="dc">21 janv. 2026</td>
-              <td class="catd">
-              <button class="rdots" aria-label="Actions" onclick="togRow(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
-              <div class="rmenu">
-              <div class="rmi">Modifier l'apprenant</div>
-              <div class="rmi">Affecter une formation</div>
-              <div class="rmi">Ajouter au groupe</div>
-              <div class="rmdiv"></div>
-              <div class="rmi">Désactiver</div>
-              <div class="rmi dn">Supprimer</div>
-              </div>
-              </td>
-              </tr>
-              </tbody>
-              </table>
-              </div>
-              <div class="tfoot">
-              <span class="fi">5 résultats sur 128</span>
-              <div class="pgn">
-              <button class="pb" disabled>Précédent</button>
-              <button class="pb on">1</button>
-              <button class="pb">2</button>
-              <button class="pb">3</button>
-              <button class="pb">Suivant</button>
-              </div>
-              <div class="lpp-wrap">
-              <span class="lpp-lbl">Par page</span>
-              <button class="lpp-btn">25 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-              </div>
-              </div>
-              </div>
-
-            </div>
+            <div class="content"></div>
           </main>
         </div>
       </div>
@@ -7255,8 +7292,8 @@
       <!-- ============ 2. REGLAGES ============ -->
       <p
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
-        2 — Réglages · <code>templates/reglages.html</code></p>
-      <div class="nav-stage" style="height:640px;">
+        2 — Réglages · une sous-entrée active, son groupe ouvert</p>
+      <div class="nav-stage" style="height:480px;">
         <header class="topbar">
         <div class="tb-slot">
         <span class="tb-appn">Online<b>Manager</b></span>
@@ -7414,63 +7451,7 @@
           </nav>
           </aside>
           <main class="main">
-            <div class="content">
-              <nav class="bc-wrap" aria-label="Fil d'Ariane">
-              <a class="bc-item" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Accueil</a>
-              <span class="bc-sep"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
-              <span class="bc-cur">Carte de visite</span>
-              </nav>
-
-              <div class="ph">
-              <div class="ph-l">
-              <h1 class="ph-title">Carte de visite</h1>
-              </div>
-              <div class="ph-actions">
-              <button class="btn">Annuler</button>
-              <button class="btn primary">Enregistrer</button>
-              </div>
-              </div>
-
-              <div class="form-body">
-              <div class="col">
-              <div class="fs-block">
-              <div class="fs-header">
-              <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-              <div class="fs-title">Informations générales</div>
-              </div>
-              <div class="fs-card"><div class="form-grid col-full"><div class="form-field"><label>Raison sociale<span class="req">*</span></label><input type="text" class="form-input" value="ONLINEFORMAPRO"></div></div><div class="form-grid"><div class="form-field"><label>Nom du responsable<span class="req">*</span></label><input type="text" class="form-input" value="GUERRIN"></div><div class="form-field"><label>Prénom du responsable<span class="req">*</span></label><input type="text" class="form-input" value="Michèle"></div></div><div class="form-grid col-full"><div class="form-field"><label>Fonction du responsable<span class="req">*</span></label><input type="text" class="form-input" value="PDG"></div></div><div class="form-grid col-full"><div class="form-field"><label>Adresse<span class="req">*</span></label><input type="text" class="form-input" value="Espace de la Motte"></div></div><div class="form-grid"><div class="form-field"><label>Code postal<span class="req">*</span></label><input type="text" class="form-input" value="70000"></div><div class="form-field"><label>Ville<span class="req">*</span></label><input type="text" class="form-input" value="VESOUL"></div></div><div class="form-grid col-full"><div class="form-field"><label>Pays</label><div class="w-dd-wrap block"><button class="w-dd-btn field" onclick="toggleDD(this)"><span>France</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button><div class="w-dd-menu"><div class="w-dd-item active">France</div><div class="w-dd-item">Suisse</div><div class="w-dd-item">Belgique</div></div></div></div></div><div class="form-grid"><div class="form-field"><label>Téléphone</label><input type="text" class="form-input" value="03 84 76 52 44"></div><div class="form-field"><label>E-mail</label><input type="text" class="form-input" value="projet@onlineformapro.com"></div></div></div>
-              </div>
-              <div class="fs-block">
-              <div class="fs-header">
-              <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
-              <div class="fs-title">Logo de l'entité</div>
-              </div>
-              <div class="fs-card">
-              <div class="upload-row">
-              <div class="upload-side">
-              <div class="upload-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
-              <div>
-              <div class="upload-name">Importez le logo</div>
-              <div class="upload-sub">Poids maximum 20 Mo · Formats : .png, .jpg, .svg</div>
-              </div>
-              </div>
-              <button class="btn secondary">Importer</button>
-              </div>
-              </div>
-              </div>
-              </div>
-              <div class="col">
-              <div class="fs-block">
-              <div class="fs-header">
-              <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
-              <div class="fs-title">Références légales</div>
-              </div>
-              <div class="fs-card"><div class="form-grid"><div class="form-field"><label>Forme juridique</label><input type="text" class="form-input" value="SA"></div><div class="form-field"><label>Devise</label><div class="w-dd-wrap block"><button class="w-dd-btn field" onclick="toggleDD(this)"><span>EUR (€)</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button><div class="w-dd-menu"><div class="w-dd-item active">EUR (€)</div><div class="w-dd-item">USD ($)</div></div></div></div></div><div class="form-grid col-full"><div class="form-field"><label>Capital</label><input type="text" class="form-input" value="1 100 000"></div></div><div class="form-grid"><div class="form-field"><label>N° de déclaration d'activité</label><input type="text" class="form-input ro" value="43 7000 41070" readonly></div><div class="form-field"><label>Région</label><div class="w-dd-wrap block"><button class="w-dd-btn field" onclick="toggleDD(this)"><span>Bourgogne-Franche-Comté</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button><div class="w-dd-menu"><div class="w-dd-item active">Bourgogne-Franche-Comté</div><div class="w-dd-item">Île-de-France</div></div></div></div></div><div class="form-grid"><div class="form-field"><label>CODE APE (NAF)</label><input type="text" class="form-input" value="8559A"></div><div class="form-field"><label>N° SIRET</label><input type="text" class="form-input ro" value="42478033600014" readonly></div></div></div>
-              </div>
-              </div>
-              </div>
-
-            </div>
+            <div class="content"></div>
           </main>
         </div>
       </div>
@@ -7478,8 +7459,8 @@
       <!-- ============ 3. DASHBOARD ============ -->
       <p
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
-        3 — Dashboard · <code>templates/dashboard.html</code></p>
-      <div class="nav-stage" style="height:600px;">
+        3 — Dashboard · une entrée du bloc Reporting active</p>
+      <div class="nav-stage" style="height:380px;">
         <header class="topbar">
         <div class="tb-slot">
         <span class="tb-appn">Online<b>Manager</b></span>
@@ -7578,251 +7559,9 @@
           </nav>
           </aside>
           <main class="main">
-            <div class="content">
-              <nav class="bc-wrap" aria-label="Fil d'Ariane">
-              <a class="bc-item" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Accueil</a>
-              <span class="bc-sep"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
-              <span class="bc-cur">Stats pré-formatées</span>
-              </nav>
-
-              <div class="ph">
-              <div class="ph-l">
-              <h1 class="ph-title">Stats pré-formatées</h1>
-              </div>
-              <div class="ph-actions">
-              <button class="btn">Exporter l'ensemble</button>
-              </div>
-              </div>
-
-              <div class="wgrid">
-              <div class="w">
-              <div class="w-head">
-              <div class="w-ico" style="background:#E0F8EF;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-              </div>
-              <span class="w-title">Modules par mois</span>
-              <div class="w-controls">
-              <span class="w-badge">4 821</span>
-              <div class="w-dd-wrap"><button class="w-dd-btn" onclick="toggleDD(this)"><span>Annuel</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button><div class="w-dd-menu"><div class="w-dd-item active">Annuel</div><div class="w-dd-item">Mensuel</div></div></div>
-              </div>
-              </div>
-              <div class="w-body">
-              <div class="empty-chart"><div class="empty-bar" style="height:28px;"></div><div class="empty-bar" style="height:40px;"></div><div class="empty-bar" style="height:22px;"></div><div class="empty-bar" style="height:50px;"></div><div class="empty-bar" style="height:32px;"></div></div>
-              <div class="empty-msg">Aucune donnée trouvée, essayez d'autres filtres</div>
-              </div>
-              </div>
-              <div class="w">
-              <div class="w-head">
-              <div class="w-ico" style="background:#EDE9FE;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-              </div>
-              <span class="w-title">Inscriptions par mois</span>
-              <div class="w-controls">
-              <span class="w-badge">1 204</span>
-              <div class="w-dd-wrap"><button class="w-dd-btn" onclick="toggleDD(this)"><span>Annuel</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button><div class="w-dd-menu"><div class="w-dd-item active">Annuel</div><div class="w-dd-item">Mensuel</div></div></div>
-              </div>
-              </div>
-              <div class="w-body">
-              <div class="empty-chart"><div class="empty-bar" style="height:28px;"></div><div class="empty-bar" style="height:40px;"></div><div class="empty-bar" style="height:22px;"></div><div class="empty-bar" style="height:50px;"></div><div class="empty-bar" style="height:32px;"></div></div>
-              <div class="empty-msg">Aucune donnée trouvée, essayez d'autres filtres</div>
-              </div>
-              </div>
-              <div class="w">
-              <div class="w-head">
-              <div class="w-ico" style="background:#FEF3C7;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#B45309" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
-              </div>
-              <span class="w-title">Répartition par groupe</span>
-              <div class="w-controls">
-              <span class="w-badge">12</span>
-              <div class="w-dd-wrap"><button class="w-dd-btn" onclick="toggleDD(this)"><span>Annuel</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button><div class="w-dd-menu"><div class="w-dd-item active">Annuel</div><div class="w-dd-item">Mensuel</div></div></div>
-              </div>
-              </div>
-              <div class="w-body">
-              <div class="empty-chart"><div class="empty-bar" style="height:28px;"></div><div class="empty-bar" style="height:40px;"></div><div class="empty-bar" style="height:22px;"></div><div class="empty-bar" style="height:50px;"></div><div class="empty-bar" style="height:32px;"></div></div>
-              <div class="empty-msg">Aucune donnée trouvée, essayez d'autres filtres</div>
-              </div>
-              </div>
-              <div class="w">
-              <div class="w-head">
-              <div class="w-ico" style="background:#E0F2FE;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              </div>
-              <span class="w-title">Activité par heure</span>
-              <div class="w-controls">
-              <span class="w-badge">—</span>
-              <div class="w-dd-wrap"><button class="w-dd-btn" onclick="toggleDD(this)"><span>Annuel</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button><div class="w-dd-menu"><div class="w-dd-item active">Annuel</div><div class="w-dd-item">Mensuel</div></div></div>
-              </div>
-              </div>
-              <div class="w-body">
-              <div class="empty-chart"><div class="empty-bar" style="height:28px;"></div><div class="empty-bar" style="height:40px;"></div><div class="empty-bar" style="height:22px;"></div><div class="empty-bar" style="height:50px;"></div><div class="empty-bar" style="height:32px;"></div></div>
-              <div class="empty-msg">Aucune donnée trouvée, essayez d'autres filtres</div>
-              </div>
-              </div>
-              </div>
-
-            </div>
+            <div class="content"></div>
           </main>
         </div>
-      </div>
-
-      <table class="sizing-table" style="margin-top:40px;">
-        <thead>
-          <tr>
-            <th>Zone</th>
-            <th>Classe</th>
-            <th>Traitement</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Page</td>
-            <td class="var-name">body.app</td>
-            <td class="var-value">100vh · fond --bg · colonne flex · overflow hidden</td>
-          </tr>
-          <tr>
-            <td>Corps</td>
-            <td class="var-name">.layout &gt; .sidebar + .main</td>
-            <td class="var-value">.main défile seul, padding-top 56px sous la topbar</td>
-          </tr>
-          <tr>
-            <td>Contenu</td>
-            <td class="var-name">.content</td>
-            <td class="var-value">padding 24px 32px</td>
-          </tr>
-          <tr>
-            <td>Fil d'Ariane</td>
-            <td class="var-name">.bc-wrap &gt; .bc-item · .bc-sep · .bc-cur</td>
-            <td class="var-value">13.5px · courant en 600 --t1 · marge basse 24px</td>
-          </tr>
-          <tr>
-            <td>En-tête de page</td>
-            <td class="var-name">.ph &gt; .ph-l + .ph-actions</td>
-            <td class="var-value">titre Geist 22px 600 · compteur --t3 · actions à droite</td>
-          </tr>
-          <tr>
-            <td>Grille de widgets</td>
-            <td class="var-name">.wgrid · .full</td>
-            <td class="var-value">deux colonnes, gap 24px</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="code-box">
-        &lt;body class="app"&gt;<br>
-        &nbsp;&nbsp;&lt;header class="topbar"&gt;…&lt;/header&gt;<br>
-        &nbsp;&nbsp;&lt;div class="layout"&gt;<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&lt;aside class="sidebar"&gt;…&lt;/aside&gt;<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&lt;main class="main"&gt;<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="content"&gt;<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;nav class="bc-wrap"&gt;…&lt;/nav&gt;<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="ph"&gt;…&lt;/div&gt;<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!-- contenu --&gt;<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/main&gt;<br>
-        &nbsp;&nbsp;&lt;/div&gt;<br>
-        &nbsp;&nbsp;&lt;script src="dist/components.js" defer&gt;&lt;/script&gt;<br>
-        &lt;/body&gt;
-      </div>
-    </section>
-
-    <!-- NAVIGATION -->
-    <section id="navigation">
-      <h2 class="section-title">Navigation &amp; Topbar</h2>
-      <p class="section-desc">Deux composants fixes encadrent chaque écran : la topbar sur 56px et le menu gauche sur
-        220px (<code>--sw</code>). Le bloc logo de la topbar occupe la largeur du menu et partage son fond sombre, de
-        sorte que les deux ne forment qu'une seule colonne à l'œil.</p>
-
-      <!-- ============ 1. TOPBAR ============ -->
-      <p
-        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;">
-        1 — Topbar</p>
-
-      <div class="nav-stage" style="height:56px;">
-        <header class="topbar">
-        <div class="tb-slot">
-      <span class="tb-appn">Online<b>Manager</b></span>
-      <button class="tb-burger" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
-    </div>
-        <div class="tb-body">
-        <span class="tb-store">Onlineformapro</span>
-        <div class="tb-cw"><span class="tb-cl">Comptes :</span>
-        <div class="w-dd-wrap">
-        <button class="w-dd-btn tb" onclick="toggleDD(this)"><span class="ph">Sélectionnez un compte</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-        <div class="w-dd-menu">
-          <div class="w-dd-item">INFREP</div>
-          <div class="w-dd-item">OCB Formation</div>
-          <div class="w-dd-item">Cap Petite Enfance</div>
-        </div>
-      </div>
-        </div>
-
-        <div class="tb-ics">
-        <button class="tbi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-        stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
-        <polyline points="9 22 9 12 15 12 15 22" />
-        </svg></button>
-        <button class="tbi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-        stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="11" cy="11" r="8" />
-        <path d="m21 21-4.35-4.35" />
-        </svg></button>
-        <button class="tbi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-        stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="10" />
-        <line x1="2" y1="12" x2="22" y2="12" />
-        <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
-        </svg></button>
-        <div class="tbsep"></div>
-        <div class="apps-wrap">
-        <button class="tbi">
-        <svg viewBox="0 0 24 24" fill="currentColor">
-        <circle cx="5" cy="5" r="1.8" />
-        <circle cx="12" cy="5" r="1.8" />
-        <circle cx="19" cy="5" r="1.8" />
-        <circle cx="5" cy="12" r="1.8" />
-        <circle cx="12" cy="12" r="1.8" />
-        <circle cx="19" cy="12" r="1.8" />
-        <circle cx="5" cy="19" r="1.8" />
-        <circle cx="12" cy="19" r="1.8" />
-        <circle cx="19" cy="19" r="1.8" />
-        </svg>
-        </button>
-        <div class="apps-drop">
-        <div class="apps-hd">Applications</div>
-        <div class="app-row">
-        <div class="app-ic" style="background:#7C3AED"><svg viewBox="0 0 24 24">
-        <path
-        d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
-        </svg></div>
-        <div>
-        <div class="app-nm">OnlineAuteur</div>
-        <div class="app-sub">Création de contenus</div>
-        </div>
-        </div>
-        <div class="app-row">
-        <div class="app-ic" style="background:#059669"><svg viewBox="0 0 24 24">
-        <path
-        d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5zm15 8a2 2 0 012 2v4a2 2 0 01-2 2h-2l-3 3v-3H9a2 2 0 01-2-2v-1h1a3 3 0 003-3V9h8a2 2 0 012 2z" />
-        </svg></div>
-        <div>
-        <div class="app-nm">OnlineAgora</div>
-        <div class="app-sub">Espace collaboratif</div>
-        </div>
-        </div>
-        </div>
-        </div>
-        <button class="tbi red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-        stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
-        <polyline points="16 17 21 12 16 7" />
-        <line x1="21" y1="12" x2="9" y2="12" />
-        </svg></button>
-        <div class="tb-av">AL</div>
-        </div>
-        </div>
-        </header>
       </div>
 
       <table class="sizing-table">
@@ -8480,90 +8219,23 @@
     <!-- RESOURCES -->
     <section id="resources">
       <h2 class="section-title">Ressources &amp; téléchargements</h2>
-      <p class="section-desc"><code>index.html</code> est la source unique : tout ce qui suit en est dérivé par
-        <code>build.js</code>. Une page du produit importe <code>dist/components.css</code> et charge
-        <code>dist/components.js</code> ; elle ne recopie rien.</p>
+      <p class="section-desc">Deux fichiers, dérivés de <code>index.html</code>. Une page les importe et ne recopie
+        rien. Pour une IA, les règles d'usage sont dans <code>CLAUDE.md</code>, à la racine du dépôt.</p>
 
-      <p class="rs-group">Le système</p>
       <div class="rs-grid">
         <a class="rs-card" href="dist/components.css" download>
           <span class="rs-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span>
-          <span class="rs-txt"><span class="rs-name">components.css</span><span class="rs-desc">Tout le CSS des composants. À importer dans chaque page, jamais à recopier.</span></span>
-        </a>
-        <a class="rs-card" href="dist/tokens.css" download>
-          <span class="rs-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span>
-          <span class="rs-txt"><span class="rs-name">tokens.css</span><span class="rs-desc">Les variables seules. Déjà importé par components.css.</span></span>
+          <span class="rs-txt"><span class="rs-name">components.css</span><span class="rs-desc">Les variables et le CSS de tous les composants. À importer, jamais à recopier.</span></span>
         </a>
         <a class="rs-card" href="dist/components.js" download>
           <span class="rs-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span>
-          <span class="rs-txt"><span class="rs-name">components.js</span><span class="rs-desc">Dropdowns, tableaux, menus de ligne, panneau de colonnes. À charger avec defer.</span></span>
-        </a>
-      </div>
-      <p class="rs-group">Pages de départ</p>
-      <div class="rs-grid">
-        <a class="rs-card" href="templates/liste.html" download>
-          <span class="rs-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span>
-          <span class="rs-txt"><span class="rs-name">liste.html</span><span class="rs-desc">Un tableau avec filtres, actions de ligne et pagination.</span></span>
-        </a>
-        <a class="rs-card" href="templates/reglages.html" download>
-          <span class="rs-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span>
-          <span class="rs-txt"><span class="rs-name">reglages.html</span><span class="rs-desc">Un formulaire de réglages sur deux colonnes.</span></span>
-        </a>
-        <a class="rs-card" href="templates/dashboard.html" download>
-          <span class="rs-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span>
-          <span class="rs-txt"><span class="rs-name">dashboard.html</span><span class="rs-desc">Une grille de widgets de statistiques.</span></span>
-        </a>
-      </div>
-      <p class="rs-group">Pour l'IA</p>
-      <div class="rs-grid">
-        <a class="rs-card" href="CLAUDE.md" download>
-          <span class="rs-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span>
-          <span class="rs-txt"><span class="rs-name">CLAUDE.md</span><span class="rs-desc">Les règles lues par Claude Code avant de générer : interdits, intention → classe, squelette.</span></span>
-        </a>
-        <a class="rs-card" href="AGENTS.md" download>
-          <span class="rs-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span>
-          <span class="rs-txt"><span class="rs-name">AGENTS.md</span><span class="rs-desc">Le même fichier, pour les autres assistants.</span></span>
-        </a>
-        <a class="rs-card" href="catalog.json" download>
-          <span class="rs-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span>
-          <span class="rs-txt"><span class="rs-name">catalog.json</span><span class="rs-desc">La liste fermée des composants, classes, modificateurs et extraits canoniques.</span></span>
-        </a>
-        <a class="rs-card" href="check.js" download>
-          <span class="rs-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span>
-          <span class="rs-txt"><span class="rs-name">check.js</span><span class="rs-desc">Le vérificateur : node check.js page.html. Bloque couleurs en dur, classes inconnues, select natif, icône sans aria-label, deux primary.</span></span>
-        </a>
-      </div>
-      <p class="rs-group">Maintenance</p>
-      <div class="rs-grid">
-        <a class="rs-card" href="build.js" download>
-          <span class="rs-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span>
-          <span class="rs-txt"><span class="rs-name">build.js</span><span class="rs-desc">Régénère dist/ depuis index.html. node build.js --check pour la CI.</span></span>
-        </a>
-        <a class="rs-card" href="README.md" download>
-          <span class="rs-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span>
-          <span class="rs-txt"><span class="rs-name">README.md</span><span class="rs-desc">Le mode d'emploi du dépôt.</span></span>
+          <span class="rs-txt"><span class="rs-name">components.js</span><span class="rs-desc">Dropdowns, tableaux, menus de ligne, panneau de colonnes, plage de dates. À charger avec defer.</span></span>
         </a>
       </div>
 
-      <p
-        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin:48px 0 12px;">
-        Générer une page avec une IA</p>
-      <p class="section-desc" style="margin-bottom:16px;">Le prompt qui fonctionne. L'assistant lit
-        <code>CLAUDE.md</code> seul ; le vérificateur ferme la boucle.</p>
-      <div class="code-box">
-        Génère la page « Certifications » en partant de templates/liste.html.<br>
-        Utilise uniquement les classes de catalog.json.<br>
-        Lance node check.js certifications.html et corrige jusqu'à zéro erreur.
-      </div>
-
-      <p
-        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin:40px 0 12px;">
-        Modifier le système</p>
-      <div class="code-box">
-        # 1. éditer index.html<br>
-        node build.js &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# régénère dist/<br>
-        node check.js templates/*.html &nbsp;# les pages de départ restent conformes<br>
-        node build.js --check &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# en CI : échoue si dist/ est en retard
+      <div class="code-box" style="margin-top:24px;">
+        &lt;link rel="stylesheet" href="components.css"&gt;<br>
+        &lt;script src="components.js" defer&gt;&lt;/script&gt;
       </div>
     </section>
 
@@ -8642,23 +8314,6 @@
       try { sessionStorage.removeItem(LC_KEY); } catch (e) { }
       showOnly('#home');
       window.scrollTo(0, 0);
-    }
-
-    function filterCards(q) {
-      q = (q || '').trim().toLowerCase();
-      let shown = 0;
-      document.querySelectorAll('.lc-card').forEach(c => {
-        const hit = !q || c.dataset.q.includes(q);
-        c.classList.toggle('dim', !hit);
-        if (hit) shown++;
-      });
-      document.querySelectorAll('.lc-group').forEach(h => {
-        const grid = h.nextElementSibling;
-        const any = grid && grid.querySelector('.lc-card:not(.dim)');
-        h.hidden = !any;
-        if (grid) grid.hidden = !any;
-      });
-      document.getElementById('lc-empty').style.display = shown ? 'none' : 'block';
     }
 
     function pickSection(e, hash) {
@@ -8817,6 +8472,7 @@
       if (e.key !== 'Escape') return;
       closePanels();
       closeRowMenus();
+      document.querySelectorAll('.drp.open').forEach(x => x.classList.remove('open'));
       document.querySelectorAll('.w-dd-wrap.open').forEach(w => w.classList.remove('open'));
     });
 
@@ -8914,6 +8570,121 @@
 
       document.querySelectorAll('.cpanel').forEach(p => p.addEventListener('reorder', () => applyOrder(p)));
     })();
+
+    // ---- Plage de dates ----
+    const DRP_M = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
+    const DRP_MF = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+    const drpFmt = d => DRP_M[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+    const drpIso = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    const drpParse = s => { const [y, m, d] = s.split('-').map(Number); return new Date(y, m - 1, d); };
+
+    function drpRender(pop) {
+      const y = +pop.dataset.y, m = +pop.dataset.m;
+      const start = pop.dataset.start ? drpParse(pop.dataset.start) : null;
+      const end = pop.dataset.end ? drpParse(pop.dataset.end) : null;
+      pop.querySelector('.ttl').textContent = DRP_MF[m] + ' ' + y;
+      const grid = pop.querySelector('.drp-grid');
+      grid.querySelectorAll('.drp-day').forEach(c => c.remove());
+      const first = new Date(y, m, 1);
+      const cur = new Date(y, m, 1 - ((first.getDay() + 6) % 7)); // semaine du lundi
+      for (let i = 0; i < 42; i++) {
+        const c = document.createElement('div');
+        c.className = 'drp-day';
+        c.textContent = cur.getDate();
+        if (cur.getMonth() !== m) c.classList.add('muted');
+        const t = cur.getTime();
+        if (start && end && t > start.getTime() && t < end.getTime()) c.classList.add('in');
+        if (start && t === start.getTime()) c.classList.add('start');
+        if (end && t === end.getTime()) c.classList.add('end');
+        c.dataset.d = drpIso(cur);
+        c.onclick = () => drpPick(c);
+        grid.appendChild(c);
+        cur.setDate(cur.getDate() + 1);
+      }
+      const [i1, i2] = pop.querySelectorAll('.drp-head input');
+      i1.value = start ? drpFmt(start) : '';
+      i2.value = end ? drpFmt(end) : '';
+    }
+
+    function drpSuggestions(pop) {
+      const t = new Date(); t.setHours(0, 0, 0, 0);
+      const d = (n) => { const x = new Date(t); x.setDate(x.getDate() + n); return x; };
+      const mon = d(-((t.getDay() + 6) % 7));
+      const y = t.getFullYear(), m = t.getMonth();
+      const R = {
+        today: [t, t],
+        week: [mon, t],
+        '7d': [d(-7), t],
+        '30d': [d(-30), t],
+        month: [new Date(y, m, 1), t],
+        year: [new Date(y, 0, 1), t],
+        lastmonth: [new Date(y, m - 1, 1), new Date(y, m, 0)],
+        lastyear: [new Date(y - 1, 0, 1), new Date(y - 1, 11, 31)],
+      };
+      pop.querySelectorAll('.drp-sug-item').forEach(el => {
+        const [a, b] = R[el.dataset.k];
+        el.dataset.start = drpIso(a); el.dataset.end = drpIso(b);
+        el.querySelector('span').textContent = a.getTime() === b.getTime() ? drpFmt(a) : drpFmt(a) + ' - ' + drpFmt(b);
+      });
+    }
+
+    function drpOpen(btn) {
+      const w = btn.closest('.drp');
+      const open = w.classList.contains('open');
+      document.querySelectorAll('.drp.open').forEach(x => x.classList.remove('open'));
+      if (!open) {
+        w.classList.add('open');
+        const pop = w.querySelector('.drp-pop');
+        drpSuggestions(pop);
+        drpRender(pop);
+      }
+    }
+
+    function drpNav(btn, delta) {
+      const pop = btn.closest('.drp-pop');
+      let m = +pop.dataset.m + delta, y = +pop.dataset.y;
+      if (m < 0) { m = 11; y--; } else if (m > 11) { m = 0; y++; }
+      pop.dataset.m = m; pop.dataset.y = y;
+      drpRender(pop);
+    }
+
+    function drpPick(cell) {
+      const pop = cell.closest('.drp-pop');
+      const d = cell.dataset.d;
+      const s = pop.dataset.start, e = pop.dataset.end;
+      if (!s || (s && e)) { pop.dataset.start = d; pop.dataset.end = ''; }
+      else if (d < s) { pop.dataset.start = d; }
+      else { pop.dataset.end = d; }
+      drpRender(pop);
+    }
+
+    function drpSug(el) {
+      const pop = el.closest('.drp-pop');
+      pop.dataset.start = el.dataset.start; pop.dataset.end = el.dataset.end;
+      const e = drpParse(el.dataset.end);
+      pop.dataset.y = e.getFullYear(); pop.dataset.m = e.getMonth();
+      drpRender(pop);
+    }
+
+    function drpApply(btn) {
+      const w = btn.closest('.drp'), pop = w.querySelector('.drp-pop');
+      if (pop.dataset.start && pop.dataset.end) {
+        w.querySelector('.lbl').textContent = drpFmt(drpParse(pop.dataset.start));
+        w.querySelector('.lbl2').textContent = drpFmt(drpParse(pop.dataset.end));
+      }
+      if (!pop.classList.contains('pin')) w.classList.remove('open');
+    }
+
+    function drpCancel(btn) {
+      const w = btn.closest('.drp');
+      if (!w.querySelector('.drp-pop').classList.contains('pin')) w.classList.remove('open');
+    }
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.drp')) document.querySelectorAll('.drp.open').forEach(x => x.classList.remove('open'));
+    });
+
+    document.querySelectorAll('.drp-pop.pin').forEach(pop => { drpSuggestions(pop); drpRender(pop); });
 
     /* @components:end */
 
