@@ -118,3 +118,7 @@ for (const [name, content] of Object.entries(files)) {
   fs.writeFileSync(path.join(DIST, name), content);
   console.log(`dist/${name}  ${content.length} octets`);
 }
+
+// OMDS.md est le même fichier que CLAUDE.md, sous le nom distribué à l'équipe.
+fs.copyFileSync(path.join(ROOT, 'CLAUDE.md'), path.join(ROOT, 'OMDS.md'));
+console.log('OMDS.md  copie de CLAUDE.md');

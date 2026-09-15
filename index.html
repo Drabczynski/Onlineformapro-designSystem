@@ -531,17 +531,23 @@
 
     /* Badge de comptage embarqué */
     .btn .btn-count {
-      background: rgba(255, 255, 255, 0.22);
+      min-width: 20px;
+      height: 20px;
+      padding: 0 7px;
       border-radius: 999px;
-      padding: 1px 7px;
-      font-size: 0.85em;
+      background: rgba(255, 255, 255, 0.22);
+      font-size: 11.5px;
       font-weight: 700;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
     }
 
     .btn:not(.primary):not(.secondary) .btn-count {
-      background: #fff;
+      background: var(--ps);
       border: 1px solid var(--bd);
-      padding: 0 6px;
       color: var(--t2);
     }
 
@@ -2791,9 +2797,10 @@
 
     .drp-day.start,
     .drp-day.end {
-      background: var(--a);
+      /* Le disque est trace au centre de la cellule : la cellule est plus large
+         que haute, un border-radius donnerait une ellipse. */
+      background: radial-gradient(circle at center, var(--a) 0 18px, transparent 18px);
       color: #fff;
-      border-radius: 50%;
       font-weight: 600;
     }
 
@@ -5132,85 +5139,10 @@
         texte en <code>--t3</code>.
       </p>
 
-      <!-- ============ 3. LA GRILLE ============ -->
+      <!-- ============ 3. GROUPEMENT EN SECTIONS ============ -->
       <p
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
-        3 — La grille de champs</p>
-      <p class="section-desc" style="margin-bottom:24px;">Le nombre de colonnes de la <code>.form-grid</code> suit la
-        <b>longueur attendue de la valeur</b>, pas la place disponible.</p>
-
-      <div class="preview-box">
-        <div class="preview-label">Live Preview</div>
-        <div class="fs-card" style="max-width:700px;">
-          <div class="form-grid col-full">
-            <div class="form-field"><label>Adresse<span class="req">*</span></label><input type="text"
-                class="form-input" value="Espace de la Motte"></div>
-          </div>
-          <div class="form-grid">
-            <div class="form-field"><label>Code postal<span class="req">*</span></label><input type="text"
-                class="form-input" value="70000"></div>
-            <div class="form-field"><label>Ville<span class="req">*</span></label><input type="text" class="form-input"
-                value="VESOUL"></div>
-          </div>
-          <div class="form-grid cols-3">
-            <div class="form-field"><label>Forme juridique</label><input type="text" class="form-input" value="SA">
-            </div>
-            <div class="form-field"><label>Capital</label><input type="text" class="form-input" value="1 100 000"></div>
-            <div class="form-field"><label>Devise</label><div class="w-dd-wrap block">
-  <button class="w-dd-btn field" onclick="toggleDD(this)"><span>EUR (€)</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-  <div class="w-dd-menu">
-    <div class="w-dd-item active">EUR (€)</div>
-    <div class="w-dd-item">USD ($)</div>
-  </div>
-</div></div>
-          </div>
-        </div>
-      </div>
-
-      <table class="sizing-table">
-        <thead>
-          <tr>
-            <th>Classe</th>
-            <th>Colonnes</th>
-            <th>Pour quelles valeurs</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="var-name">.form-grid.col-full</td>
-            <td class="var-value">1</td>
-            <td>Adresse, raison sociale, intitulé, zone de texte</td>
-          </tr>
-          <tr>
-            <td class="var-name">.form-grid</td>
-            <td class="var-value">2 (défaut)</td>
-            <td>Le cas courant : nom/prénom, téléphone/fax, e-mail/site</td>
-          </tr>
-          <tr>
-            <td class="var-name">.form-grid.cols-3</td>
-            <td class="var-value">3</td>
-            <td>Valeurs courtes et de même nature : code APE, capital, devise</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="code-box">
-        &lt;div class="form-grid col-full"&gt;<br>
-        &nbsp;&nbsp;&lt;div class="form-field"&gt;<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&lt;label&gt;Adresse&lt;span class="req"&gt;*&lt;/span&gt;&lt;/label&gt;<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="text" class="form-input"&gt;<br>
-        &nbsp;&nbsp;&lt;/div&gt;<br>
-        &lt;/div&gt;<br>
-        &lt;div class="form-grid"&gt;&lt;!-- 2 colonnes --&gt;<br>
-        &nbsp;&nbsp;&lt;div class="form-field"&gt;…&lt;/div&gt;<br>
-        &nbsp;&nbsp;&lt;div class="form-field"&gt;…&lt;/div&gt;<br>
-        &lt;/div&gt;
-      </div>
-
-      <!-- ============ 4. GROUPEMENT EN SECTIONS ============ -->
-      <p
-        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
-        4 — Groupement en sections</p>
+        3 — Groupement en sections</p>
       <p class="section-desc" style="margin-bottom:24px;">Toujours regrouper en <code>.fs-block</code> : un en-tête à
         icône, puis une <code>.fs-card</code> blanche qui contient les grilles. Les sections se posent sur deux
         colonnes — un bloc qui prend toute la largeur de la page étire les champs et casse la lecture.</p>
@@ -5304,10 +5236,10 @@
         « Code postal » s'étire sur 300px et les libellés s'éloignent de leurs valeurs. En deux colonnes, chaque
         section reste sous 560px : l'œil balaie une carte sans se déplacer.</p>
 
-      <!-- ============ 5. IMPORT DE FICHIER ============ -->
+      <!-- ============ 4. IMPORT DE FICHIER ============ -->
       <p
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
-        5 — Import de fichier</p>
+        4 — Import de fichier</p>
       <p class="section-desc" style="margin-bottom:24px;">Contraintes de poids et de format écrites <b>avant</b> la sélection.</p>
 
       <div class="preview-box">
@@ -5353,10 +5285,10 @@
         </div>
       </div>
 
-      <!-- ============ 6. CHOIX ============ -->
+      <!-- ============ 5. CHOIX ============ -->
       <p
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
-        6 — Choix &amp; bascules</p>
+        5 — Choix &amp; bascules</p>
 
       <div class="preview-box">
         <div class="preview-label">Cartes de choix — options exclusives à expliquer</div>
@@ -5428,10 +5360,10 @@
         </tbody>
       </table>
 
-      <!-- ============ 7. PLAGE DE DATES ============ -->
+      <!-- ============ 6. PLAGE DE DATES ============ -->
       <p
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
-        7 — Plage de dates</p>
+        6 — Plage de dates</p>
       <p class="section-desc" style="margin-bottom:24px;">Le déclencheur a le gabarit d'un dropdown de widget, icône
         calendrier en <code>--a</code>. Le panneau : les deux bornes en champs, un calendrier mensuel, une colonne de
         suggestions. La plage se lit en <code>--a1</code>, ses bornes en <code>--a</code>. Rien n'est appliqué avant
@@ -5556,7 +5488,7 @@
           <tr>
             <td>Bornes de la plage</td>
             <td class="var-name">.drp-day.start / .end</td>
-            <td class="var-value">disque --a, texte blanc 600</td>
+            <td class="var-value">disque --a de 36px centré, texte blanc 600</td>
           </tr>
           <tr>
             <td>Suggestions</td>
@@ -5580,10 +5512,10 @@
         &lt;/div&gt;
       </div>
 
-      <!-- ============ 8. LAYOUT DE PAGE ============ -->
+      <!-- ============ 7. LAYOUT DE PAGE ============ -->
       <p
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
-        8 — Layout d'une page de réglages</p>
+        7 — Layout d'une page de réglages</p>
       <p class="section-desc" style="margin-bottom:24px;">Deux colonnes de sections, réparties par <b>fréquence de
         modification</b> : ce qui change souvent à gauche, ce qui est stable (références légales, signature) à
         droite.</p>
@@ -7570,6 +7502,151 @@
             <th>Zone</th>
             <th>Classe</th>
             <th>Traitement</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Page</td>
+            <td class="var-name">body.app</td>
+            <td class="var-value">100vh · fond --bg · colonne flex · overflow hidden</td>
+          </tr>
+          <tr>
+            <td>Corps</td>
+            <td class="var-name">.layout &gt; .sidebar + .main</td>
+            <td class="var-value">.main défile seul, padding-top 56px sous la topbar</td>
+          </tr>
+          <tr>
+            <td>Contenu</td>
+            <td class="var-name">.content</td>
+            <td class="var-value">padding 24px 32px · tout le contenu de la page vit ici</td>
+          </tr>
+          <tr>
+            <td>Entrée active</td>
+            <td class="var-name">.ni.act · .ni-sub.act</td>
+            <td class="var-value">une seule par page · le groupe d'une sous-entrée porte .open</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="code-box">
+        &lt;body class="app"&gt;<br>
+        &nbsp;&nbsp;&lt;header class="topbar"&gt;…&lt;/header&gt;<br>
+        &nbsp;&nbsp;&lt;div class="layout"&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;aside class="sidebar"&gt;…&lt;/aside&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;main class="main"&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="content"&gt;&lt;!-- la page --&gt;&lt;/div&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/main&gt;<br>
+        &nbsp;&nbsp;&lt;/div&gt;<br>
+        &nbsp;&nbsp;&lt;script src="components.js" defer&gt;&lt;/script&gt;<br>
+        &lt;/body&gt;
+      </div>
+    </section>
+
+    <!-- NAVIGATION -->
+    <section id="navigation">
+      <h2 class="section-title">Navigation &amp; Topbar</h2>
+      <p class="section-desc">Deux composants fixes encadrent chaque écran : la topbar sur 56px et le menu gauche sur
+        220px (<code>--sw</code>). Le bloc logo de la topbar occupe la largeur du menu et partage son fond sombre, de
+        sorte que les deux ne forment qu'une seule colonne à l'œil.</p>
+
+      <!-- ============ 1. TOPBAR ============ -->
+      <p
+        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;">
+        1 — Topbar</p>
+
+      <div class="nav-stage" style="height:56px;">
+        <header class="topbar">
+        <div class="tb-slot">
+      <span class="tb-appn">Online<b>Manager</b></span>
+      <button class="tb-burger" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+    </div>
+        <div class="tb-body">
+        <span class="tb-store">Onlineformapro</span>
+        <div class="tb-cw"><span class="tb-cl">Comptes :</span>
+        <div class="w-dd-wrap">
+        <button class="w-dd-btn tb" onclick="toggleDD(this)"><span class="ph">Sélectionnez un compte</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="w-dd-menu">
+          <div class="w-dd-item">INFREP</div>
+          <div class="w-dd-item">OCB Formation</div>
+          <div class="w-dd-item">Cap Petite Enfance</div>
+        </div>
+      </div>
+        </div>
+
+        <div class="tb-ics">
+        <button class="tbi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+        <polyline points="9 22 9 12 15 12 15 22" />
+        </svg></button>
+        <button class="tbi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8" />
+        <path d="m21 21-4.35-4.35" />
+        </svg></button>
+        <button class="tbi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+        stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <line x1="2" y1="12" x2="22" y2="12" />
+        <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
+        </svg></button>
+        <div class="tbsep"></div>
+        <div class="apps-wrap">
+        <button class="tbi">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+        <circle cx="5" cy="5" r="1.8" />
+        <circle cx="12" cy="5" r="1.8" />
+        <circle cx="19" cy="5" r="1.8" />
+        <circle cx="5" cy="12" r="1.8" />
+        <circle cx="12" cy="12" r="1.8" />
+        <circle cx="19" cy="12" r="1.8" />
+        <circle cx="5" cy="19" r="1.8" />
+        <circle cx="12" cy="19" r="1.8" />
+        <circle cx="19" cy="19" r="1.8" />
+        </svg>
+        </button>
+        <div class="apps-drop">
+        <div class="apps-hd">Applications</div>
+        <div class="app-row">
+        <div class="app-ic" style="background:#7C3AED"><svg viewBox="0 0 24 24">
+        <path
+        d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
+        </svg></div>
+        <div>
+        <div class="app-nm">OnlineAuteur</div>
+        <div class="app-sub">Création de contenus</div>
+        </div>
+        </div>
+        <div class="app-row">
+        <div class="app-ic" style="background:#059669"><svg viewBox="0 0 24 24">
+        <path
+        d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5zm15 8a2 2 0 012 2v4a2 2 0 01-2 2h-2l-3 3v-3H9a2 2 0 01-2-2v-1h1a3 3 0 003-3V9h8a2 2 0 012 2z" />
+        </svg></div>
+        <div>
+        <div class="app-nm">OnlineAgora</div>
+        <div class="app-sub">Espace collaboratif</div>
+        </div>
+        </div>
+        </div>
+        </div>
+        <button class="tbi red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
+        <polyline points="16 17 21 12 16 7" />
+        <line x1="21" y1="12" x2="9" y2="12" />
+        </svg></button>
+        <div class="tb-av">AL</div>
+        </div>
+        </div>
+        </header>
+      </div>
+
+      <table class="sizing-table">
+        <thead>
+          <tr>
+            <th>Zone</th>
+            <th>Classe</th>
+            <th>Traitement</th>
             <th>Contenu</th>
           </tr>
         </thead>
@@ -7968,7 +8045,6 @@
       </div>
     </section>
 
-    <!-- MODALS -->
     <section id="modals">
       <h2 class="section-title">Modales & Overlays</h2>
       <p class="section-desc">Patterns pour les dialogs, popovers, date pickers et autres overlays.</p>
@@ -8219,8 +8295,7 @@
     <!-- RESOURCES -->
     <section id="resources">
       <h2 class="section-title">Ressources &amp; téléchargements</h2>
-      <p class="section-desc">Deux fichiers, dérivés de <code>index.html</code>. Une page les importe et ne recopie
-        rien. Pour une IA, les règles d'usage sont dans <code>CLAUDE.md</code>, à la racine du dépôt.</p>
+      <p class="section-desc">Deux fichiers à importer dans une page, et les règles à donner à un assistant.</p>
 
       <div class="rs-grid">
         <a class="rs-card" href="dist/components.css" download>
@@ -8230,6 +8305,10 @@
         <a class="rs-card" href="dist/components.js" download>
           <span class="rs-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span>
           <span class="rs-txt"><span class="rs-name">components.js</span><span class="rs-desc">Dropdowns, tableaux, menus de ligne, panneau de colonnes, plage de dates. À charger avec defer.</span></span>
+        </a>
+        <a class="rs-card" href="OMDS.md" download>
+          <span class="rs-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span>
+          <span class="rs-txt"><span class="rs-name">OMDS.md</span><span class="rs-desc">Les règles à donner à l'assistant : interdits, intention → classe, squelette de page complet.</span></span>
         </a>
       </div>
 
