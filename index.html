@@ -107,12 +107,6 @@
       color: var(--nav-act);
     }
 
-    .ds-logo span {
-      color: var(--t3);
-      font-weight: 600;
-      margin-left: 2px;
-    }
-
     .ds-nav-title {
       font-size: 11px;
       font-weight: 700;
@@ -714,6 +708,95 @@
     }
 
     /* ==========================================================
+       ICONOGRAPHIE — grille Eva
+       ========================================================== */
+    .ico-tools {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 8px;
+    }
+
+    .ico-count {
+      font-size: 12.5px;
+      color: var(--t3);
+    }
+
+    .ico-fallback {
+      margin: 8px 0 16px;
+      padding: 10px 14px;
+      border: 1px solid var(--d2);
+      background: var(--d1);
+      border-radius: var(--r);
+      font-size: 13px;
+      color: var(--d);
+    }
+
+    .ico-cat {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--t3);
+      margin: 28px 0 12px;
+    }
+
+    .ico-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
+      gap: 8px;
+    }
+
+    .ico-cell {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 6px 10px;
+      border: 1px solid var(--bd);
+      border-radius: var(--r);
+      background: #fff;
+      color: var(--t1);
+      cursor: pointer;
+      transition: border-color .12s, background .12s;
+      min-height: 76px;
+    }
+
+    .ico-cell:hover {
+      border-color: var(--a);
+      background: var(--a1);
+      color: var(--a);
+    }
+
+    .ico-cell.copied {
+      border-color: var(--a);
+      background: var(--a2);
+    }
+
+    .ico-cell svg,
+    .ico-cell i {
+      width: 22px;
+      height: 22px;
+      display: block;
+    }
+
+    .ico-cell svg {
+      fill: currentColor;
+    }
+
+    .ico-cell span {
+      font-size: 11px;
+      color: var(--t3);
+      text-align: center;
+      line-height: 1.2;
+      word-break: break-word;
+    }
+
+    .ico-cell.dim {
+      display: none;
+    }
+
+    /* ==========================================================
        ECRAN D'ACCUEIL — choix de la section
        ========================================================== */
     .launcher {
@@ -763,14 +846,6 @@
     .lc-brand b {
       font-weight: inherit;
       color: var(--nav-act);
-    }
-
-    .lc-brand small {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--t3);
-      margin-left: 8px;
-      letter-spacing: .04em;
     }
 
     .lc-search {
@@ -1468,8 +1543,6 @@
 
     .cplist {
       padding: 4px 0 8px;
-      max-height: 320px;
-      overflow-y: auto;
     }
 
     .crow {
@@ -2172,7 +2245,7 @@
 
     .fs-title {
       font-size: 16px;
-      font-weight: 800;
+      font-weight: 700;
       color: #0F172A;
     }
 
@@ -2970,7 +3043,7 @@
         border-radius: 16px;
         width: 100%;
         max-width: 520px;
-        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        box-shadow: 0 12px 32px rgba(17, 24, 39, 0.08);
         overflow: hidden;
         border: 1px solid var(--bd);
       }
@@ -2984,14 +3057,20 @@
       }
 
       .modal-header .modal-icon {
-        width: 42px;
-        height: 42px;
+        width: 38px;
+        height: 38px;
         background: var(--a1);
         color: var(--a);
-        border-radius: 12px;
+        border-radius: 10px;
         display: flex;
         align-items: center;
         justify-content: center;
+      }
+
+      .modal-header .modal-icon svg {
+        width: 18px;
+        height: 18px;
+        stroke-width: 1.6;
       }
 
       .modal-header .modal-title-wrap {
@@ -3043,9 +3122,9 @@
       }
 
       .drop-zone {
-        border: 2px dashed #E2E8F0;
-        border-radius: 14px;
-        padding: 40px;
+        border: 1px dashed var(--bd);
+        border-radius: var(--rl);
+        padding: 36px 32px;
         text-align: center;
         transition: var(--trans);
         cursor: pointer;
@@ -3058,17 +3137,22 @@
       }
 
       .drop-icon {
-        width: 56px;
-        height: 56px;
+        width: 48px;
+        height: 48px;
         background: #fff;
         border-radius: 50%;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 0 auto 20px;
+        margin: 0 auto 16px;
         color: var(--a);
-        border: 1px solid #E2E8F0;
+        border: 1px solid var(--bd);
+      }
+
+      .drop-icon svg {
+        width: 20px;
+        height: 20px;
+        stroke-width: 1.5;
       }
 
       .drop-text {
@@ -3138,7 +3222,7 @@
   <div class="launcher" id="launcher">
     <div class="lc-head">
       <div class="lc-head-in">
-        <div class="lc-brand">Online<b>Manager</b> DS<small>v1</small></div>
+        <div class="lc-brand">Online<b>Manager</b></div>
         <input type="search" class="lc-search" id="lc-search" placeholder="Rechercher une section…"
           oninput="filterCards(this.value)" autocomplete="off">
       </div>
@@ -3268,7 +3352,7 @@
   </div>
 
   <aside class="ds-sidebar">
-    <div class="ds-logo">Online<b>Manager</b> <span>DS</span></div>
+    <div class="ds-logo">Online<b>Manager</b></div>
 
     <button class="ds-home" onclick="showLauncher()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
@@ -5128,49 +5212,270 @@
     <!-- ICONS -->
     <section id="icons">
       <h2 class="section-title">Iconographie</h2>
-      <p class="section-desc">Jeu d'icônes de référence : <b><a href="https://akveo.github.io/eva-icons/"
-            target="_blank" rel="noopener" style="color:var(--a);">Eva Icons</a></b>, variante <i>outline</i>, grille
-        24 × 24. <code>stroke-width: 1.8</code> et <code>currentColor</code> pour que l'icône suive la variante et le
-        ton du composant qui la porte.</p>
-      <p class="section-desc" style="margin-top:-24px;font-size:13.5px;">Les tracés présentés ci-dessous sont encore
-        ceux de Feather : la substitution par les tracés Eva reste à faire, icône par icône. Les règles de taille,
-        d'épaisseur et de couleur, elles, sont celles du système.</p>
+      <p class="section-desc">Jeu de référence : <b><a href="https://akveo.github.io/eva-icons/" target="_blank"
+            rel="noopener" style="color:var(--a);">Eva Icons</a></b>, variante <i>outline</i>, grille 24 × 24, rendu
+        en <code>currentColor</code>. Les icônes ci-dessous sont celles du jeu, chargées depuis le paquet officiel —
+        187 sur les 490. Cliquer une icône copie son nom.</p>
 
-      <div class="ds-grid">
-        <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
-          <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-              <polyline points="9 22 9 12 15 12 15 22" />
-            </svg></div>
-          <span style="font-size: 11px; color: var(--t3);">Accueil</span>
-        </div>
-        <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
-          <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-              stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10" />
-              <line x1="12" y1="16" x2="12" y2="12" />
-              <line x1="12" y1="8" x2="12.01" y2="8" />
-            </svg></div>
-          <span style="font-size: 11px; color: var(--t3);">Info</span>
-        </div>
-        <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
-          <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-              stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-              <circle cx="8.5" cy="8.5" r="1.5" />
-              <polyline points="21 15 16 10 5 21" />
-            </svg></div>
-          <span style="font-size: 11px; color: var(--t3);">Image / Logo</span>
-        </div>
-        <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
-          <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 20h9" />
-              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
-            </svg></div>
-          <span style="font-size: 11px; color: var(--t3);">Édition / Signature</span>
-        </div>
+      <div class="ico-tools">
+        <input type="search" class="form-input" id="ico-search" placeholder="Filtrer par nom : trash, arrow, person…"
+          oninput="filterIcons(this.value)" autocomplete="off" style="max-width:360px;">
+        <span class="ico-count" id="ico-count"></span>
+      </div>
+      <div class="ico-fallback" id="ico-fallback" hidden>Le paquet <code>eva-icons</code> n'a pas pu être chargé
+        depuis jsDelivr — vérifiez l'accès réseau. Les noms restent valides.</div>
+
+      <h3 class="ico-cat">Navigation</h3>
+      <div class="ico-grid">
+        <div class="ico-cell" data-name="home-outline" title="home-outline" onclick="copyIcon(this)"><i data-eva="home-outline"></i><span>home</span></div>
+        <div class="ico-cell" data-name="menu-outline" title="menu-outline" onclick="copyIcon(this)"><i data-eva="menu-outline"></i><span>menu</span></div>
+        <div class="ico-cell" data-name="menu-2-outline" title="menu-2-outline" onclick="copyIcon(this)"><i data-eva="menu-2-outline"></i><span>menu-2</span></div>
+        <div class="ico-cell" data-name="arrow-back-outline" title="arrow-back-outline" onclick="copyIcon(this)"><i data-eva="arrow-back-outline"></i><span>arrow-back</span></div>
+        <div class="ico-cell" data-name="arrow-forward-outline" title="arrow-forward-outline" onclick="copyIcon(this)"><i data-eva="arrow-forward-outline"></i><span>arrow-forward</span></div>
+        <div class="ico-cell" data-name="arrow-up-outline" title="arrow-up-outline" onclick="copyIcon(this)"><i data-eva="arrow-up-outline"></i><span>arrow-up</span></div>
+        <div class="ico-cell" data-name="arrow-down-outline" title="arrow-down-outline" onclick="copyIcon(this)"><i data-eva="arrow-down-outline"></i><span>arrow-down</span></div>
+        <div class="ico-cell" data-name="chevron-left-outline" title="chevron-left-outline" onclick="copyIcon(this)"><i data-eva="chevron-left-outline"></i><span>chevron-left</span></div>
+        <div class="ico-cell" data-name="chevron-right-outline" title="chevron-right-outline" onclick="copyIcon(this)"><i data-eva="chevron-right-outline"></i><span>chevron-right</span></div>
+        <div class="ico-cell" data-name="chevron-up-outline" title="chevron-up-outline" onclick="copyIcon(this)"><i data-eva="chevron-up-outline"></i><span>chevron-up</span></div>
+        <div class="ico-cell" data-name="chevron-down-outline" title="chevron-down-outline" onclick="copyIcon(this)"><i data-eva="chevron-down-outline"></i><span>chevron-down</span></div>
+        <div class="ico-cell" data-name="arrowhead-left-outline" title="arrowhead-left-outline" onclick="copyIcon(this)"><i data-eva="arrowhead-left-outline"></i><span>arrowhead-left</span></div>
+        <div class="ico-cell" data-name="arrowhead-right-outline" title="arrowhead-right-outline" onclick="copyIcon(this)"><i data-eva="arrowhead-right-outline"></i><span>arrowhead-right</span></div>
+        <div class="ico-cell" data-name="corner-down-left-outline" title="corner-down-left-outline" onclick="copyIcon(this)"><i data-eva="corner-down-left-outline"></i><span>corner-down-left</span></div>
+        <div class="ico-cell" data-name="corner-up-right-outline" title="corner-up-right-outline" onclick="copyIcon(this)"><i data-eva="corner-up-right-outline"></i><span>corner-up-right</span></div>
+        <div class="ico-cell" data-name="external-link-outline" title="external-link-outline" onclick="copyIcon(this)"><i data-eva="external-link-outline"></i><span>external-link</span></div>
+        <div class="ico-cell" data-name="navigation-2-outline" title="navigation-2-outline" onclick="copyIcon(this)"><i data-eva="navigation-2-outline"></i><span>navigation-2</span></div>
+        <div class="ico-cell" data-name="compass-outline" title="compass-outline" onclick="copyIcon(this)"><i data-eva="compass-outline"></i><span>compass</span></div>
+        <div class="ico-cell" data-name="map-outline" title="map-outline" onclick="copyIcon(this)"><i data-eva="map-outline"></i><span>map</span></div>
+        <div class="ico-cell" data-name="pin-outline" title="pin-outline" onclick="copyIcon(this)"><i data-eva="pin-outline"></i><span>pin</span></div>
+        <div class="ico-cell" data-name="expand-outline" title="expand-outline" onclick="copyIcon(this)"><i data-eva="expand-outline"></i><span>expand</span></div>
+        <div class="ico-cell" data-name="collapse-outline" title="collapse-outline" onclick="copyIcon(this)"><i data-eva="collapse-outline"></i><span>collapse</span></div>
+        <div class="ico-cell" data-name="maximize-outline" title="maximize-outline" onclick="copyIcon(this)"><i data-eva="maximize-outline"></i><span>maximize</span></div>
+        <div class="ico-cell" data-name="minimize-outline" title="minimize-outline" onclick="copyIcon(this)"><i data-eva="minimize-outline"></i><span>minimize</span></div>
+      </div>
+      <h3 class="ico-cat">Actions</h3>
+      <div class="ico-grid">
+        <div class="ico-cell" data-name="plus-outline" title="plus-outline" onclick="copyIcon(this)"><i data-eva="plus-outline"></i><span>plus</span></div>
+        <div class="ico-cell" data-name="plus-circle-outline" title="plus-circle-outline" onclick="copyIcon(this)"><i data-eva="plus-circle-outline"></i><span>plus-circle</span></div>
+        <div class="ico-cell" data-name="minus-outline" title="minus-outline" onclick="copyIcon(this)"><i data-eva="minus-outline"></i><span>minus</span></div>
+        <div class="ico-cell" data-name="minus-circle-outline" title="minus-circle-outline" onclick="copyIcon(this)"><i data-eva="minus-circle-outline"></i><span>minus-circle</span></div>
+        <div class="ico-cell" data-name="close-outline" title="close-outline" onclick="copyIcon(this)"><i data-eva="close-outline"></i><span>close</span></div>
+        <div class="ico-cell" data-name="close-circle-outline" title="close-circle-outline" onclick="copyIcon(this)"><i data-eva="close-circle-outline"></i><span>close-circle</span></div>
+        <div class="ico-cell" data-name="checkmark-outline" title="checkmark-outline" onclick="copyIcon(this)"><i data-eva="checkmark-outline"></i><span>checkmark</span></div>
+        <div class="ico-cell" data-name="checkmark-circle-2-outline" title="checkmark-circle-2-outline" onclick="copyIcon(this)"><i data-eva="checkmark-circle-2-outline"></i><span>checkmark-circle-2</span></div>
+        <div class="ico-cell" data-name="edit-outline" title="edit-outline" onclick="copyIcon(this)"><i data-eva="edit-outline"></i><span>edit</span></div>
+        <div class="ico-cell" data-name="edit-2-outline" title="edit-2-outline" onclick="copyIcon(this)"><i data-eva="edit-2-outline"></i><span>edit-2</span></div>
+        <div class="ico-cell" data-name="trash-2-outline" title="trash-2-outline" onclick="copyIcon(this)"><i data-eva="trash-2-outline"></i><span>trash-2</span></div>
+        <div class="ico-cell" data-name="copy-outline" title="copy-outline" onclick="copyIcon(this)"><i data-eva="copy-outline"></i><span>copy</span></div>
+        <div class="ico-cell" data-name="save-outline" title="save-outline" onclick="copyIcon(this)"><i data-eva="save-outline"></i><span>save</span></div>
+        <div class="ico-cell" data-name="download-outline" title="download-outline" onclick="copyIcon(this)"><i data-eva="download-outline"></i><span>download</span></div>
+        <div class="ico-cell" data-name="upload-outline" title="upload-outline" onclick="copyIcon(this)"><i data-eva="upload-outline"></i><span>upload</span></div>
+        <div class="ico-cell" data-name="cloud-download-outline" title="cloud-download-outline" onclick="copyIcon(this)"><i data-eva="cloud-download-outline"></i><span>cloud-download</span></div>
+        <div class="ico-cell" data-name="cloud-upload-outline" title="cloud-upload-outline" onclick="copyIcon(this)"><i data-eva="cloud-upload-outline"></i><span>cloud-upload</span></div>
+        <div class="ico-cell" data-name="refresh-outline" title="refresh-outline" onclick="copyIcon(this)"><i data-eva="refresh-outline"></i><span>refresh</span></div>
+        <div class="ico-cell" data-name="sync-outline" title="sync-outline" onclick="copyIcon(this)"><i data-eva="sync-outline"></i><span>sync</span></div>
+        <div class="ico-cell" data-name="undo-outline" title="undo-outline" onclick="copyIcon(this)"><i data-eva="undo-outline"></i><span>undo</span></div>
+        <div class="ico-cell" data-name="redo-outline" title="redo-outline" onclick="copyIcon(this)"><i data-eva="redo-outline"></i><span>redo</span></div>
+        <div class="ico-cell" data-name="search-outline" title="search-outline" onclick="copyIcon(this)"><i data-eva="search-outline"></i><span>search</span></div>
+        <div class="ico-cell" data-name="funnel-outline" title="funnel-outline" onclick="copyIcon(this)"><i data-eva="funnel-outline"></i><span>funnel</span></div>
+        <div class="ico-cell" data-name="options-2-outline" title="options-2-outline" onclick="copyIcon(this)"><i data-eva="options-2-outline"></i><span>options-2</span></div>
+        <div class="ico-cell" data-name="settings-2-outline" title="settings-2-outline" onclick="copyIcon(this)"><i data-eva="settings-2-outline"></i><span>settings-2</span></div>
+        <div class="ico-cell" data-name="share-outline" title="share-outline" onclick="copyIcon(this)"><i data-eva="share-outline"></i><span>share</span></div>
+        <div class="ico-cell" data-name="link-2-outline" title="link-2-outline" onclick="copyIcon(this)"><i data-eva="link-2-outline"></i><span>link-2</span></div>
+        <div class="ico-cell" data-name="attach-2-outline" title="attach-2-outline" onclick="copyIcon(this)"><i data-eva="attach-2-outline"></i><span>attach-2</span></div>
+        <div class="ico-cell" data-name="printer-outline" title="printer-outline" onclick="copyIcon(this)"><i data-eva="printer-outline"></i><span>printer</span></div>
+        <div class="ico-cell" data-name="scissors-outline" title="scissors-outline" onclick="copyIcon(this)"><i data-eva="scissors-outline"></i><span>scissors</span></div>
+        <div class="ico-cell" data-name="crop-outline" title="crop-outline" onclick="copyIcon(this)"><i data-eva="crop-outline"></i><span>crop</span></div>
+        <div class="ico-cell" data-name="move-outline" title="move-outline" onclick="copyIcon(this)"><i data-eva="move-outline"></i><span>move</span></div>
+        <div class="ico-cell" data-name="swap-outline" title="swap-outline" onclick="copyIcon(this)"><i data-eva="swap-outline"></i><span>swap</span></div>
+        <div class="ico-cell" data-name="shuffle-2-outline" title="shuffle-2-outline" onclick="copyIcon(this)"><i data-eva="shuffle-2-outline"></i><span>shuffle-2</span></div>
+        <div class="ico-cell" data-name="flip-2-outline" title="flip-2-outline" onclick="copyIcon(this)"><i data-eva="flip-2-outline"></i><span>flip-2</span></div>
+      </div>
+      <h3 class="ico-cat">Contenu & fichiers</h3>
+      <div class="ico-grid">
+        <div class="ico-cell" data-name="file-outline" title="file-outline" onclick="copyIcon(this)"><i data-eva="file-outline"></i><span>file</span></div>
+        <div class="ico-cell" data-name="file-text-outline" title="file-text-outline" onclick="copyIcon(this)"><i data-eva="file-text-outline"></i><span>file-text</span></div>
+        <div class="ico-cell" data-name="file-add-outline" title="file-add-outline" onclick="copyIcon(this)"><i data-eva="file-add-outline"></i><span>file-add</span></div>
+        <div class="ico-cell" data-name="file-remove-outline" title="file-remove-outline" onclick="copyIcon(this)"><i data-eva="file-remove-outline"></i><span>file-remove</span></div>
+        <div class="ico-cell" data-name="folder-outline" title="folder-outline" onclick="copyIcon(this)"><i data-eva="folder-outline"></i><span>folder</span></div>
+        <div class="ico-cell" data-name="folder-add-outline" title="folder-add-outline" onclick="copyIcon(this)"><i data-eva="folder-add-outline"></i><span>folder-add</span></div>
+        <div class="ico-cell" data-name="folder-remove-outline" title="folder-remove-outline" onclick="copyIcon(this)"><i data-eva="folder-remove-outline"></i><span>folder-remove</span></div>
+        <div class="ico-cell" data-name="archive-outline" title="archive-outline" onclick="copyIcon(this)"><i data-eva="archive-outline"></i><span>archive</span></div>
+        <div class="ico-cell" data-name="inbox-outline" title="inbox-outline" onclick="copyIcon(this)"><i data-eva="inbox-outline"></i><span>inbox</span></div>
+        <div class="ico-cell" data-name="clipboard-outline" title="clipboard-outline" onclick="copyIcon(this)"><i data-eva="clipboard-outline"></i><span>clipboard</span></div>
+        <div class="ico-cell" data-name="book-outline" title="book-outline" onclick="copyIcon(this)"><i data-eva="book-outline"></i><span>book</span></div>
+        <div class="ico-cell" data-name="book-open-outline" title="book-open-outline" onclick="copyIcon(this)"><i data-eva="book-open-outline"></i><span>book-open</span></div>
+        <div class="ico-cell" data-name="bookmark-outline" title="bookmark-outline" onclick="copyIcon(this)"><i data-eva="bookmark-outline"></i><span>bookmark</span></div>
+        <div class="ico-cell" data-name="layers-outline" title="layers-outline" onclick="copyIcon(this)"><i data-eva="layers-outline"></i><span>layers</span></div>
+        <div class="ico-cell" data-name="layout-outline" title="layout-outline" onclick="copyIcon(this)"><i data-eva="layout-outline"></i><span>layout</span></div>
+        <div class="ico-cell" data-name="grid-outline" title="grid-outline" onclick="copyIcon(this)"><i data-eva="grid-outline"></i><span>grid</span></div>
+        <div class="ico-cell" data-name="list-outline" title="list-outline" onclick="copyIcon(this)"><i data-eva="list-outline"></i><span>list</span></div>
+        <div class="ico-cell" data-name="text-outline" title="text-outline" onclick="copyIcon(this)"><i data-eva="text-outline"></i><span>text</span></div>
+        <div class="ico-cell" data-name="hash-outline" title="hash-outline" onclick="copyIcon(this)"><i data-eva="hash-outline"></i><span>hash</span></div>
+        <div class="ico-cell" data-name="at-outline" title="at-outline" onclick="copyIcon(this)"><i data-eva="at-outline"></i><span>at</span></div>
+        <div class="ico-cell" data-name="code-outline" title="code-outline" onclick="copyIcon(this)"><i data-eva="code-outline"></i><span>code</span></div>
+        <div class="ico-cell" data-name="code-download-outline" title="code-download-outline" onclick="copyIcon(this)"><i data-eva="code-download-outline"></i><span>code-download</span></div>
+        <div class="ico-cell" data-name="image-outline" title="image-outline" onclick="copyIcon(this)"><i data-eva="image-outline"></i><span>image</span></div>
+        <div class="ico-cell" data-name="image-2-outline" title="image-2-outline" onclick="copyIcon(this)"><i data-eva="image-2-outline"></i><span>image-2</span></div>
+        <div class="ico-cell" data-name="film-outline" title="film-outline" onclick="copyIcon(this)"><i data-eva="film-outline"></i><span>film</span></div>
+        <div class="ico-cell" data-name="browser-outline" title="browser-outline" onclick="copyIcon(this)"><i data-eva="browser-outline"></i><span>browser</span></div>
+        <div class="ico-cell" data-name="cube-outline" title="cube-outline" onclick="copyIcon(this)"><i data-eva="cube-outline"></i><span>cube</span></div>
+      </div>
+      <h3 class="ico-cat">Personnes</h3>
+      <div class="ico-grid">
+        <div class="ico-cell" data-name="person-outline" title="person-outline" onclick="copyIcon(this)"><i data-eva="person-outline"></i><span>person</span></div>
+        <div class="ico-cell" data-name="person-add-outline" title="person-add-outline" onclick="copyIcon(this)"><i data-eva="person-add-outline"></i><span>person-add</span></div>
+        <div class="ico-cell" data-name="person-delete-outline" title="person-delete-outline" onclick="copyIcon(this)"><i data-eva="person-delete-outline"></i><span>person-delete</span></div>
+        <div class="ico-cell" data-name="person-done-outline" title="person-done-outline" onclick="copyIcon(this)"><i data-eva="person-done-outline"></i><span>person-done</span></div>
+        <div class="ico-cell" data-name="person-remove-outline" title="person-remove-outline" onclick="copyIcon(this)"><i data-eva="person-remove-outline"></i><span>person-remove</span></div>
+        <div class="ico-cell" data-name="people-outline" title="people-outline" onclick="copyIcon(this)"><i data-eva="people-outline"></i><span>people</span></div>
+        <div class="ico-cell" data-name="smiling-face-outline" title="smiling-face-outline" onclick="copyIcon(this)"><i data-eva="smiling-face-outline"></i><span>smiling-face</span></div>
+        <div class="ico-cell" data-name="award-outline" title="award-outline" onclick="copyIcon(this)"><i data-eva="award-outline"></i><span>award</span></div>
+        <div class="ico-cell" data-name="briefcase-outline" title="briefcase-outline" onclick="copyIcon(this)"><i data-eva="briefcase-outline"></i><span>briefcase</span></div>
+        <div class="ico-cell" data-name="shield-outline" title="shield-outline" onclick="copyIcon(this)"><i data-eva="shield-outline"></i><span>shield</span></div>
+        <div class="ico-cell" data-name="lock-outline" title="lock-outline" onclick="copyIcon(this)"><i data-eva="lock-outline"></i><span>lock</span></div>
+        <div class="ico-cell" data-name="unlock-outline" title="unlock-outline" onclick="copyIcon(this)"><i data-eva="unlock-outline"></i><span>unlock</span></div>
+        <div class="ico-cell" data-name="log-in-outline" title="log-in-outline" onclick="copyIcon(this)"><i data-eva="log-in-outline"></i><span>log-in</span></div>
+        <div class="ico-cell" data-name="log-out-outline" title="log-out-outline" onclick="copyIcon(this)"><i data-eva="log-out-outline"></i><span>log-out</span></div>
+        <div class="ico-cell" data-name="credit-card-outline" title="credit-card-outline" onclick="copyIcon(this)"><i data-eva="credit-card-outline"></i><span>credit-card</span></div>
+        <div class="ico-cell" data-name="gift-outline" title="gift-outline" onclick="copyIcon(this)"><i data-eva="gift-outline"></i><span>gift</span></div>
+        <div class="ico-cell" data-name="pricetags-outline" title="pricetags-outline" onclick="copyIcon(this)"><i data-eva="pricetags-outline"></i><span>pricetags</span></div>
+        <div class="ico-cell" data-name="shopping-bag-outline" title="shopping-bag-outline" onclick="copyIcon(this)"><i data-eva="shopping-bag-outline"></i><span>shopping-bag</span></div>
+        <div class="ico-cell" data-name="shopping-cart-outline" title="shopping-cart-outline" onclick="copyIcon(this)"><i data-eva="shopping-cart-outline"></i><span>shopping-cart</span></div>
+      </div>
+      <h3 class="ico-cat">Communication</h3>
+      <div class="ico-grid">
+        <div class="ico-cell" data-name="email-outline" title="email-outline" onclick="copyIcon(this)"><i data-eva="email-outline"></i><span>email</span></div>
+        <div class="ico-cell" data-name="message-circle-outline" title="message-circle-outline" onclick="copyIcon(this)"><i data-eva="message-circle-outline"></i><span>message-circle</span></div>
+        <div class="ico-cell" data-name="message-square-outline" title="message-square-outline" onclick="copyIcon(this)"><i data-eva="message-square-outline"></i><span>message-square</span></div>
+        <div class="ico-cell" data-name="paper-plane-outline" title="paper-plane-outline" onclick="copyIcon(this)"><i data-eva="paper-plane-outline"></i><span>paper-plane</span></div>
+        <div class="ico-cell" data-name="phone-outline" title="phone-outline" onclick="copyIcon(this)"><i data-eva="phone-outline"></i><span>phone</span></div>
+        <div class="ico-cell" data-name="phone-call-outline" title="phone-call-outline" onclick="copyIcon(this)"><i data-eva="phone-call-outline"></i><span>phone-call</span></div>
+        <div class="ico-cell" data-name="phone-missed-outline" title="phone-missed-outline" onclick="copyIcon(this)"><i data-eva="phone-missed-outline"></i><span>phone-missed</span></div>
+        <div class="ico-cell" data-name="phone-off-outline" title="phone-off-outline" onclick="copyIcon(this)"><i data-eva="phone-off-outline"></i><span>phone-off</span></div>
+        <div class="ico-cell" data-name="bell-outline" title="bell-outline" onclick="copyIcon(this)"><i data-eva="bell-outline"></i><span>bell</span></div>
+        <div class="ico-cell" data-name="bell-off-outline" title="bell-off-outline" onclick="copyIcon(this)"><i data-eva="bell-off-outline"></i><span>bell-off</span></div>
+        <div class="ico-cell" data-name="mic-outline" title="mic-outline" onclick="copyIcon(this)"><i data-eva="mic-outline"></i><span>mic</span></div>
+        <div class="ico-cell" data-name="mic-off-outline" title="mic-off-outline" onclick="copyIcon(this)"><i data-eva="mic-off-outline"></i><span>mic-off</span></div>
+        <div class="ico-cell" data-name="headphones-outline" title="headphones-outline" onclick="copyIcon(this)"><i data-eva="headphones-outline"></i><span>headphones</span></div>
+        <div class="ico-cell" data-name="video-outline" title="video-outline" onclick="copyIcon(this)"><i data-eva="video-outline"></i><span>video</span></div>
+        <div class="ico-cell" data-name="video-off-outline" title="video-off-outline" onclick="copyIcon(this)"><i data-eva="video-off-outline"></i><span>video-off</span></div>
+        <div class="ico-cell" data-name="globe-2-outline" title="globe-2-outline" onclick="copyIcon(this)"><i data-eva="globe-2-outline"></i><span>globe-2</span></div>
+        <div class="ico-cell" data-name="wifi-outline" title="wifi-outline" onclick="copyIcon(this)"><i data-eva="wifi-outline"></i><span>wifi</span></div>
+        <div class="ico-cell" data-name="wifi-off-outline" title="wifi-off-outline" onclick="copyIcon(this)"><i data-eva="wifi-off-outline"></i><span>wifi-off</span></div>
+        <div class="ico-cell" data-name="cast-outline" title="cast-outline" onclick="copyIcon(this)"><i data-eva="cast-outline"></i><span>cast</span></div>
+        <div class="ico-cell" data-name="monitor-outline" title="monitor-outline" onclick="copyIcon(this)"><i data-eva="monitor-outline"></i><span>monitor</span></div>
+        <div class="ico-cell" data-name="smartphone-outline" title="smartphone-outline" onclick="copyIcon(this)"><i data-eva="smartphone-outline"></i><span>smartphone</span></div>
+        <div class="ico-cell" data-name="tv-outline" title="tv-outline" onclick="copyIcon(this)"><i data-eva="tv-outline"></i><span>tv</span></div>
+      </div>
+      <h3 class="ico-cat">Statut & feedback</h3>
+      <div class="ico-grid">
+        <div class="ico-cell" data-name="info-outline" title="info-outline" onclick="copyIcon(this)"><i data-eva="info-outline"></i><span>info</span></div>
+        <div class="ico-cell" data-name="question-mark-circle-outline" title="question-mark-circle-outline" onclick="copyIcon(this)"><i data-eva="question-mark-circle-outline"></i><span>question-mark-circle</span></div>
+        <div class="ico-cell" data-name="alert-circle-outline" title="alert-circle-outline" onclick="copyIcon(this)"><i data-eva="alert-circle-outline"></i><span>alert-circle</span></div>
+        <div class="ico-cell" data-name="alert-triangle-outline" title="alert-triangle-outline" onclick="copyIcon(this)"><i data-eva="alert-triangle-outline"></i><span>alert-triangle</span></div>
+        <div class="ico-cell" data-name="checkmark-square-2-outline" title="checkmark-square-2-outline" onclick="copyIcon(this)"><i data-eva="checkmark-square-2-outline"></i><span>checkmark-square-2</span></div>
+        <div class="ico-cell" data-name="close-square-outline" title="close-square-outline" onclick="copyIcon(this)"><i data-eva="close-square-outline"></i><span>close-square</span></div>
+        <div class="ico-cell" data-name="radio-button-on-outline" title="radio-button-on-outline" onclick="copyIcon(this)"><i data-eva="radio-button-on-outline"></i><span>radio-button-on</span></div>
+        <div class="ico-cell" data-name="radio-button-off-outline" title="radio-button-off-outline" onclick="copyIcon(this)"><i data-eva="radio-button-off-outline"></i><span>radio-button-off</span></div>
+        <div class="ico-cell" data-name="toggle-left-outline" title="toggle-left-outline" onclick="copyIcon(this)"><i data-eva="toggle-left-outline"></i><span>toggle-left</span></div>
+        <div class="ico-cell" data-name="toggle-right-outline" title="toggle-right-outline" onclick="copyIcon(this)"><i data-eva="toggle-right-outline"></i><span>toggle-right</span></div>
+        <div class="ico-cell" data-name="loader-outline" title="loader-outline" onclick="copyIcon(this)"><i data-eva="loader-outline"></i><span>loader</span></div>
+        <div class="ico-cell" data-name="slash-outline" title="slash-outline" onclick="copyIcon(this)"><i data-eva="slash-outline"></i><span>slash</span></div>
+        <div class="ico-cell" data-name="flag-outline" title="flag-outline" onclick="copyIcon(this)"><i data-eva="flag-outline"></i><span>flag</span></div>
+        <div class="ico-cell" data-name="star-outline" title="star-outline" onclick="copyIcon(this)"><i data-eva="star-outline"></i><span>star</span></div>
+        <div class="ico-cell" data-name="heart-outline" title="heart-outline" onclick="copyIcon(this)"><i data-eva="heart-outline"></i><span>heart</span></div>
+        <div class="ico-cell" data-name="eye-outline" title="eye-outline" onclick="copyIcon(this)"><i data-eva="eye-outline"></i><span>eye</span></div>
+        <div class="ico-cell" data-name="eye-off-outline" title="eye-off-outline" onclick="copyIcon(this)"><i data-eva="eye-off-outline"></i><span>eye-off</span></div>
+        <div class="ico-cell" data-name="bulb-outline" title="bulb-outline" onclick="copyIcon(this)"><i data-eva="bulb-outline"></i><span>bulb</span></div>
+        <div class="ico-cell" data-name="flash-outline" title="flash-outline" onclick="copyIcon(this)"><i data-eva="flash-outline"></i><span>flash</span></div>
+        <div class="ico-cell" data-name="flash-off-outline" title="flash-off-outline" onclick="copyIcon(this)"><i data-eva="flash-off-outline"></i><span>flash-off</span></div>
+        <div class="ico-cell" data-name="power-outline" title="power-outline" onclick="copyIcon(this)"><i data-eva="power-outline"></i><span>power</span></div>
+      </div>
+      <h3 class="ico-cat">Données & temps</h3>
+      <div class="ico-grid">
+        <div class="ico-cell" data-name="bar-chart-outline" title="bar-chart-outline" onclick="copyIcon(this)"><i data-eva="bar-chart-outline"></i><span>bar-chart</span></div>
+        <div class="ico-cell" data-name="bar-chart-2-outline" title="bar-chart-2-outline" onclick="copyIcon(this)"><i data-eva="bar-chart-2-outline"></i><span>bar-chart-2</span></div>
+        <div class="ico-cell" data-name="pie-chart-outline" title="pie-chart-outline" onclick="copyIcon(this)"><i data-eva="pie-chart-outline"></i><span>pie-chart</span></div>
+        <div class="ico-cell" data-name="pie-chart-2-outline" title="pie-chart-2-outline" onclick="copyIcon(this)"><i data-eva="pie-chart-2-outline"></i><span>pie-chart-2</span></div>
+        <div class="ico-cell" data-name="trending-up-outline" title="trending-up-outline" onclick="copyIcon(this)"><i data-eva="trending-up-outline"></i><span>trending-up</span></div>
+        <div class="ico-cell" data-name="trending-down-outline" title="trending-down-outline" onclick="copyIcon(this)"><i data-eva="trending-down-outline"></i><span>trending-down</span></div>
+        <div class="ico-cell" data-name="activity-outline" title="activity-outline" onclick="copyIcon(this)"><i data-eva="activity-outline"></i><span>activity</span></div>
+        <div class="ico-cell" data-name="calendar-outline" title="calendar-outline" onclick="copyIcon(this)"><i data-eva="calendar-outline"></i><span>calendar</span></div>
+        <div class="ico-cell" data-name="clock-outline" title="clock-outline" onclick="copyIcon(this)"><i data-eva="clock-outline"></i><span>clock</span></div>
+        <div class="ico-cell" data-name="percent-outline" title="percent-outline" onclick="copyIcon(this)"><i data-eva="percent-outline"></i><span>percent</span></div>
+        <div class="ico-cell" data-name="thermometer-outline" title="thermometer-outline" onclick="copyIcon(this)"><i data-eva="thermometer-outline"></i><span>thermometer</span></div>
+        <div class="ico-cell" data-name="battery-outline" title="battery-outline" onclick="copyIcon(this)"><i data-eva="battery-outline"></i><span>battery</span></div>
+        <div class="ico-cell" data-name="charging-outline" title="charging-outline" onclick="copyIcon(this)"><i data-eva="charging-outline"></i><span>charging</span></div>
+        <div class="ico-cell" data-name="hard-drive-outline" title="hard-drive-outline" onclick="copyIcon(this)"><i data-eva="hard-drive-outline"></i><span>hard-drive</span></div>
+        <div class="ico-cell" data-name="keypad-outline" title="keypad-outline" onclick="copyIcon(this)"><i data-eva="keypad-outline"></i><span>keypad</span></div>
+      </div>
+      <h3 class="ico-cat">Média & apparence</h3>
+      <div class="ico-grid">
+        <div class="ico-cell" data-name="play-circle-outline" title="play-circle-outline" onclick="copyIcon(this)"><i data-eva="play-circle-outline"></i><span>play-circle</span></div>
+        <div class="ico-cell" data-name="pause-circle-outline" title="pause-circle-outline" onclick="copyIcon(this)"><i data-eva="pause-circle-outline"></i><span>pause-circle</span></div>
+        <div class="ico-cell" data-name="stop-circle-outline" title="stop-circle-outline" onclick="copyIcon(this)"><i data-eva="stop-circle-outline"></i><span>stop-circle</span></div>
+        <div class="ico-cell" data-name="skip-back-outline" title="skip-back-outline" onclick="copyIcon(this)"><i data-eva="skip-back-outline"></i><span>skip-back</span></div>
+        <div class="ico-cell" data-name="skip-forward-outline" title="skip-forward-outline" onclick="copyIcon(this)"><i data-eva="skip-forward-outline"></i><span>skip-forward</span></div>
+        <div class="ico-cell" data-name="rewind-left-outline" title="rewind-left-outline" onclick="copyIcon(this)"><i data-eva="rewind-left-outline"></i><span>rewind-left</span></div>
+        <div class="ico-cell" data-name="rewind-right-outline" title="rewind-right-outline" onclick="copyIcon(this)"><i data-eva="rewind-right-outline"></i><span>rewind-right</span></div>
+        <div class="ico-cell" data-name="volume-up-outline" title="volume-up-outline" onclick="copyIcon(this)"><i data-eva="volume-up-outline"></i><span>volume-up</span></div>
+        <div class="ico-cell" data-name="volume-down-outline" title="volume-down-outline" onclick="copyIcon(this)"><i data-eva="volume-down-outline"></i><span>volume-down</span></div>
+        <div class="ico-cell" data-name="volume-mute-outline" title="volume-mute-outline" onclick="copyIcon(this)"><i data-eva="volume-mute-outline"></i><span>volume-mute</span></div>
+        <div class="ico-cell" data-name="volume-off-outline" title="volume-off-outline" onclick="copyIcon(this)"><i data-eva="volume-off-outline"></i><span>volume-off</span></div>
+        <div class="ico-cell" data-name="music-outline" title="music-outline" onclick="copyIcon(this)"><i data-eva="music-outline"></i><span>music</span></div>
+        <div class="ico-cell" data-name="speaker-outline" title="speaker-outline" onclick="copyIcon(this)"><i data-eva="speaker-outline"></i><span>speaker</span></div>
+        <div class="ico-cell" data-name="camera-outline" title="camera-outline" onclick="copyIcon(this)"><i data-eva="camera-outline"></i><span>camera</span></div>
+        <div class="ico-cell" data-name="color-palette-outline" title="color-palette-outline" onclick="copyIcon(this)"><i data-eva="color-palette-outline"></i><span>color-palette</span></div>
+        <div class="ico-cell" data-name="color-picker-outline" title="color-picker-outline" onclick="copyIcon(this)"><i data-eva="color-picker-outline"></i><span>color-picker</span></div>
+        <div class="ico-cell" data-name="brush-outline" title="brush-outline" onclick="copyIcon(this)"><i data-eva="brush-outline"></i><span>brush</span></div>
+        <div class="ico-cell" data-name="pantone-outline" title="pantone-outline" onclick="copyIcon(this)"><i data-eva="pantone-outline"></i><span>pantone</span></div>
+        <div class="ico-cell" data-name="droplet-outline" title="droplet-outline" onclick="copyIcon(this)"><i data-eva="droplet-outline"></i><span>droplet</span></div>
+        <div class="ico-cell" data-name="sun-outline" title="sun-outline" onclick="copyIcon(this)"><i data-eva="sun-outline"></i><span>sun</span></div>
+        <div class="ico-cell" data-name="moon-outline" title="moon-outline" onclick="copyIcon(this)"><i data-eva="moon-outline"></i><span>moon</span></div>
+        <div class="ico-cell" data-name="umbrella-outline" title="umbrella-outline" onclick="copyIcon(this)"><i data-eva="umbrella-outline"></i><span>umbrella</span></div>
+        <div class="ico-cell" data-name="car-outline" title="car-outline" onclick="copyIcon(this)"><i data-eva="car-outline"></i><span>car</span></div>
+        <div class="ico-cell" data-name="npm-outline" title="npm-outline" onclick="copyIcon(this)"><i data-eva="npm-outline"></i><span>npm</span></div>
+      </div>
+
+      <table class="sizing-table" style="margin-top:40px;">
+        <thead>
+          <tr>
+            <th>Règle</th>
+            <th>Détail</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Variante</td>
+            <td><i>outline</i> partout. La variante <i>fill</i> n'est utilisée que pour un état actif de navigation</td>
+          </tr>
+          <tr>
+            <td>Tailles</td>
+            <td>13 / 14 / 16 / 18px dans les boutons selon xs / sm / md / lg ; 15px dans le menu gauche ; 18px en topbar
+              ; 22px seul dans une cellule</td>
+          </tr>
+          <tr>
+            <td>Couleur</td>
+            <td><code>fill: currentColor</code> — l'icône prend la couleur du texte du composant qui la porte</td>
+          </tr>
+          <tr>
+            <td>Intégration</td>
+            <td><code>&lt;i data-eva="trash-2-outline"&gt;&lt;/i&gt;</code> puis <code>eva.replace()</code> au chargement,
+              ou le SVG inline exporté depuis le site</td>
+          </tr>
+          <tr>
+            <td>Icône seule</td>
+            <td><code>aria-label</code> sur le bouton, <code>aria-hidden="true"</code> sur l'icône</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="code-box">
+        &lt;script src="https://cdn.jsdelivr.net/npm/eva-icons@1.1.3/eva.min.js"&gt;&lt;/script&gt;<br>
+        &lt;button class="btn tertiary neutral icon-only" aria-label="Supprimer la formation"&gt;<br>
+        &nbsp;&nbsp;&lt;i data-eva="trash-2-outline" aria-hidden="true"&gt;&lt;/i&gt;<br>
+        &lt;/button&gt;<br>
+        &lt;script&gt;eva.replace({ width: 16, height: 16 });&lt;/script&gt;
       </div>
     </section>
 
@@ -5307,7 +5612,7 @@
             <table>
               <thead>
                 <tr class="thr">
-                  <th class="gsth"><button class="gbtn" aria-label="Grouper"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></button></th>
+                  <th class="gsth"></th>
                   <th class="srt">Nom<span class="rez"></span></th>
                   <th class="srt">E-mail<span class="rez"></span></th>
                   <th class="srt">Statut<span class="rez"></span></th>
@@ -5349,48 +5654,48 @@
                           <input type="checkbox" class="cck" checked disabled>
                           <span class="clbl">Apprenant</span>
                         </div>
-                        <div class="crow" draggable="true">
-                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                        <div class="crow">
+                          <span class="cdg" draggable="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
                           <input type="checkbox" class="cck" checked>
                           <span class="clbl">État</span>
                         </div>
-                        <div class="crow" draggable="true">
-                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                        <div class="crow">
+                          <span class="cdg" draggable="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
                           <input type="checkbox" class="cck">
                           <span class="clbl">E-mail</span>
                         </div>
-                        <div class="crow" draggable="true">
-                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                        <div class="crow">
+                          <span class="cdg" draggable="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
                           <input type="checkbox" class="cck">
                           <span class="clbl">Identifiant</span>
                         </div>
-                        <div class="crow" draggable="true">
-                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                        <div class="crow">
+                          <span class="cdg" draggable="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
                           <input type="checkbox" class="cck" checked>
                           <span class="clbl">Groupes</span>
                         </div>
-                        <div class="crow" draggable="true">
-                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                        <div class="crow">
+                          <span class="cdg" draggable="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
                           <input type="checkbox" class="cck">
                           <span class="clbl">Département</span>
                         </div>
-                        <div class="crow" draggable="true">
-                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                        <div class="crow">
+                          <span class="cdg" draggable="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
                           <input type="checkbox" class="cck">
                           <span class="clbl">Rôle</span>
                         </div>
-                        <div class="crow" draggable="true">
-                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                        <div class="crow">
+                          <span class="cdg" draggable="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
                           <input type="checkbox" class="cck" checked>
                           <span class="clbl">Profil formations</span>
                         </div>
-                        <div class="crow" draggable="true">
-                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                        <div class="crow">
+                          <span class="cdg" draggable="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
                           <input type="checkbox" class="cck">
                           <span class="clbl">Dernière connexion</span>
                         </div>
-                        <div class="crow" draggable="true">
-                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                        <div class="crow">
+                          <span class="cdg" draggable="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
                           <input type="checkbox" class="cck" checked>
                           <span class="clbl">Date de création</span>
                         </div>
@@ -5754,91 +6059,158 @@
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
         4 — Édition des colonnes</p>
       <p class="section-desc" style="margin-bottom:24px;">La roue crantée ferme la ligne de filtres, dans la colonne
-        <code>.cgear-th</code> de 44px. Elle ouvre le panneau des colonnes : une case pour afficher ou masquer, une
-        poignée pour réordonner par glisser-déposer. La première colonne est verrouillée. Le panneau se ferme au clic
-        en dehors.</p>
+        <code>.cgear-th</code> de 44px. Elle ouvre le panneau des colonnes : une case affiche ou masque la colonne
+        dans le tableau, une poignée la réordonne par glisser-déposer. La première colonne est verrouillée.
+        « Réinitialiser » rétablit l'ordre et la visibilité par défaut. Le panneau se ferme au clic en dehors ou avec
+        Échap.</p>
 
-      <div class="preview-box" style="padding:40px 20px 380px;">
-        <div class="preview-label">Live Preview — panneau ouvert, glissez une ligne</div>
-        <div class="tcard">
+      <div class="preview-box" style="padding:40px 20px 24px;">
+        <div class="preview-label">Live Preview — cochez une colonne, glissez une poignée</div>
+        <div class="tcard" style="min-height:420px;">
           <div class="tw">
-            <table>
+            <table style="table-layout:fixed;">
               <thead>
                 <tr class="thr">
-                  <th class="gsth"></th>
-                  <th class="srt">Nom<span class="rez"></span></th>
-                  <th class="srt">Statut<span class="rez"></span></th>
-                  <th class="srt">Inscription</th>
+                  <th class="srt" data-col="nom">Apprenant<span class="rez"></span></th>
+                  <th class="srt" data-col="etat">État<span class="rez"></span></th>
+                  <th class="srt" data-col="email" hidden>E-mail<span class="rez"></span></th>
+                  <th class="srt" data-col="id" hidden>Identifiant<span class="rez"></span></th>
+                  <th class="srt" data-col="groupes">Groupes<span class="rez"></span></th>
+                  <th class="srt" data-col="dept" hidden>Département<span class="rez"></span></th>
+                  <th class="srt" data-col="role" hidden>Rôle<span class="rez"></span></th>
+                  <th class="srt" data-col="profil">Profil formations<span class="rez"></span></th>
+                  <th class="srt" data-col="conn" hidden>Dernière connexion<span class="rez"></span></th>
+                  <th class="srt" data-col="creation">Date de création<span class="rez"></span></th>
                   <th class="cgear-th"></th>
                 </tr>
                 <tr class="thr-filter">
-                  <th class="gsth"></th>
-                  <th><input type="search" class="th-search" placeholder="Rechercher"></th>
-                  <th><div class="w-dd-wrap block"><button class="w-dd-btn sm" onclick="toggleDD(this)"><span>Tous</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button><div class="w-dd-menu"><div class="w-dd-item active">Tous</div><div class="w-dd-item">Actif</div><div class="w-dd-item">Inactif</div></div></div></th>
-                  <th><input type="search" class="th-search" placeholder="Rechercher"></th>
+                  <th data-col="nom"><input type="search" class="th-search" placeholder="Rechercher"></th>
+                  <th data-col="etat"><input type="search" class="th-search" placeholder="Rechercher"></th>
+                  <th data-col="email" hidden><input type="search" class="th-search" placeholder="Rechercher"></th>
+                  <th data-col="id" hidden><input type="search" class="th-search" placeholder="Rechercher"></th>
+                  <th data-col="groupes"><input type="search" class="th-search" placeholder="Rechercher"></th>
+                  <th data-col="dept" hidden><input type="search" class="th-search" placeholder="Rechercher"></th>
+                  <th data-col="role" hidden><input type="search" class="th-search" placeholder="Rechercher"></th>
+                  <th data-col="profil"><input type="search" class="th-search" placeholder="Rechercher"></th>
+                  <th data-col="conn" hidden><input type="search" class="th-search" placeholder="Rechercher"></th>
+                  <th data-col="creation"><input type="search" class="th-search" placeholder="Rechercher"></th>
                   <th class="cgear-th">
                     <button class="cgear on" aria-label="Choisir les colonnes" onclick="togCols(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
                     <div class="cpanel oo pin">
                       <div class="cph">
                         <span class="cpt">Colonnes</span>
-                        <button class="cprst">Réinitialiser</button>
+                        <button class="cprst" onclick="colReset(this)">Réinitialiser</button>
                       </div>
                       <div class="cplist">
-                        <div class="crow lk">
-                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
-                          <input type="checkbox" class="cck" checked disabled>
-                          <span class="clbl">Apprenant</span>
-                        </div>
-                        <div class="crow" draggable="true">
-                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
-                          <input type="checkbox" class="cck" checked>
-                          <span class="clbl">État</span>
-                        </div>
-                        <div class="crow" draggable="true">
-                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
-                          <input type="checkbox" class="cck">
-                          <span class="clbl">E-mail</span>
-                        </div>
-                        <div class="crow" draggable="true">
-                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
-                          <input type="checkbox" class="cck">
-                          <span class="clbl">Identifiant</span>
-                        </div>
-                        <div class="crow" draggable="true">
-                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
-                          <input type="checkbox" class="cck" checked>
-                          <span class="clbl">Groupes</span>
-                        </div>
-                        <div class="crow" draggable="true">
-                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
-                          <input type="checkbox" class="cck">
-                          <span class="clbl">Département</span>
-                        </div>
-                        <div class="crow" draggable="true">
-                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
-                          <input type="checkbox" class="cck">
-                          <span class="clbl">Rôle</span>
-                        </div>
-                        <div class="crow" draggable="true">
-                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
-                          <input type="checkbox" class="cck" checked>
-                          <span class="clbl">Profil formations</span>
-                        </div>
-                        <div class="crow" draggable="true">
-                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
-                          <input type="checkbox" class="cck">
-                          <span class="clbl">Dernière connexion</span>
-                        </div>
-                        <div class="crow" draggable="true">
-                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
-                          <input type="checkbox" class="cck" checked>
-                          <span class="clbl">Date de création</span>
-                        </div>
+                      <div class="crow lk">
+                        <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                        <input type="checkbox" class="cck" data-col="nom" checked disabled onchange="colToggle(this)">
+                        <span class="clbl">Apprenant</span>
+                      </div>
+                      <div class="crow">
+                        <span class="cdg" draggable="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                        <input type="checkbox" class="cck" data-col="etat" checked onchange="colToggle(this)">
+                        <span class="clbl">État</span>
+                      </div>
+                      <div class="crow">
+                        <span class="cdg" draggable="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                        <input type="checkbox" class="cck" data-col="email" onchange="colToggle(this)">
+                        <span class="clbl">E-mail</span>
+                      </div>
+                      <div class="crow">
+                        <span class="cdg" draggable="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                        <input type="checkbox" class="cck" data-col="id" onchange="colToggle(this)">
+                        <span class="clbl">Identifiant</span>
+                      </div>
+                      <div class="crow">
+                        <span class="cdg" draggable="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                        <input type="checkbox" class="cck" data-col="groupes" checked onchange="colToggle(this)">
+                        <span class="clbl">Groupes</span>
+                      </div>
+                      <div class="crow">
+                        <span class="cdg" draggable="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                        <input type="checkbox" class="cck" data-col="dept" onchange="colToggle(this)">
+                        <span class="clbl">Département</span>
+                      </div>
+                      <div class="crow">
+                        <span class="cdg" draggable="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                        <input type="checkbox" class="cck" data-col="role" onchange="colToggle(this)">
+                        <span class="clbl">Rôle</span>
+                      </div>
+                      <div class="crow">
+                        <span class="cdg" draggable="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                        <input type="checkbox" class="cck" data-col="profil" checked onchange="colToggle(this)">
+                        <span class="clbl">Profil formations</span>
+                      </div>
+                      <div class="crow">
+                        <span class="cdg" draggable="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                        <input type="checkbox" class="cck" data-col="conn" onchange="colToggle(this)">
+                        <span class="clbl">Dernière connexion</span>
+                      </div>
+                      <div class="crow">
+                        <span class="cdg" draggable="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                        <input type="checkbox" class="cck" data-col="creation" checked onchange="colToggle(this)">
+                        <span class="clbl">Date de création</span>
+                      </div>
                       </div>
                     </div>
                   </th>
                 </tr>
               </thead>
+              <tbody>
+              <tr>
+                <td style="white-space:normal;" data-col="nom">Michèle GUERRIN</td>
+                <td style="white-space:normal;" data-col="etat"><span class="stb ston"><span class="stdon"></span>Actif</span></td>
+                <td style="white-space:normal;" data-col="email" hidden><span class="cv">m.guerrin@onlineformapro.com</span></td>
+                <td style="white-space:normal;" data-col="id" hidden><span class="mcel">USR-4821</span></td>
+                <td style="white-space:normal;" data-col="groupes">RH Central</td>
+                <td style="white-space:normal;" data-col="dept" hidden>Direction</td>
+                <td style="white-space:normal;" data-col="role" hidden>Administrateur</td>
+                <td style="white-space:normal;" data-col="profil">Management</td>
+                <td style="white-space:normal;" data-col="conn" hidden><span class="dc">Aujourd'hui</span></td>
+                <td style="white-space:normal;" data-col="creation"><span class="dc">12 mars 2026</span></td>
+                <td class="tail"></td>
+              </tr>
+              <tr>
+                <td style="white-space:normal;" data-col="nom">Alan DRABCZYNSKI</td>
+                <td style="white-space:normal;" data-col="etat"><span class="stb ston"><span class="stdon"></span>Actif</span></td>
+                <td style="white-space:normal;" data-col="email" hidden><span class="cv">a.drabczynski@onlineformapro.com</span></td>
+                <td style="white-space:normal;" data-col="id" hidden><span class="mcel">USR-4977</span></td>
+                <td style="white-space:normal;" data-col="groupes">Produit</td>
+                <td style="white-space:normal;" data-col="dept" hidden>Design</td>
+                <td style="white-space:normal;" data-col="role" hidden>Gestionnaire</td>
+                <td style="white-space:normal;" data-col="profil">RGPD</td>
+                <td style="white-space:normal;" data-col="conn" hidden><span class="dc">Hier</span></td>
+                <td style="white-space:normal;" data-col="creation"><span class="dc">9 mars 2026</span></td>
+                <td class="tail"></td>
+              </tr>
+              <tr>
+                <td style="white-space:normal;" data-col="nom">Jean DUPONT</td>
+                <td style="white-space:normal;" data-col="etat"><span class="stb stoff"><span class="stdoff"></span>Inactif</span></td>
+                <td style="white-space:normal;" data-col="email" hidden><span class="cv">j.dupont@onlineformapro.com</span></td>
+                <td style="white-space:normal;" data-col="id" hidden><span class="mcel">USR-3310</span></td>
+                <td style="white-space:normal;" data-col="groupes">Sécurité</td>
+                <td style="white-space:normal;" data-col="dept" hidden>Formation</td>
+                <td style="white-space:normal;" data-col="role" hidden>Formateur</td>
+                <td style="white-space:normal;" data-col="profil">Sécurité au travail</td>
+                <td style="white-space:normal;" data-col="conn" hidden><span class="dc">2 févr. 2026</span></td>
+                <td style="white-space:normal;" data-col="creation"><span class="dc">2 févr. 2026</span></td>
+                <td class="tail"></td>
+              </tr>
+              <tr>
+                <td style="white-space:normal;" data-col="nom">Sophie LEROY</td>
+                <td style="white-space:normal;" data-col="etat"><span class="stb ston"><span class="stdon"></span>Actif</span></td>
+                <td style="white-space:normal;" data-col="email" hidden><span class="cv">s.leroy@onlineformapro.com</span></td>
+                <td style="white-space:normal;" data-col="id" hidden><span class="mcel">USR-3985</span></td>
+                <td style="white-space:normal;" data-col="groupes">Management</td>
+                <td style="white-space:normal;" data-col="dept" hidden>RH</td>
+                <td style="white-space:normal;" data-col="role" hidden>Gestionnaire</td>
+                <td style="white-space:normal;" data-col="profil">Management</td>
+                <td style="white-space:normal;" data-col="conn" hidden><span class="dc">Il y a 3 jours</span></td>
+                <td style="white-space:normal;" data-col="creation"><span class="dc">28 janv. 2026</span></td>
+                <td class="tail"></td>
+              </tr>
+              </tbody>
             </table>
           </div>
         </div>
@@ -6708,7 +7080,7 @@
           <div class="modal-mock">
             <div class="modal-header">
               <div class="modal-icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
               </div>
               <div class="modal-title-wrap">
                 <div class="modal-title">Importer une photo</div>
@@ -6719,15 +7091,15 @@
             <div class="modal-body">
               <div class="drop-zone">
                 <div class="drop-icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
                 </div>
                 <div class="drop-text">Glissez-déposez votre photo</div>
                 <div class="drop-sub">Format : .jpeg, .png, .webp — taille max : 5 MB</div>
-                <button class="btn primary" style="height: 44px; padding: 0 24px; font-size: 15px;">Parcourir les fichiers</button>
+                <button class="btn primary">Parcourir les fichiers</button>
               </div>
             </div>
             <div class="modal-footer">
-              <button class="btn" style="height: 44px; padding: 0 24px;">Fermer</button>
+              <button class="btn">Fermer</button>
             </div>
           </div>
         </div>
@@ -6943,7 +7315,47 @@
 
   </main>
 
+  <script src="https://cdn.jsdelivr.net/npm/eva-icons@1.1.3/eva.min.js"
+    onerror="document.getElementById('ico-fallback').hidden=false"></script>
   <script>
+    // ---- Iconographie ----
+    (function () {
+      if (window.eva) {
+        eva.replace({ width: 22, height: 22, class: 'eva' });
+      } else {
+        document.getElementById('ico-fallback').hidden = false;
+      }
+      const total = document.querySelectorAll('.ico-cell').length;
+      document.getElementById('ico-count').textContent = total + ' icônes';
+    })();
+
+    function filterIcons(q) {
+      q = (q || '').trim().toLowerCase();
+      let shown = 0;
+      document.querySelectorAll('.ico-cell').forEach(c => {
+        const hit = !q || c.dataset.name.includes(q);
+        c.classList.toggle('dim', !hit);
+        if (hit) shown++;
+      });
+      document.querySelectorAll('.ico-cat').forEach(h => {
+        const grid = h.nextElementSibling;
+        const any = grid && grid.querySelector('.ico-cell:not(.dim)');
+        h.hidden = !any;
+        if (grid) grid.hidden = !any;
+      });
+      document.getElementById('ico-count').textContent = shown + ' icône' + (shown > 1 ? 's' : '');
+    }
+
+    function copyIcon(cell) {
+      const name = cell.dataset.name;
+      const done = () => {
+        cell.classList.add('copied');
+        setTimeout(() => cell.classList.remove('copied'), 700);
+      };
+      if (navigator.clipboard) navigator.clipboard.writeText(name).then(done, done);
+      else done();
+    }
+
     // ---- Ecran d'accueil ----
     const LC_KEY = 'ds-section';
 
@@ -7063,34 +7475,41 @@
 
 
     // ---- Tableaux : redimensionnement de colonne ----
+    // Pointer Events + capture : le pointerup arrive meme si le bouton est
+    // relache hors de la fenetre, donc l'etat ne reste jamais bloque.
     (function () {
       let drag = null;
 
-      document.addEventListener('mousedown', (e) => {
+      function endDrag() {
+        if (!drag) return;
+        drag.handle.classList.remove('rz');
+        document.body.style.cursor = '';
+        document.body.style.userSelect = '';
+        drag = null;
+      }
+
+      document.addEventListener('pointerdown', (e) => {
         const handle = e.target.closest('.rez');
-        if (!handle) return;
+        if (!handle || e.button !== 0) return;
         const th = handle.parentElement;
-        drag = { th, x: e.clientX, w: th.getBoundingClientRect().width };
+        drag = { th, handle, x: e.clientX, w: th.getBoundingClientRect().width };
         handle.classList.add('rz');
+        handle.setPointerCapture(e.pointerId);
         document.body.style.cursor = 'col-resize';
         document.body.style.userSelect = 'none';
         e.preventDefault();
       });
 
-      document.addEventListener('mousemove', (e) => {
+      document.addEventListener('pointermove', (e) => {
         if (!drag) return;
         const w = Math.max(70, drag.w + e.clientX - drag.x);
         drag.th.style.width = w + 'px';
         drag.th.style.minWidth = w + 'px';
       });
 
-      document.addEventListener('mouseup', () => {
-        if (!drag) return;
-        document.querySelectorAll('.rez.rz').forEach(h => h.classList.remove('rz'));
-        document.body.style.cursor = '';
-        document.body.style.userSelect = '';
-        drag = null;
-      });
+      document.addEventListener('pointerup', endDrag);
+      document.addEventListener('pointercancel', endDrag);
+      window.addEventListener('blur', endDrag);
     })();
 
     // ---- Tableaux : panneau de colonnes ----
@@ -7098,31 +7517,87 @@
       const panel = btn.parentElement.querySelector('.cpanel');
       if (panel.classList.contains('pin')) return;
       const open = panel.classList.contains('oo');
-      document.querySelectorAll('.cpanel:not(.pin)').forEach(p => p.classList.remove('oo'));
-      document.querySelectorAll('.cgear-th:not(:has(.pin)) .cgear').forEach(g => g.classList.remove('on'));
+      closePanels();
       if (!open) {
         panel.classList.add('oo');
         btn.classList.add('on');
       }
     }
 
+    function closePanels() {
+      document.querySelectorAll('.cpanel:not(.pin)').forEach(p => p.classList.remove('oo'));
+      document.querySelectorAll('.cpanel:not(.pin)').forEach(p => {
+        const g = p.parentElement.querySelector('.cgear');
+        if (g) g.classList.remove('on');
+      });
+    }
+
     document.addEventListener('click', (e) => {
-      if (!e.target.closest('.cgear-th')) {
-        document.querySelectorAll('.cpanel:not(.pin)').forEach(p => p.classList.remove('oo'));
-        document.querySelectorAll('.cgear-th:not(:has(.pin)) .cgear').forEach(g => g.classList.remove('on'));
-      }
+      if (!e.target.closest('.cgear-th')) closePanels();
     });
 
-    // ---- Tableaux : reordonner les colonnes par glisser-deposer ----
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape') return;
+      closePanels();
+      document.querySelectorAll('.w-dd-wrap.open').forEach(w => w.classList.remove('open'));
+    });
+
+    // ---- Tableaux : afficher / masquer une colonne depuis le panneau ----
+    function colToggle(cb) {
+      const table = cb.closest('.tcard').querySelector('table');
+      const key = cb.dataset.col;
+      if (!table || !key) return;
+      table.querySelectorAll('[data-col="' + key + '"]').forEach(cell => { cell.hidden = !cb.checked; });
+    }
+
+    function colReset(btn) {
+      const panel = btn.closest('.cpanel');
+      const list = panel.querySelector('.cplist');
+      const rows = [...list.querySelectorAll('.crow')];
+      const order = rows.slice().sort((a, b) => a.dataset.i - b.dataset.i);
+      order.forEach(r => list.appendChild(r));
+      rows.forEach(r => {
+        const cb = r.querySelector('.cck');
+        cb.checked = cb.dataset.def === '1';
+        colToggle(cb);
+      });
+      const evt = new Event('reorder');
+      panel.dispatchEvent(evt);
+    }
+
+    // memoriser l'ordre et l'etat par defaut de chaque panneau
+    document.querySelectorAll('.cpanel').forEach(p => {
+      p.querySelectorAll('.crow').forEach((r, i) => {
+        r.dataset.i = i;
+        const cb = r.querySelector('.cck');
+        if (cb) cb.dataset.def = cb.checked ? '1' : '0';
+      });
+    });
+
+    // ---- Tableaux : reordonner les colonnes par glisser-deposer (poignee) ----
     (function () {
       let src = null;
 
+      function applyOrder(panel) {
+        const table = panel.closest('.tcard').querySelector('table');
+        if (!table) return;
+        const keys = [...panel.querySelectorAll('.crow')].map(r => r.querySelector('.cck').dataset.col).filter(Boolean);
+        table.querySelectorAll('tr').forEach(tr => {
+          const byKey = {};
+          [...tr.children].forEach(c => { if (c.dataset.col) byKey[c.dataset.col] = c; });
+          keys.forEach(k => { if (byKey[k]) tr.appendChild(byKey[k]); });
+          const tail = tr.querySelector('.cgear-th, .tail');
+          if (tail) tr.appendChild(tail);
+        });
+      }
+
       document.addEventListener('dragstart', (e) => {
-        const row = e.target.closest('.crow[draggable]');
-        if (!row) return;
-        src = row;
-        row.classList.add('dg');
+        const handle = e.target.closest('.cdg[draggable]');
+        if (!handle) return;
+        src = handle.closest('.crow');
+        src.classList.add('dg');
         e.dataTransfer.effectAllowed = 'move';
+        try { e.dataTransfer.setData('text/plain', ''); } catch (err) { }
       });
 
       document.addEventListener('dragover', (e) => {
@@ -7134,10 +7609,16 @@
         row.parentElement.insertBefore(src, after ? row.nextSibling : row);
       });
 
+      document.addEventListener('drop', (e) => { if (src) e.preventDefault(); });
+
       document.addEventListener('dragend', () => {
-        if (src) src.classList.remove('dg');
+        if (!src) return;
+        src.classList.remove('dg');
+        applyOrder(src.closest('.cpanel'));
         src = null;
       });
+
+      document.querySelectorAll('.cpanel').forEach(p => p.addEventListener('reorder', () => applyOrder(p)));
     })();
 
     // Demo: loading state (the width stays fixed, so no layout shift)
