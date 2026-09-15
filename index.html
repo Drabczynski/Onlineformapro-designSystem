@@ -46,6 +46,9 @@
       --row-even: #F9FAFB;
       --row-hover: #EDEFF2;
       --row-active: #E3E6EA;
+      /* Menu gauche : etat actif, repris de l'application */
+      --nav-act: #E2006E;
+
       /* Sidebar / Reporting colors */
       --sb-dark: #13041c;
       --sb-rep: #0A032D;
@@ -338,39 +341,39 @@
 
     /* --- Variante : Secondary — le bleu, en contour. --- */
     .btn.secondary {
-      --btn-ring: rgba(var(--s-rgb), 0.26);
+      --btn-ring: rgba(var(--a-rgb), 0.26);
       background: #fff;
-      border-color: var(--s2);
-      color: var(--s);
+      border-color: var(--a2);
+      color: var(--a);
     }
 
     .btn.secondary:hover {
-      background: var(--s1);
-      border-color: var(--s);
-      color: var(--s-p);
+      background: var(--a1);
+      border-color: var(--a);
+      color: var(--a-p);
     }
 
     .btn.secondary:active {
-      background: var(--s2);
+      background: var(--a2);
     }
 
     /* --- Variante : Tertiary — texte seul, aucun poids. --- */
     .btn.tertiary {
-      --btn-ring: rgba(var(--s-rgb), 0.24);
+      --btn-ring: rgba(var(--a-rgb), 0.24);
       --btn-px: 6px;
       background: transparent;
       border-color: transparent;
-      color: var(--s);
+      color: var(--a);
     }
 
     .btn.tertiary:hover {
-      background: var(--s1);
+      background: var(--a1);
       border-color: transparent;
-      color: var(--s-p);
+      color: var(--a-p);
     }
 
     .btn.tertiary:active {
-      background: var(--s2);
+      background: var(--a2);
     }
 
     /* --- Ton : Neutral — retire la couleur, garde le poids --- */
@@ -616,7 +619,6 @@
     /* --- Split button (action + menu) --- */
     .btn-split {
       display: inline-flex;
-      gap: 1px;
     }
 
     .btn-split .btn:first-child {
@@ -627,6 +629,12 @@
       --btn-radius: 0 var(--r) var(--r) 0;
       width: var(--btn-h);
       padding: 0;
+      margin-left: -1px;
+    }
+
+    .btn-split .btn:hover,
+    .btn-split .btn:focus-visible {
+      z-index: 1;
     }
 
     /* --- Segmented control --- */
@@ -704,6 +712,161 @@
       text-transform: uppercase;
       letter-spacing: 0.06em;
       color: var(--t3);
+    }
+
+    /* ==========================================================
+       ECRAN D'ACCUEIL — choix de la section
+       ========================================================== */
+    .launcher {
+      position: fixed;
+      inset: 0;
+      z-index: 9000;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 32px;
+      overflow-y: auto;
+    }
+
+    .launcher.hidden {
+      display: none;
+    }
+
+    /* Tant que l'accueil est ouvert, la page ne rend pas : elle mesure
+       plusieurs dizaines de milliers de pixels derriere l'overlay. */
+    body.lc-open .ds-sidebar,
+    body.lc-open .ds-main {
+      display: none;
+    }
+
+    .lc-inner {
+      width: 100%;
+      max-width: 1000px;
+    }
+
+    .lc-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .lc-logo .dot {
+      width: 14px;
+      height: 14px;
+      background: var(--a);
+      border-radius: 5px;
+    }
+
+    .lc-logo span {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--a);
+    }
+
+    .lc-sub {
+      font-size: 15px;
+      color: var(--t2);
+      margin-bottom: 40px;
+    }
+
+    .lc-group {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--t3);
+      margin: 32px 0 14px;
+    }
+
+    .lc-group:first-of-type {
+      margin-top: 0;
+    }
+
+    .lc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 12px;
+    }
+
+    .lc-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      border: 1px solid var(--bd);
+      border-radius: var(--rl);
+      background: #fff;
+      color: var(--t1);
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      transition: border-color .15s, background .15s, transform .06s;
+    }
+
+    .lc-card:hover {
+      border-color: var(--a);
+      background: var(--a1);
+    }
+
+    .lc-card:active {
+      transform: translateY(1px);
+    }
+
+    .lc-card .ic {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: var(--a1);
+      color: var(--a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .lc-card .ic svg {
+      width: 16px;
+      height: 16px;
+      stroke-width: 1.8;
+    }
+
+    .lc-all {
+      margin-top: 36px;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* Bouton de retour a l'accueil, dans la colonne de gauche */
+    .ds-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 26px;
+      padding: 7px 12px;
+      border: 1px solid var(--bd);
+      border-radius: var(--r);
+      background: #fff;
+      color: var(--t2);
+      font-family: inherit;
+      font-size: 12.5px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background .12s, color .12s;
+    }
+
+    .ds-home:hover {
+      background: var(--ps);
+      color: var(--t1);
+    }
+
+    .ds-home svg {
+      width: 14px;
+      height: 14px;
+      stroke-width: 1.8;
     }
 
     /* ==========================================================
@@ -786,7 +949,7 @@
       cursor: pointer;
       padding-right: 24px;
       appearance: none;
-      background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239CA3AF'/%3E%3C/svg%3E") no-repeat right 8px center;
+      background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 8px center;
     }
 
     .tcard thead th.srt {
@@ -1150,6 +1313,155 @@
       margin: 3px 0;
     }
 
+    /* --- Roue crantee + panneau de colonnes --- */
+    .cgear-th {
+      width: 44px;
+      text-align: center !important;
+      position: relative;
+    }
+
+    .cgear {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      border: none;
+      background: transparent;
+      color: var(--t3);
+      cursor: pointer;
+      margin: 0 auto;
+      transition: background .12s, color .12s;
+    }
+
+    .cgear:hover,
+    .cgear.on {
+      background: var(--a1);
+      color: var(--a);
+    }
+
+    .cgear svg {
+      width: 17px;
+      height: 17px;
+      stroke-width: 1.6;
+    }
+
+    .cpanel {
+      display: none;
+      position: absolute;
+      top: calc(100% + 6px);
+      right: 0;
+      width: 248px;
+      background: #fff;
+      border: 1px solid var(--bd);
+      border-radius: var(--rl);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, .11);
+      z-index: 500;
+      overflow: hidden;
+      text-align: left;
+    }
+
+    .cpanel.oo {
+      display: block;
+    }
+
+    .cph {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px 8px;
+      border-bottom: 1px solid var(--bg);
+    }
+
+    .cpt {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--t2);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .cprst {
+      font-size: 12px;
+      color: var(--a);
+      cursor: pointer;
+      font-weight: 500;
+      background: none;
+      border: none;
+      font-family: inherit;
+    }
+
+    .cprst:hover {
+      text-decoration: underline;
+    }
+
+    .cplist {
+      padding: 4px 0 8px;
+      max-height: 320px;
+      overflow-y: auto;
+    }
+
+    .crow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      cursor: grab;
+      transition: background .08s;
+      user-select: none;
+    }
+
+    .crow:hover {
+      background: var(--ps);
+    }
+
+    .crow.dg {
+      background: var(--a1);
+      opacity: .7;
+    }
+
+    .cdg {
+      display: flex;
+      align-items: center;
+      color: var(--bd);
+      flex-shrink: 0;
+    }
+
+    .cdg svg {
+      width: 13px;
+      height: 13px;
+    }
+
+    .cck {
+      width: 14px;
+      height: 14px;
+      accent-color: var(--a);
+      cursor: pointer;
+      flex-shrink: 0;
+      margin: 0;
+    }
+
+    .clbl {
+      font-size: 13px;
+      flex: 1;
+      font-weight: 400;
+      color: var(--t1);
+    }
+
+    .crow.lk {
+      cursor: default;
+    }
+
+    .crow.lk .cdg svg {
+      opacity: .3;
+    }
+
+    .crow.lk .cck {
+      opacity: .4;
+      cursor: not-allowed;
+    }
+
     /* --- Pied de tableau --- */
     .tfoot {
       display: flex;
@@ -1337,7 +1649,7 @@
     .tb-cl {
       font-size: 12px;
       color: var(--t3);
-      width: 100%;
+      white-space: nowrap;
     }
 
     .tb-sel {
@@ -1347,12 +1659,12 @@
       font-family: inherit;
       border: 1px solid var(--bd);
       border-radius: var(--r);
-      background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239CA3AF'/%3E%3C/svg%3E") no-repeat right 8px center;
+      background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 8px center;
       appearance: none;
       color: var(--t2);
       cursor: pointer;
       outline: none;
-      min-width: 160px;
+      min-width: 220px;
     }
 
     .tb-sel:focus {
@@ -1567,7 +1879,7 @@
     }
 
     .ni.act {
-      background: var(--a);
+      background: var(--nav-act);
       color: #fff;
       font-weight: 500;
     }
@@ -1903,7 +2215,7 @@
       font-family: inherit;
       border: 1px solid #E2E8F0;
       border-radius: 8px;
-      background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%230F172A'/%3E%3C/svg%3E") no-repeat right 12px center;
+      background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 11px center;
       appearance: none;
       color: #0F172A;
       cursor: default;
@@ -2023,11 +2335,12 @@
     }
 
     .upload-ic {
-      width: 48px;
-      height: 48px;
+      width: 44px;
+      height: 44px;
       border-radius: var(--r);
-      background: var(--ps);
-      border: 1px dashed var(--bd);
+      background: #fff;
+      border: 1px solid var(--bd);
+      box-shadow: none;
       color: var(--t3);
       display: flex;
       align-items: center;
@@ -2036,9 +2349,9 @@
     }
 
     .upload-ic svg {
-      width: 22px;
-      height: 22px;
-      stroke-width: 1.8;
+      width: 19px;
+      height: 19px;
+      stroke-width: 1.3;
     }
 
     .upload-name {
@@ -2735,13 +3048,58 @@
   </style>
 </head>
 
-<body>
+<body class="lc-open">
+  <div class="launcher" id="launcher">
+    <div class="lc-inner">
+      <div class="lc-logo">
+        <span class="dot"></span><span>Design System</span>
+      </div>
+      <p class="lc-sub">OnlineManager — choisissez une section, ou ouvrez la page entière.</p>
+      <div class="lc-group">Fondations</div>
+      <div class="lc-grid">
+        <a class="lc-card" href="#colors" onclick="pickSection(event, '#colors')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="10.5" r="2.5"/><circle cx="8.5" cy="7.5" r="2.5"/><circle cx="6.5" cy="12.5" r="2.5"/><path d="M12 2a10 10 0 0 0 0 20c.55 0 1-.45 1-1v-1a2 2 0 0 1 2-2h2a5 5 0 0 0 5-5 10 10 0 0 0-10-11z"/></svg></span>Couleurs & Variables</a>
+        <a class="lc-card" href="#typography" onclick="pickSection(event, '#typography')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg></span>Typographie</a>
+        <a class="lc-card" href="#sizing" onclick="pickSection(event, '#sizing')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3H3v18h18V3z"/><path d="M7 7v10"/><path d="M11 7v4"/><path d="M15 7v10"/></svg></span>Tailles & Espacements</a>
+      </div>
+      <div class="lc-group">Composants</div>
+      <div class="lc-grid">
+        <a class="lc-card" href="#buttons" onclick="pickSection(event, '#buttons')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="10" rx="4"/><circle cx="8" cy="12" r="2"/></svg></span>Boutons</a>
+        <a class="lc-card" href="#badges" onclick="pickSection(event, '#badges')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></span>Badges & Tags</a>
+        <a class="lc-card" href="#forms" onclick="pickSection(event, '#forms')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="14" x2="13" y2="14"/></svg></span>Formulaires</a>
+        <a class="lc-card" href="#dropdowns" onclick="pickSection(event, '#dropdowns')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>Dropdowns</a>
+        <a class="lc-card" href="#blocks" onclick="pickSection(event, '#blocks')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></span>Blocs & Cartes</a>
+        <a class="lc-card" href="#tables" onclick="pickSection(event, '#tables')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="9" x2="9" y2="21"/></svg></span>Tableaux</a>
+        <a class="lc-card" href="#icons" onclick="pickSection(event, '#icons')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>Iconographie</a>
+        <a class="lc-card" href="#widgets" onclick="pickSection(event, '#widgets')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span>Widgets Stats</a>
+      </div>
+      <div class="lc-group">Patterns & Layouts</div>
+      <div class="lc-grid">
+        <a class="lc-card" href="#layouts" onclick="pickSection(event, '#layouts')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg></span>Layouts (Grilles)</a>
+        <a class="lc-card" href="#page-templates" onclick="pickSection(event, '#page-templates')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/></svg></span>Templates de Pages</a>
+        <a class="lc-card" href="#navigation" onclick="pickSection(event, '#navigation')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></span>Navigation & Topbar</a>
+        <a class="lc-card" href="#modals" onclick="pickSection(event, '#modals')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><circle cx="17" cy="7" r=".6"/></svg></span>Modales & Overlays</a>
+        <a class="lc-card" href="#states" onclick="pickSection(event, '#states')"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>États & Feedback</a>
+      </div>
+      <div class="lc-all">
+        <button class="btn" onclick="showAll()">Ouvrir la page entière</button>
+      </div>
+    </div>
+  </div>
+
+
 
   <aside class="ds-sidebar">
     <div class="ds-logo">
       <div class="dot"></div>
       Design System
     </div>
+
+    <button class="ds-home" onclick="showLauncher()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+        <polyline points="9 22 9 12 15 12 15 22" />
+      </svg>Accueil
+    </button>
 
     <div class="ds-nav-title">Fondations</div>
     <a href="#colors" class="ds-nav-item">Couleurs & Variables</a>
@@ -3640,7 +3998,7 @@
         <div class="btn-demo">
           <button class="btn primary">Étape suivante <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
           <button class="btn">Trier <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <button class="btn tertiary neutral"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>Filtrer<span class="btn-count">3</span></button>
+          <button class="btn tertiary neutral"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>Filtrer</button>
         </div>
       </div>
 
@@ -3683,6 +4041,11 @@
             <td>13 / 14 / 16 / 18px selon xs / sm / md / lg — pilotée par <code>--btn-icon</code>, jamais en dur</td>
           </tr>
           <tr>
+            <td>Jeu</td>
+            <td><a href="https://akveo.github.io/eva-icons/" target="_blank" rel="noopener"
+                style="color:var(--a);">Eva Icons</a>, variante <i>outline</i>, grille 24 × 24</td>
+          </tr>
+          <tr>
             <td>Épaisseur</td>
             <td><code>stroke-width: 1.8</code> pour tout le système, quelle que soit la taille</td>
           </tr>
@@ -3723,12 +4086,11 @@
         Formes</p>
 
       <div class="preview-box">
-        <div class="preview-label">Pleine largeur · pilule · compteur</div>
+        <div class="preview-label">Pleine largeur · compteur</div>
         <div style="max-width:420px;">
           <button class="btn primary lg block"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>Valider les 24 inscriptions</button>
         </div>
         <div class="btn-demo">
-          <button class="btn secondary pill">Terminé</button>
           <button class="btn">Filtrer<span class="btn-count">3</span></button>
           <button class="btn primary">Sélection<span class="btn-count">12</span></button>
         </div>
@@ -3736,7 +4098,6 @@
 
       <div class="code-box">
         &lt;button class="btn primary lg block"&gt;Valider&lt;/button&gt;<br>
-        &lt;button class="btn secondary pill"&gt;Terminé&lt;/button&gt;<br>
         &lt;button class="btn"&gt;Filtrer&lt;span class="btn-count"&gt;3&lt;/span&gt;&lt;/button&gt;
       </div>
 
@@ -4658,17 +5019,7 @@
       <p
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
         5 — Import de fichier</p>
-      <p class="section-desc" style="margin-bottom:24px;"><b>Zone large</b> quand l'import est l'action principale du
-        bloc, <b>ligne compacte</b> quand c'est un réglage parmi d'autres. Contraintes de poids et de format écrites
-        <b>avant</b> la sélection.</p>
-
-      <div class="preview-box">
-        <div class="preview-label">Zone large — l'import est l'action principale</div>
-        <div class="upload-zone">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          <span>Définir le logo</span>
-        </div>
-      </div>
+      <p class="section-desc" style="margin-bottom:24px;">Contraintes de poids et de format écrites <b>avant</b> la sélection.</p>
 
       <div class="preview-box">
         <div class="preview-label">Ligne compacte — un réglage parmi d'autres</div>
@@ -4695,7 +5046,7 @@
         </div>
         <div class="fs-block" style="max-width:700px;">
           <div class="fs-header">
-            <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+            <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
             <div class="fs-title">Signature visuelle</div>
           </div>
           <div class="fs-card">
@@ -4791,29 +5142,13 @@
       <p
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
         7 — Layout d'une page de réglages</p>
-      <p class="section-desc" style="margin-bottom:24px;">Bandeau d'identité sur toute la largeur, puis deux colonnes de
-        sections, réparties par <b>fréquence de modification</b> : ce qui change souvent à gauche, ce qui est stable
-        (références légales, signature) à droite.</p>
+      <p class="section-desc" style="margin-bottom:24px;">Deux colonnes de sections, réparties par <b>fréquence de
+        modification</b> : ce qui change souvent à gauche, ce qui est stable (références légales, signature) à
+        droite.</p>
 
       <div class="preview-box" style="background:var(--bg);">
         <div class="preview-label">Live Preview</div>
         <div class="form-body">
-          <div class="full">
-            <div class="pcard" style="display:flex; align-items:center; gap:28px; margin-bottom:0;">
-              <div class="upload-zone" style="width:170px;height:96px;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                <span>Définir le logo</span>
-              </div>
-              <div style="flex:1; min-width:0;">
-                <div style="font-size:22px;font-weight:600;color:var(--t1);margin-bottom:10px;">ONLINEFORMAPRO</div>
-                <div class="pbadges">
-                  <span class="pbadge green">Siège social</span>
-                  <span class="pbadge" style="background:var(--a1);color:var(--a-p);">SA</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
           <div class="col">
             <div class="fs-block">
               <div class="fs-header">
@@ -4877,7 +5212,7 @@
             </div>
             <div class="fs-block">
               <div class="fs-header">
-                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
                 <div class="fs-title">Signature visuelle</div>
               </div>
               <div class="fs-card">
@@ -4899,48 +5234,23 @@
 
       <div class="code-box">
         &lt;div class="form-body"&gt;<br>
-        &nbsp;&nbsp;&lt;div class="full"&gt;&lt;!-- bandeau d'identité, pleine largeur --&gt;&lt;/div&gt;<br>
         &nbsp;&nbsp;&lt;div class="col"&gt;&lt;!-- sections modifiées souvent --&gt;&lt;/div&gt;<br>
         &nbsp;&nbsp;&lt;div class="col"&gt;&lt;!-- sections stables --&gt;&lt;/div&gt;<br>
         &lt;/div&gt;
       </div>
 
-      <!-- ============ 8. REGLES ============ -->
-      <p
-        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
-        8 — Règles d'usage</p>
-
-      <div class="do-dont">
-        <div class="dd-card do">
-          <h4>À faire</h4>
-          <ul>
-            <li>Le label au-dessus du champ, toujours.</li>
-            <li>Choisir le nombre de colonnes selon la longueur de la valeur attendue.</li>
-            <li>Écrire le format attendu en <code>.form-hint</code> avant la saisie.</li>
-            <li>Regrouper en <code>.fs-block</code> dès sept champs.</li>
-            <li>Garder le texte lisible sur un champ en lecture seule.</li>
-            <li>Un message d'erreur qui dit quoi corriger, pas seulement qu'il y a une erreur.</li>
-          </ul>
-        </div>
-        <div class="dd-card dont">
-          <h4>À éviter</h4>
-          <ul>
-            <li>Le placeholder comme label : il disparaît dès la première frappe.</li>
-            <li>Une bascule pour un réglage qui n'est appliqué qu'après « Enregistrer ».</li>
-            <li>Désactiver un champ là où la lecture seule suffit.</li>
-            <li>Annoncer les contraintes de fichier seulement après un import raté.</li>
-            <li>Un astérisque sur presque tous les champs : marquer les facultatifs à la place.</li>
-            <li>Des couleurs en dur : tout passe par les tokens.</li>
-          </ul>
-        </div>
-      </div>
     </section>
 
     <!-- ICONS -->
     <section id="icons">
       <h2 class="section-title">Iconographie</h2>
-      <p class="section-desc">Système basé sur Lucide / Feather Icons. Utilisation de <b>Stroke-width: 1.8</b> pour plus
-        de finesse.</p>
+      <p class="section-desc">Jeu d'icônes de référence : <b><a href="https://akveo.github.io/eva-icons/"
+            target="_blank" rel="noopener" style="color:var(--a);">Eva Icons</a></b>, variante <i>outline</i>, grille
+        24 × 24. <code>stroke-width: 1.8</code> et <code>currentColor</code> pour que l'icône suive la variante et le
+        ton du composant qui la porte.</p>
+      <p class="section-desc" style="margin-top:-24px;font-size:13.5px;">Les tracés présentés ci-dessous sont encore
+        ceux de Feather : la substitution par les tracés Eva reste à faire, icône par icône. Les règles de taille,
+        d'épaisseur et de couleur, elles, sont celles du système.</p>
 
       <div class="ds-grid">
         <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
@@ -5118,7 +5428,8 @@
                   <th class="srt">E-mail<span class="rez"></span></th>
                   <th class="srt">Statut<span class="rez"></span></th>
                   <th class="srt">Groupe<span class="rez"></span></th>
-                  <th class="srt">Inscription</th>
+                  <th class="srt">Inscription<span class="rez"></span></th>
+                  <th class="cgear-th"></th>
                 </tr>
                 <tr class="thr-filter">
                   <th class="gsth"></th>
@@ -5135,6 +5446,67 @@
                       <option>Produit</option>
                     </select></th>
                   <th><input type="search" class="th-search" placeholder="Rechercher"></th>
+                  <th class="cgear-th">
+                    <button class="cgear" aria-label="Choisir les colonnes" onclick="togCols(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
+                    <div class="cpanel">
+                      <div class="cph">
+                        <span class="cpt">Colonnes</span>
+                        <button class="cprst">Réinitialiser</button>
+                      </div>
+                      <div class="cplist">
+              <div class="crow lk">
+                <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                <input type="checkbox" class="cck" checked disabled>
+                <span class="clbl">Apprenant</span>
+              </div>
+              <div class="crow" draggable="true">
+                <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                <input type="checkbox" class="cck" checked>
+                <span class="clbl">État</span>
+              </div>
+              <div class="crow" draggable="true">
+                <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                <input type="checkbox" class="cck">
+                <span class="clbl">E-mail</span>
+              </div>
+              <div class="crow" draggable="true">
+                <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                <input type="checkbox" class="cck">
+                <span class="clbl">Identifiant</span>
+              </div>
+              <div class="crow" draggable="true">
+                <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                <input type="checkbox" class="cck" checked>
+                <span class="clbl">Groupes</span>
+              </div>
+              <div class="crow" draggable="true">
+                <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                <input type="checkbox" class="cck">
+                <span class="clbl">Département</span>
+              </div>
+              <div class="crow" draggable="true">
+                <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                <input type="checkbox" class="cck">
+                <span class="clbl">Rôle</span>
+              </div>
+              <div class="crow" draggable="true">
+                <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                <input type="checkbox" class="cck" checked>
+                <span class="clbl">Profil formations</span>
+              </div>
+              <div class="crow" draggable="true">
+                <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                <input type="checkbox" class="cck">
+                <span class="clbl">Dernière connexion</span>
+              </div>
+              <div class="crow" draggable="true">
+                <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                <input type="checkbox" class="cck" checked>
+                <span class="clbl">Date de création</span>
+              </div>
+                      </div>
+                    </div>
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -5153,6 +5525,7 @@
                 <td><span class="stb ston"><span class="stdon"></span>Actif</span></td>
                 <td>RH Central<span class="npill">3</span></td>
                 <td class="dc">12 mars 2026</td>
+                <td></td>
               </tr>
               <tr>
                 <td class="catd"><button class="rdots" aria-label="Actions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></td>
@@ -5169,6 +5542,7 @@
                 <td><span class="stb ston"><span class="stdon"></span>Actif</span></td>
                 <td>Produit</td>
                 <td class="dc">9 mars 2026</td>
+                <td></td>
               </tr>
               <tr>
                 <td class="catd"><button class="rdots" aria-label="Actions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></td>
@@ -5185,6 +5559,7 @@
                 <td><span class="stb stoff"><span class="stdoff"></span>Inactif</span></td>
                 <td>Sécurité au travail</td>
                 <td class="dc">2 févr. 2026</td>
+                <td></td>
               </tr>
               <tr>
                 <td class="catd"><button class="rdots" aria-label="Actions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></td>
@@ -5201,6 +5576,7 @@
                 <td><span class="stb ston"><span class="stdon"></span>Actif</span></td>
                 <td>Management<span class="npill">2</span></td>
                 <td class="dc">28 janv. 2026</td>
+                <td></td>
               </tr>
               </tbody>
             </table>
@@ -5346,70 +5722,10 @@
         </tbody>
       </table>
 
-      <!-- ============ 4. CONTENU DE CELLULE ============ -->
+      <!-- ============ 4. ACTIONS DE LIGNE ============ -->
       <p
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
-        4 — Contenu de cellule</p>
-
-      <div class="preview-box" style="padding:40px 20px 20px;">
-        <div class="preview-label">Live Preview</div>
-        <div class="tcard">
-          <div class="tw">
-            <table>
-              <tbody>
-                <tr>
-                  <td style="width:190px;" class="cv">Identité</td>
-                  <td>
-                    <div class="cn">
-                      <div class="ava" style="background:#F8F1FB;color:#8A3AAF;">MG</div>
-                      <div>
-                        <div class="nmain">Michèle GUERRIN</div>
-                        <div class="nsub">PDG</div>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="cv">Statut</td>
-                  <td><span class="stb ston"><span class="stdon"></span>Actif</span> &nbsp;&nbsp;
-                    <span class="stb stoff"><span class="stdoff"></span>Inactif</span></td>
-                </tr>
-                <tr>
-                  <td class="cv">Compteur</td>
-                  <td>RH Central<span class="npill">3</span></td>
-                </tr>
-                <tr>
-                  <td class="cv">Valeur secondaire</td>
-                  <td class="dc">12 mars 2026</td>
-                </tr>
-                <tr>
-                  <td class="cv">Identifiant technique</td>
-                  <td><span class="mcel">USR-4821-A</span></td>
-                </tr>
-                <tr>
-                  <td class="cv">Infobulle</td>
-                  <td>
-                    <span class="mwrap">
-                      <span style="border-bottom:1px dashed var(--t3);cursor:default;">3 modules</span>
-                      <span class="mtip">
-                        <div class="mtit">Modules suivis</div>
-                        <div class="mit"><span class="mdt"></span>Sécurité au travail</div>
-                        <div class="mit"><span class="mdt"></span>Management d'équipe</div>
-                        <div class="mit"><span class="mdt"></span>RGPD</div>
-                      </span>
-                    </span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <!-- ============ 5. ACTIONS DE LIGNE ============ -->
-      <p
-        style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
-        5 — Actions de ligne</p>
+        4 — Actions de ligne</p>
       <p class="section-desc" style="margin-bottom:24px;">Le bouton <code>.rdots</code> reste masqué et n'apparaît qu'au
         survol de la ligne, dans une colonne <code>.catd</code> de 44px réservée à gauche.</p>
 
@@ -5429,95 +5745,67 @@
         </div>
       </div>
 
-      <!-- ============ 6. PIED DE TABLEAU ============ -->
+      <!-- ============ 5. PIED DE TABLEAU ============ -->
       <p
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
-        6 — Pied de tableau &amp; densité</p>
+        5 — Pied de tableau &amp; densité</p>
 
       <div class="preview-box" style="padding:40px 20px 20px;">
-        <div class="preview-label">Mode compact — .tcard.cmp masque avatars et sous-titres</div>
-        <div class="tcard cmp">
-          <div class="tw">
-            <table>
-              <tbody>
-              <tr>
-                <td class="catd"><button class="rdots" aria-label="Actions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></td>
-                <td>
-                  <div class="cn">
-                    <div class="ava" style="background:#F8F1FB;color:#8A3AAF;">MG</div>
-                    <div>
-                      <div class="nmain">Michèle GUERRIN</div>
-                      <div class="nsub">PDG</div>
-                    </div>
-                  </div>
-                </td>
-                <td class="cv">m.guerrin@onlineformapro.com</td>
-                <td><span class="stb ston"><span class="stdon"></span>Actif</span></td>
-                <td>RH Central<span class="npill">3</span></td>
-                <td class="dc">12 mars 2026</td>
-              </tr>
-              <tr>
-                <td class="catd"><button class="rdots" aria-label="Actions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></td>
-                <td>
-                  <div class="cn">
-                    <div class="ava" style="background:#F1F7FB;color:#2876A7;">AD</div>
-                    <div>
-                      <div class="nmain">Alan DRABCZYNSKI</div>
-                      <div class="nsub">Designer</div>
-                    </div>
-                  </div>
-                </td>
-                <td class="cv">a.drabczynski@onlineformapro.com</td>
-                <td><span class="stb ston"><span class="stdon"></span>Actif</span></td>
-                <td>Produit</td>
-                <td class="dc">9 mars 2026</td>
-              </tr>
-              <tr>
-                <td class="catd"><button class="rdots" aria-label="Actions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></td>
-                <td>
-                  <div class="cn">
-                    <div class="ava" style="background:#FEF3C7;color:#B45309;">JD</div>
-                    <div>
-                      <div class="nmain">Jean DUPONT</div>
-                      <div class="nsub">Formateur</div>
-                    </div>
-                  </div>
-                </td>
-                <td class="cv">j.dupont@onlineformapro.com</td>
-                <td><span class="stb stoff"><span class="stdoff"></span>Inactif</span></td>
-                <td>Sécurité au travail</td>
-                <td class="dc">2 févr. 2026</td>
-              </tr>
-              <tr>
-                <td class="catd"><button class="rdots" aria-label="Actions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></td>
-                <td>
-                  <div class="cn">
-                    <div class="ava" style="background:#F8F1FB;color:#8A3AAF;">SL</div>
-                    <div>
-                      <div class="nmain">Sophie LEROY</div>
-                      <div class="nsub">Gestionnaire</div>
-                    </div>
-                  </div>
-                </td>
-                <td class="cv">s.leroy@onlineformapro.com</td>
-                <td><span class="stb ston"><span class="stdon"></span>Actif</span></td>
-                <td>Management<span class="npill">2</span></td>
-                <td class="dc">28 janv. 2026</td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="tfoot">
+        <div class="preview-label">Live Preview</div>
+        <div class="tcard">
+          <div class="tfoot" style="border-top:none;border-radius:var(--rl);">
             <span class="fi">4 résultats sur 128</span>
             <div class="pgn">
               <button class="pb" disabled>Précédent</button>
               <button class="pb on">1</button>
               <button class="pb">2</button>
+              <button class="pb">3</button>
               <button class="pb">Suivant</button>
+            </div>
+            <div class="lpp-wrap">
+              <span class="lpp-lbl">Par page</span>
+              <button class="lpp-btn">25 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
             </div>
           </div>
         </div>
       </div>
+
+      <table class="sizing-table">
+        <thead>
+          <tr>
+            <th>Élément</th>
+            <th>Classe</th>
+            <th>Traitement</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Pied</td>
+            <td class="var-name">.tfoot</td>
+            <td class="var-value">padding 10px 14px · fond --ps · filet haut --bg</td>
+          </tr>
+          <tr>
+            <td>Compteur</td>
+            <td class="var-name">.fi</td>
+            <td class="var-value">12.5px --t3</td>
+          </tr>
+          <tr>
+            <td>Pagination</td>
+            <td class="var-name">.pb / .pb.on</td>
+            <td class="var-value">28px · radius 7px · page courante sur --t1</td>
+          </tr>
+          <tr>
+            <td>Par page</td>
+            <td class="var-name">.lpp-btn</td>
+            <td class="var-value">28px, même gabarit que la pagination</td>
+          </tr>
+          <tr>
+            <td>Mode compact</td>
+            <td class="var-name">.tcard.cmp</td>
+            <td class="var-value">cellules à 5px de padding, avatars et sous-titres masqués</td>
+          </tr>
+        </tbody>
+      </table>
 
       <div class="code-box">
         &lt;div class="tcard"&gt;<br>
@@ -5742,7 +6030,7 @@
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;">
         1 — Topbar</p>
 
-      <div class="nav-stage" style="height:120px;">
+      <div class="nav-stage" style="height:56px;">
         <header class="topbar">
         <div class="tb-slot">
         <div class="tb-logo"><svg viewBox="0 0 24 24">
@@ -5922,11 +6210,6 @@
 
       <div class="nav-stage" style="height:520px;display:flex;">
         <aside class="sidebar">
-        <div class="sb-s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-        stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="11" cy="11" r="8" />
-        <path d="m21 21-4.35-4.35" />
-        </svg><span>Rechercher</span><kbd>⌘K</kbd></div>
         <div class="sb-toggle"
         style="margin: 0 12px 10px; display:flex; background:rgba(255,255,255,0.05); border-radius:6px; padding:4px;">
         <div class="sbt-btn on"
@@ -6018,11 +6301,6 @@
             <td class="var-value">--sw 220px · #150625 · padding-top 56px</td>
           </tr>
           <tr>
-            <td>Recherche</td>
-            <td class="var-name">.sb-s</td>
-            <td class="var-value">blanc 5 % sur bordure blanc 10 % · raccourci en <code>kbd</code></td>
-          </tr>
-          <tr>
             <td>Bascule</td>
             <td class="var-name">.sb-toggle / .sbt-btn.on</td>
             <td class="var-value">Gestion / Reporting · l'onglet actif passe à blanc 10 %</td>
@@ -6040,7 +6318,7 @@
           <tr>
             <td>Actif</td>
             <td class="var-name">.ni.act</td>
-            <td class="var-value">fond <code>--a</code>, texte blanc, poids 500</td>
+            <td class="var-value">fond <code>--nav-act #E2006E</code>, texte blanc, poids 500</td>
           </tr>
           <tr>
             <td>Groupe</td>
@@ -6154,11 +6432,6 @@
         </header>
         <div style="display:flex;height:100%;">
           <aside class="sidebar">
-          <div class="sb-s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-          stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="11" cy="11" r="8" />
-          <path d="m21 21-4.35-4.35" />
-          </svg><span>Rechercher</span><kbd>⌘K</kbd></div>
           <div class="sb-toggle"
           style="margin: 0 12px 10px; display:flex; background:rgba(255,255,255,0.05); border-radius:6px; padding:4px;">
           <div class="sbt-btn on"
@@ -6245,7 +6518,6 @@
         &nbsp;&nbsp;&lt;div class="tb-body"&gt;entité, sélecteur, &lt;div class="tb-ics"&gt;icônes&lt;/div&gt;&lt;/div&gt;<br>
         &lt;/header&gt;<br><br>
         &lt;aside class="sidebar"&gt;<br>
-        &nbsp;&nbsp;&lt;div class="sb-s"&gt;recherche&lt;/div&gt;<br>
         &nbsp;&nbsp;&lt;div class="sb-toggle"&gt;Gestion / Reporting&lt;/div&gt;<br>
         &nbsp;&nbsp;&lt;nav class="nav"&gt;<br>
         &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="ni-group"&gt;&lt;div class="ni"&gt;…&lt;/div&gt;&lt;div class="sub-nav"&gt;…&lt;/div&gt;&lt;/div&gt;<br>
@@ -6506,13 +6778,69 @@
   </main>
 
   <script>
+    // ---- Ecran d'accueil ----
+    const LC_KEY = 'ds-section';
+
+    function hideLauncher() {
+      document.getElementById('launcher').classList.add('hidden');
+      document.body.classList.remove('lc-open');
+    }
+
+    function showLauncher() {
+      document.getElementById('launcher').classList.remove('hidden');
+      document.body.classList.add('lc-open');
+      window.scrollTo(0, 0);
+      try { sessionStorage.removeItem(LC_KEY); } catch (e) { }
+    }
+
+    function showOnly(hash) {
+      document.querySelectorAll('.ds-main > section').forEach(sec => {
+        sec.hidden = hash !== 'all' && ('#' + sec.id) !== hash;
+      });
+      document.querySelectorAll('.ds-nav-item').forEach(a => {
+        a.style.color = (hash !== 'all' && a.getAttribute('href') === hash) ? 'var(--a)' : '';
+      });
+    }
+
+    function pickSection(e, hash) {
+      e.preventDefault();
+      try { sessionStorage.setItem(LC_KEY, hash); } catch (err) { }
+      showOnly(hash);
+      hideLauncher();
+      window.scrollTo(0, 0);
+    }
+
+    function showAll() {
+      try { sessionStorage.setItem(LC_KEY, 'all'); } catch (err) { }
+      showOnly('all');
+      hideLauncher();
+      window.scrollTo(0, 0);
+    }
+
+    (function () {
+      let saved = null;
+      try { saved = sessionStorage.getItem(LC_KEY); } catch (e) { }
+      if (saved) {
+        showOnly(saved);
+        hideLauncher();
+      } else {
+        document.body.classList.add('lc-open');
+      }
+    })();
+
     // Smooth scroll for nav
     document.querySelectorAll('.ds-nav-item').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
-        });
+        const hash = this.getAttribute('href');
+        const target = document.querySelector(hash);
+        if (target.hidden) {
+          try { sessionStorage.setItem(LC_KEY, hash); } catch (err) { }
+          showOnly(hash);
+          window.scrollTo(0, 0);
+        } else {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
       });
     });
 
@@ -6549,6 +6877,84 @@
       btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
     }
+
+
+    // ---- Tableaux : redimensionnement de colonne ----
+    (function () {
+      let drag = null;
+
+      document.addEventListener('mousedown', (e) => {
+        const handle = e.target.closest('.rez');
+        if (!handle) return;
+        const th = handle.parentElement;
+        drag = { th, x: e.clientX, w: th.getBoundingClientRect().width };
+        handle.classList.add('rz');
+        document.body.style.cursor = 'col-resize';
+        document.body.style.userSelect = 'none';
+        e.preventDefault();
+      });
+
+      document.addEventListener('mousemove', (e) => {
+        if (!drag) return;
+        const w = Math.max(70, drag.w + e.clientX - drag.x);
+        drag.th.style.width = w + 'px';
+        drag.th.style.minWidth = w + 'px';
+      });
+
+      document.addEventListener('mouseup', () => {
+        if (!drag) return;
+        document.querySelectorAll('.rez.rz').forEach(h => h.classList.remove('rz'));
+        document.body.style.cursor = '';
+        document.body.style.userSelect = '';
+        drag = null;
+      });
+    })();
+
+    // ---- Tableaux : panneau de colonnes ----
+    function togCols(btn) {
+      const panel = btn.parentElement.querySelector('.cpanel');
+      const open = panel.classList.contains('oo');
+      document.querySelectorAll('.cpanel').forEach(p => p.classList.remove('oo'));
+      document.querySelectorAll('.cgear').forEach(g => g.classList.remove('on'));
+      if (!open) {
+        panel.classList.add('oo');
+        btn.classList.add('on');
+      }
+    }
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.cgear-th')) {
+        document.querySelectorAll('.cpanel').forEach(p => p.classList.remove('oo'));
+        document.querySelectorAll('.cgear').forEach(g => g.classList.remove('on'));
+      }
+    });
+
+    // ---- Tableaux : reordonner les colonnes par glisser-deposer ----
+    (function () {
+      let src = null;
+
+      document.addEventListener('dragstart', (e) => {
+        const row = e.target.closest('.crow[draggable]');
+        if (!row) return;
+        src = row;
+        row.classList.add('dg');
+        e.dataTransfer.effectAllowed = 'move';
+      });
+
+      document.addEventListener('dragover', (e) => {
+        const row = e.target.closest('.crow');
+        if (!row || !src || row === src || row.classList.contains('lk')) return;
+        e.preventDefault();
+        const box = row.getBoundingClientRect();
+        const after = e.clientY > box.top + box.height / 2;
+        row.parentElement.insertBefore(src, after ? row.nextSibling : row);
+      });
+
+      document.addEventListener('dragend', () => {
+        if (src) src.classList.remove('dg');
+        src = null;
+      });
+    })();
 
     // Demo: loading state (the width stays fixed, so no layout shift)
     function demoLoading(btn) {
