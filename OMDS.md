@@ -1,5 +1,7 @@
 # OnlineManager — règles pour générer une page
 
+*Version 1.0.0 — sortie le 2026-09-15*
+
 Ce dépôt est le design system d'OnlineManager. Tu génères des pages HTML qui
 l'utilisent. Tu ne modifies jamais le système lui-même : ni `index.html`, ni `dist/`.
 

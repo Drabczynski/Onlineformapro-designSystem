@@ -19,6 +19,11 @@ const DIST = path.join(ROOT, 'dist');
 
 const html = fs.readFileSync(SRC, 'utf8').replace(/\r\n/g, '\n');
 
+// Version et date de sortie : une seule source, le bandeau de la section Ressources.
+const release = html.match(/class="rs-release" data-version="([^"]+)" data-date="([^"]+)"/);
+if (!release) throw new Error('Bandeau de version introuvable dans index.html (.rs-release)');
+const [, VERSION, RELEASED] = release;
+
 function between(text, start, end, label) {
   const i = text.indexOf(start);
   const j = text.indexOf(end, i + start.length);
@@ -85,7 +90,7 @@ function dedent(block) {
   return block.split('\n').map(l => l.replace(/^ {4}/, '')).join('\n');
 }
 
-const HEADER = (what) => `/* OnlineManager — ${what}\n   Généré par build.js depuis index.html. Ne pas modifier à la main. */\n\n`;
+const HEADER = (what) => `/* OnlineManager — ${what}\n   Version ${VERSION} — sortie le ${RELEASED}\n   Généré par build.js depuis index.html. Ne pas modifier à la main. */\n\n`;
 
 const componentsOut = HEADER('composants') +
   tokensCss.map(dedent).join('\n\n') + '\n\n' +
@@ -96,7 +101,7 @@ const script = html.slice(html.lastIndexOf('<script>') + 8, html.lastIndexOf('</
 let js = between(script, '/* @components:start', '/* @components:end */', '@components');
 js = js.slice(js.indexOf('*/') + 2); // retire la fin de la ligne de marqueur
 js = js.split('\n').map(l => l.replace(/^ {4}/, '')).join('\n').trim();
-const jsOut = `/* OnlineManager — composants (JS)\n   Généré par build.js depuis index.html. Ne pas modifier à la main.\n   Charger après le DOM : <script src="dist/components.js" defer></script> */\n\n${js}\n`;
+const jsOut = `/* OnlineManager — composants (JS)\n   Version ${VERSION} — sortie le ${RELEASED}\n   Généré par build.js depuis index.html. Ne pas modifier à la main.\n   Charger après le DOM : <script src="components.js" defer></script> */\n\n${js}\n`;
 
 // ---------------------------------------------------------------- écriture / vérification
 const files = {
@@ -120,5 +125,8 @@ for (const [name, content] of Object.entries(files)) {
 }
 
 // OMDS.md est le même fichier que CLAUDE.md, sous le nom distribué à l'équipe.
-fs.copyFileSync(path.join(ROOT, 'CLAUDE.md'), path.join(ROOT, 'OMDS.md'));
-console.log('OMDS.md  copie de CLAUDE.md');
+const rules = fs.readFileSync(path.join(ROOT, 'CLAUDE.md'), 'utf8')
+  .replace(/^# OnlineManager — règles pour générer une page\n/,
+    `# OnlineManager — règles pour générer une page\n\n*Version ${VERSION} — sortie le ${RELEASED}*\n`);
+fs.writeFileSync(path.join(ROOT, 'OMDS.md'), rules);
+console.log(`OMDS.md  CLAUDE.md estampillé v${VERSION}`);

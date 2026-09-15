@@ -1,6 +1,7 @@
 /* OnlineManager — composants (JS)
+   Version 1.0.0 — sortie le 2026-09-15
    Généré par build.js depuis index.html. Ne pas modifier à la main.
-   Charger après le DOM : <script src="dist/components.js" defer></script> */
+   Charger après le DOM : <script src="components.js" defer></script> */
 
 // ---- Dropdown ----
 function toggleDD(btn) {
