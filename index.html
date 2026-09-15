@@ -4,10 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Design System - OnlineManager</title>
+  <title>OnlineManager DS</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@300..900&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Geist:wght@100..900&family=Manrope:wght@200..800&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Overpass+Mono:wght@300..700&family=Overpass:ital,wght@0,100..900;1,100..900&family=Stack+Sans+Headline:wght@200..700&family=Yellowtail&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Geist:wght@400..700&family=Overpass+Mono:wght@400;600;700&display=swap');
 
     :root {
       /* Primary — Violet (couleur de marque) */
@@ -19,14 +18,9 @@
       --a-p: #662B81;
       --a-dark: #9B4BC4;
 
-      /* Secondary — Bleu */
-      --s: #2876A7;
-      --s-rgb: 40, 118, 167;
-      --s-h: #22658E;
-      --s-p: #1C5376;
-      --s-t: #1A4E6E;
-      --s1: #F1F7FB;
-      --s2: #CADEEA;
+      /* Focus des champs de saisie — Bleu */
+      --s: #3B82F6;
+      --s1: #EFF6FF;
 
       /* Destructive (état sémantique uniquement) */
       --d: #B42318;
@@ -100,18 +94,23 @@
       font-family: 'Inter', sans-serif;
       font-weight: 700;
       font-size: 20px;
-      color: var(--a);
+      letter-spacing: -0.015em;
+      color: var(--t1);
       margin-bottom: 40px;
       display: flex;
       align-items: center;
       gap: 10px;
     }
 
-    .ds-logo .dot {
-      width: 12px;
-      height: 12px;
-      background: var(--a);
-      border-radius: 4px;
+    .ds-logo b {
+      font-weight: inherit;
+      color: var(--nav-act);
+    }
+
+    .ds-logo span {
+      color: var(--t3);
+      font-weight: 600;
+      margin-left: 2px;
     }
 
     .ds-nav-title {
@@ -676,7 +675,7 @@
 
     .btn-seg button.active {
       background: #fff;
-      color: var(--s-t);
+      color: var(--a);
       box-shadow: 0 1px 2px rgba(17, 24, 39, 0.09);
     }
 
@@ -952,9 +951,22 @@
       box-shadow: 0 1px 3px rgba(0, 0, 0, .04);
     }
 
+    /* overflow visible : les dropdowns de filtre et le panneau de colonnes
+       debordent du tableau. Les arrondis sont portes par les cellules. */
     .tw {
-      overflow: hidden;
       border-radius: var(--rl);
+    }
+
+    .tcard thead tr:first-child th:first-child {
+      border-top-left-radius: var(--rl);
+    }
+
+    .tcard thead tr:first-child th:last-child {
+      border-top-right-radius: var(--rl);
+    }
+
+    .tcard .tfoot {
+      border-radius: 0 0 var(--rl) var(--rl);
     }
 
     .tcard table {
@@ -2085,6 +2097,10 @@
       margin-top: 20px;
     }
 
+    .do-dont.stack {
+      grid-template-columns: 1fr;
+    }
+
     .dd-card {
       border: 1px solid var(--bd);
       border-left-width: 3px;
@@ -2094,7 +2110,7 @@
     }
 
     .dd-card.do {
-      border-left-color: var(--s);
+      border-left-color: var(--a);
     }
 
     .dd-card.dont {
@@ -2110,7 +2126,7 @@
     }
 
     .dd-card.do h4 {
-      color: var(--s-t);
+      color: var(--a);
     }
 
     .dd-card.dont h4 {
@@ -2249,8 +2265,8 @@
     }
 
     .form-input:focus {
-      border-color: #3B82F6;
-      box-shadow: 0 0 0 3px #EFF6FF;
+      border-color: var(--s);
+      box-shadow: 0 0 0 3px var(--s1);
     }
 
     /* Lecture seule : la valeur compte, la saisie non */
@@ -2475,7 +2491,7 @@
       color: var(--t2);
     }
 
-    /* ── WIDGET STATS (Reporting / Lemlist-style) ── */
+    /* ── WIDGET STATS (Reporting) ── */
     .w {
       background: #fff;
       border: 1px solid var(--bd);
@@ -3252,10 +3268,7 @@
   </div>
 
   <aside class="ds-sidebar">
-    <div class="ds-logo">
-      <div class="dot"></div>
-      Design System
-    </div>
+    <div class="ds-logo">Online<b>Manager</b> <span>DS</span></div>
 
     <button class="ds-home" onclick="showLauncher()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
@@ -3291,10 +3304,10 @@
     <!-- COLORS -->
     <section id="colors">
       <h2 class="section-title">Couleurs</h2>
-      <p class="section-desc">La palette suit une hiérarchie à trois niveaux : le <b>violet</b>
-        (<code>#8A3AAF</code>) porte la marque et l'action principale, le <b>bleu</b> (<code>#2876A7</code>) prend les
-        actions secondaires, et le <b>blanc</b> assure tout le reste. Les neutres profonds garantissent la lisibilité —
-        voir la section <a href="#buttons" style="color:var(--s-t);">Boutons</a>.</p>
+      <p class="section-desc">Quatre couleurs ont un rôle. Le <b>violet</b> <code>#8A3AAF</code> porte toutes les
+        actions. Le <b>rouge</b> <code>#E2006E</code> est réservé au menu gauche et au wordmark. Le <b>bleu</b>
+        <code>#3B82F6</code> ne sert qu'au focus des champs de saisie. Le <b>rouge sombre</b> <code>#B42318</code>
+        signale le destructif. Tout le reste est neutre.</p>
 
       <div class="ds-grid">
         <div class="swatch-card">
@@ -3305,10 +3318,10 @@
           </div>
         </div>
         <div class="swatch-card">
-          <div class="swatch-color" style="background: var(--s);"></div>
+          <div class="swatch-color" style="background: var(--nav-act);"></div>
           <div class="swatch-info">
-            <div class="swatch-name">Secondary — Bleu</div>
-            <div class="swatch-hex">#2876A7</div>
+            <div class="swatch-name">Menu gauche &amp; wordmark</div>
+            <div class="swatch-hex">#E2006E</div>
           </div>
         </div>
         <div class="swatch-card">
@@ -3316,6 +3329,13 @@
           <div class="swatch-info">
             <div class="swatch-name">Destructive</div>
             <div class="swatch-hex">#B42318</div>
+          </div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch-color" style="background: var(--s);"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Focus des champs</div>
+            <div class="swatch-hex">#3B82F6</div>
           </div>
         </div>
         <div class="swatch-card">
@@ -3380,7 +3400,7 @@
 
       <div class="typo-row">
         <div class="typo-label">H1 - Page Header / Design System - font-weight: 700 / 32px</div>
-        <div style="font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 700;">Statistiques pré-formatées
+        <div style="font-family: Geist, sans-serif; font-size: 32px; font-weight: 700;">Statistiques pré-formatées
         </div>
       </div>
 
@@ -3463,75 +3483,54 @@
       <!-- ============ 1. LA PALETTE D'ACTION ============ -->
       <p
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;">
-        1 — La palette d'action : violet, bleu, blanc</p>
+        1 — La couleur d'action</p>
       <p class="section-desc" style="margin-bottom:24px;">
-        Trois niveaux. <b>Violet <code>#8A3AAF</code></b> : la marque et l'action qui engage, une seule par écran.
-        <b>Bleu <code>#2876A7</code></b> : valider, exporter, dupliquer, filtrer. <b>Blanc</b> : annuler, fermer,
-        revenir. 128° séparent le violet du bleu, soit deux familles distinctes y compris en deutéranopie.
+        Une seule couleur d'action, le <b>violet <code>#8A3AAF</code></b>, déclinée par le poids : plein pour le
+        primaire, en contour pour le secondaire, en texte seul pour le tertiaire. Le blanc bordé couvre les actions
+        neutres. Le rouge <code>#E2006E</code> est réservé à la navigation et n'apparaît sur aucun bouton.
       </p>
 
       <div class="ds-grid" style="margin-bottom:28px;">
         <div class="swatch-card">
           <div class="swatch-color" style="background: var(--a);"></div>
           <div class="swatch-info">
-            <div class="swatch-name">Primary — Violet</div>
+            <div class="swatch-name">Base</div>
             <div class="swatch-hex">#8A3AAF &nbsp;·&nbsp; --a</div>
           </div>
         </div>
         <div class="swatch-card">
           <div class="swatch-color" style="background: var(--a-h);"></div>
           <div class="swatch-info">
-            <div class="swatch-name">Primary — Hover</div>
+            <div class="swatch-name">Hover</div>
             <div class="swatch-hex">#783298 &nbsp;·&nbsp; --a-h</div>
           </div>
         </div>
         <div class="swatch-card">
           <div class="swatch-color" style="background: var(--a-p);"></div>
           <div class="swatch-info">
-            <div class="swatch-name">Primary — Pressed</div>
+            <div class="swatch-name">Pressed</div>
             <div class="swatch-hex">#662B81 &nbsp;·&nbsp; --a-p</div>
-          </div>
-        </div>
-        <div class="swatch-card">
-          <div class="swatch-color" style="background: var(--s);"></div>
-          <div class="swatch-info">
-            <div class="swatch-name">Secondary — Bleu</div>
-            <div class="swatch-hex">#2876A7 &nbsp;·&nbsp; --s</div>
-          </div>
-        </div>
-        <div class="swatch-card">
-          <div class="swatch-color" style="background: var(--s-h);"></div>
-          <div class="swatch-info">
-            <div class="swatch-name">Secondary — Hover</div>
-            <div class="swatch-hex">#22658E &nbsp;·&nbsp; --s-h</div>
-          </div>
-        </div>
-        <div class="swatch-card">
-          <div class="swatch-color" style="background: var(--s-p);"></div>
-          <div class="swatch-info">
-            <div class="swatch-name">Secondary — Pressed</div>
-            <div class="swatch-hex">#1C5376 &nbsp;·&nbsp; --s-p</div>
           </div>
         </div>
         <div class="swatch-card">
           <div class="swatch-color" style="background: var(--a2);"></div>
           <div class="swatch-info">
-            <div class="swatch-name">Violet — Tint / Surface</div>
-            <div class="swatch-hex">#E0CAEA &nbsp;·&nbsp; #F8F1FB</div>
+            <div class="swatch-name">Bordure teintée</div>
+            <div class="swatch-hex">#E0CAEA &nbsp;·&nbsp; --a2</div>
           </div>
         </div>
         <div class="swatch-card">
-          <div class="swatch-color" style="background: var(--s2);"></div>
+          <div class="swatch-color" style="background: var(--a1); border-bottom: 1px solid var(--bd);"></div>
           <div class="swatch-info">
-            <div class="swatch-name">Bleu — Tint / Surface</div>
-            <div class="swatch-hex">#CADEEA &nbsp;·&nbsp; #F1F7FB</div>
+            <div class="swatch-name">Surface teintée</div>
+            <div class="swatch-hex">#F8F1FB &nbsp;·&nbsp; --a1</div>
           </div>
         </div>
         <div class="swatch-card">
-          <div class="swatch-color" style="background: #fff; border-bottom: 1px solid var(--bd);"></div>
+          <div class="swatch-color" style="background: var(--a-dark);"></div>
           <div class="swatch-info">
-            <div class="swatch-name">Tertiary — Blanc</div>
-            <div class="swatch-hex">#FFFFFF + bordure --bd</div>
+            <div class="swatch-name">Sur fond sombre</div>
+            <div class="swatch-hex">#9B4BC4 &nbsp;·&nbsp; --a-dark</div>
           </div>
         </div>
       </div>
@@ -3547,7 +3546,7 @@
         </thead>
         <tbody>
           <tr>
-            <td>Texte blanc sur violet <span class="var-value">#8A3AAF</span></td>
+            <td>Texte blanc sur <span class="var-value">#8A3AAF</span></td>
             <td class="var-value">6.35:1</td>
             <td>AA (tout texte)</td>
             <td>Bouton <code>.primary</code> au repos</td>
@@ -3562,51 +3561,28 @@
             <td>Violet sur fond blanc</td>
             <td class="var-value">6.35:1</td>
             <td>AA</td>
-            <td>Logo, liens, icônes, état actif de la navigation</td>
-          </tr>
-          <tr>
-            <td>Texte blanc sur bleu <span class="var-value">#2876A7</span></td>
-            <td class="var-value">4.95:1</td>
-            <td>AA (tout texte)</td>
-            <td>Bouton <code>.secondary</code> au repos</td>
-          </tr>
-          <tr>
-            <td>Texte blanc sur <span class="var-value">#22658E</span> puis <span class="var-value">#1C5376</span></td>
-            <td class="var-value">6.33 → 8.24</td>
-            <td>AA / AAA</td>
-            <td>Hover puis pressed</td>
-          </tr>
-          <tr>
-            <td><span class="var-value">#1A4E6E</span> sur surface <span class="var-value">#F1F7FB</span></td>
-            <td class="var-value">8.24:1</td>
-            <td>AAA</td>
-            <td>Surface teintée bleue (hover de <code>.tertiary</code>)</td>
+            <td><code>.secondary</code>, <code>.tertiary</code>, liens, icônes</td>
           </tr>
           <tr>
             <td><span class="var-value">#662B81</span> sur surface <span class="var-value">#F8F1FB</span></td>
             <td class="var-value">8.51:1</td>
             <td>AAA</td>
-            <td>Surface teintée violette (badges, icônes de widget)</td>
+            <td>Survol de <code>.secondary</code> et <code>.tertiary</code></td>
           </tr>
           <tr>
-            <td>Écart de teinte violet ↔ bleu</td>
-            <td class="var-value">78°</td>
-            <td>—</td>
-            <td>281° et 203° : deux familles distinctes, jamais confondues</td>
+            <td>Texte blanc sur <span class="var-value">#9B4BC4</span></td>
+            <td class="var-value">5.00:1</td>
+            <td>AA</td>
+            <td><code>.primary.on-dark</code> sur les sidebars</td>
           </tr>
         </tbody>
       </table>
 
       <div class="code-box" style="margin-top:20px;">
         :root {<br>
-        &nbsp;&nbsp;/* Primary — violet de marque */<br>
         &nbsp;&nbsp;--a: #8A3AAF; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--a-h: #783298; &nbsp;&nbsp;--a-p: #662B81;<br>
         &nbsp;&nbsp;--a1: #F8F1FB; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--a2: #E0CAEA; &nbsp;&nbsp;--a-rgb: 138, 58, 175;<br>
-        &nbsp;&nbsp;--a-dark: #9B4BC4; &nbsp;/* violet éclairci pour les sidebars sombres */<br><br>
-        &nbsp;&nbsp;/* Secondary — bleu */<br>
-        &nbsp;&nbsp;--s: #2876A7; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--s-h: #22658E; &nbsp;&nbsp;--s-p: #1C5376;<br>
-        &nbsp;&nbsp;--s1: #F1F7FB; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--s2: #CADEEA; &nbsp;&nbsp;--s-t: #1A4E6E;<br>
-        &nbsp;&nbsp;--s-rgb: 40, 118, 167;<br>
+        &nbsp;&nbsp;--a-dark: #9B4BC4; &nbsp;/* violet éclairci pour les sidebars sombres */<br>
         }
       </div>
 
@@ -3668,7 +3644,7 @@
           <tr>
             <td>Secondary</td>
             <td class="var-name">.btn.secondary</td>
-            <td class="var-value">contour + texte #2876A7</td>
+            <td class="var-value">contour --a2 · texte #8A3AAF</td>
             <td>L'action importante mais non engageante : valider, enregistrer, prévisualiser</td>
           </tr>
           <tr>
@@ -3680,16 +3656,15 @@
           <tr>
             <td>Tertiary</td>
             <td class="var-name">.btn.tertiary</td>
-            <td class="var-value">texte #2876A7 seul</td>
+            <td class="var-value">texte #8A3AAF seul</td>
             <td>Aucun poids visuel : au fil du texte, en tableau dense, ou icône seule en barre d'outils</td>
           </tr>
         </tbody>
       </table>
 
       <p class="section-desc" style="margin:20px 0 0;font-size:14px;">
-        <b>Le bleu porte directement le texte.</b> Sur <code>.tertiary</code>, <code>#2876A7</code> est appliqué tel
-        quel : 4.95:1 sur blanc, AA pour du texte normal. Identique au contour du <code>.secondary</code>, les deux
-        se lisent comme un seul registre.
+        <b>Le violet porte directement le texte.</b> Sur <code>.secondary</code> et <code>.tertiary</code>,
+        <code>#8A3AAF</code> est appliqué tel quel : 6.35:1 sur blanc, AA pour du texte normal.
       </p>
 
       <p
@@ -4223,8 +4198,7 @@
         7 — Sur les sidebars sombres</p>
       <p class="section-desc" style="margin-bottom:24px;">Les deux sidebars sont violettes (<code>#13041C</code>, <code>#0A032D</code>) : le violet de marque n'y
         ressort qu'à <b>3.11:1</b>, au seuil de 3:1 du WCAG 1.4.11. Sur ces surfaces, la variante primaire passe à
-        <code>--a-dark #9B4BC4</code> — <b>3.95:1</b> sur les deux fonds, texte blanc à 5.00:1. Le bleu tient
-        <b>3.99:1</b> sans correction. La variante neutre devient un fond blanc à 8 % d'opacité.</p>
+        <code>--a-dark #9B4BC4</code> — <b>3.95:1</b> sur les deux fonds, texte blanc à 5.00:1. La variante neutre devient un fond blanc à 8 % d'opacité.</p>
 
       <div class="preview-box" style="background:var(--sb-dark);border-color:#2A1235;">
         <div class="preview-label" style="background:var(--sb-dark);color:#8B7A94;border-color:#2A1235;">Sidebar Gestion
@@ -4723,7 +4697,7 @@
           <tr>
             <td>Focus</td>
             <td class="var-name">:focus</td>
-            <td>Bordure --s + anneau 3px --s1 : le bleu secondaire, comme les boutons</td>
+            <td>Bordure --s + anneau 3px --s1 : le bleu est réservé à cet usage</td>
           </tr>
           <tr>
             <td>Lecture seule</td>
@@ -4828,9 +4802,9 @@
       <p
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
         4 — Groupement en sections</p>
-      <p class="section-desc" style="margin-bottom:24px;">Au-delà de sept champs, regrouper en <code>.fs-block</code> :
-        un en-tête à icône, puis une <code>.fs-card</code> blanche qui contient les grilles. L'icône sert de repère au
-        défilement.</p>
+      <p class="section-desc" style="margin-bottom:24px;">Toujours regrouper en <code>.fs-block</code> : un en-tête à
+        icône, puis une <code>.fs-card</code> blanche qui contient les grilles. Les sections se posent sur deux
+        colonnes — un bloc qui prend toute la largeur de la page étire les champs et casse la lecture.</p>
 
       <div class="preview-box">
         <div class="preview-label">Live Preview</div>
@@ -4876,6 +4850,50 @@
         &nbsp;&nbsp;&lt;/div&gt;<br>
         &lt;/div&gt;
       </div>
+
+
+      <div class="do-dont stack" style="margin-top:0;">
+        <div class="dd-card do" style="padding:0;overflow:hidden;">
+          <h4 style="padding:14px 18px 0;">À faire — deux colonnes de sections</h4>
+          <div style="padding:10px 18px 18px;background:var(--bg);">
+            <div class="form-body" style="gap:16px;">
+              <div class="col">
+              <div class="fs-block">
+                <div class="fs-header">
+                  <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+                  <div class="fs-title">Informations générales</div>
+                </div>
+                <div class="fs-card"><div class="form-grid col-full"><div class="form-field"><label>Raison sociale</label><input type="text" class="form-input" value="ONLINEFORMAPRO"></div></div><div class="form-grid"><div class="form-field"><label>Code postal</label><input type="text" class="form-input" value="70000"></div><div class="form-field"><label>Ville</label><input type="text" class="form-input" value="VESOUL"></div></div></div>
+              </div>
+              </div>
+              <div class="col">
+              <div class="fs-block">
+                <div class="fs-header">
+                  <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+                  <div class="fs-title">Références légales</div>
+                </div>
+                <div class="fs-card"><div class="form-grid"><div class="form-field"><label>Forme juridique</label><input type="text" class="form-input" value="SA"></div><div class="form-field"><label>Capital</label><input type="text" class="form-input" value="1 100 000"></div></div><div class="form-grid col-full"><div class="form-field"><label>N° SIRET</label><input type="text" class="form-input" value="42478033600014"></div></div></div>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dd-card dont" style="padding:0;overflow:hidden;">
+          <h4 style="padding:14px 18px 0;">À éviter — un bloc sur toute la largeur</h4>
+          <div style="padding:10px 18px 18px;background:var(--bg);">
+            <div class="fs-block">
+                <div class="fs-header">
+                  <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+                  <div class="fs-title">Informations générales</div>
+                </div>
+                <div class="fs-card"><div class="form-grid cols-3"><div class="form-field"><label>Raison sociale</label><input type="text" class="form-input" value="ONLINEFORMAPRO"></div><div class="form-field"><label>Forme juridique</label><input type="text" class="form-input" value="SA"></div><div class="form-field"><label>Code postal</label><input type="text" class="form-input" value="70000"></div><div class="form-field"><label>Ville</label><input type="text" class="form-input" value="VESOUL"></div><div class="form-field"><label>Capital</label><input type="text" class="form-input" value="1 100 000"></div><div class="form-field"><label>N° SIRET</label><input type="text" class="form-input" value="42478033600014"></div></div></div>
+              </div>
+          </div>
+        </div>
+      </div>
+      <p class="section-desc" style="margin:14px 0 0;font-size:13.5px;">Sur toute la largeur, un champ court comme
+        « Code postal » s'étire sur 300px et les libellés s'éloignent de leurs valeurs. En deux colonnes, chaque
+        section reste sous 560px : l'œil balaie une carte sans se déplacer.</p>
 
       <!-- ============ 5. IMPORT DE FICHIER ============ -->
       <p
@@ -5159,8 +5177,8 @@
     <!-- WIDGETS STATS -->
     <section id="widgets" style="padding-bottom: 100px;">
       <h2 class="section-title">Widgets Stats</h2>
-      <p class="section-desc">Gabarit de widget utilisé dans la section <b>Reporting → Stats pré-formatées</b>. Inspiré
-        du style Lemlist : icône colorée + titre + ⓘ dans le header, contrôles à droite, corps vide avec empty-state.
+      <p class="section-desc">Gabarit de widget utilisé dans la section <b>Reporting → Stats pré-formatées</b> : icône
+        colorée + titre + ⓘ dans le header, contrôles à droite, corps vide avec empty-state.
       </p>
 
       <p
@@ -5318,7 +5336,67 @@
   </div>
 </div></th>
                   <th><input type="search" class="th-search" placeholder="Rechercher"></th>
-                  <th class="cgear-th"></th>
+                  <th class="cgear-th">
+                    <button class="cgear" aria-label="Choisir les colonnes" onclick="togCols(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
+                    <div class="cpanel">
+                      <div class="cph">
+                        <span class="cpt">Colonnes</span>
+                        <button class="cprst">Réinitialiser</button>
+                      </div>
+                      <div class="cplist">
+                        <div class="crow lk">
+                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                          <input type="checkbox" class="cck" checked disabled>
+                          <span class="clbl">Apprenant</span>
+                        </div>
+                        <div class="crow" draggable="true">
+                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                          <input type="checkbox" class="cck" checked>
+                          <span class="clbl">État</span>
+                        </div>
+                        <div class="crow" draggable="true">
+                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                          <input type="checkbox" class="cck">
+                          <span class="clbl">E-mail</span>
+                        </div>
+                        <div class="crow" draggable="true">
+                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                          <input type="checkbox" class="cck">
+                          <span class="clbl">Identifiant</span>
+                        </div>
+                        <div class="crow" draggable="true">
+                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                          <input type="checkbox" class="cck" checked>
+                          <span class="clbl">Groupes</span>
+                        </div>
+                        <div class="crow" draggable="true">
+                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                          <input type="checkbox" class="cck">
+                          <span class="clbl">Département</span>
+                        </div>
+                        <div class="crow" draggable="true">
+                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                          <input type="checkbox" class="cck">
+                          <span class="clbl">Rôle</span>
+                        </div>
+                        <div class="crow" draggable="true">
+                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                          <input type="checkbox" class="cck" checked>
+                          <span class="clbl">Profil formations</span>
+                        </div>
+                        <div class="crow" draggable="true">
+                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                          <input type="checkbox" class="cck">
+                          <span class="clbl">Dernière connexion</span>
+                        </div>
+                        <div class="crow" draggable="true">
+                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                          <input type="checkbox" class="cck" checked>
+                          <span class="clbl">Date de création</span>
+                        </div>
+                      </div>
+                    </div>
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -5343,7 +5421,7 @@
                 <td class="catd"><button class="rdots" aria-label="Actions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></td>
                 <td>
                   <div class="cn">
-                    <div class="ava" style="background:#F1F7FB;color:#2876A7;">AD</div>
+                    <div class="ava" style="background:#F3F4F6;color:#4B5563;">AD</div>
                     <div>
                       <div class="nmain">Alan DRABCZYNSKI</div>
                       <div class="nsub">Designer</div>
@@ -5390,16 +5468,154 @@
                 <td class="dc">28 janv. 2026</td>
                 <td></td>
               </tr>
+              <tr>
+                <td class="catd"><button class="rdots" aria-label="Actions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></td>
+                <td>
+                  <div class="cn">
+                    <div class="ava" style="background:#F3F4F6;color:#4B5563;">TB</div>
+                    <div>
+                      <div class="nmain">Thomas BERNARD</div>
+                      <div class="nsub">Formateur</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="cv">t.bernard@onlineformapro.com</td>
+                <td><span class="stb ston"><span class="stdon"></span>Actif</span></td>
+                <td>Sécurité au travail</td>
+                <td class="dc">21 janv. 2026</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td class="catd"><button class="rdots" aria-label="Actions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></td>
+                <td>
+                  <div class="cn">
+                    <div class="ava" style="background:#FEF3C7;color:#B45309;">CM</div>
+                    <div>
+                      <div class="nmain">Claire MOREAU</div>
+                      <div class="nsub">Responsable RH</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="cv">c.moreau@onlineformapro.com</td>
+                <td><span class="stb ston"><span class="stdon"></span>Actif</span></td>
+                <td>RH Central</td>
+                <td class="dc">14 janv. 2026</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td class="catd"><button class="rdots" aria-label="Actions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></td>
+                <td>
+                  <div class="cn">
+                    <div class="ava" style="background:#F8F1FB;color:#8A3AAF;">PR</div>
+                    <div>
+                      <div class="nmain">Paul ROUSSEAU</div>
+                      <div class="nsub">Apprenant</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="cv">p.rousseau@onlineformapro.com</td>
+                <td><span class="stb stoff"><span class="stdoff"></span>Inactif</span></td>
+                <td>Management</td>
+                <td class="dc">8 janv. 2026</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td class="catd"><button class="rdots" aria-label="Actions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></td>
+                <td>
+                  <div class="cn">
+                    <div class="ava" style="background:#F3F4F6;color:#4B5563;">NL</div>
+                    <div>
+                      <div class="nmain">Nadia LAMBERT</div>
+                      <div class="nsub">Gestionnaire</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="cv">n.lambert@onlineformapro.com</td>
+                <td><span class="stb ston"><span class="stdon"></span>Actif</span></td>
+                <td>Produit<span class="npill">5</span></td>
+                <td class="dc">19 déc. 2025</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td class="catd"><button class="rdots" aria-label="Actions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></td>
+                <td>
+                  <div class="cn">
+                    <div class="ava" style="background:#FEF3C7;color:#B45309;">KB</div>
+                    <div>
+                      <div class="nmain">Karim BENALI</div>
+                      <div class="nsub">Formateur</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="cv">k.benali@onlineformapro.com</td>
+                <td><span class="stb ston"><span class="stdon"></span>Actif</span></td>
+                <td>RGPD</td>
+                <td class="dc">11 déc. 2025</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td class="catd"><button class="rdots" aria-label="Actions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></td>
+                <td>
+                  <div class="cn">
+                    <div class="ava" style="background:#F8F1FB;color:#8A3AAF;">EF</div>
+                    <div>
+                      <div class="nmain">Émilie FONTAINE</div>
+                      <div class="nsub">Apprenante</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="cv">e.fontaine@onlineformapro.com</td>
+                <td><span class="stb stoff"><span class="stdoff"></span>Inactif</span></td>
+                <td>Sécurité au travail</td>
+                <td class="dc">3 déc. 2025</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td class="catd"><button class="rdots" aria-label="Actions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></td>
+                <td>
+                  <div class="cn">
+                    <div class="ava" style="background:#F3F4F6;color:#4B5563;">LG</div>
+                    <div>
+                      <div class="nmain">Lucas GIRARD</div>
+                      <div class="nsub">Apprenant</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="cv">l.girard@onlineformapro.com</td>
+                <td><span class="stb ston"><span class="stdon"></span>Actif</span></td>
+                <td>RGPD</td>
+                <td class="dc">26 nov. 2025</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td class="catd"><button class="rdots" aria-label="Actions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></td>
+                <td>
+                  <div class="cn">
+                    <div class="ava" style="background:#FEF3C7;color:#B45309;">AP</div>
+                    <div>
+                      <div class="nmain">Anaïs PETIT</div>
+                      <div class="nsub">Responsable formation</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="cv">a.petit@onlineformapro.com</td>
+                <td><span class="stb ston"><span class="stdon"></span>Actif</span></td>
+                <td>Management</td>
+                <td class="dc">18 nov. 2025</td>
+                <td></td>
+              </tr>
               </tbody>
             </table>
           </div>
           <div class="tfoot">
-            <span class="fi">4 résultats sur 128</span>
+            <span class="fi">12 résultats sur 128</span>
             <div class="pgn">
               <button class="pb" disabled>Précédent</button>
               <button class="pb on">1</button>
               <button class="pb">2</button>
               <button class="pb">3</button>
+              <button class="pb">…</button>
+              <button class="pb">11</button>
               <button class="pb">Suivant</button>
             </div>
             <div class="lpp-wrap">
@@ -5537,81 +5753,93 @@
       <p
         style="font-size:13px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;margin-top:56px;">
         4 — Édition des colonnes</p>
-      <p class="section-desc" style="margin-bottom:24px;">La roue crantée ferme la ligne de filtres. Elle ouvre le
-        panneau des colonnes : une case pour afficher ou masquer, une poignée pour réordonner par glisser-déposer. La
-        première colonne est verrouillée.</p>
+      <p class="section-desc" style="margin-bottom:24px;">La roue crantée ferme la ligne de filtres, dans la colonne
+        <code>.cgear-th</code> de 44px. Elle ouvre le panneau des colonnes : une case pour afficher ou masquer, une
+        poignée pour réordonner par glisser-déposer. La première colonne est verrouillée. Le panneau se ferme au clic
+        en dehors.</p>
 
-      <div class="preview-box" style="padding:40px 20px 20px;">
-        <div class="preview-label">Live Preview — glissez une ligne du panneau</div>
-        <div style="display:flex;gap:40px;align-items:flex-start;flex-wrap:wrap;">
-          <div class="btn-spec">
-            <span class="spec-label">Roue crantée</span>
-            <div style="display:flex;gap:10px;align-items:center;">
-              <button class="cgear" aria-label="Choisir les colonnes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
-              <button class="cgear on" aria-label="Choisir les colonnes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
-              <span class="dc">repos · ouvert</span>
-            </div>
-          </div>
-          <div class="btn-spec">
-            <span class="spec-label">Panneau</span>
-            <div class="cpanel oo" style="position:relative;top:0;right:auto;">
-                  <div class="cph">
-                    <span class="cpt">Colonnes</span>
-                    <button class="cprst">Réinitialiser</button>
-                  </div>
-                  <div class="cplist">
-                          <div class="crow lk">
-            <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
-            <input type="checkbox" class="cck" checked disabled>
-            <span class="clbl">Apprenant</span>
-                          </div>
-                          <div class="crow" draggable="true">
-            <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
-            <input type="checkbox" class="cck" checked>
-            <span class="clbl">État</span>
-                          </div>
-                          <div class="crow" draggable="true">
-            <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
-            <input type="checkbox" class="cck">
-            <span class="clbl">E-mail</span>
-                          </div>
-                          <div class="crow" draggable="true">
-            <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
-            <input type="checkbox" class="cck">
-            <span class="clbl">Identifiant</span>
-                          </div>
-                          <div class="crow" draggable="true">
-            <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
-            <input type="checkbox" class="cck" checked>
-            <span class="clbl">Groupes</span>
-                          </div>
-                          <div class="crow" draggable="true">
-            <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
-            <input type="checkbox" class="cck">
-            <span class="clbl">Département</span>
-                          </div>
-                          <div class="crow" draggable="true">
-            <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
-            <input type="checkbox" class="cck">
-            <span class="clbl">Rôle</span>
-                          </div>
-                          <div class="crow" draggable="true">
-            <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
-            <input type="checkbox" class="cck" checked>
-            <span class="clbl">Profil formations</span>
-                          </div>
-                          <div class="crow" draggable="true">
-            <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
-            <input type="checkbox" class="cck">
-            <span class="clbl">Dernière connexion</span>
-                          </div>
-                          <div class="crow" draggable="true">
-            <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
-            <input type="checkbox" class="cck" checked>
-            <span class="clbl">Date de création</span>
-                          </div>
-                  </div>
-                </div>
+      <div class="preview-box" style="padding:40px 20px 380px;">
+        <div class="preview-label">Live Preview — panneau ouvert, glissez une ligne</div>
+        <div class="tcard">
+          <div class="tw">
+            <table>
+              <thead>
+                <tr class="thr">
+                  <th class="gsth"></th>
+                  <th class="srt">Nom<span class="rez"></span></th>
+                  <th class="srt">Statut<span class="rez"></span></th>
+                  <th class="srt">Inscription</th>
+                  <th class="cgear-th"></th>
+                </tr>
+                <tr class="thr-filter">
+                  <th class="gsth"></th>
+                  <th><input type="search" class="th-search" placeholder="Rechercher"></th>
+                  <th><div class="w-dd-wrap block"><button class="w-dd-btn sm" onclick="toggleDD(this)"><span>Tous</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button><div class="w-dd-menu"><div class="w-dd-item active">Tous</div><div class="w-dd-item">Actif</div><div class="w-dd-item">Inactif</div></div></div></th>
+                  <th><input type="search" class="th-search" placeholder="Rechercher"></th>
+                  <th class="cgear-th">
+                    <button class="cgear on" aria-label="Choisir les colonnes" onclick="togCols(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
+                    <div class="cpanel oo pin">
+                      <div class="cph">
+                        <span class="cpt">Colonnes</span>
+                        <button class="cprst">Réinitialiser</button>
+                      </div>
+                      <div class="cplist">
+                        <div class="crow lk">
+                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                          <input type="checkbox" class="cck" checked disabled>
+                          <span class="clbl">Apprenant</span>
+                        </div>
+                        <div class="crow" draggable="true">
+                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                          <input type="checkbox" class="cck" checked>
+                          <span class="clbl">État</span>
+                        </div>
+                        <div class="crow" draggable="true">
+                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                          <input type="checkbox" class="cck">
+                          <span class="clbl">E-mail</span>
+                        </div>
+                        <div class="crow" draggable="true">
+                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                          <input type="checkbox" class="cck">
+                          <span class="clbl">Identifiant</span>
+                        </div>
+                        <div class="crow" draggable="true">
+                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                          <input type="checkbox" class="cck" checked>
+                          <span class="clbl">Groupes</span>
+                        </div>
+                        <div class="crow" draggable="true">
+                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                          <input type="checkbox" class="cck">
+                          <span class="clbl">Département</span>
+                        </div>
+                        <div class="crow" draggable="true">
+                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                          <input type="checkbox" class="cck">
+                          <span class="clbl">Rôle</span>
+                        </div>
+                        <div class="crow" draggable="true">
+                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                          <input type="checkbox" class="cck" checked>
+                          <span class="clbl">Profil formations</span>
+                        </div>
+                        <div class="crow" draggable="true">
+                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                          <input type="checkbox" class="cck">
+                          <span class="clbl">Dernière connexion</span>
+                        </div>
+                        <div class="crow" draggable="true">
+                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                          <input type="checkbox" class="cck" checked>
+                          <span class="clbl">Date de création</span>
+                        </div>
+                      </div>
+                    </div>
+                  </th>
+                </tr>
+              </thead>
+            </table>
           </div>
         </div>
       </div>
@@ -5872,7 +6100,7 @@
       <div class="code-box">
         &lt;!-- STRUCTURE GLOBALE --&gt;
         &lt;header class="topbar"&gt;
-        &lt;div class="tb-slot"&gt;Logo + App Name&lt;/div&gt;
+        &lt;div class="tb-slot"&gt;Online&lt;b&gt;Manager&lt;/b&gt; + burger&lt;/div&gt;
         &lt;div class="tb-body"&gt;Store + Controls&lt;/div&gt;
         &lt;div class="tb-ics"&gt;Icons + Avatar&lt;/div&gt;
         &lt;/header&gt;
@@ -6589,7 +6817,7 @@
           <button class="btn" disabled>Neutral disabled</button>
         </div>
         <p style="font-size:12.5px;color:var(--t3);line-height:1.6;">Le détail des 6 états est documenté dans la
-          section <a href="#buttons" style="color:var(--s-t);">Boutons → 5</a>.</p>
+          section <a href="#buttons" style="color:var(--a);">Boutons → 5</a>.</p>
       </div>
 
       <p
@@ -6605,7 +6833,7 @@
           <div class="form-field">
             <label>Input Focus</label>
             <input type="text" class="form-input" placeholder="Type something..."
-              style="border-color: #3B82F6; box-shadow: 0 0 0 3px #EFF6FF;" autofocus>
+              style="border-color: var(--s); box-shadow: 0 0 0 3px var(--s1);" autofocus>
           </div>
           <div class="form-field">
             <label>Input Disabled</label>
@@ -6868,9 +7096,10 @@
     // ---- Tableaux : panneau de colonnes ----
     function togCols(btn) {
       const panel = btn.parentElement.querySelector('.cpanel');
+      if (panel.classList.contains('pin')) return;
       const open = panel.classList.contains('oo');
-      document.querySelectorAll('.cpanel').forEach(p => p.classList.remove('oo'));
-      document.querySelectorAll('.cgear').forEach(g => g.classList.remove('on'));
+      document.querySelectorAll('.cpanel:not(.pin)').forEach(p => p.classList.remove('oo'));
+      document.querySelectorAll('.cgear-th:not(:has(.pin)) .cgear').forEach(g => g.classList.remove('on'));
       if (!open) {
         panel.classList.add('oo');
         btn.classList.add('on');
@@ -6879,8 +7108,8 @@
 
     document.addEventListener('click', (e) => {
       if (!e.target.closest('.cgear-th')) {
-        document.querySelectorAll('.cpanel').forEach(p => p.classList.remove('oo'));
-        document.querySelectorAll('.cgear').forEach(g => g.classList.remove('on'));
+        document.querySelectorAll('.cpanel:not(.pin)').forEach(p => p.classList.remove('oo'));
+        document.querySelectorAll('.cgear-th:not(:has(.pin)) .cgear').forEach(g => g.classList.remove('on'));
       }
     });
 
