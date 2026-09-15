@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stats pré-formatées — OnlineManager</title>
+  <!-- Le système : ne jamais recopier ce CSS dans la page, ne jamais le surcharger. -->
+  <link rel="stylesheet" href="../dist/components.css">
+</head>
+
+<body class="app">
+  <header class="topbar">
+          <div class="tb-slot">
+        <span class="tb-appn">Online<b>Manager</b></span>
+        <button class="tb-burger" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      </div>
+          <div class="tb-body">
+          <span class="tb-store">Onlineformapro</span>
+          <div class="tb-cw"><span class="tb-cl">Comptes :</span>
+          <div class="w-dd-wrap">
+          <button class="w-dd-btn tb" onclick="toggleDD(this)"><span class="ph">Sélectionnez un compte</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="w-dd-menu">
+            <div class="w-dd-item">INFREP</div>
+            <div class="w-dd-item">OCB Formation</div>
+            <div class="w-dd-item">Cap Petite Enfance</div>
+          </div>
+        </div>
+          </div>
+
+          <div class="tb-ics">
+          <button class="tbi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+          <polyline points="9 22 9 12 15 12 15 22" />
+          </svg></button>
+          <button class="tbi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" />
+          </svg></button>
+          <button class="tbi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+          stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <line x1="2" y1="12" x2="22" y2="12" />
+          <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
+          </svg></button>
+          <div class="tbsep"></div>
+          <div class="apps-wrap">
+          <button class="tbi">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+          <circle cx="5" cy="5" r="1.8" />
+          <circle cx="12" cy="5" r="1.8" />
+          <circle cx="19" cy="5" r="1.8" />
+          <circle cx="5" cy="12" r="1.8" />
+          <circle cx="12" cy="12" r="1.8" />
+          <circle cx="19" cy="12" r="1.8" />
+          <circle cx="5" cy="19" r="1.8" />
+          <circle cx="12" cy="19" r="1.8" />
+          <circle cx="19" cy="19" r="1.8" />
+          </svg>
+          </button>
+          <div class="apps-drop">
+          <div class="apps-hd">Applications</div>
+          <div class="app-row">
+          <div class="app-ic" style="background:#7C3AED"><svg viewBox="0 0 24 24">
+          <path
+          d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
+          </svg></div>
+          <div>
+          <div class="app-nm">OnlineAuteur</div>
+          <div class="app-sub">Création de contenus</div>
+          </div>
+          </div>
+          <div class="app-row">
+          <div class="app-ic" style="background:#059669"><svg viewBox="0 0 24 24">
+          <path
+          d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5zm15 8a2 2 0 012 2v4a2 2 0 01-2 2h-2l-3 3v-3H9a2 2 0 01-2-2v-1h1a3 3 0 003-3V9h8a2 2 0 012 2z" />
+          </svg></div>
+          <div>
+          <div class="app-nm">OnlineAgora</div>
+          <div class="app-sub">Espace collaboratif</div>
+          </div>
+          </div>
+          </div>
+          </div>
+          <button class="tbi red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
+          <polyline points="16 17 21 12 16 7" />
+          <line x1="21" y1="12" x2="9" y2="12" />
+          </svg></button>
+          <div class="tb-av">AL</div>
+          </div>
+          </div>
+          </header>
+
+  <div class="layout">
+    <aside class="sidebar">
+              <div class="sb-toggle">
+              <div class="sbt-btn">
+              Gestion</div>
+              <div class="sbt-btn on">Reporting</div>
+              </div>
+              <nav class="nav">
+      <div class="ni act"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Stats pré-formatées</div>
+      <div class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Rapports</div>
+      <div class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Exports</div>
+    </nav>
+              </aside>
+
+    <main class="main">
+      <div class="content">
+        <nav class="bc-wrap" aria-label="Fil d'Ariane">
+          <a class="bc-item" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Accueil</a>
+          <span class="bc-sep"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+          <span class="bc-cur">Stats pré-formatées</span>
+        </nav>
+
+        <div class="ph">
+          <div class="ph-l">
+            <h1 class="ph-title">Stats pré-formatées</h1>
+          </div>
+          <div class="ph-actions">
+            <button class="btn">Exporter l'ensemble</button>
+          </div>
+        </div>
+
+        <div class="wgrid">
+          <div class="w">
+            <div class="w-head">
+              <div class="w-ico" style="background:#E0F8EF;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+              </div>
+              <span class="w-title">Modules par mois</span>
+              <div class="w-controls">
+                <span class="w-badge">4 821</span>
+                <div class="w-dd-wrap"><button class="w-dd-btn" onclick="toggleDD(this)"><span>Annuel</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button><div class="w-dd-menu"><div class="w-dd-item active">Annuel</div><div class="w-dd-item">Mensuel</div></div></div>
+              </div>
+            </div>
+            <div class="w-body">
+              <div class="empty-chart"><div class="empty-bar" style="height:28px;"></div><div class="empty-bar" style="height:40px;"></div><div class="empty-bar" style="height:22px;"></div><div class="empty-bar" style="height:50px;"></div><div class="empty-bar" style="height:32px;"></div></div>
+              <div class="empty-msg">Aucune donnée trouvée, essayez d'autres filtres</div>
+            </div>
+          </div>
+          <div class="w">
+            <div class="w-head">
+              <div class="w-ico" style="background:#EDE9FE;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <span class="w-title">Inscriptions par mois</span>
+              <div class="w-controls">
+                <span class="w-badge">1 204</span>
+                <div class="w-dd-wrap"><button class="w-dd-btn" onclick="toggleDD(this)"><span>Annuel</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button><div class="w-dd-menu"><div class="w-dd-item active">Annuel</div><div class="w-dd-item">Mensuel</div></div></div>
+              </div>
+            </div>
+            <div class="w-body">
+              <div class="empty-chart"><div class="empty-bar" style="height:28px;"></div><div class="empty-bar" style="height:40px;"></div><div class="empty-bar" style="height:22px;"></div><div class="empty-bar" style="height:50px;"></div><div class="empty-bar" style="height:32px;"></div></div>
+              <div class="empty-msg">Aucune donnée trouvée, essayez d'autres filtres</div>
+            </div>
+          </div>
+          <div class="w">
+            <div class="w-head">
+              <div class="w-ico" style="background:#FEF3C7;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#B45309" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
+              </div>
+              <span class="w-title">Répartition par groupe</span>
+              <div class="w-controls">
+                <span class="w-badge">12</span>
+                <div class="w-dd-wrap"><button class="w-dd-btn" onclick="toggleDD(this)"><span>Annuel</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button><div class="w-dd-menu"><div class="w-dd-item active">Annuel</div><div class="w-dd-item">Mensuel</div></div></div>
+              </div>
+            </div>
+            <div class="w-body">
+              <div class="empty-chart"><div class="empty-bar" style="height:28px;"></div><div class="empty-bar" style="height:40px;"></div><div class="empty-bar" style="height:22px;"></div><div class="empty-bar" style="height:50px;"></div><div class="empty-bar" style="height:32px;"></div></div>
+              <div class="empty-msg">Aucune donnée trouvée, essayez d'autres filtres</div>
+            </div>
+          </div>
+          <div class="w">
+            <div class="w-head">
+              <div class="w-ico" style="background:#E0F2FE;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <span class="w-title">Activité par heure</span>
+              <div class="w-controls">
+                <span class="w-badge">—</span>
+                <div class="w-dd-wrap"><button class="w-dd-btn" onclick="toggleDD(this)"><span>Annuel</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button><div class="w-dd-menu"><div class="w-dd-item active">Annuel</div><div class="w-dd-item">Mensuel</div></div></div>
+              </div>
+            </div>
+            <div class="w-body">
+              <div class="empty-chart"><div class="empty-bar" style="height:28px;"></div><div class="empty-bar" style="height:40px;"></div><div class="empty-bar" style="height:22px;"></div><div class="empty-bar" style="height:50px;"></div><div class="empty-bar" style="height:32px;"></div></div>
+              <div class="empty-msg">Aucune donnée trouvée, essayez d'autres filtres</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../dist/components.js" defer></script>
+</body>
+
+</html>
