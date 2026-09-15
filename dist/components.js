@@ -174,7 +174,9 @@ document.querySelectorAll('.cpanel').forEach(p => {
       const byKey = {};
       [...tr.children].forEach(c => { if (c.dataset.col) byKey[c.dataset.col] = c; });
       keys.forEach(k => { if (byKey[k]) tr.appendChild(byKey[k]); });
-      const tail = tr.querySelector('.cgear-th, .tail');
+      // La cellule d'actions termine toujours la ligne : .cgear-th en en-tete,
+  // .catd dans le corps. Sans cela le reordonnancement la laisse en tete.
+  const tail = tr.querySelector('.cgear-th, .catd, .tail');
       if (tail) tr.appendChild(tail);
     });
   }

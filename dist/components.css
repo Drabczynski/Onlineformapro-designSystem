@@ -1712,6 +1712,14 @@
   flex-shrink: 0;
 }
 
+/* La taille du glyphe appartient au composant : une page n'a pas a la
+   repeter dans un style="" sur chaque svg. */
+.fs-icon svg {
+  width: 12px;
+  height: 12px;
+  stroke-width: 2.5;
+}
+
 .fs-title {
   font-size: 16px;
   font-weight: 700;
