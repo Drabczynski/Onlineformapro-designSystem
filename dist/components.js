@@ -131,7 +131,11 @@ function colToggle(cb) {
   const table = cb.closest('.tcard').querySelector('table');
   const key = cb.dataset.col;
   if (!table || !key) return;
-  table.querySelectorAll('[data-col="' + key + '"]').forEach(cell => { cell.hidden = !cb.checked; });
+  // On ne vise que les cellules. Le panneau de colonnes vit dans un <th>,
+  // donc ses cases portent le meme data-col : sans ce filtre, decocher une
+  // colonne masquait la case elle-meme et on ne pouvait plus la recocher.
+  table.querySelectorAll('th[data-col="' + key + '"], td[data-col="' + key + '"]')
+    .forEach(cell => { cell.hidden = !cb.checked; });
 }
 
 function colReset(btn) {
