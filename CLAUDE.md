@@ -58,6 +58,7 @@ La référence des composants est `index.html` : chaque section montre le rendu,
 | Un filtre de colonne | `input.th-search` ou `.w-dd-wrap.block > .w-dd-btn.sm` |
 | Les actions d'une ligne | dernière cellule `td.catd > button.rdots + .rmenu > .rmi` |
 | Un statut dans une cellule | `<span class="stb ston"><span class="stdon"></span>Actif</span>` |
+| Le nom au début d'une ligne | `.cn > .ava` + `div (.nmain + .nsub)` pour une personne ; `.cn > .cn-ico` + `div` pour une chose — une entité, un lieu, une formation |
 | Un widget de statistiques | `.w > .w-head + .w-body`, dans une `.wgrid` |
 | Un en-tête de page | `.ph > .ph-l (h1.ph-title + .ph-ct) + .ph-actions` |
 | Une icône | `<i data-eva="nom-outline">` — noms Eva Icons, variante outline uniquement |

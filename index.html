@@ -1298,11 +1298,23 @@
       box-shadow: 0 0 0 1.5px var(--bd);
     }
 
-    /* La pastille porte des initiales, ou une icone quand la ligne designe une
-       chose et non une personne : une entite, un lieu, un service. */
-    .ava svg {
-      width: 13px;
-      height: 13px;
+    /* Quand la ligne designe une chose et non une personne — une entite, un
+       lieu, un service — c'est une icone nue qui precede le nom. Le cercle de
+       la pastille ajoutait du poids sans ajouter de sens : il dit « quelqu'un »,
+       et il n'y a personne. */
+    .cn-ico {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      color: var(--t1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cn-ico svg {
+      width: 18px;
+      height: 18px;
     }
 
     /* Le nom d'une ligne peut ouvrir la fiche correspondante. Il reste du texte
