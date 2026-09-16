@@ -646,6 +646,35 @@
   table-layout: auto;
 }
 
+/* Barre d'outils du tableau : les filtres qui portent sur toute la liste
+   vivent dans la carte, au-dessus de l'en-tete. Poses au-dessus de la
+   carte, ils n'appartiendraient a rien. */
+.tbar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--bd);
+  border-radius: var(--rl) var(--rl) 0 0;
+  background: #fff;
+}
+
+.tbar-lbl {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--t3);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  flex-shrink: 0;
+}
+
+/* La barre coiffe la carte : l'en-tete du tableau perd ses arrondis. */
+.tbar + .tw thead tr:first-child th:first-child,
+.tbar + .tw thead tr:first-child th:last-child {
+  border-radius: 0;
+}
+
 .tcard thead tr {
   background: var(--ps);
 }
