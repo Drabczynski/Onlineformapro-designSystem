@@ -1937,6 +1937,17 @@ a.nmain:hover {
   box-shadow: 0 0 0 3px var(--s1);
 }
 
+/* Champ fautif. Le rouge remplace le bleu du focus : un champ en erreur
+   reste en erreur pendant qu'on le corrige, jusqu'a ce qu'il soit juste. */
+.form-input.ko,
+.form-input.ko:focus {
+  border-color: var(--d);
+}
+
+.form-input.ko:focus {
+  box-shadow: 0 0 0 3px var(--d2);
+}
+
 /* Lecture seule : la valeur compte, la saisie non */
 .form-input.ro {
   border-color: #E2E8F0;
@@ -2916,18 +2927,7 @@ textarea.form-input {
   border-top: 1px solid var(--bd);
 }
 
-/* ── MODAL STYLES ── */
-  .modal-preview-wrap {
-    background: #F1F5F9;
-    border-radius: var(--rl);
-    padding: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid var(--bd);
-  }
-
-.modal-mock {
+.modal {
     background: #fff;
     border-radius: 16px;
     width: 100%;
@@ -2935,6 +2935,47 @@ textarea.form-input {
     box-shadow: 0 12px 32px rgba(17, 24, 39, 0.08);
     overflow: hidden;
     border: 1px solid var(--bd);
+  }
+
+/* Le voile porte l'ouverture : une modale fermee n'existe pas dans la
+     page, elle ne se contente pas d'etre invisible. */
+  .modal-veil {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(17, 24, 39, 0.45);
+  }
+
+/* .modal-veil pose display:flex : sans cette regle, [hidden] ne ferme
+     plus rien. */
+  .modal-veil[hidden] {
+    display: none;
+  }
+
+.modal-veil .modal {
+    animation: modal-in 0.18s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+@keyframes modal-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+@media (prefers-reduced-motion: reduce) {
+    .modal-veil .modal {
+      animation: none;
+    }
   }
 
 .modal-header {
@@ -2991,6 +3032,11 @@ textarea.form-input {
     justify-content: center;
     transition: var(--trans);
   }
+
+.modal-close svg {
+  width: 15px;
+  height: 15px;
+}
 
 .modal-close:hover {
     background: #E2E8F0;

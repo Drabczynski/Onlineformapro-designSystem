@@ -161,7 +161,7 @@
                 <div class="form-grid">
                   <div class="form-field">
                     <label>Code postal<span class="req">*</span></label>
-                    <input type="text" class="form-input" value="70000">
+                    <input type="text" inputmode="numeric" data-fmt="cp" class="form-input" value="70000">
                   </div>
                   <div class="form-field">
                     <label>Pays</label>
@@ -177,11 +177,11 @@
                 <div class="form-grid">
                   <div class="form-field">
                     <label>Téléphone</label>
-                    <input type="text" class="form-input" value="03 84 76 52 44">
+                    <input type="tel" inputmode="tel" data-fmt="tel" class="form-input" value="03 84 76 52 44">
                   </div>
                   <div class="form-field">
                     <label>Fax</label>
-                    <input type="text" class="form-input" value="03 84 76 90 80">
+                    <input type="tel" inputmode="tel" data-fmt="tel" class="form-input" value="03 84 76 90 80">
                   </div>
                 </div>
                 <div class="form-grid col-full">
@@ -242,11 +242,11 @@
                 <div class="form-grid">
                   <div class="form-field">
                     <label>Code APE (NAF)</label>
-                    <input type="text" class="form-input" value="8559A">
+                    <input type="text" data-fmt="naf" class="form-input" value="8559A">
                   </div>
                   <div class="form-field">
                     <label>N° SIRET</label>
-                    <input type="text" class="form-input ro" value="42478033600014" readonly>
+                    <input type="text" data-fmt="siret" class="form-input ro" value="424 780 336 00014" readonly>
                     <span class="form-hint">Renseigné par l'administration, non modifiable</span>
                   </div>
                 </div>

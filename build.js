@@ -62,6 +62,7 @@ const DOC_ONLY = [
   /^\.code-box/, /^\.sizing-table/, /^\.btn-demo/, /^\.btn-spec/, /^\.spec-label/,
   /^\.do-dont/, /^\.dd-card/, /^\.axis-/, /^\.tone-matrix/, /^\.tm-/, /^\.nav-stage/,
   /^\.launcher/, /^\.lc-/, /^\.ico-/, /^\.icon-box/, /^\.rs-/, /^body\b/, /^body\./,
+  /^\.modal-preview-wrap/,
 ];
 function isDocOnly(selector) {
   return selector.split(',').every(s => DOC_ONLY.some(re => re.test(s.trim())));

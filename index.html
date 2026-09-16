@@ -2617,6 +2617,17 @@
       box-shadow: 0 0 0 3px var(--s1);
     }
 
+    /* Champ fautif. Le rouge remplace le bleu du focus : un champ en erreur
+       reste en erreur pendant qu'on le corrige, jusqu'a ce qu'il soit juste. */
+    .form-input.ko,
+    .form-input.ko:focus {
+      border-color: var(--d);
+    }
+
+    .form-input.ko:focus {
+      box-shadow: 0 0 0 3px var(--d2);
+    }
+
     /* Lecture seule : la valeur compte, la saisie non */
     .form-input.ro {
       border-color: #E2E8F0;
@@ -3662,7 +3673,7 @@
         border: 1px solid var(--bd);
       }
 
-      .modal-mock {
+      .modal {
         background: #fff;
         border-radius: 16px;
         width: 100%;
@@ -3670,6 +3681,47 @@
         box-shadow: 0 12px 32px rgba(17, 24, 39, 0.08);
         overflow: hidden;
         border: 1px solid var(--bd);
+      }
+
+      /* Le voile porte l'ouverture : une modale fermee n'existe pas dans la
+         page, elle ne se contente pas d'etre invisible. */
+      .modal-veil {
+        position: fixed;
+        inset: 0;
+        z-index: 200;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background: rgba(17, 24, 39, 0.45);
+      }
+
+      /* .modal-veil pose display:flex : sans cette regle, [hidden] ne ferme
+         plus rien. */
+      .modal-veil[hidden] {
+        display: none;
+      }
+
+      .modal-veil .modal {
+        animation: modal-in 0.18s cubic-bezier(0.22, 0.61, 0.36, 1);
+      }
+
+      @keyframes modal-in {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .modal-veil .modal {
+          animation: none;
+        }
       }
 
       .modal-header {
@@ -3727,7 +3779,12 @@
         transition: var(--trans);
       }
 
-      .modal-close:hover {
+      .modal-close svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    .modal-close:hover {
         background: #E2E8F0;
         color: var(--t1);
       }
@@ -8333,7 +8390,7 @@
       <div class="ds-grid" style="grid-template-columns: 1fr 1fr; align-items: start;">
         <!-- STEP 1: IMPORT -->
         <div class="modal-preview-wrap">
-          <div class="modal-mock">
+          <div class="modal">
             <div class="modal-header">
               <div class="modal-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
@@ -8342,7 +8399,7 @@
                 <div class="modal-title">Importer une photo</div>
                 <div class="modal-subtitle">Choisissez ou glissez votre image</div>
               </div>
-              <button class="modal-close">✕</button>
+              <button class="modal-close" aria-label="Fermer la fenêtre" onclick="modalFerme(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
             </div>
             <div class="modal-body">
               <div class="drop-zone">
@@ -8362,7 +8419,7 @@
 
         <!-- STEP 2: CROP -->
         <div class="modal-preview-wrap">
-          <div class="modal-mock">
+          <div class="modal">
             <div class="modal-header">
               <div class="modal-icon">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
@@ -8371,7 +8428,7 @@
                 <div class="modal-title">Recadrer la photo</div>
                 <div class="modal-subtitle">Ajustez la zone de recadrage</div>
               </div>
-              <button class="modal-close">✕</button>
+              <button class="modal-close" aria-label="Fermer la fenêtre" onclick="modalFerme(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
             </div>
             <div class="modal-body" style="padding-bottom: 12px;">
               <div class="cropper-area">
@@ -8836,7 +8893,9 @@
       closePanels();
       closeRowMenus();
       document.querySelectorAll('.drp.open').forEach(x => x.classList.remove('open'));
+      document.querySelectorAll('.dp.open').forEach(x => x.classList.remove('open'));
       document.querySelectorAll('.w-dd-wrap.open').forEach(w => w.classList.remove('open'));
+      document.querySelectorAll('.modal-veil:not([hidden])').forEach(v => { v.hidden = true; });
     });
 
     // ---- Tableaux : afficher / masquer une colonne depuis le panneau ----
@@ -9054,6 +9113,119 @@
     });
 
     document.querySelectorAll('.drp-pop.pin').forEach(pop => { drpSuggestions(pop); drpRender(pop); });
+
+    // ---- Champs : mise en forme et verification ----
+    // Le format se corrige pendant la frappe, l'erreur ne s'affiche qu'en
+    // sortie de champ : personne n'aime s'entendre dire « e-mail invalide » a
+    // la deuxieme lettre.
+    const FORMATS = {
+      tel: v => v.replace(/\D/g, '').slice(0, 10).replace(/(\d{2})(?=\d)/g, '$1 '),
+      cp: v => v.replace(/\D/g, '').slice(0, 5),
+      siret: v => {
+        const d = v.replace(/\D/g, '').slice(0, 14);
+        return [d.slice(0, 3), d.slice(3, 6), d.slice(6, 9), d.slice(9)].filter(Boolean).join(' ');
+      },
+      naf: v => v.replace(/[^0-9A-Za-z]/g, '').slice(0, 5).toUpperCase(),
+    };
+
+    const REGLES = {
+      tel: [/^\d{2}( \d{2}){4}$/, 'Dix chiffres, par exemple 03 84 75 40 40'],
+      cp: [/^\d{5}$/, 'Cinq chiffres, par exemple 70000'],
+      siret: [/^\d{3} \d{3} \d{3} \d{5}$/, 'Quatorze chiffres'],
+      naf: [/^\d{4}[A-Z]$/, 'Quatre chiffres et une lettre, par exemple 8559A'],
+    };
+
+    const MESSAGES = {
+      email: 'Il manque un @ ou le nom du domaine, par exemple nom@exemple.fr',
+      url: 'Adresse incomplete, par exemple https://exemple.fr',
+    };
+
+    const I_ERREUR = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+      'stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/>' +
+      '<line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>';
+
+    function champFormate(el) {
+      const f = FORMATS[el.dataset.fmt];
+      if (!f) return;
+      // On compte les caracteres utiles avant le curseur, pas les separateurs :
+      // c'est le seul repere qui survive a une remise en forme.
+      const utile = /[0-9A-Za-z]/;
+      const avant = el.value.slice(0, el.selectionStart).replace(/[^0-9A-Za-z]/g, '').length;
+      const v = f(el.value);
+      if (v === el.value) return;
+      el.value = v;
+      let i = 0, vus = 0;
+      while (i < v.length && vus < avant) { if (utile.test(v[i])) vus++; i++; }
+      el.setSelectionRange(i, i);
+    }
+
+    function champVerifie(el) {
+      const champ = el.closest('.form-field');
+      if (!champ) return;
+      const valeur = el.value.trim();
+      const regle = REGLES[el.dataset.fmt];
+      let msg = '';
+      if (!valeur) {
+        if (el.required) msg = 'Ce champ est obligatoire';
+      } else if (regle && !regle[0].test(valeur)) {
+        msg = regle[1];
+      } else if (!el.checkValidity()) {
+        msg = MESSAGES[el.type] || 'Ce format n\'est pas reconnu';
+      }
+
+      el.classList.toggle('ko', !!msg);
+      // L'erreur remplace l'aide : les deux ensemble, c'est deux lignes de
+      // petit texte gris-rouge sous un champ, et on ne lit plus ni l'une ni
+      // l'autre.
+      const aide = champ.querySelector('.form-hint');
+      if (aide) aide.hidden = !!msg;
+
+      let bulle = champ.querySelector('.form-error');
+      if (!msg) { if (bulle) bulle.remove(); return; }
+      if (!bulle) {
+        bulle = document.createElement('span');
+        bulle.className = 'form-error';
+        champ.appendChild(bulle);
+      }
+      bulle.innerHTML = I_ERREUR + '<span></span>';
+      bulle.lastChild.textContent = msg;
+    }
+
+    document.addEventListener('input', (e) => {
+      const el = e.target;
+      if (!el.classList || !el.classList.contains('form-input')) return;
+      champFormate(el);
+      // Un champ deja fautif se reverifie a chaque frappe : l'erreur doit
+      // disparaitre des qu'elle est corrigee, sans attendre la sortie.
+      if (el.classList.contains('ko')) champVerifie(el);
+    });
+
+    document.addEventListener('blur', (e) => {
+      const el = e.target;
+      if (el.classList && el.classList.contains('form-input') && !el.readOnly) champVerifie(el);
+    }, true);
+
+    // ---- Modale ----
+    function modalOuvre(id) {
+      const veil = document.getElementById(id);
+      if (!veil) return;
+      veil.hidden = false;
+      // Le clavier entre dans la modale au lieu de rester derriere elle, sur le
+      // bouton qui l'a ouverte.
+      const premier = veil.querySelector('button, input, select, textarea, a[href]');
+      if (premier) premier.focus();
+    }
+
+    function modalFerme(el) {
+      const veil = typeof el === 'string' ? document.getElementById(el) : el.closest('.modal-veil');
+      if (veil) veil.hidden = true;
+    }
+
+    // Le voile se ferme au clic, la carte non : sinon le moindre clic dans le
+    // formulaire refermerait la fenetre.
+    document.addEventListener('click', (e) => {
+      if (e.target.classList.contains('modal-veil')) e.target.hidden = true;
+    });
 
     // ---- Choix d'une date : le meme calendrier, une seule borne ----
     function dpRender(pop) {

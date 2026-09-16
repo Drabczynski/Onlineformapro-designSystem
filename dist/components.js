@@ -123,7 +123,9 @@ document.addEventListener('keydown', (e) => {
   closePanels();
   closeRowMenus();
   document.querySelectorAll('.drp.open').forEach(x => x.classList.remove('open'));
+  document.querySelectorAll('.dp.open').forEach(x => x.classList.remove('open'));
   document.querySelectorAll('.w-dd-wrap.open').forEach(w => w.classList.remove('open'));
+  document.querySelectorAll('.modal-veil:not([hidden])').forEach(v => { v.hidden = true; });
 });
 
 // ---- Tableaux : afficher / masquer une colonne depuis le panneau ----
@@ -341,6 +343,119 @@ document.addEventListener('click', (e) => {
 });
 
 document.querySelectorAll('.drp-pop.pin').forEach(pop => { drpSuggestions(pop); drpRender(pop); });
+
+// ---- Champs : mise en forme et verification ----
+// Le format se corrige pendant la frappe, l'erreur ne s'affiche qu'en
+// sortie de champ : personne n'aime s'entendre dire « e-mail invalide » a
+// la deuxieme lettre.
+const FORMATS = {
+  tel: v => v.replace(/\D/g, '').slice(0, 10).replace(/(\d{2})(?=\d)/g, '$1 '),
+  cp: v => v.replace(/\D/g, '').slice(0, 5),
+  siret: v => {
+    const d = v.replace(/\D/g, '').slice(0, 14);
+    return [d.slice(0, 3), d.slice(3, 6), d.slice(6, 9), d.slice(9)].filter(Boolean).join(' ');
+  },
+  naf: v => v.replace(/[^0-9A-Za-z]/g, '').slice(0, 5).toUpperCase(),
+};
+
+const REGLES = {
+  tel: [/^\d{2}( \d{2}){4}$/, 'Dix chiffres, par exemple 03 84 75 40 40'],
+  cp: [/^\d{5}$/, 'Cinq chiffres, par exemple 70000'],
+  siret: [/^\d{3} \d{3} \d{3} \d{5}$/, 'Quatorze chiffres'],
+  naf: [/^\d{4}[A-Z]$/, 'Quatre chiffres et une lettre, par exemple 8559A'],
+};
+
+const MESSAGES = {
+  email: 'Il manque un @ ou le nom du domaine, par exemple nom@exemple.fr',
+  url: 'Adresse incomplete, par exemple https://exemple.fr',
+};
+
+const I_ERREUR = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+  'stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/>' +
+  '<line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>';
+
+function champFormate(el) {
+  const f = FORMATS[el.dataset.fmt];
+  if (!f) return;
+  // On compte les caracteres utiles avant le curseur, pas les separateurs :
+  // c'est le seul repere qui survive a une remise en forme.
+  const utile = /[0-9A-Za-z]/;
+  const avant = el.value.slice(0, el.selectionStart).replace(/[^0-9A-Za-z]/g, '').length;
+  const v = f(el.value);
+  if (v === el.value) return;
+  el.value = v;
+  let i = 0, vus = 0;
+  while (i < v.length && vus < avant) { if (utile.test(v[i])) vus++; i++; }
+  el.setSelectionRange(i, i);
+}
+
+function champVerifie(el) {
+  const champ = el.closest('.form-field');
+  if (!champ) return;
+  const valeur = el.value.trim();
+  const regle = REGLES[el.dataset.fmt];
+  let msg = '';
+  if (!valeur) {
+    if (el.required) msg = 'Ce champ est obligatoire';
+  } else if (regle && !regle[0].test(valeur)) {
+    msg = regle[1];
+  } else if (!el.checkValidity()) {
+    msg = MESSAGES[el.type] || 'Ce format n\'est pas reconnu';
+  }
+
+  el.classList.toggle('ko', !!msg);
+  // L'erreur remplace l'aide : les deux ensemble, c'est deux lignes de
+  // petit texte gris-rouge sous un champ, et on ne lit plus ni l'une ni
+  // l'autre.
+  const aide = champ.querySelector('.form-hint');
+  if (aide) aide.hidden = !!msg;
+
+  let bulle = champ.querySelector('.form-error');
+  if (!msg) { if (bulle) bulle.remove(); return; }
+  if (!bulle) {
+    bulle = document.createElement('span');
+    bulle.className = 'form-error';
+    champ.appendChild(bulle);
+  }
+  bulle.innerHTML = I_ERREUR + '<span></span>';
+  bulle.lastChild.textContent = msg;
+}
+
+document.addEventListener('input', (e) => {
+  const el = e.target;
+  if (!el.classList || !el.classList.contains('form-input')) return;
+  champFormate(el);
+  // Un champ deja fautif se reverifie a chaque frappe : l'erreur doit
+  // disparaitre des qu'elle est corrigee, sans attendre la sortie.
+  if (el.classList.contains('ko')) champVerifie(el);
+});
+
+document.addEventListener('blur', (e) => {
+  const el = e.target;
+  if (el.classList && el.classList.contains('form-input') && !el.readOnly) champVerifie(el);
+}, true);
+
+// ---- Modale ----
+function modalOuvre(id) {
+  const veil = document.getElementById(id);
+  if (!veil) return;
+  veil.hidden = false;
+  // Le clavier entre dans la modale au lieu de rester derriere elle, sur le
+  // bouton qui l'a ouverte.
+  const premier = veil.querySelector('button, input, select, textarea, a[href]');
+  if (premier) premier.focus();
+}
+
+function modalFerme(el) {
+  const veil = typeof el === 'string' ? document.getElementById(el) : el.closest('.modal-veil');
+  if (veil) veil.hidden = true;
+}
+
+// Le voile se ferme au clic, la carte non : sinon le moindre clic dans le
+// formulaire refermerait la fenetre.
+document.addEventListener('click', (e) => {
+  if (e.target.classList.contains('modal-veil')) e.target.hidden = true;
+});
 
 // ---- Choix d'une date : le meme calendrier, une seule borne ----
 function dpRender(pop) {

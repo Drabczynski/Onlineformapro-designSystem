@@ -30,10 +30,11 @@ La référence des composants est `index.html` : chaque section montre le rendu,
 - Aucun `<select>` natif : le sélecteur du système est `.w-dd-wrap`.
 - Aucun `<input type="date">` : son calendrier est celui du navigateur, pas celui du système. Le composant est `.dp`.
 - Aucune icône sans `aria-label` sur le bouton qui la porte quand elle est seule.
+- Aucun message d'erreur écrit à la main sous un champ : c'est `data-fmt` qui le pose, et il remplace l'aide.
 - Aucun `opacity` pour simuler un état désactivé : l'attribut `disabled`.
 - Aucune `.form-switch` dans un `.form-field` : une bascule n'est pas un champ de saisie, son libellé ne s'empile pas au-dessus d'elle.
 - Aucun bouton bleu, vert ou rose. La couleur d'action est le violet ; le rouge `--nav-act` n'existe que dans le menu gauche.
-- Une seule action `.btn.primary` par écran.
+- Une seule action `.btn.primary` par écran. Une modale est un écran à part : elle a droit à la sienne.
 - Un formulaire n'est jamais un bloc sur toute la largeur : deux colonnes de `.fs-block` dans `.form-body`.
 
 ## Intention → classe
@@ -51,6 +52,8 @@ La référence des composants est `index.html` : chaque section montre le rendu,
 | Un champ obligatoire | `<span class="req">*</span>` collé au label |
 | Un champ en lecture seule | `input.form-input.ro` + attribut `readonly` |
 | Un champ de date | `.dp > input.form-input + .dp-btn + .dp-pop` — le calendrier du système |
+| Un champ au format connu | `type="email"`, ou `data-fmt="tel"` / `cp` / `siret` / `naf` — le système met en forme pendant la frappe et affiche l'erreur à la sortie du champ |
+| Une fenêtre modale | `.modal-veil[hidden] > .modal (.modal-header + .modal-body + .modal-footer)`, ouverte par `modalOuvre('id')`, fermée par `modalFerme(this)` |
 | Une liste de choix | `.w-dd-wrap.block > .w-dd-btn.field + .w-dd-menu > .w-dd-item` |
 | Un réglage qui s'applique tout de suite | `.form-toggle > .form-toggle-txt (.form-toggle-lbl + .form-hint) + .form-switch` — le libellé à gauche, l'interrupteur à droite |
 | Deux champs côte à côte | `.form-grid` ; un seul : `.form-grid.col-full` ; trois : `.form-grid.cols-3` |

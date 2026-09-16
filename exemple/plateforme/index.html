@@ -155,7 +155,7 @@
                 <div class="form-grid">
                   <div class="form-field">
                     <label>Téléphone</label>
-                    <input type="text" class="form-input" value="03 84 75 40 40">
+                    <input type="tel" inputmode="tel" data-fmt="tel" class="form-input" value="03 84 75 40 40">
                   </div>
                   <div class="form-field">
                     <label>E-mail</label>
@@ -185,7 +185,7 @@
                 <div class="form-grid">
                   <div class="form-field">
                     <label>Code postal<span class="req">*</span></label>
-                    <input type="text" class="form-input" value="70000">
+                    <input type="text" inputmode="numeric" data-fmt="cp" class="form-input" value="70000">
                   </div>
                   <div class="form-field">
                     <label>Ville<span class="req">*</span></label>
@@ -222,7 +222,7 @@
                       <div class="upload-sub">20 Mo max · .png, .jpg · fond transparent conseillé</div>
                     </div>
                   </div>
-                  <button class="btn secondary sm">Importer</button>
+                  <button class="btn secondary sm" onclick="modalOuvre('mdl-logo')">Importer</button>
                 </div>
               </div>
             </div>
@@ -254,11 +254,11 @@
                 <div class="form-grid">
                   <div class="form-field">
                     <label>Code APE (NAF)</label>
-                    <input type="text" class="form-input" value="8559A">
+                    <input type="text" data-fmt="naf" class="form-input" value="8559A">
                   </div>
                   <div class="form-field">
                     <label>N° SIRET</label>
-                    <input type="text" class="form-input ro" value="42478033600014" readonly>
+                    <input type="text" data-fmt="siret" class="form-input ro" value="424 780 336 00014" readonly>
                     <span class="form-hint">Renseigné par l'administration, non modifiable</span>
                   </div>
                 </div>
@@ -285,7 +285,7 @@
                       <div class="upload-sub">Apposée sur les attestations et les conventions</div>
                     </div>
                   </div>
-                  <button class="btn secondary sm">Importer</button>
+                  <button class="btn secondary sm" onclick="modalOuvre('mdl-signature')">Importer</button>
                 </div>
               </div>
             </div>
@@ -317,6 +317,54 @@
       </div>
     </main>
   </div>
+
+      <div class="modal-veil" id="mdl-logo" hidden>
+        <div class="modal">
+          <div class="modal-header">
+            <div class="modal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+            <div class="modal-title-wrap">
+              <div class="modal-title">Importer le logo</div>
+              <div class="modal-subtitle">Il s'affiche sur la carte de visite et les documents édités</div>
+            </div>
+            <button class="modal-close" aria-label="Fermer la fenêtre" onclick="modalFerme(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+          </div>
+          <div class="modal-body">
+            <div class="drop-zone">
+              <div class="drop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+              <div class="drop-text">Glissez-déposez le logo</div>
+              <div class="drop-sub">20 Mo max · .png, .jpg · fond transparent conseillé</div>
+              <button class="btn primary">Parcourir les fichiers</button>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn" onclick="modalFerme(this)">Fermer</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-veil" id="mdl-signature" hidden>
+        <div class="modal">
+          <div class="modal-header">
+            <div class="modal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+            <div class="modal-title-wrap">
+              <div class="modal-title">Importer la signature</div>
+              <div class="modal-subtitle">Elle est apposée sur les attestations et les conventions</div>
+            </div>
+            <button class="modal-close" aria-label="Fermer la fenêtre" onclick="modalFerme(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+          </div>
+          <div class="modal-body">
+            <div class="drop-zone">
+              <div class="drop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+              <div class="drop-text">Glissez-déposez la signature</div>
+              <div class="drop-sub">5 Mo max · .png, .jpg · fond transparent conseillé</div>
+              <button class="btn primary">Parcourir les fichiers</button>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn" onclick="modalFerme(this)">Fermer</button>
+          </div>
+        </div>
+      </div>
   <script src="../../dist/components.js" defer></script>
 </body>
 
