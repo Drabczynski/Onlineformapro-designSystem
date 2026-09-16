@@ -28,6 +28,7 @@ La référence des composants est `index.html` : chaque section montre le rendu,
 - Aucun attribut `style=""` sauf : la hauteur d'une `.empty-bar`, le `background` d'une `.w-ico` et la couleur d'un `.ava`, qui sont des valeurs de données.
 - Aucune balise `<style>` dans la page. Aucune classe inventée. Aucun `!important`.
 - Aucun `<select>` natif : le sélecteur du système est `.w-dd-wrap`.
+- Aucun `<input type="date">` : son calendrier est celui du navigateur, pas celui du système. Le composant est `.dp`.
 - Aucune icône sans `aria-label` sur le bouton qui la porte quand elle est seule.
 - Aucun `opacity` pour simuler un état désactivé : l'attribut `disabled`.
 - Aucune `.form-switch` dans un `.form-field` : une bascule n'est pas un champ de saisie, son libellé ne s'empile pas au-dessus d'elle.
@@ -49,6 +50,7 @@ La référence des composants est `index.html` : chaque section montre le rendu,
 | Un champ texte | `.form-field > label + input.form-input` |
 | Un champ obligatoire | `<span class="req">*</span>` collé au label |
 | Un champ en lecture seule | `input.form-input.ro` + attribut `readonly` |
+| Un champ de date | `.dp > input.form-input + .dp-btn + .dp-pop` — le calendrier du système |
 | Une liste de choix | `.w-dd-wrap.block > .w-dd-btn.field + .w-dd-menu > .w-dd-item` |
 | Un réglage qui s'applique tout de suite | `.form-toggle > .form-toggle-txt (.form-toggle-lbl + .form-hint) + .form-switch` — le libellé à gauche, l'interrupteur à droite |
 | Deux champs côte à côte | `.form-grid` ; un seul : `.form-grid.col-full` ; trois : `.form-grid.cols-3` |

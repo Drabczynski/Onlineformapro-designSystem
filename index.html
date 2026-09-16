@@ -2469,11 +2469,13 @@
       background: rgba(255, 255, 255, 0.4);
       border: 1px solid rgba(255, 255, 255, 0.8);
       border-radius: 12px;
-      padding: 20px;
+      /* Moins d'air au-dessus du titre qu'autour de la carte : l'en-tete
+         appartient au groupe, il ne flotte pas au-dessus. */
+      padding: 14px 18px 18px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 12px;
     }
 
     .fs-header {
@@ -3003,6 +3005,74 @@
       gap: 10px;
       padding: 12px 16px 16px;
       border-top: 1px solid var(--bd);
+    }
+
+    /* --- Choix d'une date --- */
+    /* Le calendrier de la plage de dates, ramene a une seule borne. Le champ
+       se lit et s'ouvre, le bouton porte l'icone, la date choisie remplace le
+       texte. Aucun champ date natif : son calendrier est celui du navigateur,
+       pas celui du systeme. */
+    .dp {
+      position: relative;
+    }
+
+    .dp .form-input {
+      padding-right: 38px;
+      cursor: pointer;
+    }
+
+    .dp-btn {
+      position: absolute;
+      right: 1px;
+      bottom: 1px;
+      width: 36px;
+      height: 36px;
+      border: 0;
+      background: transparent;
+      color: var(--t3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-radius: 0 var(--r) var(--r) 0;
+    }
+
+    .dp-btn svg {
+      width: 15px;
+      height: 15px;
+      stroke-width: 1.8;
+    }
+
+    .dp-btn:hover,
+    .dp.open .dp-btn {
+      color: var(--a);
+    }
+
+    .dp-pop {
+      display: none;
+      position: absolute;
+      z-index: 60;
+      top: calc(100% + 6px);
+      left: 0;
+      width: 300px;
+      background: #fff;
+      border: 1px solid var(--bd);
+      border-radius: var(--rl);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+    }
+
+    .dp.open .dp-pop {
+      display: block;
+    }
+
+    /* La cellule se resserre : le panneau est plus etroit que celui de la
+       plage, le disque du jour choisi suit. */
+    .dp-pop .drp-day {
+      height: 36px;
+    }
+
+    .dp-pop .drp-day.start {
+      background: radial-gradient(circle at center, var(--a) 0 15px, transparent 15px);
     }
 
     /* --- Case a cocher en ligne --- */
@@ -8972,6 +9042,60 @@
     });
 
     document.querySelectorAll('.drp-pop.pin').forEach(pop => { drpSuggestions(pop); drpRender(pop); });
+
+    // ---- Choix d'une date : le meme calendrier, une seule borne ----
+    function dpRender(pop) {
+      const y = +pop.dataset.y, m = +pop.dataset.m;
+      const choisi = pop.dataset.d ? drpParse(pop.dataset.d) : null;
+      pop.querySelector('.ttl').textContent = DRP_MF[m] + ' ' + y;
+      const grid = pop.querySelector('.drp-grid');
+      grid.querySelectorAll('.drp-day').forEach(c => c.remove());
+      const premier = new Date(y, m, 1);
+      const cur = new Date(y, m, 1 - ((premier.getDay() + 6) % 7)); // semaine du lundi
+      for (let i = 0; i < 42; i++) {
+        const c = document.createElement('div');
+        c.className = 'drp-day';
+        c.textContent = cur.getDate();
+        if (cur.getMonth() !== m) c.classList.add('muted');
+        if (choisi && cur.getTime() === choisi.getTime()) c.classList.add('start');
+        c.dataset.d = drpIso(cur);
+        c.onclick = () => dpPick(c);
+        grid.appendChild(c);
+        cur.setDate(cur.getDate() + 1);
+      }
+    }
+
+    function dpOpen(el) {
+      const w = el.closest('.dp');
+      const ouvert = w.classList.contains('open');
+      document.querySelectorAll('.dp.open').forEach(x => x.classList.remove('open'));
+      if (!ouvert) {
+        w.classList.add('open');
+        dpRender(w.querySelector('.dp-pop'));
+      }
+    }
+
+    function dpNav(btn, delta) {
+      const pop = btn.closest('.dp-pop');
+      let m = +pop.dataset.m + delta, y = +pop.dataset.y;
+      if (m < 0) { m = 11; y--; } else if (m > 11) { m = 0; y++; }
+      pop.dataset.m = m; pop.dataset.y = y;
+      dpRender(pop);
+    }
+
+    function dpPick(cell) {
+      const pop = cell.closest('.dp-pop'), w = pop.closest('.dp');
+      const d = drpParse(cell.dataset.d);
+      pop.dataset.d = cell.dataset.d;
+      pop.dataset.y = d.getFullYear();
+      pop.dataset.m = d.getMonth();
+      w.querySelector('.form-input').value = drpFmt(d);
+      w.classList.remove('open');
+    }
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.dp')) document.querySelectorAll('.dp.open').forEach(x => x.classList.remove('open'));
+    });
 
     // ---- Menu gauche : ouvrir et refermer un groupe ----
     function toggleNav(el) {

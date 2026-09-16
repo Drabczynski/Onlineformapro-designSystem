@@ -342,6 +342,60 @@ document.addEventListener('click', (e) => {
 
 document.querySelectorAll('.drp-pop.pin').forEach(pop => { drpSuggestions(pop); drpRender(pop); });
 
+// ---- Choix d'une date : le meme calendrier, une seule borne ----
+function dpRender(pop) {
+  const y = +pop.dataset.y, m = +pop.dataset.m;
+  const choisi = pop.dataset.d ? drpParse(pop.dataset.d) : null;
+  pop.querySelector('.ttl').textContent = DRP_MF[m] + ' ' + y;
+  const grid = pop.querySelector('.drp-grid');
+  grid.querySelectorAll('.drp-day').forEach(c => c.remove());
+  const premier = new Date(y, m, 1);
+  const cur = new Date(y, m, 1 - ((premier.getDay() + 6) % 7)); // semaine du lundi
+  for (let i = 0; i < 42; i++) {
+    const c = document.createElement('div');
+    c.className = 'drp-day';
+    c.textContent = cur.getDate();
+    if (cur.getMonth() !== m) c.classList.add('muted');
+    if (choisi && cur.getTime() === choisi.getTime()) c.classList.add('start');
+    c.dataset.d = drpIso(cur);
+    c.onclick = () => dpPick(c);
+    grid.appendChild(c);
+    cur.setDate(cur.getDate() + 1);
+  }
+}
+
+function dpOpen(el) {
+  const w = el.closest('.dp');
+  const ouvert = w.classList.contains('open');
+  document.querySelectorAll('.dp.open').forEach(x => x.classList.remove('open'));
+  if (!ouvert) {
+    w.classList.add('open');
+    dpRender(w.querySelector('.dp-pop'));
+  }
+}
+
+function dpNav(btn, delta) {
+  const pop = btn.closest('.dp-pop');
+  let m = +pop.dataset.m + delta, y = +pop.dataset.y;
+  if (m < 0) { m = 11; y--; } else if (m > 11) { m = 0; y++; }
+  pop.dataset.m = m; pop.dataset.y = y;
+  dpRender(pop);
+}
+
+function dpPick(cell) {
+  const pop = cell.closest('.dp-pop'), w = pop.closest('.dp');
+  const d = drpParse(cell.dataset.d);
+  pop.dataset.d = cell.dataset.d;
+  pop.dataset.y = d.getFullYear();
+  pop.dataset.m = d.getMonth();
+  w.querySelector('.form-input').value = drpFmt(d);
+  w.classList.remove('open');
+}
+
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.dp')) document.querySelectorAll('.dp.open').forEach(x => x.classList.remove('open'));
+});
+
 // ---- Menu gauche : ouvrir et refermer un groupe ----
 function toggleNav(el) {
   const groupe = el.closest('.ni-group');
