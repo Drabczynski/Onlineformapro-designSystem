@@ -199,23 +199,106 @@
             <table>
               <thead>
                 <tr class="thr">
-                  <th class="srt">Entité<span class="rez"></span></th>
-                  <th class="srt">Date de début<span class="rez"></span></th>
-                  <th class="srt">Date de fin<span class="rez"></span></th>
-                  <th class="srt">Licences<span class="rez"></span></th>
-                  <th class="srt">Maximum d'usagers<span class="rez"></span></th>
-                  <th class="srt">Compte<span class="rez"></span></th>
+                  <th class="srt" data-col="nom">Entité<span class="rez"></span></th>
+                  <th class="srt" data-col="debut">Date de début<span class="rez"></span></th>
+                  <th class="srt" data-col="fin">Date de fin<span class="rez"></span></th>
+                  <th class="srt" data-col="licences">Licences<span class="rez"></span></th>
+                  <th class="srt" data-col="maxi">Maximum d'usagers<span class="rez"></span></th>
+                  <th class="srt" data-col="siret" hidden>N° SIRET<span class="rez"></span></th>
+                  <th class="srt" data-col="compte">Compte<span class="rez"></span></th>
                   <th class="cgear-th"></th>
+                </tr>
+                <tr class="thr-filter">
+                  <th data-col="nom"><input type="search" class="th-search" placeholder="Rechercher"></th>
+                  <th data-col="debut"><input type="search" class="th-search" placeholder="Rechercher"></th>
+                  <th data-col="fin"><input type="search" class="th-search" placeholder="Rechercher"></th>
+                  <th data-col="licences">
+                    <div class="w-dd-wrap block">
+                    <button class="w-dd-btn sm" onclick="toggleDD(this)"><span>Toutes</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                    <div class="w-dd-menu">
+                    <div class="w-dd-item active">Toutes</div>
+                    <div class="w-dd-item">Flottantes</div>
+                    <div class="w-dd-item">Annuelles</div>
+                    <div class="w-dd-item">Nominatives</div>
+                    </div>
+                    </div>
+                  </th>
+                  <th data-col="maxi"><input type="search" class="th-search" placeholder="Rechercher"></th>
+                  <th data-col="siret" hidden><input type="search" class="th-search" placeholder="Rechercher"></th>
+                  <th data-col="compte">
+                    <div class="w-dd-wrap block">
+                    <button class="w-dd-btn sm" onclick="toggleDD(this)"><span>Tous</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                    <div class="w-dd-menu">
+                    <div class="w-dd-item active">Tous</div>
+                    <div class="w-dd-item">Activé</div>
+                    <div class="w-dd-item">Désactivé</div>
+                    </div>
+                    </div>
+                  </th>
+                  <th class="cgear-th">
+                    <button class="cgear" aria-label="Choisir les colonnes" onclick="togCols(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
+                    <div class="cpanel">
+                      <div class="cph">
+                        <span class="cpt">Colonnes</span>
+                        <button class="cprst" onclick="colReset(this)">Réinitialiser</button>
+                      </div>
+                      <div class="cplist">
+                        <div class="crow lk">
+                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                          <input type="checkbox" class="cck" data-col="nom" checked disabled onchange="colToggle(this)">
+                          <span class="clbl">Entité</span>
+                        </div>
+                        <div class="crow">
+                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                          <input type="checkbox" class="cck" data-col="debut" checked onchange="colToggle(this)">
+                          <span class="clbl">Date de début</span>
+                        </div>
+                        <div class="crow">
+                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                          <input type="checkbox" class="cck" data-col="fin" checked onchange="colToggle(this)">
+                          <span class="clbl">Date de fin</span>
+                        </div>
+                        <div class="crow">
+                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                          <input type="checkbox" class="cck" data-col="licences" checked onchange="colToggle(this)">
+                          <span class="clbl">Licences</span>
+                        </div>
+                        <div class="crow">
+                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                          <input type="checkbox" class="cck" data-col="maxi" checked onchange="colToggle(this)">
+                          <span class="clbl">Maximum d'usagers</span>
+                        </div>
+                        <div class="crow">
+                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                          <input type="checkbox" class="cck" data-col="siret" onchange="colToggle(this)">
+                          <span class="clbl">N° SIRET</span>
+                        </div>
+                        <div class="crow">
+                          <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                          <input type="checkbox" class="cck" data-col="compte" checked onchange="colToggle(this)">
+                          <span class="clbl">Compte</span>
+                        </div>
+                      </div>
+                    </div>
+                  </th>
                 </tr>
               </thead>
               <tbody>
               <tr>
-                <td class="nmain">ACCÈS DÉMONSTRATION</td>
-                <td class="dc">02/09/2024</td>
-                <td class="cv">Permanent</td>
-                <td class="cv">Flottantes</td>
-                <td class="cv">Pas de limite</td>
-                <td>
+                <td data-col="nom">
+                  <div class="cn">
+                    <div>
+                      <div class="nmain">ACCÈS DÉMONSTRATION</div>
+                      <div class="nsub">SIRET 42478033600014</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="dc" data-col="debut">02/09/2024</td>
+                <td class="cv" data-col="fin">Permanent</td>
+                <td class="cv" data-col="licences">Flottantes</td>
+                <td class="cv" data-col="maxi">Pas de limite</td>
+                <td class="mcel" data-col="siret" hidden>42478033600014</td>
+                <td data-col="compte">
                   <div class="cn">
                     <label class="form-switch"><input type="checkbox"><span class="slider"></span></label>
                     <span class="stb stoff"><span class="stdoff"></span>Désactivé</span>
@@ -233,12 +316,20 @@
                 </td>
               </tr>
               <tr>
-                <td class="nmain">ADELINE</td>
-                <td class="dc">16/11/2020</td>
-                <td class="cv">Permanent</td>
-                <td class="cv">Flottantes</td>
-                <td class="cv">Pas de limite</td>
-                <td>
+                <td data-col="nom">
+                  <div class="cn">
+                    <div>
+                      <div class="nmain">ADELINE</div>
+                      <div class="nsub">SIRET 51028837700026</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="dc" data-col="debut">16/11/2020</td>
+                <td class="cv" data-col="fin">Permanent</td>
+                <td class="cv" data-col="licences">Flottantes</td>
+                <td class="cv" data-col="maxi">Pas de limite</td>
+                <td class="mcel" data-col="siret" hidden>51028837700026</td>
+                <td data-col="compte">
                   <div class="cn">
                     <label class="form-switch"><input type="checkbox"><span class="slider"></span></label>
                     <span class="stb stoff"><span class="stdoff"></span>Désactivé</span>
@@ -256,12 +347,20 @@
                 </td>
               </tr>
               <tr>
-                <td class="nmain">ARCHIVES</td>
-                <td class="dc">02/05/2022</td>
-                <td class="cv">Permanent</td>
-                <td class="cv">Flottantes</td>
-                <td class="cv">Pas de limite</td>
-                <td>
+                <td data-col="nom">
+                  <div class="cn">
+                    <div>
+                      <div class="nmain">ARCHIVES</div>
+                      <div class="nsub">SIRET 39812470900031</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="dc" data-col="debut">02/05/2022</td>
+                <td class="cv" data-col="fin">Permanent</td>
+                <td class="cv" data-col="licences">Flottantes</td>
+                <td class="cv" data-col="maxi">Pas de limite</td>
+                <td class="mcel" data-col="siret" hidden>39812470900031</td>
+                <td data-col="compte">
                   <div class="cn">
                     <label class="form-switch"><input type="checkbox"><span class="slider"></span></label>
                     <span class="stb stoff"><span class="stdoff"></span>Désactivé</span>
@@ -279,12 +378,20 @@
                 </td>
               </tr>
               <tr>
-                <td class="nmain">Archives #MAXIME</td>
-                <td class="dc">13/02/2012</td>
-                <td class="cv">Permanent</td>
-                <td class="cv">Annuelles</td>
-                <td class="cv">Pas de limite</td>
-                <td>
+                <td data-col="nom">
+                  <div class="cn">
+                    <div>
+                      <div class="nmain">Archives #MAXIME</div>
+                      <div class="nsub">SIRET 44190562300018</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="dc" data-col="debut">13/02/2012</td>
+                <td class="cv" data-col="fin">Permanent</td>
+                <td class="cv" data-col="licences">Annuelles</td>
+                <td class="cv" data-col="maxi">Pas de limite</td>
+                <td class="mcel" data-col="siret" hidden>44190562300018</td>
+                <td data-col="compte">
                   <div class="cn">
                     <label class="form-switch"><input type="checkbox"><span class="slider"></span></label>
                     <span class="stb stoff"><span class="stdoff"></span>Désactivé</span>

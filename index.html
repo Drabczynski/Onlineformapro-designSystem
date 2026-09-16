@@ -2111,10 +2111,10 @@
     .sub-nav {
       display: none;
       flex-direction: column;
-      gap: 4px;
-      padding-left: 42px;
-      margin-top: 4px;
-      margin-bottom: 4px;
+      gap: 1px;
+      margin: 3px 8px 6px 30px;
+      padding-left: 12px;
+      border-left: 1px solid rgba(255, 255, 255, 0.12);
     }
 
     .ni-group.open > .sub-nav {
@@ -2123,30 +2123,51 @@
 
     .ni-sub {
       display: block;
-      font-size: 13px;
-      color: rgba(255, 255, 255, 0.6);
-      padding: 6px 12px;
-      border-radius: 6px;
+      font-size: 12.5px;
+      color: rgba(255, 255, 255, 0.58);
+      padding: 6px 10px;
+      border-radius: 5px;
       text-decoration: none;
       cursor: pointer;
       transition: all 0.15s;
     }
 
-    .ni-sub:hover,
-    .ni-sub.act {
+    .ni-sub:hover {
       color: #fff;
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.06);
     }
 
-    /* Troisieme niveau : « Gerer les entites » et ses actions. */
+    .ni-sub.act {
+      color: #fff;
+      font-weight: 500;
+      background: rgba(var(--a-rgb), 0.38);
+    }
+
+    /* Troisieme niveau : « Gerer les entites » et ses actions. Un second filet,
+       donc un second cran de profondeur, visible sans compter les pixels. */
     .sub-nav .sub-nav {
-      padding-left: 16px;
+      margin-left: 8px;
+      margin-bottom: 4px;
+      padding-left: 12px;
+    }
+
+    .sub-nav .sub-nav .ni-sub {
+      font-size: 12px;
     }
 
     .ni-sub.grp {
       display: flex;
       align-items: center;
       gap: 8px;
+      margin-top: 4px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.82);
+      letter-spacing: -0.005em;
+    }
+
+    .ni-sub.grp:hover {
+      color: #fff;
     }
 
     .ni-sub.grp .chevron {
