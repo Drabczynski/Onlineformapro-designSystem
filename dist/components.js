@@ -341,8 +341,24 @@ document.querySelectorAll('.drp-pop.pin').forEach(pop => { drpSuggestions(pop); 
 // ---- Menu gauche : ouvrir et refermer un groupe ----
 function toggleNav(el) {
   const groupe = el.closest('.ni-group');
-  const ouvert = groupe.classList.toggle('open');
-  el.setAttribute('aria-expanded', ouvert ? 'true' : 'false');
+  const ouvert = groupe.classList.contains('open');
+
+  // Un seul groupe ouvert par niveau : ses freres se referment, et leurs
+  // propres sous-groupes avec eux. Sans cela le menu s'allonge sans fin.
+  for (const frere of groupe.parentElement.children) {
+    if (frere === groupe || !frere.classList.contains('ni-group')) continue;
+    fermeNav(frere);
+    frere.querySelectorAll('.ni-group').forEach(fermeNav);
+  }
+
+  groupe.classList.toggle('open', !ouvert);
+  el.setAttribute('aria-expanded', ouvert ? 'false' : 'true');
+}
+
+function fermeNav(groupe) {
+  groupe.classList.remove('open');
+  const entete = groupe.querySelector(':scope > [role="button"]');
+  if (entete) entete.setAttribute('aria-expanded', 'false');
 }
 
 // Au clavier : l'en-tete de groupe repond a Entree et a la barre d'espace.

@@ -646,11 +646,6 @@
       border-radius: var(--r);
     }
 
-    .btn-seg.wrap {
-      flex-wrap: wrap;
-      max-width: 100%;
-    }
-
     .btn-seg button {
       height: 28px;
       padding: 0 14px;
@@ -1078,35 +1073,6 @@
       width: 100%;
       border-collapse: collapse;
       table-layout: auto;
-    }
-
-    /* Barre d'outils du tableau : les filtres qui portent sur toute la liste
-       vivent dans la carte, au-dessus de l'en-tete. Poses au-dessus de la
-       carte, ils n'appartiendraient a rien. */
-    .tbar {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      flex-wrap: wrap;
-      padding: 12px 14px;
-      border-bottom: 1px solid var(--bd);
-      border-radius: var(--rl) var(--rl) 0 0;
-      background: #fff;
-    }
-
-    .tbar-lbl {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--t3);
-      text-transform: uppercase;
-      letter-spacing: .06em;
-      flex-shrink: 0;
-    }
-
-    /* La barre coiffe la carte : l'en-tete du tableau perd ses arrondis. */
-    .tbar + .tw thead tr:first-child th:first-child,
-    .tbar + .tw thead tr:first-child th:last-child {
-      border-radius: 0;
     }
 
     .tcard thead tr {
@@ -8891,8 +8857,24 @@
     // ---- Menu gauche : ouvrir et refermer un groupe ----
     function toggleNav(el) {
       const groupe = el.closest('.ni-group');
-      const ouvert = groupe.classList.toggle('open');
-      el.setAttribute('aria-expanded', ouvert ? 'true' : 'false');
+      const ouvert = groupe.classList.contains('open');
+
+      // Un seul groupe ouvert par niveau : ses freres se referment, et leurs
+      // propres sous-groupes avec eux. Sans cela le menu s'allonge sans fin.
+      for (const frere of groupe.parentElement.children) {
+        if (frere === groupe || !frere.classList.contains('ni-group')) continue;
+        fermeNav(frere);
+        frere.querySelectorAll('.ni-group').forEach(fermeNav);
+      }
+
+      groupe.classList.toggle('open', !ouvert);
+      el.setAttribute('aria-expanded', ouvert ? 'false' : 'true');
+    }
+
+    function fermeNav(groupe) {
+      groupe.classList.remove('open');
+      const entete = groupe.querySelector(':scope > [role="button"]');
+      if (entete) entete.setAttribute('aria-expanded', 'false');
     }
 
     // Au clavier : l'en-tete de groupe repond a Entree et a la barre d'espace.
