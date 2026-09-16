@@ -3464,6 +3464,24 @@
       transform: translateX(20px);
     }
 
+    /* Dans une ligne de tableau, la bascule de formulaire ecrase tout : elle
+       descend a la taille du texte qui l'accompagne. */
+    .form-switch.sm {
+      width: 30px;
+      height: 17px;
+    }
+
+    .form-switch.sm .slider:before {
+      height: 13px;
+      width: 13px;
+      left: 2px;
+      bottom: 2px;
+    }
+
+    .form-switch.sm input:checked+.slider:before {
+      transform: translateX(13px);
+    }
+
       /* ── MODAL STYLES ── */
       .modal-preview-wrap {
         background: #F1F5F9;
