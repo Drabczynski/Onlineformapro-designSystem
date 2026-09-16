@@ -348,7 +348,7 @@ function toggleNav(el) {
 // Au clavier : l'en-tete de groupe repond a Entree et a la barre d'espace.
 document.addEventListener('keydown', (e) => {
   if (e.key !== 'Enter' && e.key !== ' ') return;
-  const el = e.target.closest ? e.target.closest('.ni-group > .ni[role="button"]') : null;
+  const el = e.target.closest ? e.target.closest('.ni-group > [role="button"]') : null;
   if (!el) return;
   e.preventDefault();
   toggleNav(el);

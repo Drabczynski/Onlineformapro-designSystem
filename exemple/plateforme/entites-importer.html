@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Carte de visite — OnlineManager</title>
+  <title>Importer des entités — OnlineManager</title>
   <!-- Le système : on l'importe, on ne le recopie pas, on ne le surcharge pas. -->
   <link rel="stylesheet" href="../../dist/components.css">
 </head>
@@ -105,15 +105,15 @@
     <div class="ni" role="button" tabindex="0" aria-expanded="true" onclick="toggleNav(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V6z"/><polyline points="9 12 11 14 15 10"/></svg>Administration<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
     <div class="sub-nav">
     <div class="ni-sub">Mon compte</div>
-    <a class="ni-sub act" href="index.html">Carte de visite</a>
-    <div class="ni-group">
-    <div class="ni-sub grp" role="button" tabindex="0" aria-expanded="false" onclick="toggleNav(this)">Gérer les entités<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+    <a class="ni-sub" href="index.html">Carte de visite</a>
+    <div class="ni-group open">
+    <div class="ni-sub grp" role="button" tabindex="0" aria-expanded="true" onclick="toggleNav(this)">Gérer les entités<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
     <div class="sub-nav">
     <a class="ni-sub" href="entites-creer.html">Créer</a>
     <div class="ni-sub">Modifier</div>
     <div class="ni-sub">Supprimer</div>
     <a class="ni-sub" href="entites-lister.html">Lister</a>
-    <a class="ni-sub" href="entites-importer.html">Importer CSV</a>
+    <a class="ni-sub act" href="entites-importer.html">Importer CSV</a>
     </div>
     </div>
     <div class="ni-group">
@@ -154,12 +154,12 @@
       <div class="content">
         <div class="ph">
           <div class="ph-l">
-            <h1 class="ph-title">Carte de visite</h1>
-            <span class="ph-ct">Onlineformapro</span>
+            <h1 class="ph-title">Importer des entités</h1>
+            <span class="ph-ct">Fichier CSV</span>
           </div>
           <div class="ph-actions">
-            <button class="btn">Annuler</button>
-            <button class="btn primary">Enregistrer</button>
+            <a class="btn" href="entites-lister.html">Annuler</a>
+            <button class="btn primary">Valider l'import</button>
           </div>
         </div>
 
@@ -167,103 +167,29 @@
           <div class="col">
             <div class="fs-block">
               <div class="fs-header">
-                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-                <div class="fs-title">Informations générales</div>
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+                <div class="fs-title">Fichier à importer</div>
               </div>
               <div class="fs-card">
                 <div class="form-grid col-full">
-                  <div class="form-field">
-                    <label>Raison sociale<span class="req">*</span></label>
-                    <input type="text" class="form-input" value="ONLINEFORMAPRO">
-                  </div>
-                </div>
-                <div class="form-grid">
-                  <div class="form-field">
-                    <label>Nom du responsable<span class="req">*</span></label>
-                    <input type="text" class="form-input" value="GUERRIN">
-                  </div>
-                  <div class="form-field">
-                    <label>Prénom du responsable<span class="req">*</span></label>
-                    <input type="text" class="form-input" value="Michèle">
-                  </div>
-                </div>
-                <div class="form-grid col-full">
-                  <div class="form-field">
-                    <label>Fonction du responsable<span class="req">*</span></label>
-                    <input type="text" class="form-input" value="Présidente-directrice générale">
-                  </div>
-                </div>
-                <div class="form-grid">
-                  <div class="form-field">
-                    <label>Téléphone</label>
-                    <input type="text" class="form-input" value="03 84 75 40 40">
-                  </div>
-                  <div class="form-field">
-                    <label>E-mail</label>
-                    <input type="email" class="form-input" value="contact@onlineformapro.com">
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="fs-block">
-              <div class="fs-header">
-                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-                <div class="fs-title">Adresse</div>
-              </div>
-              <div class="fs-card">
-                <div class="form-grid col-full">
-                  <div class="form-field">
-                    <label>Adresse<span class="req">*</span></label>
-                    <input type="text" class="form-input" value="4 rue Pasteur">
-                  </div>
-                </div>
-                <div class="form-grid col-full">
-                  <div class="form-field">
-                    <label>Complément</label>
-                    <input type="text" class="form-input" value="Bâtiment B">
-                  </div>
-                </div>
-                <div class="form-grid">
-                  <div class="form-field">
-                    <label>Code postal<span class="req">*</span></label>
-                    <input type="text" class="form-input" value="70000">
-                  </div>
-                  <div class="form-field">
-                    <label>Ville<span class="req">*</span></label>
-                    <input type="text" class="form-input" value="VESOUL">
-                  </div>
-                </div>
-                <div class="form-grid col-full">
-                  <div class="form-field">
-                    <label>Pays</label>
-                    <div class="w-dd-wrap block">
-  <button class="w-dd-btn field" onclick="toggleDD(this)"><span>France</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-  <div class="w-dd-menu">
-    <div class="w-dd-item active">France</div>
-    <div class="w-dd-item">Belgique</div>
-    <div class="w-dd-item">Suisse</div>
-    <div class="w-dd-item">Luxembourg</div>
-  </div>
-</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="fs-block">
-              <div class="fs-header">
-                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
-                <div class="fs-title">Logo de l'entité</div>
-              </div>
-              <div class="fs-card">
-                <div class="upload-row">
-                  <div class="upload-side">
-                    <div class="upload-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
-                    <div>
-                      <div class="upload-name">Importez le logo</div>
-                      <div class="upload-sub">20 Mo max · .png, .jpg · fond transparent conseillé</div>
+                  <div class="upload-row">
+                    <div class="upload-side">
+                      <div class="upload-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+                      <div>
+                        <div class="upload-name">Aucun fichier choisi</div>
+                        <div class="upload-sub">CSV séparé par des points-virgules, encodage UTF-8, 5 Mo max</div>
+                      </div>
+                    </div>
+                    <div class="btn-bar">
+                      <button class="btn">Exemple CSV</button>
+                      <button class="btn secondary">Parcourir</button>
                     </div>
                   </div>
-                  <button class="btn secondary sm">Importer</button>
+                </div>
+                <div class="form-grid col-full">
+                  <label class="form-check-inline">
+                    <input type="checkbox"> Envoyer une notification aux usagers par e-mail
+                  </label>
                 </div>
               </div>
             </div>
@@ -271,85 +197,35 @@
           <div class="col">
             <div class="fs-block">
               <div class="fs-header">
-                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
-                <div class="fs-title">Références légales</div>
-              </div>
-              <div class="fs-card">
-                <div class="form-grid">
-                  <div class="form-field">
-                    <label>Forme juridique</label>
-                    <input type="text" class="form-input" value="SA">
-                  </div>
-                  <div class="form-field">
-                    <label>Devise</label>
-                    <div class="w-dd-wrap block">
-  <button class="w-dd-btn field" onclick="toggleDD(this)"><span>EUR (€)</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-  <div class="w-dd-menu">
-    <div class="w-dd-item active">EUR (€)</div>
-    <div class="w-dd-item">CHF</div>
-    <div class="w-dd-item">USD ($)</div>
-  </div>
-</div>
-                  </div>
-                </div>
-                <div class="form-grid">
-                  <div class="form-field">
-                    <label>Code APE (NAF)</label>
-                    <input type="text" class="form-input" value="8559A">
-                  </div>
-                  <div class="form-field">
-                    <label>N° SIRET</label>
-                    <input type="text" class="form-input ro" value="42478033600014" readonly>
-                    <span class="form-hint">Renseigné par l'administration, non modifiable</span>
-                  </div>
-                </div>
-                <div class="form-grid col-full">
-                  <div class="form-field">
-                    <label>N° de déclaration d'activité</label>
-                    <input type="text" class="form-input" value="43700123470">
-                    <span class="form-hint">Auprès de la préfecture de région</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="fs-block">
-              <div class="fs-header">
-                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
-                <div class="fs-title">Signature visuelle</div>
-              </div>
-              <div class="fs-card">
-                <div class="upload-row">
-                  <div class="upload-side">
-                    <div class="upload-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
-                    <div>
-                      <div class="upload-name">Importez la signature</div>
-                      <div class="upload-sub">Apposée sur les attestations et les conventions</div>
-                    </div>
-                  </div>
-                  <button class="btn secondary sm">Importer</button>
-                </div>
-              </div>
-            </div>
-            <div class="fs-block">
-              <div class="fs-header">
-                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14M12 2v2M12 20v2M2 12h2M20 12h2"/></svg></div>
-                <div class="fs-title">Affichage de la carte</div>
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></div>
+                <div class="fs-title">Colonnes attendues</div>
               </div>
               <div class="fs-card">
                 <div class="form-grid col-full">
                   <div class="form-field">
-                    <label>Publier la carte de visite</label>
-                    <label class="form-switch"><input type="checkbox" checked><span class="slider"></span></label>
-                    <span class="form-hint">Visible par les apprenants dans leur espace</span>
+                    <label>libelle</label>
+                    <span class="form-hint">Le nom de l'entité · obligatoire</span>
                   </div>
-                </div>
-                <div class="form-grid col-full">
-                  <label class="form-check-inline">
-                    <input type="checkbox" checked> Afficher le téléphone sur les attestations
-                  </label>
-                  <label class="form-check-inline">
-                    <input type="checkbox"> Afficher l'adresse complète sur les conventions
-                  </label>
+                  <div class="form-field">
+                    <label>siret</label>
+                    <span class="form-hint">Son numéro SIRET, 14 chiffres · facultatif</span>
+                  </div>
+                  <div class="form-field">
+                    <label>date_debut</label>
+                    <span class="form-hint">Au format JJ/MM/AAAA · facultatif</span>
+                  </div>
+                  <div class="form-field">
+                    <label>date_fin</label>
+                    <span class="form-hint">Au format JJ/MM/AAAA · facultatif</span>
+                  </div>
+                  <div class="form-field">
+                    <label>licences</label>
+                    <span class="form-hint">flottantes ou nominatives · facultatif</span>
+                  </div>
+                  <div class="form-field">
+                    <label>max_usagers</label>
+                    <span class="form-hint">Un entier, ou vide pour illimité · facultatif</span>
+                  </div>
                 </div>
               </div>
             </div>

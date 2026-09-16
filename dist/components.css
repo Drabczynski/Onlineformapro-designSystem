@@ -466,6 +466,11 @@
   border-radius: var(--r);
 }
 
+.btn-seg.wrap {
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+
 .btn-seg button {
   height: 28px;
   padding: 0 14px;
@@ -1642,7 +1647,7 @@
   margin-bottom: 4px;
 }
 
-.ni-group.open .sub-nav {
+.ni-group.open > .sub-nav {
   display: flex;
 }
 
@@ -1661,6 +1666,30 @@
 .ni-sub.act {
   color: #fff;
   background: rgba(255, 255, 255, 0.05);
+}
+
+/* Troisieme niveau : « Gerer les entites » et ses actions. */
+.sub-nav .sub-nav {
+  padding-left: 16px;
+}
+
+.ni-sub.grp {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ni-sub.grp .chevron {
+  width: 14px;
+  height: 14px;
+  margin-left: auto;
+  opacity: .5;
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+
+.ni-group.open > .ni-sub.grp .chevron {
+  transform: rotate(180deg);
 }
 
 .nb {

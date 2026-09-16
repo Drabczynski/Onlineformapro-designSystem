@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Personnalisation des coordonnées — OnlineManager</title>
+  <title>Créer une entité — OnlineManager</title>
   <!-- Le système : on l'importe, on ne le recopie pas, on ne le surcharge pas. -->
   <link rel="stylesheet" href="../../dist/components.css">
 </head>
@@ -101,15 +101,15 @@
     <div class="sbt-btn">Reporting</div>
     </div>
     <nav class="nav">
-    <div class="ni-group">
-    <div class="ni" role="button" tabindex="0" aria-expanded="false" onclick="toggleNav(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V6z"/><polyline points="9 12 11 14 15 10"/></svg>Administration<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+    <div class="ni-group open">
+    <div class="ni" role="button" tabindex="0" aria-expanded="true" onclick="toggleNav(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V6z"/><polyline points="9 12 11 14 15 10"/></svg>Administration<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
     <div class="sub-nav">
     <div class="ni-sub">Mon compte</div>
     <a class="ni-sub" href="index.html">Carte de visite</a>
-    <div class="ni-group">
-    <div class="ni-sub grp" role="button" tabindex="0" aria-expanded="false" onclick="toggleNav(this)">Gérer les entités<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+    <div class="ni-group open">
+    <div class="ni-sub grp" role="button" tabindex="0" aria-expanded="true" onclick="toggleNav(this)">Gérer les entités<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
     <div class="sub-nav">
-    <a class="ni-sub" href="entites-creer.html">Créer</a>
+    <a class="ni-sub act" href="entites-creer.html">Créer</a>
     <div class="ni-sub">Modifier</div>
     <div class="ni-sub">Supprimer</div>
     <a class="ni-sub" href="entites-lister.html">Lister</a>
@@ -127,10 +127,10 @@
     </div>
     </div>
     </div>
-    <div class="ni-group open">
-    <div class="ni" role="button" tabindex="0" aria-expanded="true" onclick="toggleNav(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>Paramétrages<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+    <div class="ni-group">
+    <div class="ni" role="button" tabindex="0" aria-expanded="false" onclick="toggleNav(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>Paramétrages<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
     <div class="sub-nav">
-    <a class="ni-sub act" href="coordonnees.html">Gérer les coordonnées</a>
+    <a class="ni-sub" href="coordonnees.html">Gérer les coordonnées</a>
     <div class="ni-sub">Gérer le menu usager</div>
     <div class="ni-sub">Gérer le dashboard usager</div>
     <div class="ni-sub">Gérer les couleurs</div>
@@ -154,12 +154,12 @@
       <div class="content">
         <div class="ph">
           <div class="ph-l">
-            <h1 class="ph-title">Personnalisation des coordonnées</h1>
-            <span class="ph-ct">ONLINEFORMAPRO</span>
+            <h1 class="ph-title">Créer une entité</h1>
+            <span class="ph-ct">Administration</span>
           </div>
           <div class="ph-actions">
-            <button class="btn">Annuler</button>
-            <button class="btn primary">Enregistrer</button>
+            <a class="btn" href="entites-lister.html">Annuler</a>
+            <button class="btn primary">Créer l'entité</button>
           </div>
         </div>
 
@@ -167,75 +167,121 @@
           <div class="col">
             <div class="fs-block">
               <div class="fs-header">
-                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-                <div class="fs-title">Informations générales</div>
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+                <div class="fs-title">Informations</div>
               </div>
               <div class="fs-card">
                 <div class="form-grid col-full">
                   <div class="form-field">
-                    <label>Raison sociale<span class="req">*</span></label>
-                    <input type="text" class="form-input" value="ONLINEFORMAPRO">
+                    <label>Libellé<span class="req">*</span></label>
+                    <input type="text" class="form-input" value="" placeholder="Nom de l'entité">
+                  </div>
+                </div>
+                <div class="form-grid col-full">
+                  <div class="form-field">
+                    <label>N° SIRET</label>
+                    <input type="text" class="form-input" value="" placeholder="14 chiffres">
+                    <span class="form-hint">Sans espaces ni séparateurs</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="fs-block">
+              <div class="fs-header">
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+                <div class="fs-title">Durée de validité du compte</div>
+              </div>
+              <div class="fs-card">
+                <div class="form-grid">
+                  <div class="form-field">
+                    <label>Date de début</label>
+                    <input type="text" class="form-input" value="16/09/2026" placeholder="">
+                  </div>
+                  <div class="form-field">
+                    <label>Date de fin</label>
+                    <input type="text" class="form-input" value="" placeholder="Aucune">
+                  </div>
+                </div>
+                <div class="form-grid col-full">
+                  <div class="form-field">
+                    <label>Durée</label>
+                    <div class="w-dd-wrap block">
+                      <button class="w-dd-btn field" onclick="toggleDD(this)"><span>Permanent</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                      <div class="w-dd-menu">
+                        <div class="w-dd-item active">Permanent</div>
+                        <div class="w-dd-item">6 mois</div>
+                        <div class="w-dd-item">1 an</div>
+                        <div class="w-dd-item">2 ans</div>
+                        <div class="w-dd-item">3 ans</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="fs-block">
+              <div class="fs-header">
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg></div>
+                <div class="fs-title">Plateformes</div>
+              </div>
+              <div class="fs-card">
+                <div class="form-grid col-full">
+                  <div class="form-field">
+                    <label>Plateformes de l'entité</label>
+                    <div class="w-dd-wrap block">
+                      <button class="w-dd-btn field" onclick="toggleDD(this)"><span>OnlineManager</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                      <div class="w-dd-menu">
+                        <div class="w-dd-item active">OnlineManager</div>
+                        <div class="w-dd-item">OnlineAuteur</div>
+                        <div class="w-dd-item">OnlineAgora</div>
+                      </div>
+                    </div>
+                    <span class="form-hint">Une entité peut être ouverte sur plusieurs plateformes</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="fs-block">
+              <div class="fs-header">
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg></div>
+                <div class="fs-title">Limiter le nombre d'utilisateurs inscrits</div>
+              </div>
+              <div class="fs-card">
+                <div class="form-grid col-full">
+                  <div class="form-field">
+                    <label>Mode de licence</label>
+                    <div class="w-dd-wrap block">
+                      <button class="w-dd-btn field" onclick="toggleDD(this)"><span>Licences flottantes</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                      <div class="w-dd-menu">
+                        <div class="w-dd-item active">Licences flottantes</div>
+                        <div class="w-dd-item">Licences nominatives</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="form-grid">
                   <div class="form-field">
-                    <label>Nom du responsable<span class="req">*</span></label>
-                    <input type="text" class="form-input" value="GUERRIN">
+                    <label>Nombre d'inscrits</label>
+                    <label class="form-check-inline">
+                    <input type="checkbox" checked> Pas de limite
+                  </label>
                   </div>
                   <div class="form-field">
-                    <label>Prénom du responsable<span class="req">*</span></label>
-                    <input type="text" class="form-input" value="Michèle">
+                    <label>Limité à</label>
+                    <input type="text" class="form-input" value="" placeholder="Illimité">
                   </div>
                 </div>
                 <div class="form-grid col-full">
                   <div class="form-field">
-                    <label>Fonction du responsable<span class="req">*</span></label>
-                    <input type="text" class="form-input" value="PDG">
+                    <label>Licences à durée fixe</label>
+                    <input type="text" class="form-input" value="" placeholder="Nombre de mois">
+                    <span class="form-hint">Laissez vide pour une durée libre</span>
                   </div>
                 </div>
                 <div class="form-grid col-full">
-                  <div class="form-field">
-                    <label>Adresse<span class="req">*</span></label>
-                    <input type="text" class="form-input" value="Espace de la Motte">
-                  </div>
-                </div>
-                <div class="form-grid">
-                  <div class="form-field">
-                    <label>Code postal<span class="req">*</span></label>
-                    <input type="text" class="form-input" value="70000">
-                  </div>
-                  <div class="form-field">
-                    <label>Pays</label>
-                    <input type="text" class="form-input" placeholder="France">
-                  </div>
-                </div>
-                <div class="form-grid col-full">
-                  <div class="form-field">
-                    <label>Ville<span class="req">*</span></label>
-                    <input type="text" class="form-input" value="VESOUL">
-                  </div>
-                </div>
-                <div class="form-grid">
-                  <div class="form-field">
-                    <label>Téléphone</label>
-                    <input type="text" class="form-input" value="03 84 76 52 44">
-                  </div>
-                  <div class="form-field">
-                    <label>Fax</label>
-                    <input type="text" class="form-input" value="03 84 76 90 80">
-                  </div>
-                </div>
-                <div class="form-grid col-full">
-                  <div class="form-field">
-                    <label>E-mail</label>
-                    <input type="email" class="form-input" value="projet@onlineformapro.com">
-                  </div>
-                </div>
-                <div class="form-grid col-full">
-                  <div class="form-field">
-                    <label>Site internet</label>
-                    <input type="url" class="form-input" value="http://www.onlineformapro.com">
-                  </div>
+                  <label class="form-check-inline">
+                    <input type="checkbox"> Autoriser le choix d'une date de début
+                  </label>
                 </div>
               </div>
             </div>
@@ -243,98 +289,44 @@
           <div class="col">
             <div class="fs-block">
               <div class="fs-header">
-                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
-                <div class="fs-title">Références légales</div>
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg></div>
+                <div class="fs-title">Paramètres</div>
               </div>
               <div class="fs-card">
                 <div class="form-grid col-full">
                   <div class="form-field">
-                    <label>Forme juridique</label>
-                    <input type="text" class="form-input" value="SA">
-                  </div>
-                </div>
-                <div class="form-grid">
-                  <div class="form-field">
-                    <label>Capital</label>
-                    <input type="text" class="form-input" value="1 100 000">
-                  </div>
-                  <div class="form-field">
-                    <label>Devise</label>
+                    <label>Langue</label>
                     <div class="w-dd-wrap block">
-  <button class="w-dd-btn field" onclick="toggleDD(this)"><span>Euro (€)</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-  <div class="w-dd-menu">
-    <div class="w-dd-item active">Euro (€)</div>
-    <div class="w-dd-item">Franc suisse</div>
-    <div class="w-dd-item">Dollar ($)</div>
-  </div>
-</div>
-                  </div>
-                </div>
-                <div class="form-grid">
-                  <div class="form-field">
-                    <label>N° de déclaration d'activité</label>
-                    <input type="text" class="form-input" value="43 7000 41070">
-                  </div>
-                  <div class="form-field">
-                    <label>Région</label>
-                    <input type="text" class="form-input" placeholder="Bourgogne-Franche-Comté">
-                  </div>
-                </div>
-                <div class="form-grid">
-                  <div class="form-field">
-                    <label>Code APE (NAF)</label>
-                    <input type="text" class="form-input" value="8559A">
-                  </div>
-                  <div class="form-field">
-                    <label>N° SIRET</label>
-                    <input type="text" class="form-input ro" value="42478033600014" readonly>
-                    <span class="form-hint">Renseigné par l'administration, non modifiable</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="fs-block">
-              <div class="fs-header">
-                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
-                <div class="fs-title">Logo</div>
-              </div>
-              <div class="fs-card">
-                <div class="form-grid col-full">
-                  <div class="upload-row">
-                    <div class="upload-side">
-                      <div class="upload-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
-                      <div>
-                        <div class="upload-name">onlineformapro.png</div>
-                        <div class="upload-sub">PNG · 240 × 90 px · remplacez-le ou supprimez-le</div>
+                      <button class="w-dd-btn field" onclick="toggleDD(this)"><span>Français</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                      <div class="w-dd-menu">
+                        <div class="w-dd-item active">Français</div>
+                        <div class="w-dd-item">English</div>
+                        <div class="w-dd-item">Español</div>
+                        <div class="w-dd-item">Deutsch</div>
                       </div>
                     </div>
-                    <div class="btn-bar">
-                      <button class="btn sm">Remplacer</button>
-                      <button class="btn critical sm">Supprimer</button>
+                  </div>
+                </div>
+                <div class="form-grid col-full">
+                  <div class="form-field">
+                    <label>Espace de stockage des dossiers partagés</label>
+                    <div class="w-dd-wrap block">
+                      <button class="w-dd-btn field" onclick="toggleDD(this)"><span>1 Go</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                      <div class="w-dd-menu">
+                        <div class="w-dd-item active">1 Go</div>
+                        <div class="w-dd-item">5 Go</div>
+                        <div class="w-dd-item">10 Go</div>
+                        <div class="w-dd-item">50 Go</div>
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div class="form-grid col-full">
-                  <label class="form-check-inline">
-                    <input type="checkbox"> Appliquer les changements aux entités et structures
+                  <div class="form-field">
+                    <label>Tutorat</label>
+                    <label class="form-check-inline">
+                    <input type="checkbox" checked> Activer le tutorat Onlineformapro
                   </label>
-                </div>
-              </div>
-            </div>
-            <div class="fs-block">
-              <div class="fs-header">
-                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
-                <div class="fs-title">Signature</div>
-              </div>
-              <div class="fs-card">
-                <div class="upload-row">
-                  <div class="upload-zone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg><span>Ajouter une signature</span></div>
-                  <div class="upload-side">
-                    <div>
-                      <div class="upload-name">Aucune signature</div>
-                      <div class="upload-sub">Apposée sur les attestations et les conventions.
-                        PNG à fond transparent, 400 × 150 px.</div>
-                    </div>
                   </div>
                 </div>
               </div>

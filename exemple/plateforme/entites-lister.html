@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entités — OnlineManager</title>
+  <!-- Le système : on l'importe, on ne le recopie pas, on ne le surcharge pas. -->
+  <link rel="stylesheet" href="../../dist/components.css">
+</head>
+
+<body class="app">
+  <header class="topbar">
+  <div class="tb-slot">
+  <span class="tb-appn">Online<b>Manager</b></span>
+  <button class="tb-burger" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+  </div>
+  <div class="tb-body">
+  <span class="tb-store">Onlineformapro</span>
+  <div class="tb-cw"><span class="tb-cl">Comptes :</span>
+  <div class="w-dd-wrap">
+  <button class="w-dd-btn tb" onclick="toggleDD(this)"><span class="dd-ph">Sélectionnez un compte</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  <div class="w-dd-menu">
+  <div class="w-dd-item">INFREP</div>
+  <div class="w-dd-item">OCB Formation</div>
+  <div class="w-dd-item">Cap Petite Enfance</div>
+  </div>
+  </div>
+  </div>
+
+  <div class="tb-ics">
+  <button aria-label="Accueil" class="tbi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+  stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+  <polyline points="9 22 9 12 15 12 15 22" />
+  </svg></button>
+  <button aria-label="Rechercher" class="tbi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+  stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="11" cy="11" r="8" />
+  <path d="m21 21-4.35-4.35" />
+  </svg></button>
+  <button aria-label="Changer de langue" class="tbi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+  stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="12" cy="12" r="10" />
+  <line x1="2" y1="12" x2="22" y2="12" />
+  <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
+  </svg></button>
+  <div class="tbsep"></div>
+  <div class="apps-wrap">
+  <button aria-label="Applications" class="tbi">
+  <svg viewBox="0 0 24 24" fill="currentColor">
+  <circle cx="5" cy="5" r="1.8" />
+  <circle cx="12" cy="5" r="1.8" />
+  <circle cx="19" cy="5" r="1.8" />
+  <circle cx="5" cy="12" r="1.8" />
+  <circle cx="12" cy="12" r="1.8" />
+  <circle cx="19" cy="12" r="1.8" />
+  <circle cx="5" cy="19" r="1.8" />
+  <circle cx="12" cy="19" r="1.8" />
+  <circle cx="19" cy="19" r="1.8" />
+  </svg>
+  </button>
+  <div class="apps-drop">
+  <div class="apps-hd">Applications</div>
+  <div class="app-row">
+  <div class="app-ic" style="background:#7C3AED"><svg viewBox="0 0 24 24">
+  <path
+  d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
+  </svg></div>
+  <div>
+  <div class="app-nm">OnlineAuteur</div>
+  <div class="app-sub">Création de contenus</div>
+  </div>
+  </div>
+  <div class="app-row">
+  <div class="app-ic" style="background:#059669"><svg viewBox="0 0 24 24">
+  <path
+  d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5zm15 8a2 2 0 012 2v4a2 2 0 01-2 2h-2l-3 3v-3H9a2 2 0 01-2-2v-1h1a3 3 0 003-3V9h8a2 2 0 012 2z" />
+  </svg></div>
+  <div>
+  <div class="app-nm">OnlineAgora</div>
+  <div class="app-sub">Espace collaboratif</div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <button aria-label="Se déconnecter" class="tbi red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+  stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
+  <polyline points="16 17 21 12 16 7" />
+  <line x1="21" y1="12" x2="9" y2="12" />
+  </svg></button>
+  <div class="tb-av">AL</div>
+  </div>
+  </div>
+  </header>
+  <div class="layout">
+    <aside class="sidebar">
+    <div class="sb-toggle">
+    <div class="sbt-btn on">Gestion</div>
+    <div class="sbt-btn">Reporting</div>
+    </div>
+    <nav class="nav">
+    <div class="ni-group open">
+    <div class="ni" role="button" tabindex="0" aria-expanded="true" onclick="toggleNav(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V6z"/><polyline points="9 12 11 14 15 10"/></svg>Administration<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+    <div class="sub-nav">
+    <div class="ni-sub">Mon compte</div>
+    <a class="ni-sub" href="index.html">Carte de visite</a>
+    <div class="ni-group open">
+    <div class="ni-sub grp" role="button" tabindex="0" aria-expanded="true" onclick="toggleNav(this)">Gérer les entités<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+    <div class="sub-nav">
+    <a class="ni-sub" href="entites-creer.html">Créer</a>
+    <div class="ni-sub">Modifier</div>
+    <div class="ni-sub">Supprimer</div>
+    <a class="ni-sub act" href="entites-lister.html">Lister</a>
+    <a class="ni-sub" href="entites-importer.html">Importer CSV</a>
+    </div>
+    </div>
+    <div class="ni-group">
+    <div class="ni-sub grp" role="button" tabindex="0" aria-expanded="false" onclick="toggleNav(this)">Gérer les structures<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+    <div class="sub-nav">
+    <div class="ni-sub">Créer</div>
+    <div class="ni-sub">Modifier</div>
+    <div class="ni-sub">Supprimer</div>
+    <div class="ni-sub">Lister</div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="ni-group">
+    <div class="ni" role="button" tabindex="0" aria-expanded="false" onclick="toggleNav(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>Paramétrages<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+    <div class="sub-nav">
+    <a class="ni-sub" href="coordonnees.html">Gérer les coordonnées</a>
+    <div class="ni-sub">Gérer le menu usager</div>
+    <div class="ni-sub">Gérer le dashboard usager</div>
+    <div class="ni-sub">Gérer les couleurs</div>
+    <div class="ni-sub">Gérer les notifications</div>
+    <div class="ni-sub">Gérer les tuteurs</div>
+    <div class="ni-sub">Gérer les badges</div>
+    <div class="ni-sub">Gérer les relances</div>
+    </div>
+    </div>
+    <div class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>Gestionnaires</div>
+    <a class="ni" href="usagers.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Usagers</a>
+    <div class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>Évaluations</div>
+    <div class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>Formations</div>
+    <div class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>Parcours</div>
+    <div class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>Enquêtes</div>
+    <div class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 6.6a4.4 4.4 0 00-6.2 0L12 9.2 9.4 6.6a4.4 4.4 0 10-6.2 6.2L12 21.6l8.8-8.8a4.4 4.4 0 000-6.2z"/></svg>Tutorat</div>
+    <div class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>Visio</div>
+    </nav>
+    </aside>
+    <main class="main">
+      <div class="content">
+        <div class="ph">
+          <div class="ph-l">
+            <h1 class="ph-title">Entités</h1>
+            <span class="ph-ct"><strong>4</strong> listées sur 56</span>
+          </div>
+          <div class="ph-actions">
+            <a class="btn" href="entites-importer.html">Importer un CSV</a>
+            <a class="btn primary" href="entites-creer.html">Créer une entité</a>
+          </div>
+        </div>
+
+        <div class="btn-seg wrap">
+          <button class="active" onclick="segPick(this)">A</button>
+          <button class="" onclick="segPick(this)">B</button>
+          <button class="" onclick="segPick(this)">C</button>
+          <button class="" onclick="segPick(this)">D</button>
+          <button class="" onclick="segPick(this)">E</button>
+          <button class="" onclick="segPick(this)">F</button>
+          <button class="" onclick="segPick(this)">G</button>
+          <button class="" onclick="segPick(this)">H</button>
+          <button class="" onclick="segPick(this)">I</button>
+          <button class="" onclick="segPick(this)">J</button>
+          <button class="" onclick="segPick(this)">K</button>
+          <button class="" onclick="segPick(this)">L</button>
+          <button class="" onclick="segPick(this)">M</button>
+          <button class="" onclick="segPick(this)">N</button>
+          <button class="" onclick="segPick(this)">O</button>
+          <button class="" onclick="segPick(this)">P</button>
+          <button class="" onclick="segPick(this)">Q</button>
+          <button class="" onclick="segPick(this)">R</button>
+          <button class="" onclick="segPick(this)">S</button>
+          <button class="" onclick="segPick(this)">T</button>
+          <button class="" onclick="segPick(this)">U</button>
+          <button class="" onclick="segPick(this)">V</button>
+          <button class="" onclick="segPick(this)">W</button>
+          <button class="" onclick="segPick(this)">X</button>
+          <button class="" onclick="segPick(this)">Y</button>
+          <button class="" onclick="segPick(this)">Z</button>
+          <button class="" onclick="segPick(this)">Autre</button>
+          <button class="" onclick="segPick(this)">Tous</button>
+        </div>
+
+        <div class="tcard">
+          <div class="tw">
+            <table>
+              <thead>
+                <tr class="thr">
+                  <th class="srt">Entité<span class="rez"></span></th>
+                  <th class="srt">Date de début<span class="rez"></span></th>
+                  <th class="srt">Date de fin<span class="rez"></span></th>
+                  <th class="srt">Licences<span class="rez"></span></th>
+                  <th class="srt">Maximum d'usagers<span class="rez"></span></th>
+                  <th class="srt">Compte<span class="rez"></span></th>
+                  <th class="cgear-th"></th>
+                </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td class="nmain">ACCÈS DÉMONSTRATION</td>
+                <td class="dc">02/09/2024</td>
+                <td class="cv">Permanent</td>
+                <td class="cv">Flottantes</td>
+                <td class="cv">Pas de limite</td>
+                <td>
+                  <div class="cn">
+                    <label class="form-switch"><input type="checkbox"><span class="slider"></span></label>
+                    <span class="stb stoff"><span class="stdoff"></span>Désactivé</span>
+                  </div>
+                </td>
+                <td class="catd">
+                  <button class="rdots" aria-label="Actions sur ACCÈS DÉMONSTRATION" onclick="togRow(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+                  <div class="rmenu">
+                    <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> Modifier l'entité</div>
+                    <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Importer des usagers</div>
+                    <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Dupliquer</div>
+                    <div class="rmdiv"></div>
+                    <div class="rmi dn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg> Supprimer</div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="nmain">ADELINE</td>
+                <td class="dc">16/11/2020</td>
+                <td class="cv">Permanent</td>
+                <td class="cv">Flottantes</td>
+                <td class="cv">Pas de limite</td>
+                <td>
+                  <div class="cn">
+                    <label class="form-switch"><input type="checkbox"><span class="slider"></span></label>
+                    <span class="stb stoff"><span class="stdoff"></span>Désactivé</span>
+                  </div>
+                </td>
+                <td class="catd">
+                  <button class="rdots" aria-label="Actions sur ADELINE" onclick="togRow(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+                  <div class="rmenu">
+                    <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> Modifier l'entité</div>
+                    <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Importer des usagers</div>
+                    <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Dupliquer</div>
+                    <div class="rmdiv"></div>
+                    <div class="rmi dn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg> Supprimer</div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="nmain">ARCHIVES</td>
+                <td class="dc">02/05/2022</td>
+                <td class="cv">Permanent</td>
+                <td class="cv">Flottantes</td>
+                <td class="cv">Pas de limite</td>
+                <td>
+                  <div class="cn">
+                    <label class="form-switch"><input type="checkbox"><span class="slider"></span></label>
+                    <span class="stb stoff"><span class="stdoff"></span>Désactivé</span>
+                  </div>
+                </td>
+                <td class="catd">
+                  <button class="rdots" aria-label="Actions sur ARCHIVES" onclick="togRow(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+                  <div class="rmenu">
+                    <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> Modifier l'entité</div>
+                    <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Importer des usagers</div>
+                    <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Dupliquer</div>
+                    <div class="rmdiv"></div>
+                    <div class="rmi dn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg> Supprimer</div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="nmain">Archives #MAXIME</td>
+                <td class="dc">13/02/2012</td>
+                <td class="cv">Permanent</td>
+                <td class="cv">Annuelles</td>
+                <td class="cv">Pas de limite</td>
+                <td>
+                  <div class="cn">
+                    <label class="form-switch"><input type="checkbox"><span class="slider"></span></label>
+                    <span class="stb stoff"><span class="stdoff"></span>Désactivé</span>
+                  </div>
+                </td>
+                <td class="catd">
+                  <button class="rdots" aria-label="Actions sur Archives #MAXIME" onclick="togRow(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+                  <div class="rmenu">
+                    <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> Modifier l'entité</div>
+                    <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Importer des usagers</div>
+                    <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Dupliquer</div>
+                    <div class="rmdiv"></div>
+                    <div class="rmi dn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg> Supprimer</div>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tfoot">
+            <span class="fi">4 entités listées, dont 0 valide, sur 56 au total</span>
+            <div class="pgn">
+              <button class="pb" disabled>Précédent</button>
+              <button class="pb on">1</button>
+              <button class="pb">Suivant</button>
+            </div>
+            <div class="lpp-wrap">
+              <span class="lpp-lbl">Par page</span>
+              <button class="lpp-btn">25 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="../../dist/components.js" defer></script>
+</body>
+
+</html>
