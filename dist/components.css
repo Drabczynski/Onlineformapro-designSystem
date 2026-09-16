@@ -51,9 +51,23 @@
   --sq5: #8A3AAF;
   --sq6: #662B81;
 
+  --sb1: #EFF3FE;
+  --sb2: #D3E0FC;
+  --sb3: #A8C2F8;
+  --sb4: #6C97F1;
+  --sb5: #2563EB;
+  --sb6: #1A46B0;
+
   /* Graphiques — etats. Reserves : jamais une couleur de serie. */
   --ok: #047857;
   --warn: #B45309;
+
+  /* Le lavis de chaque teinte : le fond d'une aire, sous sa courbe. */
+  --ch1-w: #F8F1FB;
+  --ch2-w: #FDF3E9;
+  --ch3-w: #EAF6F3;
+  --ch4-w: #EFF3FE;
+  --ch5-w: #F8F4E6;
 
   --ch-grid: #EDEFF2;
 
@@ -2111,6 +2125,13 @@ textarea.form-input {
   grid-column: 1 / -1;
 }
 
+/* Deux colonnes inegales : le sujet de l'ecran au centre, ce qui l'entoure
+   sur le cote. Deux colonnes egales donnent le meme poids a la formation
+   et a la liste de ceux qui la suivent. */
+.form-body.main-side {
+  grid-template-columns: 1.7fr 1fr;
+}
+
 /* --- Import de fichier : ligne compacte --- */
 .upload-row {
   display: flex;
@@ -2564,27 +2585,43 @@ textarea.form-input {
   min-width: 0;
 }
 
+/* La teinte se declare une fois sur le graphique, les marques la suivent.
+   Sans cela chaque marque repeterait la couleur, et un tableau de bord
+   entier finirait dans la seule teinte de marque. */
+.chart {
+  --mark: var(--ch1);
+  --wash: var(--ch1-w);
+}
+
+.chart.t2 { --mark: var(--ch2); --wash: var(--ch2-w); }
+
+.chart.t3 { --mark: var(--ch3); --wash: var(--ch3-w); }
+
+.chart.t4 { --mark: var(--ch4); --wash: var(--ch4-w); }
+
+.chart.t5 { --mark: var(--ch5); --wash: var(--ch5-w); }
+
 /* La marque est fine et son bout est arrondi ; le pied reste carre, pose
    sur la ligne de base. */
 .chart .bar {
-  fill: var(--ch1);
+  fill: var(--mark);
 }
 
 .chart .line {
   fill: none;
-  stroke: var(--ch1);
+  stroke: var(--mark);
   stroke-width: 2;
   stroke-linejoin: round;
   stroke-linecap: round;
 }
 
 .chart .area {
-  fill: var(--sq1);
+  fill: var(--wash);
   stroke: none;
 }
 
 .chart .dot {
-  fill: var(--ch1);
+  fill: var(--mark);
   stroke: #fff;
   stroke-width: 2;
 }
@@ -2672,6 +2709,12 @@ textarea.form-input {
 
 .meter-fill.ok { background: var(--ok); }
 
+.meter-fill.c2 { background: var(--ch2); }
+
+.meter-fill.c3 { background: var(--ch3); }
+
+.meter-fill.c4 { background: var(--ch4); }
+
 /* --- Le chiffre seul --- */
 /* Quand une donnee tient en un nombre, elle n'a pas besoin d'un graphique. */
 .hero-num {
@@ -2725,6 +2768,27 @@ textarea.form-input {
 .hmap-c.s5 { background: var(--sq5); }
 
 .hmap-c.s6 { background: var(--sq6); }
+
+/* La rampe d'une carte de chaleur se choisit sur la grille : une seule
+   teinte du clair au fonce, mais pas forcement la meme d'un ecran a
+   l'autre. */
+.hmap.t4 .hmap-c.s1,
+.hmap-scale.t4 .hmap-c.s1 { background: var(--sb1); }
+
+.hmap.t4 .hmap-c.s2,
+.hmap-scale.t4 .hmap-c.s2 { background: var(--sb2); }
+
+.hmap.t4 .hmap-c.s3,
+.hmap-scale.t4 .hmap-c.s3 { background: var(--sb3); }
+
+.hmap.t4 .hmap-c.s4,
+.hmap-scale.t4 .hmap-c.s4 { background: var(--sb4); }
+
+.hmap.t4 .hmap-c.s5,
+.hmap-scale.t4 .hmap-c.s5 { background: var(--sb5); }
+
+.hmap.t4 .hmap-c.s6,
+.hmap-scale.t4 .hmap-c.s6 { background: var(--sb6); }
 
 .hmap-lbl {
   font-size: 11px;
@@ -2812,6 +2876,14 @@ textarea.form-input {
   flex-shrink: 0;
   background: var(--bg);
   display: block;
+}
+
+/* Quand la vignette porte l'illustration d'un module et non un simple
+   reperage, elle a besoin d'etre lue. */
+.thumb.lg {
+  width: 76px;
+  height: 50px;
+  border-radius: 8px;
 }
 
 .thumb.wide {

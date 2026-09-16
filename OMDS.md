@@ -61,6 +61,7 @@ La référence des composants est `index.html` : chaque section montre le rendu,
 | Deux champs côte à côte | `.form-grid` ; un seul : `.form-grid.col-full` ; trois : `.form-grid.cols-3` |
 | Un groupe de champs | `.fs-block > .fs-header (.fs-icon + .fs-title) + .fs-card` |
 | Une page de réglages | `.form-body > .col + .col`, chaque `.col` contient des `.fs-block` |
+| Un sujet et ce qui l'entoure | `.form-body.main-side` — colonne principale large, colonne de côté étroite |
 | Un tableau | `.tcard > .tw > table` avec `tr.thr` (libellés) puis `tr.thr-filter` (filtres), puis `.tfoot` |
 | Un filtre de colonne | `input.th-search` ou `.w-dd-wrap.block > .w-dd-btn.sm` |
 | Les actions d'une ligne | dernière cellule `td.catd > button.rdots + .rmenu > .rmi` |
@@ -69,9 +70,10 @@ La référence des composants est `index.html` : chaque section montre le rendu,
 | Un widget vide (attente de données) | `.w > .w-head + .w-body`, dans une `.wgrid` |
 | Un widget qui porte des données | `.w > .w-head (.fs-icon + .w-title) + .w-plot` ; trois colonnes : `.wgrid.cols-3 > .wcol` |
 | Un graphique | un `<svg class="chart">` : `.bar`, `.line` + `.area` + `.dot`, `.arc.c1`…`.c5`. La géométrie tient dans les attributs SVG |
-| Une couleur de série | `--ch1`…`--ch5`, dans cet ordre, jamais recyclées ; une rampe d'intensité : `--sq1`…`--sq6` |
+| Une couleur de série | `--ch1`…`--ch5`, dans cet ordre, jamais recyclées. La teinte se pose sur le graphique : `.chart.t2`…`.t5` |
+| Une rampe d'intensité | `--sq1`…`--sq6` (violet) ou `--sb1`…`--sb6` (bleu, via `.hmap.t4`) — une seule teinte par graphique |
 | Une légende | `.legend > .legend-item (.legend-dot.cN + libellé + .legend-val)` — obligatoire dès deux séries |
-| Une jauge | `.meter > .meter-fill` (`.ok` pour le vert), largeur en `style="width:NN%"` |
+| Une jauge | `.meter > .meter-fill` (`.ok`, `.c2`…`.c4` pour la teinte), largeur en `style="width:NN%"` |
 | Un chiffre seul | `.hero-row > .hero-num + …` — quand la donnée tient en un nombre, pas de graphique |
 | Une carte de chaleur | `.hmap.j5 > .hmap-lbl + .hmap-c.s1`…`.s6`, avec une `.hmap-scale` sous la grille |
 | Un tableau dans un widget | `.mini > thead + tbody`, colonnes de chiffres en `.num` |
