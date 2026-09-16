@@ -4,488 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tableau de bord — OnlineManager</title>
+  <title>Carte de visite — OnlineManager</title>
   <!-- Le système : on l'importe, on ne le recopie pas, on ne le surcharge pas. -->
   <link rel="stylesheet" href="../../dist/components.css">
-  <style>
-    /* ==========================================================
-       TABLEAU DE BORD — en attente de validation.
-       Rien de tout ceci n'est encore dans le design system : ces regles
-       vivent dans la page le temps que la maquette soit validee, puis
-       elles rejoindront index.html et dist/components.css.
-       ========================================================== */
-
-    .dash {
-      /* Palette des series, validee : ecart daltonien et contraste sur blanc */
-      --c1: #8A3AAF;
-      --c2: #D9731A;
-      --c3: #118A6E;
-      /* Tons pales de la marque, pour les fonds de barre et la carte de chaleur */
-      --p1: #F3E8F8;
-      --p2: #E2C9EE;
-      --p3: #C79ADD;
-      --p4: #A86BC9;
-      --up: #067A53;
-      --up-bg: #E6F5EE;
-      --down: #B42318;
-      --down-bg: #FDECEA;
-
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 18px;
-      align-items: start;
-    }
-
-    /* --- La carte --- */
-    .card {
-      background: #fff;
-      border-radius: 18px;
-      box-shadow: 0 1px 2px rgba(17, 24, 39, .04), 0 10px 28px rgba(17, 24, 39, .05);
-      padding: 20px 22px 22px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      min-width: 0;
-    }
-
-    .sp3 { grid-column: span 3; }
-    .sp4 { grid-column: span 4; }
-    .sp5 { grid-column: span 5; }
-    .sp6 { grid-column: span 6; }
-    .sp8 { grid-column: span 8; }
-
-    .c-head {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-    }
-
-    .c-head svg.ic {
-      width: 17px;
-      height: 17px;
-      stroke-width: 1.7;
-      color: var(--t2);
-      flex-shrink: 0;
-    }
-
-    .c-title {
-      font-size: 14.5px;
-      font-weight: 600;
-      color: var(--t1);
-      flex: 1;
-      min-width: 0;
-    }
-
-    .c-more {
-      width: 30px;
-      height: 30px;
-      border: none;
-      border-radius: 50%;
-      background: var(--ps);
-      color: var(--t3);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      transition: background .12s, color .12s;
-    }
-
-    .c-more:hover {
-      background: var(--bg);
-      color: var(--t2);
-    }
-
-    .c-more svg {
-      width: 16px;
-      height: 16px;
-    }
-
-    .c-sub {
-      font-size: 12.5px;
-      color: var(--t3);
-    }
-
-    /* --- Chiffres --- */
-    .fig {
-      display: flex;
-      align-items: baseline;
-      gap: 5px;
-    }
-
-    .fig .n {
-      font-family: Geist, 'Inter', sans-serif;
-      font-size: 34px;
-      font-weight: 600;
-      letter-spacing: -0.03em;
-      color: var(--t1);
-      line-height: 1;
-    }
-
-    .fig .u {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--t3);
-    }
-
-    .fig.sm .n { font-size: 22px; }
-    .fig.sm .u { font-size: 11.5px; }
-
-    .fig-lbl {
-      font-size: 12.5px;
-      color: var(--t3);
-      margin-top: 6px;
-    }
-
-    .figs {
-      display: flex;
-      gap: 28px;
-      flex-wrap: wrap;
-    }
-
-    /* --- Puce de tendance --- */
-    .chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      height: 23px;
-      padding: 0 9px;
-      border-radius: 999px;
-      font-size: 11.5px;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .chip svg {
-      width: 12px;
-      height: 12px;
-      stroke-width: 2.4;
-    }
-
-    .chip.up {
-      background: var(--up-bg);
-      color: var(--up);
-    }
-
-    .chip.down {
-      background: var(--down-bg);
-      color: var(--down);
-    }
-
-    /* --- Barre en pilule --- */
-    .prog {
-      display: flex;
-      gap: 2px;
-      height: 11px;
-    }
-
-    .prog i {
-      display: block;
-      height: 100%;
-      border-radius: 999px;
-      background: var(--a);
-    }
-
-    .prog i.t1 { background: var(--p2); }
-    .prog i.t2 { background: var(--p3); }
-    .prog i.rest {
-      flex: 1;
-      background: var(--bg);
-    }
-
-    .prog-row {
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-    }
-
-    .prog-top {
-      display: flex;
-      align-items: baseline;
-      gap: 10px;
-      font-size: 12.5px;
-      color: var(--t2);
-    }
-
-    .prog-top b {
-      margin-left: auto;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--t1);
-    }
-
-    /* --- Bascule segmentee --- */
-    .seg {
-      display: inline-flex;
-      gap: 2px;
-      padding: 3px;
-      background: var(--ps);
-      border-radius: 999px;
-      flex-shrink: 0;
-    }
-
-    .seg button {
-      height: 25px;
-      padding: 0 12px;
-      border: none;
-      border-radius: 999px;
-      background: transparent;
-      font-family: inherit;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--t3);
-      cursor: pointer;
-      transition: background .12s, color .12s;
-    }
-
-    .seg button:hover {
-      color: var(--t1);
-    }
-
-    .seg button.active {
-      background: var(--a);
-      color: #fff;
-    }
-
-    /* --- Graphiques --- */
-    .chart {
-      position: relative;
-    }
-
-    .chart svg {
-      display: block;
-      width: 100%;
-      height: auto;
-      overflow: visible;
-    }
-
-    .ch-grid {
-      stroke: var(--bd);
-      stroke-width: 1;
-      stroke-dasharray: 2 4;
-    }
-
-    .ch-axis {
-      fill: var(--t3);
-      font-size: 9.5px;
-      letter-spacing: .05em;
-    }
-
-    .ch-line {
-      fill: none;
-      stroke-width: 2.2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .ch-dot {
-      stroke: #fff;
-      stroke-width: 2.4;
-    }
-
-    .ch-hit {
-      fill: transparent;
-      cursor: crosshair;
-    }
-
-    .ch-cross {
-      stroke: var(--t3);
-      stroke-width: 1;
-      stroke-dasharray: 3 3;
-      opacity: 0;
-    }
-
-    .chart.on .ch-cross {
-      opacity: 1;
-    }
-
-    .ch-tip {
-      position: absolute;
-      top: 0;
-      left: 0;
-      display: none;
-      min-width: 140px;
-      padding: 9px 11px;
-      background: var(--t1);
-      border-radius: 10px;
-      box-shadow: 0 10px 26px rgba(0, 0, 0, .22);
-      pointer-events: none;
-      z-index: 50;
-    }
-
-    .chart.on .ch-tip {
-      display: block;
-    }
-
-    .ch-tip-h {
-      font-size: 10px;
-      font-weight: 600;
-      color: var(--t3);
-      text-transform: uppercase;
-      letter-spacing: .06em;
-      margin-bottom: 6px;
-    }
-
-    .ch-tip-r {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      font-size: 12px;
-      color: #fff;
-      padding: 2px 0;
-    }
-
-    .ch-tip-r b {
-      margin-left: auto;
-      font-weight: 600;
-    }
-
-    .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      flex-shrink: 0;
-      display: inline-block;
-    }
-
-    .dot.s1 { background: var(--c1); }
-    .dot.s2 { background: var(--c2); }
-    .dot.s3 { background: var(--c3); }
-
-    /* --- Jauge --- */
-    .gauge {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2px;
-    }
-
-    .gauge svg {
-      width: 100%;
-      max-width: 210px;
-      height: auto;
-      display: block;
-    }
-
-    .gauge-c {
-      margin-top: -50px;
-      text-align: center;
-    }
-
-    .gauge-c .fig {
-      justify-content: center;
-    }
-
-    /* --- Classement --- */
-    .rk {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-    }
-
-    .rk-n {
-      width: 24px;
-      height: 24px;
-      border-radius: 8px;
-      background: var(--a1);
-      color: var(--a);
-      font-size: 11.5px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .rk-txt {
-      flex: 1;
-      min-width: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-
-    .rk-name {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--t1);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .rk-sub {
-      font-size: 11.5px;
-      color: var(--t3);
-    }
-
-    .rk-val {
-      font-size: 13.5px;
-      font-weight: 600;
-      color: var(--t1);
-      flex-shrink: 0;
-    }
-
-    .stack {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    /* --- Carte de chaleur --- */
-    .hm {
-      display: grid;
-      grid-template-columns: 26px repeat(13, 1fr);
-      gap: 4px;
-      align-items: center;
-    }
-
-    .hm-h,
-    .hm-d {
-      font-size: 9.5px;
-      color: var(--t3);
-      letter-spacing: .04em;
-    }
-
-    .hm-h { text-align: center; }
-
-    .hm-c {
-      aspect-ratio: 1;
-      border-radius: 5px;
-      background: var(--ps);
-    }
-
-    .hm-c.l1 { background: var(--p1); }
-    .hm-c.l2 { background: var(--p2); }
-    .hm-c.l3 { background: var(--p3); }
-    .hm-c.l4 { background: var(--a); }
-
-    .hm-leg {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      justify-content: flex-end;
-      font-size: 11px;
-      color: var(--t3);
-    }
-
-    .hm-leg i {
-      width: 12px;
-      height: 12px;
-      border-radius: 4px;
-      display: inline-block;
-    }
-
-    @media (max-width: 1400px) {
-      .sp3 { grid-column: span 6; }
-      .sp4, .sp5 { grid-column: span 6; }
-      .sp8 { grid-column: span 12; }
-    }
-
-    @media (max-width: 900px) {
-      .sp3, .sp4, .sp5, .sp6, .sp8 { grid-column: span 12; }
-    }
-  </style>
 </head>
 
 <body class="app">
@@ -580,12 +101,11 @@
     <div class="sbt-btn">Reporting</div>
     </div>
     <nav class="nav">
-    <a class="ni act" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Accueil</a>
-    <div class="ni-group">
+    <div class="ni-group open">
     <div class="ni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V6z"/><polyline points="9 12 11 14 15 10"/></svg>Administration<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
     <div class="sub-nav">
     <div class="ni-sub">Mon compte</div>
-    <a class="ni-sub" href="carte-de-visite.html">Carte de visite</a>
+    <a class="ni-sub act" href="index.html">Carte de visite</a>
     <div class="ni-sub">Gérer les entités</div>
     <div class="ni-sub">Gérer les structures</div>
     </div>
@@ -617,368 +137,211 @@
       <div class="content">
         <div class="ph">
           <div class="ph-l">
-            <h1 class="ph-title">Tableau de bord</h1>
+            <h1 class="ph-title">Carte de visite</h1>
             <span class="ph-ct">Onlineformapro</span>
           </div>
           <div class="ph-actions">
-            <button class="btn">Exporter</button>
-            <button class="btn primary">Générer un rapport</button>
+            <button class="btn">Annuler</button>
+            <button class="btn primary">Enregistrer</button>
           </div>
         </div>
 
-        <div class="dash">
-      <div class="card sp3">
-        <div class="c-head"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/></svg><span class="c-title">Apprenants actifs</span><button class="c-more" aria-label="Options de apprenants actifs"><svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="19" cy="12" r="1.4"/></svg></button></div>
-        <div>
-          <span class="fig"><span class="n">118</span></span>
-          <div class="fig-lbl">sur 248 inscrits</div>
-        </div>
-        <div class="chart"><svg viewBox="0 0 300 54" role="img" aria-label="Douze derniers mois"><rect x="6.8" y="25.6" width="11.5" height="28.4" rx="5.8" fill="var(--p1)"/><rect x="31.8" y="22" width="11.5" height="32" rx="5.8" fill="var(--p1)"/><rect x="56.8" y="24.7" width="11.5" height="29.3" rx="5.8" fill="var(--p1)"/><rect x="81.8" y="16.9" width="11.5" height="37.1" rx="5.8" fill="var(--p1)"/><rect x="106.8" y="20.1" width="11.5" height="33.9" rx="5.8" fill="var(--p1)"/><rect x="131.8" y="13.7" width="11.5" height="40.3" rx="5.8" fill="var(--p1)"/><rect x="156.8" y="17.8" width="11.5" height="36.2" rx="5.8" fill="var(--p1)"/><rect x="181.8" y="10.5" width="11.5" height="43.5" rx="5.8" fill="var(--p1)"/><rect x="206.8" y="13.7" width="11.5" height="40.3" rx="5.8" fill="var(--p1)"/><rect x="231.8" y="7.8" width="11.5" height="46.2" rx="5.8" fill="var(--p1)"/><rect x="256.8" y="4.1" width="11.5" height="49.9" rx="5.8" fill="var(--p1)"/><rect x="281.8" y="0" width="11.5" height="54" rx="5.8" fill="var(--a)"/></svg></div>
-        <div class="prog-top"><span class="chip up"><svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>+62 %</span><b>sur 12 mois</b></div>
-      </div>
-      <div class="card sp3">
-        <div class="c-head"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg><span class="c-title">Parcours terminés</span><button class="c-more" aria-label="Options de parcours terminés"><svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="19" cy="12" r="1.4"/></svg></button></div>
-        <div>
-          <span class="fig"><span class="n">149</span></span>
-          <div class="fig-lbl">sur les douze derniers mois</div>
-        </div>
-        <div class="chart"><svg viewBox="0 0 300 54" role="img" aria-label="Douze derniers mois"><rect x="6.8" y="38.4" width="11.5" height="15.6" rx="5.8" fill="var(--p1)"/><rect x="31.8" y="35.2" width="11.5" height="18.8" rx="5.8" fill="var(--p1)"/><rect x="56.8" y="36.6" width="11.5" height="17.4" rx="5.8" fill="var(--p1)"/><rect x="81.8" y="31.9" width="11.5" height="22.1" rx="5.8" fill="var(--p1)"/><rect x="106.8" y="33.3" width="11.5" height="20.7" rx="5.8" fill="var(--p1)"/><rect x="131.8" y="27.9" width="11.5" height="26.1" rx="5.8" fill="var(--p1)"/><rect x="156.8" y="30.1" width="11.5" height="23.9" rx="5.8" fill="var(--p1)"/><rect x="181.8" y="22.1" width="11.5" height="31.9" rx="5.8" fill="var(--p1)"/><rect x="206.8" y="18.8" width="11.5" height="35.2" rx="5.8" fill="var(--p1)"/><rect x="231.8" y="13.4" width="11.5" height="40.6" rx="5.8" fill="var(--p1)"/><rect x="256.8" y="6.5" width="11.5" height="47.5" rx="5.8" fill="var(--p1)"/><rect x="281.8" y="0" width="11.5" height="54" rx="5.8" fill="var(--a)"/></svg></div>
-        <div class="prog-top"><span class="chip up"><svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>+247 %</span><b>sur 12 mois</b></div>
-      </div>
-      <div class="card sp3">
-        <div class="c-head"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span class="c-title">Temps moyen</span><button class="c-more" aria-label="Options de temps moyen"><svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="19" cy="12" r="1.4"/></svg></button></div>
-        <div>
-          <span class="fig"><span class="n">4 h 11</span><span class="u">min</span></span>
-          <div class="fig-lbl">par apprenant et par mois</div>
-        </div>
-        <div class="chart"><svg viewBox="0 0 300 54" role="img" aria-label="Douze derniers mois"><rect x="6.8" y="24.7" width="11.5" height="29.3" rx="5.8" fill="var(--p1)"/><rect x="31.8" y="22.2" width="11.5" height="31.8" rx="5.8" fill="var(--p1)"/><rect x="56.8" y="23.7" width="11.5" height="30.3" rx="5.8" fill="var(--p1)"/><rect x="81.8" y="19.1" width="11.5" height="34.9" rx="5.8" fill="var(--p1)"/><rect x="106.8" y="20.7" width="11.5" height="33.3" rx="5.8" fill="var(--p1)"/><rect x="131.8" y="17.2" width="11.5" height="36.8" rx="5.8" fill="var(--p1)"/><rect x="156.8" y="18.3" width="11.5" height="35.7" rx="5.8" fill="var(--p1)"/><rect x="181.8" y="13.3" width="11.5" height="40.7" rx="5.8" fill="var(--p1)"/><rect x="206.8" y="10.3" width="11.5" height="43.7" rx="5.8" fill="var(--p1)"/><rect x="231.8" y="6.5" width="11.5" height="47.5" rx="5.8" fill="var(--p1)"/><rect x="256.8" y="2.8" width="11.5" height="51.2" rx="5.8" fill="var(--p1)"/><rect x="281.8" y="0" width="11.5" height="54" rx="5.8" fill="var(--a)"/></svg></div>
-        <div class="prog-top"><span class="chip up"><svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>+1 h 55 min</span><b>sur 12 mois</b></div>
-      </div>
-      <div class="card sp3">
-        <div class="c-head"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg><span class="c-title">Réussite</span><button class="c-more" aria-label="Options de réussite"><svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="19" cy="12" r="1.4"/></svg></button></div>
-        <div>
-          <span class="fig"><span class="n">51</span><span class="u">%</span></span>
-          <div class="fig-lbl">aux évaluations</div>
-        </div>
-        <div class="chart"><svg viewBox="0 0 300 54" role="img" aria-label="Douze derniers mois"><rect x="6.8" y="0.7" width="11.5" height="53.3" rx="5.8" fill="var(--p1)"/><rect x="31.8" y="2.2" width="11.5" height="51.8" rx="5.8" fill="var(--p1)"/><rect x="56.8" y="0" width="11.5" height="54" rx="5.8" fill="var(--a)"/><rect x="81.8" y="3.6" width="11.5" height="50.4" rx="5.8" fill="var(--p1)"/><rect x="106.8" y="1.5" width="11.5" height="52.5" rx="5.8" fill="var(--p1)"/><rect x="131.8" y="5.8" width="11.5" height="48.2" rx="5.8" fill="var(--p1)"/><rect x="156.8" y="4.4" width="11.5" height="49.6" rx="5.8" fill="var(--p1)"/><rect x="181.8" y="9.5" width="11.5" height="44.5" rx="5.8" fill="var(--p1)"/><rect x="206.8" y="10.9" width="11.5" height="43.1" rx="5.8" fill="var(--p1)"/><rect x="231.8" y="13.9" width="11.5" height="40.1" rx="5.8" fill="var(--p1)"/><rect x="256.8" y="15.3" width="11.5" height="38.7" rx="5.8" fill="var(--p1)"/><rect x="281.8" y="16.8" width="11.5" height="37.2" rx="5.8" fill="var(--p1)"/></svg></div>
-        <div class="prog-top"><span class="chip down"><svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg>-22 %</span><b>sur 12 mois</b></div>
-      </div>
-      <div class="card sp8">
-        <div class="c-head"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><span class="c-title">Temps de formation</span><span class="seg"><button class="active" onclick="segPick(this)">Mensuel</button><button class="" onclick="segPick(this)">Trimestriel</button><button class="" onclick="segPick(this)">Annuel</button></span><button class="c-more" aria-label="Options de le temps de formation"><svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="19" cy="12" r="1.4"/></svg></button></div>
-        <div class="figs">
-          <div><span class="fig"><span class="n">5 656</span><span class="u">h</span></span><div class="fig-lbl">Réalisé sur la période</div></div>
-          <div><span class="fig sm"><span class="n">471</span><span class="u">h</span></span><div class="fig-lbl">Moyenne mensuelle</div></div>
-          <div><span class="fig sm"><span class="n">1 012</span><span class="u">h</span></span><div class="fig-lbl">Meilleur mois, mars</div></div>
-        </div>
-        <div class="chart" data-chart='{"w": 900, "x": [46.0, 122.5, 199.1, 275.6, 352.2, 428.7, 505.3, 581.8, 658.4, 734.9, 811.5, 888.0], "labels": ["Oct.", "Nov.", "Déc.", "Janv.", "Févr.", "Mars", "Avr.", "Mai", "Juin", "Juil.", "Août", "Sept."], "series": [{"n": "Temps réalisé", "c": "var(--c1)", "v": [302, 848, 431, 562, 638, 1012, 384, 251, 297, 312, 198, 421], "u": " h"}]}'><svg viewBox="0 0 900 240" role="img" aria-label="Heures realisees par mois"><defs><linearGradient id="gT" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--c1)" stop-opacity=".20"/><stop offset="1" stop-color="var(--c1)" stop-opacity="0"/></linearGradient></defs><line class="ch-grid" x1="46" y1="214" x2="888" y2="214"/><text class="ch-axis" x="36" y="217.5" text-anchor="end">0</text><line class="ch-grid" x1="46" y1="150" x2="888" y2="150"/><text class="ch-axis" x="36" y="153.5" text-anchor="end">350</text><line class="ch-grid" x1="46" y1="86" x2="888" y2="86"/><text class="ch-axis" x="36" y="89.5" text-anchor="end">700</text><line class="ch-grid" x1="46" y1="22" x2="888" y2="22"/><text class="ch-axis" x="36" y="25.5" text-anchor="end">1050</text><text class="ch-axis" x="46" y="232" text-anchor="middle">OCT</text><text class="ch-axis" x="199.1" y="232" text-anchor="middle">DÉC</text><text class="ch-axis" x="352.2" y="232" text-anchor="middle">FÉVR</text><text class="ch-axis" x="505.3" y="232" text-anchor="middle">AVR</text><text class="ch-axis" x="658.4" y="232" text-anchor="middle">JUIN</text><text class="ch-axis" x="811.5" y="232" text-anchor="middle">AOÛT</text><path d="M46 158.8 L122.5 58.9 L199.1 135.2 L275.6 111.2 L352.2 97.3 L428.7 28.9 L505.3 143.8 L581.8 168.1 L658.4 159.7 L734.9 156.9 L811.5 177.8 L888 137 L888 214 L46 214 Z" fill="url(#gT)"/><line class="ch-cross" x1="0" y1="16" x2="0" y2="214"/><path class="ch-line" d="M46 158.8 L122.5 58.9 L199.1 135.2 L275.6 111.2 L352.2 97.3 L428.7 28.9 L505.3 143.8 L581.8 168.1 L658.4 159.7 L734.9 156.9 L811.5 177.8 L888 137" stroke="var(--c1)"/><circle class="ch-dot" cx="46" cy="158.8" r="3.6" fill="var(--c1)"/><circle class="ch-dot" cx="122.5" cy="58.9" r="3.6" fill="var(--c1)"/><circle class="ch-dot" cx="199.1" cy="135.2" r="3.6" fill="var(--c1)"/><circle class="ch-dot" cx="275.6" cy="111.2" r="3.6" fill="var(--c1)"/><circle class="ch-dot" cx="352.2" cy="97.3" r="3.6" fill="var(--c1)"/><circle class="ch-dot" cx="428.7" cy="28.9" r="3.6" fill="var(--c1)"/><circle class="ch-dot" cx="505.3" cy="143.8" r="3.6" fill="var(--c1)"/><circle class="ch-dot" cx="581.8" cy="168.1" r="3.6" fill="var(--c1)"/><circle class="ch-dot" cx="658.4" cy="159.7" r="3.6" fill="var(--c1)"/><circle class="ch-dot" cx="734.9" cy="156.9" r="3.6" fill="var(--c1)"/><circle class="ch-dot" cx="811.5" cy="177.8" r="3.6" fill="var(--c1)"/><circle class="ch-dot" cx="888" cy="137" r="3.6" fill="var(--c1)"/><rect class="ch-hit" x="0" y="0" width="900" height="240"/></svg><div class="ch-tip"></div></div>
-      </div>
-      <div class="card sp4">
-        <div class="c-head"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg><span class="c-title">Réussite aux évaluations</span><span class="chip down"><svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg>-22 %</span><button class="c-more" aria-label="Options de la réussite"><svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="19" cy="12" r="1.4"/></svg></button></div>
-        <div class="gauge">
-          <svg viewBox="0 0 210 128" role="img" aria-label="Réussite aux évaluations 51 pour cent"><path d="M23 108 A82 82 0 0 1 187 108" fill="none" stroke="var(--bg)" stroke-width="16" stroke-linecap="round"/><path d="M23 108 A82 82 0 0 1 107.6 26" fill="none" stroke="var(--a)" stroke-width="16" stroke-linecap="round"/></svg>
-          <div class="gauge-c">
-            <span class="fig"><span class="n">51</span><span class="u">%</span></span>
-            <div class="fig-lbl">de réussite aux évaluations</div>
+        <div class="form-body">
+          <div class="col">
+            <div class="fs-block">
+              <div class="fs-header">
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+                <div class="fs-title">Informations générales</div>
+              </div>
+              <div class="fs-card">
+                <div class="form-grid col-full">
+                  <div class="form-field">
+                    <label>Raison sociale<span class="req">*</span></label>
+                    <input type="text" class="form-input" value="ONLINEFORMAPRO">
+                  </div>
+                </div>
+                <div class="form-grid">
+                  <div class="form-field">
+                    <label>Nom du responsable<span class="req">*</span></label>
+                    <input type="text" class="form-input" value="GUERRIN">
+                  </div>
+                  <div class="form-field">
+                    <label>Prénom du responsable<span class="req">*</span></label>
+                    <input type="text" class="form-input" value="Michèle">
+                  </div>
+                </div>
+                <div class="form-grid col-full">
+                  <div class="form-field">
+                    <label>Fonction du responsable<span class="req">*</span></label>
+                    <input type="text" class="form-input" value="Présidente-directrice générale">
+                  </div>
+                </div>
+                <div class="form-grid">
+                  <div class="form-field">
+                    <label>Téléphone</label>
+                    <input type="text" class="form-input" value="03 84 75 40 40">
+                  </div>
+                  <div class="form-field">
+                    <label>E-mail</label>
+                    <input type="email" class="form-input" value="contact@onlineformapro.com">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="fs-block">
+              <div class="fs-header">
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+                <div class="fs-title">Adresse</div>
+              </div>
+              <div class="fs-card">
+                <div class="form-grid col-full">
+                  <div class="form-field">
+                    <label>Adresse<span class="req">*</span></label>
+                    <input type="text" class="form-input" value="4 rue Pasteur">
+                  </div>
+                </div>
+                <div class="form-grid col-full">
+                  <div class="form-field">
+                    <label>Complément</label>
+                    <input type="text" class="form-input" value="Bâtiment B">
+                  </div>
+                </div>
+                <div class="form-grid">
+                  <div class="form-field">
+                    <label>Code postal<span class="req">*</span></label>
+                    <input type="text" class="form-input" value="70000">
+                  </div>
+                  <div class="form-field">
+                    <label>Ville<span class="req">*</span></label>
+                    <input type="text" class="form-input" value="VESOUL">
+                  </div>
+                </div>
+                <div class="form-grid col-full">
+                  <div class="form-field">
+                    <label>Pays</label>
+                    <div class="w-dd-wrap block">
+  <button class="w-dd-btn field" onclick="toggleDD(this)"><span>France</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  <div class="w-dd-menu">
+    <div class="w-dd-item active">France</div>
+    <div class="w-dd-item">Belgique</div>
+    <div class="w-dd-item">Suisse</div>
+    <div class="w-dd-item">Luxembourg</div>
+  </div>
+</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="fs-block">
+              <div class="fs-header">
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+                <div class="fs-title">Logo de l'entité</div>
+              </div>
+              <div class="fs-card">
+                <div class="upload-row">
+                  <div class="upload-side">
+                    <div class="upload-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+                    <div>
+                      <div class="upload-name">Importez le logo</div>
+                      <div class="upload-sub">20 Mo max · .png, .jpg · fond transparent conseillé</div>
+                    </div>
+                  </div>
+                  <button class="btn secondary sm">Importer</button>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="prog-row">
-          <div class="prog-top">Acquis<b>51 %</b></div>
-          <div class="prog"><i style="width:51%"></i><i class="t1" style="width:22%"></i><i class="rest"></i></div>
-          <div class="prog-top"><span class="c-sub">En cours 22 % · Non acquis 27 %</span></div>
-        </div>
-      </div>
-      <div class="card sp4">
-        <div class="c-head"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><span class="c-title">Connexions</span><button class="c-more" aria-label="Options de connexions"><svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="19" cy="12" r="1.4"/></svg></button></div>
-        <div>
-          <div class="c-sub">Sur les douze derniers mois</div>
-          <span class="fig"><span class="n">621</span><span class="u">ce mois</span></span>
-        </div>
-        <div class="chart"><svg viewBox="0 0 420 92" role="img" aria-label="Douze derniers mois"><rect x="9.4" y="54" width="16.1" height="22" rx="8.1" fill="var(--p1)"/><rect x="44.5" y="0" width="16.1" height="76" rx="8.1" fill="var(--a)"/><rect x="79.5" y="53.7" width="16.1" height="22.3" rx="8.1" fill="var(--p1)"/><rect x="114.5" y="32.8" width="16.1" height="43.2" rx="8.1" fill="var(--p1)"/><rect x="149.4" y="22.3" width="16.1" height="53.7" rx="8.1" fill="var(--p1)"/><rect x="184.4" y="21.4" width="16.1" height="54.6" rx="8.1" fill="var(--p1)"/><rect x="219.4" y="54" width="16.1" height="22" rx="8.1" fill="var(--p1)"/><rect x="254.4" y="59.9" width="16.1" height="16.1" rx="8.1" fill="var(--p1)"/><rect x="289.4" y="49.5" width="16.1" height="26.5" rx="8.1" fill="var(--p1)"/><rect x="324.4" y="56.4" width="16.1" height="19.6" rx="8.1" fill="var(--p1)"/><rect x="359.4" y="59.9" width="16.1" height="16.1" rx="8.1" fill="var(--p1)"/><rect x="394.4" y="50.9" width="16.1" height="25.1" rx="8.1" fill="var(--p1)"/><text class="ch-axis" x="17.5" y="88" text-anchor="middle">OCT</text><text class="ch-axis" x="122.5" y="88" text-anchor="middle">JANV</text><text class="ch-axis" x="227.5" y="88" text-anchor="middle">AVR</text><text class="ch-axis" x="332.5" y="88" text-anchor="middle">JUIL</text></svg></div>
-        <div class="prog-top"><span class="dot s1"></span>Pic à 1 883<b>801 en moyenne</b></div>
-      </div>
-      <div class="card sp4">
-        <div class="c-head"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span class="c-title">Modules suivis</span><button class="c-more" aria-label="Options de modules suivis"><svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="19" cy="12" r="1.4"/></svg></button></div>
-        <div>
-          <div class="c-sub">Sur les douze derniers mois</div>
-          <span class="fig"><span class="n">117</span><span class="u">ce mois</span></span>
-        </div>
-        <div class="chart"><svg viewBox="0 0 420 92" role="img" aria-label="Douze derniers mois"><rect x="9.4" y="28" width="16.1" height="48" rx="8.1" fill="var(--p1)"/><rect x="44.5" y="25.8" width="16.1" height="50.2" rx="8.1" fill="var(--p1)"/><rect x="79.5" y="22.2" width="16.1" height="53.8" rx="8.1" fill="var(--p1)"/><rect x="114.5" y="0" width="16.1" height="76" rx="8.1" fill="var(--a)"/><rect x="149.4" y="27.4" width="16.1" height="48.6" rx="8.1" fill="var(--p1)"/><rect x="184.4" y="1.9" width="16.1" height="74.1" rx="8.1" fill="var(--p1)"/><rect x="219.4" y="19.3" width="16.1" height="56.7" rx="8.1" fill="var(--p1)"/><rect x="254.4" y="38.6" width="16.1" height="37.4" rx="8.1" fill="var(--p1)"/><rect x="289.4" y="41.9" width="16.1" height="34.1" rx="8.1" fill="var(--p1)"/><rect x="324.4" y="26.7" width="16.1" height="49.3" rx="8.1" fill="var(--p1)"/><rect x="359.4" y="37.4" width="16.1" height="38.6" rx="8.1" fill="var(--p1)"/><rect x="394.4" y="38.3" width="16.1" height="37.7" rx="8.1" fill="var(--p1)"/><text class="ch-axis" x="17.5" y="88" text-anchor="middle">OCT</text><text class="ch-axis" x="122.5" y="88" text-anchor="middle">JANV</text><text class="ch-axis" x="227.5" y="88" text-anchor="middle">AVR</text><text class="ch-axis" x="332.5" y="88" text-anchor="middle">JUIL</text></svg></div>
-        <div class="prog-top"><span class="dot s2"></span>Pic à 236<b>156 en moyenne</b></div>
-      </div>
-      <div class="card sp4">
-        <div class="c-head"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg><span class="c-title">Évaluations réalisées</span><button class="c-more" aria-label="Options de évaluations réalisées"><svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="19" cy="12" r="1.4"/></svg></button></div>
-        <div>
-          <div class="c-sub">Sur les douze derniers mois</div>
-          <span class="fig"><span class="n">79</span><span class="u">ce mois</span></span>
-        </div>
-        <div class="chart"><svg viewBox="0 0 420 92" role="img" aria-label="Douze derniers mois"><rect x="9.4" y="6.1" width="16.1" height="69.9" rx="8.1" fill="var(--p1)"/><rect x="44.5" y="35.2" width="16.1" height="40.8" rx="8.1" fill="var(--p1)"/><rect x="79.5" y="24.9" width="16.1" height="51.1" rx="8.1" fill="var(--p1)"/><rect x="114.5" y="1.9" width="16.1" height="74.1" rx="8.1" fill="var(--p1)"/><rect x="149.4" y="21.1" width="16.1" height="54.9" rx="8.1" fill="var(--p1)"/><rect x="184.4" y="0" width="16.1" height="76" rx="8.1" fill="var(--a)"/><rect x="219.4" y="31" width="16.1" height="45" rx="8.1" fill="var(--p1)"/><rect x="254.4" y="41.3" width="16.1" height="34.7" rx="8.1" fill="var(--p1)"/><rect x="289.4" y="34.7" width="16.1" height="41.3" rx="8.1" fill="var(--p1)"/><rect x="324.4" y="54.4" width="16.1" height="21.6" rx="8.1" fill="var(--p1)"/><rect x="359.4" y="47.4" width="16.1" height="28.6" rx="8.1" fill="var(--p1)"/><rect x="394.4" y="38.9" width="16.1" height="37.1" rx="8.1" fill="var(--p1)"/><text class="ch-axis" x="17.5" y="88" text-anchor="middle">OCT</text><text class="ch-axis" x="122.5" y="88" text-anchor="middle">JANV</text><text class="ch-axis" x="227.5" y="88" text-anchor="middle">AVR</text><text class="ch-axis" x="332.5" y="88" text-anchor="middle">JUIL</text></svg></div>
-        <div class="prog-top"><span class="dot s3"></span>Pic à 162<b>102 en moyenne</b></div>
-      </div>
-      <div class="card sp5">
-        <div class="c-head"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span class="c-title">Modules les plus suivis</span><span class="c-sub">Connexions</span><button class="c-more" aria-label="Options de les modules"><svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="19" cy="12" r="1.4"/></svg></button></div>
-        <div class="stack">
-          <div class="rk">
-            <span class="rk-n">1</span>
-            <span class="rk-txt">
-              <span class="rk-name">Prise en main</span>
-              <span class="rk-sub">Excel 2016</span>
-              <span class="prog"><i style="width:100%"></i><i class="rest"></i></span>
-            </span>
-            <span class="rk-val">1 234</span>
+          <div class="col">
+            <div class="fs-block">
+              <div class="fs-header">
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+                <div class="fs-title">Références légales</div>
+              </div>
+              <div class="fs-card">
+                <div class="form-grid">
+                  <div class="form-field">
+                    <label>Forme juridique</label>
+                    <input type="text" class="form-input" value="SA">
+                  </div>
+                  <div class="form-field">
+                    <label>Devise</label>
+                    <div class="w-dd-wrap block">
+  <button class="w-dd-btn field" onclick="toggleDD(this)"><span>EUR (€)</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  <div class="w-dd-menu">
+    <div class="w-dd-item active">EUR (€)</div>
+    <div class="w-dd-item">CHF</div>
+    <div class="w-dd-item">USD ($)</div>
+  </div>
+</div>
+                  </div>
+                </div>
+                <div class="form-grid">
+                  <div class="form-field">
+                    <label>Code APE (NAF)</label>
+                    <input type="text" class="form-input" value="8559A">
+                  </div>
+                  <div class="form-field">
+                    <label>N° SIRET</label>
+                    <input type="text" class="form-input ro" value="42478033600014" readonly>
+                    <span class="form-hint">Renseigné par l'administration, non modifiable</span>
+                  </div>
+                </div>
+                <div class="form-grid col-full">
+                  <div class="form-field">
+                    <label>N° de déclaration d'activité</label>
+                    <input type="text" class="form-input" value="43700123470">
+                    <span class="form-hint">Auprès de la préfecture de région</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="fs-block">
+              <div class="fs-header">
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+                <div class="fs-title">Signature visuelle</div>
+              </div>
+              <div class="fs-card">
+                <div class="upload-row">
+                  <div class="upload-side">
+                    <div class="upload-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+                    <div>
+                      <div class="upload-name">Importez la signature</div>
+                      <div class="upload-sub">Apposée sur les attestations et les conventions</div>
+                    </div>
+                  </div>
+                  <button class="btn secondary sm">Importer</button>
+                </div>
+              </div>
+            </div>
+            <div class="fs-block">
+              <div class="fs-header">
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14M12 2v2M12 20v2M2 12h2M20 12h2"/></svg></div>
+                <div class="fs-title">Affichage de la carte</div>
+              </div>
+              <div class="fs-card">
+                <div class="form-grid col-full">
+                  <div class="form-field">
+                    <label>Publier la carte de visite</label>
+                    <label class="form-switch"><input type="checkbox" checked><span class="slider"></span></label>
+                    <span class="form-hint">Visible par les apprenants dans leur espace</span>
+                  </div>
+                </div>
+                <div class="form-grid col-full">
+                  <label class="form-check-inline">
+                    <input type="checkbox" checked> Afficher le téléphone sur les attestations
+                  </label>
+                  <label class="form-check-inline">
+                    <input type="checkbox"> Afficher l'adresse complète sur les conventions
+                  </label>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="rk">
-            <span class="rk-n">2</span>
-            <span class="rk-txt">
-              <span class="rk-name">Les bases du HTML</span>
-              <span class="rk-sub">Langages HTML/CSS</span>
-              <span class="prog"><i style="width:76%"></i><i class="rest"></i></span>
-            </span>
-            <span class="rk-val">935</span>
-          </div>
-          <div class="rk">
-            <span class="rk-n">3</span>
-            <span class="rk-txt">
-              <span class="rk-name">Prise en main</span>
-              <span class="rk-sub">Excel 2021</span>
-              <span class="prog"><i style="width:71%"></i><i class="rest"></i></span>
-            </span>
-            <span class="rk-val">879</span>
-          </div>
-          <div class="rk">
-            <span class="rk-n">4</span>
-            <span class="rk-txt">
-              <span class="rk-name">Sélectionner une cellule, une plage de cellules</span>
-              <span class="rk-sub">Excel 2021</span>
-              <span class="prog"><i style="width:68%"></i><i class="rest"></i></span>
-            </span>
-            <span class="rk-val">834</span>
-          </div>
-          <div class="rk">
-            <span class="rk-n">5</span>
-            <span class="rk-txt">
-              <span class="rk-name">Pour commencer</span>
-              <span class="rk-sub">Word 2021</span>
-              <span class="prog"><i style="width:66%"></i><i class="rest"></i></span>
-            </span>
-            <span class="rk-val">812</span>
-          </div>
-        </div>
-      </div>
-      <div class="card sp4">
-        <div class="c-head"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg><span class="c-title">Périodes d'activité</span><span class="c-sub">Heures</span><button class="c-more" aria-label="Options de les périodes"><svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="19" cy="12" r="1.4"/></svg></button></div>
-          <div class="hm">
-            <span></span>
-            <span class="hm-h">08</span>
-            <span class="hm-h">09</span>
-            <span class="hm-h">10</span>
-            <span class="hm-h">11</span>
-            <span class="hm-h">12</span>
-            <span class="hm-h">13</span>
-            <span class="hm-h">14</span>
-            <span class="hm-h">15</span>
-            <span class="hm-h">16</span>
-            <span class="hm-h">17</span>
-            <span class="hm-h">18</span>
-            <span class="hm-h">19</span>
-            <span class="hm-h">20</span>
-            <span class="hm-d">Lun</span>
-            <span class="hm-c l1"></span>
-            <span class="hm-c l4"></span>
-            <span class="hm-c l4"></span>
-            <span class="hm-c l3"></span>
-            <span class="hm-c l1"></span>
-            <span class="hm-c l1"></span>
-            <span class="hm-c l3"></span>
-            <span class="hm-c l4"></span>
-            <span class="hm-c l3"></span>
-            <span class="hm-c l2"></span>
-            <span class="hm-c l1"></span>
-            <span class="hm-c"></span>
-            <span class="hm-c"></span>
-            <span class="hm-d">Mar</span>
-            <span class="hm-c l1"></span>
-            <span class="hm-c l3"></span>
-            <span class="hm-c l4"></span>
-            <span class="hm-c l4"></span>
-            <span class="hm-c l2"></span>
-            <span class="hm-c l1"></span>
-            <span class="hm-c l3"></span>
-            <span class="hm-c l4"></span>
-            <span class="hm-c l4"></span>
-            <span class="hm-c l2"></span>
-            <span class="hm-c l1"></span>
-            <span class="hm-c l1"></span>
-            <span class="hm-c"></span>
-            <span class="hm-d">Mer</span>
-            <span class="hm-c l2"></span>
-            <span class="hm-c l4"></span>
-            <span class="hm-c l4"></span>
-            <span class="hm-c l3"></span>
-            <span class="hm-c l1"></span>
-            <span class="hm-c l2"></span>
-            <span class="hm-c l4"></span>
-            <span class="hm-c l4"></span>
-            <span class="hm-c l3"></span>
-            <span class="hm-c l2"></span>
-            <span class="hm-c l1"></span>
-            <span class="hm-c"></span>
-            <span class="hm-c"></span>
-            <span class="hm-d">Jeu</span>
-            <span class="hm-c l1"></span>
-            <span class="hm-c l3"></span>
-            <span class="hm-c l4"></span>
-            <span class="hm-c l4"></span>
-            <span class="hm-c l2"></span>
-            <span class="hm-c l1"></span>
-            <span class="hm-c l3"></span>
-            <span class="hm-c l3"></span>
-            <span class="hm-c l4"></span>
-            <span class="hm-c l3"></span>
-            <span class="hm-c l1"></span>
-            <span class="hm-c l1"></span>
-            <span class="hm-c"></span>
-            <span class="hm-d">Ven</span>
-            <span class="hm-c l1"></span>
-            <span class="hm-c l3"></span>
-            <span class="hm-c l3"></span>
-            <span class="hm-c l3"></span>
-            <span class="hm-c l2"></span>
-            <span class="hm-c l1"></span>
-            <span class="hm-c l3"></span>
-            <span class="hm-c l3"></span>
-            <span class="hm-c l2"></span>
-            <span class="hm-c l1"></span>
-            <span class="hm-c l1"></span>
-            <span class="hm-c"></span>
-            <span class="hm-c"></span>
-            <span class="hm-d">Sam</span>
-            <span class="hm-c"></span>
-            <span class="hm-c l1"></span>
-            <span class="hm-c l1"></span>
-            <span class="hm-c l2"></span>
-            <span class="hm-c l1"></span>
-            <span class="hm-c"></span>
-            <span class="hm-c l1"></span>
-            <span class="hm-c l1"></span>
-            <span class="hm-c l1"></span>
-            <span class="hm-c"></span>
-            <span class="hm-c"></span>
-            <span class="hm-c"></span>
-            <span class="hm-c"></span>
-            <span class="hm-d">Dim</span>
-            <span class="hm-c"></span>
-            <span class="hm-c"></span>
-            <span class="hm-c l1"></span>
-            <span class="hm-c l1"></span>
-            <span class="hm-c l1"></span>
-            <span class="hm-c l1"></span>
-            <span class="hm-c l1"></span>
-            <span class="hm-c l1"></span>
-            <span class="hm-c"></span>
-            <span class="hm-c"></span>
-            <span class="hm-c"></span>
-            <span class="hm-c"></span>
-            <span class="hm-c"></span>
-          </div>
-          <div class="hm-leg">Moins<i class="hm-c"></i><i class="hm-c l1"></i><i class="hm-c l2"></i><i class="hm-c l3"></i><i class="hm-c l4"></i>Plus</div>
-      </div>
-      <div class="card sp3">
-        <div class="c-head"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg><span class="c-title">Structures actives</span><button class="c-more" aria-label="Options de les structures"><svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="19" cy="12" r="1.4"/></svg></button></div>
-        <div class="stack">
-          <div class="rk">
-            <span class="rk-txt">
-              <span class="rk-name">DECIVISION</span>
-              <span class="rk-sub">Très active</span>
-              <span class="prog"><i style="width:100%"></i><i class="rest"></i></span>
-            </span>
-            <span class="rk-val">1 842</span>
-          </div>
-          <div class="rk">
-            <span class="rk-txt">
-              <span class="rk-name">CIBC Bourgogne Sud</span>
-              <span class="rk-sub">Très active</span>
-              <span class="prog"><i style="width:71%"></i><i class="rest"></i></span>
-            </span>
-            <span class="rk-val">1 317</span>
-          </div>
-          <div class="rk">
-            <span class="rk-txt">
-              <span class="rk-name">COALLIA</span>
-              <span class="rk-sub">Active</span>
-              <span class="prog"><i style="width:51%"></i><i class="rest"></i></span>
-            </span>
-            <span class="rk-val">948</span>
-          </div>
-          <div class="rk">
-            <span class="rk-txt">
-              <span class="rk-name">Apolline Kamdom</span>
-              <span class="rk-sub">Active</span>
-              <span class="prog"><i style="width:33%"></i><i class="rest"></i></span>
-            </span>
-            <span class="rk-val">612</span>
-          </div>
-          <div class="rk">
-            <span class="rk-txt">
-              <span class="rk-name">Claudine Mapella</span>
-              <span class="rk-sub">Peu active</span>
-              <span class="prog"><i style="width:15%"></i><i class="rest"></i></span>
-            </span>
-            <span class="rk-val">274</span>
-          </div>
-          <div class="rk">
-            <span class="rk-txt">
-              <span class="rk-name">INFREP Besançon</span>
-              <span class="rk-sub">Peu active</span>
-              <span class="prog"><i style="width:7%"></i><i class="rest"></i></span>
-            </span>
-            <span class="rk-val">131</span>
-          </div>
-        </div>
-      </div>
         </div>
       </div>
     </main>
   </div>
   <script src="../../dist/components.js" defer></script>
-  <script defer>
-    document.addEventListener('DOMContentLoaded', function () {
-    // Survol des graphiques : reticule + infobulle sur le point le plus proche.
-    // Provisoire dans la page, comme le CSS : rejoindra components.js apres validation.
-    document.querySelectorAll('.chart[data-chart]').forEach(function (ch) {
-      var cfg = JSON.parse(ch.dataset.chart);
-      var svg = ch.querySelector('svg');
-      var cross = ch.querySelector('.ch-cross');
-      var tip = ch.querySelector('.ch-tip');
-
-      ch.addEventListener('pointermove', function (e) {
-        var box = svg.getBoundingClientRect();
-        var vx = (e.clientX - box.left) / box.width * cfg.w;
-        var k = 0, best = Infinity;
-        cfg.x.forEach(function (x, i) {
-          var d = Math.abs(x - vx);
-          if (d < best) { best = d; k = i; }
-        });
-        cross.setAttribute('x1', cfg.x[k]);
-        cross.setAttribute('x2', cfg.x[k]);
-        tip.innerHTML = '<div class="ch-tip-h">' + cfg.labels[k] + '</div>' +
-          cfg.series.map(function (s) {
-            return '<div class="ch-tip-r"><span class="dot"></span>' + s.n +
-                   '<b>' + s.v[k].toLocaleString('fr-FR') + (s.u || '') + '</b></div>';
-          }).join('');
-        tip.querySelectorAll('.dot').forEach(function (d, i) {
-          d.style.background = cfg.series[i].c;
-        });
-        ch.classList.add('on');
-        var px = cfg.x[k] / cfg.w * box.width;
-        var w = tip.offsetWidth;
-        tip.style.left = Math.max(0, Math.min(box.width - w, px - w / 2)) + 'px';
-        tip.style.top = '6px';
-      });
-
-      ch.addEventListener('pointerleave', function () { ch.classList.remove('on'); });
-    });
-    });
-  </script>
 </body>
 
 </html>
