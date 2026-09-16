@@ -23,7 +23,7 @@ La référence des composants est `index.html` : chaque section montre le rendu,
 ## Interdits
 
 - Aucune couleur écrite en dur (`#…`, `rgb(…)`, noms de couleur). Les seules couleurs sont `var(--…)`, et uniquement dans les cas prévus par les composants.
-- Aucun attribut `style=""` sauf : la hauteur d'une `.empty-bar`, le `background` d'une `.w-ico` et la couleur d'un `.ava`, qui sont des valeurs de données.
+- Aucun attribut `style=""` sauf : la hauteur d'une `.empty-bar`, la largeur d'un `.meter-fill`, le `background` d'une `.w-ico` et la couleur d'un `.ava`, qui sont des valeurs de données.
 - Aucune balise `<style>` dans la page. Aucune classe inventée. Aucun `!important`.
 - Aucun `<select>` natif : le sélecteur du système est `.w-dd-wrap`.
 - Aucun `<input type="date">` : son calendrier est celui du navigateur, pas celui du système. Le composant est `.dp`.
@@ -32,6 +32,8 @@ La référence des composants est `index.html` : chaque section montre le rendu,
 - Aucun `opacity` pour simuler un état désactivé : l'attribut `disabled`.
 - Aucune `.form-switch` dans un `.form-field` : une bascule n'est pas un champ de saisie, son libellé ne s'empile pas au-dessus d'elle.
 - Aucun bouton bleu, vert ou rose. La couleur d'action est le violet ; le rouge `--nav-act` n'existe que dans le menu gauche.
+- Aucune couleur de série inventée : la 6<sup>e</sup> série se replie sur « Autres ». Aucun double axe vertical : deux mesures, deux graphiques.
+- Aucun graphique dessiné avec des `<div>` : la géométrie va dans un `<svg>`, donc dans des attributs et non dans des styles.
 - Une seule action `.btn.primary` par écran. Une modale est un écran à part : elle a droit à la sienne.
 - Un formulaire n'est jamais un bloc sur toute la largeur : deux colonnes de `.fs-block` dans `.form-body`.
 
@@ -62,7 +64,15 @@ La référence des composants est `index.html` : chaque section montre le rendu,
 | Les actions d'une ligne | dernière cellule `td.catd > button.rdots + .rmenu > .rmi` |
 | Un statut dans une cellule | `<span class="stb ston"><span class="stdon"></span>Actif</span>` |
 | Le nom au début d'une ligne | `.cn > .ava` + `div (.nmain + .nsub)` pour une personne ; `.cn > .cn-ico` + `div` pour une chose — une entité, un lieu, une formation |
-| Un widget de statistiques | `.w > .w-head + .w-body`, dans une `.wgrid` |
+| Un widget vide (attente de données) | `.w > .w-head + .w-body`, dans une `.wgrid` |
+| Un widget qui porte des données | `.w > .w-head (.fs-icon + .w-title) + .w-plot` ; trois colonnes : `.wgrid.cols-3 > .wcol` |
+| Un graphique | un `<svg class="chart">` : `.bar`, `.line` + `.area` + `.dot`, `.arc.c1`…`.c5`. La géométrie tient dans les attributs SVG |
+| Une couleur de série | `--ch1`…`--ch5`, dans cet ordre, jamais recyclées ; une rampe d'intensité : `--sq1`…`--sq6` |
+| Une légende | `.legend > .legend-item (.legend-dot.cN + libellé + .legend-val)` — obligatoire dès deux séries |
+| Une jauge | `.meter > .meter-fill` (`.ok` pour le vert), largeur en `style="width:NN%"` |
+| Un chiffre seul | `.hero-row > .hero-num + …` — quand la donnée tient en un nombre, pas de graphique |
+| Une carte de chaleur | `.hmap.j5 > .hmap-lbl + .hmap-c.s1`…`.s6`, avec une `.hmap-scale` sous la grille |
+| Un tableau dans un widget | `.mini > thead + tbody`, colonnes de chiffres en `.num` |
 | Un en-tête de page | `.ph > .ph-l (h1.ph-title + .ph-ct) + .ph-actions` |
 | Une icône | `<i data-eva="nom-outline">` — noms Eva Icons, variante outline uniquement |
 

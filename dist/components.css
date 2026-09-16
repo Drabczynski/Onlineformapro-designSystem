@@ -32,6 +32,31 @@
   --bg: #F3F4F6;
   --ps: #F7F8FA;
 
+  /* Graphiques — couleurs de serie.
+     Ordre fixe, jamais recycle : une 6e serie se replie sur « Autres »,
+     elle ne fabrique pas une teinte. Ces cinq-la passent les controles de
+     separation, y compris pour les trois daltonismes. */
+  --ch1: #8A3AAF;
+  --ch2: #D9731A;
+  --ch3: #118A6E;
+  --ch4: #2563EB;
+  --ch5: #7F6000;
+
+  /* Graphiques — rampe d'intensite. Une seule teinte, du clair au fonce :
+     c'est la clarte qui porte la quantite, pas la couleur. */
+  --sq1: #F8F1FB;
+  --sq2: #E0CAEA;
+  --sq3: #C79BD8;
+  --sq4: #A867C2;
+  --sq5: #8A3AAF;
+  --sq6: #662B81;
+
+  /* Graphiques — etats. Reserves : jamais une couleur de serie. */
+  --ok: #047857;
+  --warn: #B45309;
+
+  --ch-grid: #EDEFF2;
+
   /* Lignes de tableau */
   --row-even: #F9FAFB;
   --row-hover: #F1F3F5;
@@ -626,8 +651,21 @@
   align-items: stretch;
 }
 
+.wgrid.cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
 .wgrid > .full {
   grid-column: 1 / -1;
+}
+
+/* Une colonne de widgets, quand plusieurs se suivent dans la meme case
+   d'une grille. */
+.wcol {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
 }
 
 /* ==========================================================
@@ -1871,6 +1909,7 @@ a.nmain:hover {
   background: var(--ps);
   color: var(--t2);
   border: 1px solid var(--bd);
+  white-space: nowrap;
 }
 
 .pbadge.filled {
@@ -2414,6 +2453,299 @@ textarea.form-input {
 
 .dp-pop .drp-day.start {
   background: radial-gradient(circle at center, var(--a) 0 15px, transparent 15px);
+}
+
+/* ==========================================================
+   GRAPHIQUES
+   Le trace vit dans un <svg> : la geometrie tient dans des attributs,
+   donc une page n'a pas a ecrire un seul style="".
+   ========================================================== */
+
+/* Corps de widget qui porte de vraies donnees, par opposition a .w-body
+   qui est la boite d'attente. */
+.w-plot {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px 18px 18px;
+}
+
+.chart {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* Un anneau n'a pas a grandir avec son widget : passe une certaine taille
+   il ne dit rien de plus, il occupe seulement la place de sa legende. */
+.chart.ring {
+  width: 190px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.chart .grid {
+  stroke: var(--ch-grid);
+  stroke-width: 1;
+}
+
+.chart .tick {
+  fill: var(--t3);
+  font-size: 11px;
+  font-family: inherit;
+}
+
+.chart .tick.y {
+  text-anchor: end;
+}
+
+.chart .tick.mid {
+  text-anchor: middle;
+}
+
+/* La marque est fine et son bout est arrondi ; le pied reste carre, pose
+   sur la ligne de base. */
+.chart .bar {
+  fill: var(--ch1);
+}
+
+.chart .line {
+  fill: none;
+  stroke: var(--ch1);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.chart .area {
+  fill: var(--sq1);
+  stroke: none;
+}
+
+.chart .dot {
+  fill: var(--ch1);
+  stroke: #fff;
+  stroke-width: 2;
+}
+
+/* Anneau : chaque part est un arc, l'ecart de 2px empeche deux parts
+   voisines de se souder. */
+.chart .arc {
+  fill: none;
+  stroke-width: 14;
+}
+
+.chart .arc.c1 { stroke: var(--ch1); }
+
+.chart .arc.c2 { stroke: var(--ch2); }
+
+.chart .arc.c3 { stroke: var(--ch3); }
+
+.chart .arc.c4 { stroke: var(--ch4); }
+
+.chart .arc.c5 { stroke: var(--ch5); }
+
+.chart .arc.rest { stroke: var(--bd); }
+
+/* --- Legende --- */
+/* Des deux series, la legende est la ; d'une seule, le titre suffit. */
+.legend {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.legend.row {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--t2);
+}
+
+.legend-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--bd);
+}
+
+.legend-dot.c1 { background: var(--ch1); }
+
+.legend-dot.c2 { background: var(--ch2); }
+
+.legend-dot.c3 { background: var(--ch3); }
+
+.legend-dot.c4 { background: var(--ch4); }
+
+.legend-dot.c5 { background: var(--ch5); }
+
+/* La valeur porte l'encre du texte, jamais la couleur de sa serie. */
+.legend-val {
+  margin-left: auto;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--t1);
+}
+
+/* --- Jauge --- */
+.meter {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.meter-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--ch1);
+}
+
+.meter-fill.ok { background: var(--ok); }
+
+/* --- Le chiffre seul --- */
+/* Quand une donnee tient en un nombre, elle n'a pas besoin d'un graphique. */
+.hero-num {
+  font-family: Geist, 'Inter', sans-serif;
+  font-size: 42px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--t1);
+}
+
+.hero-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.hero-row .meter {
+  flex: 1;
+}
+
+/* --- Carte de chaleur --- */
+.hmap {
+  display: grid;
+  gap: 4px;
+}
+
+/* Une colonne d'heures, puis un jour par colonne. */
+.hmap.j5 {
+  grid-template-columns: 34px repeat(5, 1fr);
+}
+
+.hmap.j7 {
+  grid-template-columns: 34px repeat(7, 1fr);
+}
+
+.hmap-c {
+  height: 22px;
+  border-radius: 4px;
+  background: var(--sq1);
+}
+
+.hmap-c.s1 { background: var(--sq1); }
+
+.hmap-c.s2 { background: var(--sq2); }
+
+.hmap-c.s3 { background: var(--sq3); }
+
+.hmap-c.s4 { background: var(--sq4); }
+
+.hmap-c.s5 { background: var(--sq5); }
+
+.hmap-c.s6 { background: var(--sq6); }
+
+.hmap-lbl {
+  font-size: 11px;
+  color: var(--t3);
+  text-align: center;
+  line-height: 22px;
+}
+
+.hmap-lbl.y {
+  text-align: right;
+  padding-right: 6px;
+}
+
+/* Echelle : une rampe se lit avec ses bornes, sinon elle ne dit rien. */
+.hmap-scale {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  color: var(--t3);
+}
+
+.hmap-scale .hmap-c {
+  width: 18px;
+  height: 10px;
+}
+
+/* --- Tableau compact dans un widget --- */
+.mini {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.mini th {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--t3);
+  text-align: left;
+  padding: 0 0 8px;
+  border-bottom: 1px solid var(--bd);
+}
+
+.mini th.num,
+.mini td.num {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.mini td {
+  font-size: 12.5px;
+  color: var(--t1);
+  padding: 9px 0;
+  border-bottom: 1px solid var(--ps);
+}
+
+.mini tr:last-child td {
+  border-bottom: 0;
+}
+
+.mini td.num {
+  color: var(--t2);
+  font-weight: 500;
+}
+
+/* Vignette d'un module. Le fond tient la place avant que l'image arrive. */
+.thumb {
+  width: 48px;
+  height: 34px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--bg);
+  display: block;
+}
+
+.thumb.wide {
+  width: 100%;
+  height: 170px;
+  border-radius: var(--rl);
+  border: 1px solid var(--bd);
 }
 
 /* --- Case a cocher en ligne --- */

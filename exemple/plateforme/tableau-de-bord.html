@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tableau de bord — OnlineManager</title>
+  <!-- Le système : on l'importe, on ne le recopie pas, on ne le surcharge pas. -->
+  <link rel="stylesheet" href="../../dist/components.css">
+</head>
+
+<body class="app">
+  <header class="topbar">
+  <div class="tb-slot">
+  <span class="tb-appn">Online<b>Manager</b></span>
+  <button class="tb-burger" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+  </div>
+  <div class="tb-body">
+  <span class="tb-store">Onlineformapro</span>
+  <div class="tb-cw"><span class="tb-cl">Comptes :</span>
+  <div class="w-dd-wrap">
+  <button class="w-dd-btn tb" onclick="toggleDD(this)"><span class="dd-ph">Sélectionnez un compte</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  <div class="w-dd-menu">
+  <div class="w-dd-item">INFREP</div>
+  <div class="w-dd-item">OCB Formation</div>
+  <div class="w-dd-item">Cap Petite Enfance</div>
+  </div>
+  </div>
+  </div>
+
+  <div class="tb-ics">
+  <button aria-label="Accueil" class="tbi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+  stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+  <polyline points="9 22 9 12 15 12 15 22" />
+  </svg></button>
+  <button aria-label="Rechercher" class="tbi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+  stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="11" cy="11" r="8" />
+  <path d="m21 21-4.35-4.35" />
+  </svg></button>
+  <button aria-label="Changer de langue" class="tbi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+  stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="12" cy="12" r="10" />
+  <line x1="2" y1="12" x2="22" y2="12" />
+  <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
+  </svg></button>
+  <div class="tbsep"></div>
+  <div class="apps-wrap">
+  <button aria-label="Applications" class="tbi">
+  <svg viewBox="0 0 24 24" fill="currentColor">
+  <circle cx="5" cy="5" r="1.8" />
+  <circle cx="12" cy="5" r="1.8" />
+  <circle cx="19" cy="5" r="1.8" />
+  <circle cx="5" cy="12" r="1.8" />
+  <circle cx="12" cy="12" r="1.8" />
+  <circle cx="19" cy="12" r="1.8" />
+  <circle cx="5" cy="19" r="1.8" />
+  <circle cx="12" cy="19" r="1.8" />
+  <circle cx="19" cy="19" r="1.8" />
+  </svg>
+  </button>
+  <div class="apps-drop">
+  <div class="apps-hd">Applications</div>
+  <div class="app-row">
+  <div class="app-ic" style="background:#7C3AED"><svg viewBox="0 0 24 24">
+  <path
+  d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
+  </svg></div>
+  <div>
+  <div class="app-nm">OnlineAuteur</div>
+  <div class="app-sub">Création de contenus</div>
+  </div>
+  </div>
+  <div class="app-row">
+  <div class="app-ic" style="background:#059669"><svg viewBox="0 0 24 24">
+  <path
+  d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5zm15 8a2 2 0 012 2v4a2 2 0 01-2 2h-2l-3 3v-3H9a2 2 0 01-2-2v-1h1a3 3 0 003-3V9h8a2 2 0 012 2z" />
+  </svg></div>
+  <div>
+  <div class="app-nm">OnlineAgora</div>
+  <div class="app-sub">Espace collaboratif</div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <button aria-label="Se déconnecter" class="tbi red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+  stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
+  <polyline points="16 17 21 12 16 7" />
+  <line x1="21" y1="12" x2="9" y2="12" />
+  </svg></button>
+  <div class="tb-av">AL</div>
+  </div>
+  </div>
+  </header>
+  <div class="layout">
+    <aside class="sidebar">
+    <div class="sb-toggle">
+    <div class="sbt-btn on">Gestion</div>
+    <div class="sbt-btn">Reporting</div>
+    </div>
+    <nav class="nav">
+    <a class="ni act" href="tableau-de-bord.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>Tableau de bord</a>
+    <a class="ni" href="formations.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Formations</a>
+    <a class="ni" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="8" cy="12" r="2.2"/><line x1="14" y1="10" x2="18" y2="10"/><line x1="14" y1="14" x2="18" y2="14"/></svg>Carte de visite</a>
+    <a class="ni" href="coordonnees.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Coordonnées</a>
+    <a class="ni" href="usagers.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>Usagers</a>
+    <a class="ni" href="entites-lister.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg>Entités</a>
+    <a class="ni" href="entites-creer.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>Créer une entité</a>
+    <a class="ni" href="entites-importer.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>Importer un CSV</a>
+    </nav>
+    </aside>
+    <main class="main">
+      <div class="content">
+        <div class="ph">
+          <div class="ph-l">
+            <h1 class="ph-title">Tableau de bord</h1>
+            <span class="ph-ct">Du 1<sup>er</sup> mars au 30 septembre 2026</span>
+          </div>
+          <div class="ph-actions">
+            <button class="btn">Exporter</button>
+            <button class="btn primary">Choisir la période</button>
+          </div>
+        </div>
+
+        <div class="wgrid cols-3">
+          <div class="wcol">
+            <div class="w">
+              <div class="w-head">
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+                <span class="w-title">Nombre de modules suivis</span>
+              </div>
+              <div class="w-plot">
+                <svg class="chart" viewBox="0 0 330 190" role="img" aria-label="Modules suivis par mois, de février à septembre">
+                  <line class="grid" x1="34" y1="120.0" x2="320" y2="120.0"/>
+                  <text class="tick y" x="26" y="124.0">10</text>
+                  <line class="grid" x1="34" y1="92.0" x2="320" y2="92.0"/>
+                  <text class="tick y" x="26" y="96.0">20</text>
+                  <line class="grid" x1="34" y1="64.0" x2="320" y2="64.0"/>
+                  <text class="tick y" x="26" y="68.0">30</text>
+                  <line class="grid" x1="34" y1="36.0" x2="320" y2="36.0"/>
+                  <text class="tick y" x="26" y="40.0">40</text>
+                  <line class="grid" x1="34" y1="8.0" x2="320" y2="8.0"/>
+                  <text class="tick y" x="26" y="12.0">50</text>
+                  <rect class="bar" x="43.9" y="30.4" width="16" height="117.6" rx="4"><title>fév : 42 modules</title></rect>
+                  <rect class="bar" x="79.6" y="80.8" width="16" height="67.2" rx="4"><title>mar : 24 modules</title></rect>
+                  <rect class="bar" x="115.4" y="69.6" width="16" height="78.4" rx="4"><title>avr : 28 modules</title></rect>
+                  <rect class="bar" x="151.1" y="16.4" width="16" height="131.6" rx="4"><title>mai : 47 modules</title></rect>
+                  <rect class="bar" x="186.9" y="52.8" width="16" height="95.2" rx="4"><title>juin : 34 modules</title></rect>
+                  <rect class="bar" x="222.6" y="44.4" width="16" height="103.6" rx="4"><title>juil : 37 modules</title></rect>
+                  <rect class="bar" x="258.4" y="27.6" width="16" height="120.4" rx="4"><title>août : 43 modules</title></rect>
+                  <rect class="bar" x="294.1" y="61.2" width="16" height="86.8" rx="4"><title>sept : 31 modules</title></rect>
+                  <text class="tick mid" x="51.9" y="166">fév</text>
+                  <text class="tick mid" x="87.6" y="166">mar</text>
+                  <text class="tick mid" x="123.4" y="166">avr</text>
+                  <text class="tick mid" x="159.1" y="166">mai</text>
+                  <text class="tick mid" x="194.9" y="166">juin</text>
+                  <text class="tick mid" x="230.6" y="166">juil</text>
+                  <text class="tick mid" x="266.4" y="166">août</text>
+                  <text class="tick mid" x="302.1" y="166">sept</text>
+                </svg>
+              </div>
+            </div>
+            <div class="w">
+              <div class="w-head">
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg></div>
+                <span class="w-title">Top 5 des usagers les plus actifs</span>
+              </div>
+              <div class="w-plot">
+                <table class="mini">
+                  <thead>
+                    <tr><th>Usagers</th><th class="num">Temps de formation</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="cn">
+                          <div class="ava" style="background:#F8F1FB;color:#8A3AAF;">BE</div>Bataille Eve
+                        </div>
+                      </td>
+                      <td class="num">2 h 13</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="cn">
+                          <div class="ava" style="background:#F8F1FB;color:#8A3AAF;">BK</div>Behava Killian
+                        </div>
+                      </td>
+                      <td class="num">1 h 54</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="cn">
+                          <div class="ava" style="background:#F8F1FB;color:#8A3AAF;">BM</div>Benyamine Michael
+                        </div>
+                      </td>
+                      <td class="num">1 h 51</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="cn">
+                          <div class="ava" style="background:#F8F1FB;color:#8A3AAF;">BB</div>Berlioux Bastien
+                        </div>
+                      </td>
+                      <td class="num">1 h 33</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="cn">
+                          <div class="ava" style="background:#F8F1FB;color:#8A3AAF;">SP</div>Sylvain Pierre
+                        </div>
+                      </td>
+                      <td class="num">1 h 03</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="w">
+              <div class="w-head">
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+                <span class="w-title">Taux de complétion des formations</span>
+              </div>
+              <div class="w-plot">
+                <div class="hero-row">
+                  <div class="hero-num">94 %</div>
+                  <div class="meter"><div class="meter-fill ok" style="width:94%"></div></div>
+                </div>
+                <div class="nsub">1 128 modules terminés sur 1 200 affectés</div>
+                      <div class="w-dd-wrap">
+                        <button class="w-dd-btn" onclick="toggleDD(this)"><span>Modules de formation : tous</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                        <div class="w-dd-menu">
+                          <div class="w-dd-item active">Tous</div>
+                          <div class="w-dd-item">E-learning</div>
+                          <div class="w-dd-item">Présentiel</div>
+                          <div class="w-dd-item">Mixte</div>
+                        </div>
+                      </div>
+              </div>
+            </div>
+          </div>
+          <div class="wcol">
+            <div class="w">
+              <div class="w-head">
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+                <span class="w-title">Périodes d'activité par heure</span>
+              </div>
+              <div class="w-plot">
+                <div class="hmap j5">
+                  <div class="hmap-lbl y">15h</div>
+                  <div class="hmap-c s2" title="L, 15h : 10 à 20 connexions"></div>
+                  <div class="hmap-c s3" title="M, 15h : 20 à 35 connexions"></div>
+                  <div class="hmap-c s1" title="M, 15h : moins de 10 connexions"></div>
+                  <div class="hmap-c s2" title="J, 15h : 10 à 20 connexions"></div>
+                  <div class="hmap-c s3" title="V, 15h : 20 à 35 connexions"></div>
+                  <div class="hmap-lbl y">14h</div>
+                  <div class="hmap-c s3" title="L, 14h : 20 à 35 connexions"></div>
+                  <div class="hmap-c s2" title="M, 14h : 10 à 20 connexions"></div>
+                  <div class="hmap-c s4" title="M, 14h : 35 à 50 connexions"></div>
+                  <div class="hmap-c s2" title="J, 14h : 10 à 20 connexions"></div>
+                  <div class="hmap-c s5" title="V, 14h : 50 à 70 connexions"></div>
+                  <div class="hmap-lbl y">13h</div>
+                  <div class="hmap-c s1" title="L, 13h : moins de 10 connexions"></div>
+                  <div class="hmap-c s4" title="M, 13h : 35 à 50 connexions"></div>
+                  <div class="hmap-c s2" title="M, 13h : 10 à 20 connexions"></div>
+                  <div class="hmap-c s1" title="J, 13h : moins de 10 connexions"></div>
+                  <div class="hmap-c s4" title="V, 13h : 35 à 50 connexions"></div>
+                  <div class="hmap-lbl y">12h</div>
+                  <div class="hmap-c s2" title="L, 12h : 10 à 20 connexions"></div>
+                  <div class="hmap-c s5" title="M, 12h : 50 à 70 connexions"></div>
+                  <div class="hmap-c s3" title="M, 12h : 20 à 35 connexions"></div>
+                  <div class="hmap-c s4" title="J, 12h : 35 à 50 connexions"></div>
+                  <div class="hmap-c s6" title="V, 12h : plus de 70 connexions"></div>
+                  <div class="hmap-lbl y">11h</div>
+                  <div class="hmap-c s4" title="L, 11h : 35 à 50 connexions"></div>
+                  <div class="hmap-c s3" title="M, 11h : 20 à 35 connexions"></div>
+                  <div class="hmap-c s5" title="M, 11h : 50 à 70 connexions"></div>
+                  <div class="hmap-c s2" title="J, 11h : 10 à 20 connexions"></div>
+                  <div class="hmap-c s5" title="V, 11h : 50 à 70 connexions"></div>
+                  <div class="hmap-lbl y">10h</div>
+                  <div class="hmap-c s2" title="L, 10h : 10 à 20 connexions"></div>
+                  <div class="hmap-c s4" title="M, 10h : 35 à 50 connexions"></div>
+                  <div class="hmap-c s2" title="M, 10h : 10 à 20 connexions"></div>
+                  <div class="hmap-c s5" title="J, 10h : 50 à 70 connexions"></div>
+                  <div class="hmap-c s3" title="V, 10h : 20 à 35 connexions"></div>
+                  <div class="hmap-lbl y">09h</div>
+                  <div class="hmap-c s1" title="L, 09h : moins de 10 connexions"></div>
+                  <div class="hmap-c s3" title="M, 09h : 20 à 35 connexions"></div>
+                  <div class="hmap-c s1" title="M, 09h : moins de 10 connexions"></div>
+                  <div class="hmap-c s2" title="J, 09h : 10 à 20 connexions"></div>
+                  <div class="hmap-c s4" title="V, 09h : 35 à 50 connexions"></div>
+                  <div class="hmap-lbl y"></div>
+                  <div class="hmap-lbl">L</div>
+                  <div class="hmap-lbl">M</div>
+                  <div class="hmap-lbl">M</div>
+                  <div class="hmap-lbl">J</div>
+                  <div class="hmap-lbl">V</div>
+                </div>
+                <div class="hmap-scale"><span>Moins actif</span><span class="hmap-c s1"></span><span class="hmap-c s2"></span><span class="hmap-c s3"></span><span class="hmap-c s4"></span><span class="hmap-c s5"></span><span class="hmap-c s6"></span><span>Plus actif</span></div>
+              </div>
+            </div>
+            <div class="w">
+              <div class="w-head">
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+                <span class="w-title">Top 5 des modules les plus suivis</span>
+              </div>
+              <div class="w-plot">
+                <table class="mini">
+                  <thead>
+                    <tr><th>Intitulés</th><th class="num">Connexions</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="cn">
+                          <img class="thumb" loading="lazy" alt="Les règles de présentation" src="img/module-1.svg">
+                          <div>
+                            <div class="nmain">Les règles de présentation</div>
+                            <div class="nsub">Powerpoint 2019</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="num">1 265</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="cn">
+                          <img class="thumb" loading="lazy" alt="Recrut IA" src="img/module-2.svg">
+                          <div>
+                            <div class="nmain">Recrut IA</div>
+                            <div class="nsub">Outils IA</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="num">1 120</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="cn">
+                          <img class="thumb" loading="lazy" alt="Installation et recherche de thème" src="img/module-3.svg">
+                          <div>
+                            <div class="nmain">Installation et recherche de thème</div>
+                            <div class="nsub">Wordpress — Création d’un site</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="num">625</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="cn">
+                          <img class="thumb" loading="lazy" alt="Les bases du HTML" src="img/module-4.svg">
+                          <div>
+                            <div class="nmain">Les bases du HTML</div>
+                            <div class="nsub">HTML/CSS3</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="num">312</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="cn">
+                          <img class="thumb" loading="lazy" alt="Insertion de médias en HTML" src="img/module-5.svg">
+                          <div>
+                            <div class="nmain">Insertion de médias en HTML</div>
+                            <div class="nsub">HTML/CSS3</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="num">112</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="w">
+              <div class="w-head">
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777z"/></svg></div>
+                <span class="w-title">Licences consommées</span>
+              </div>
+              <div class="w-plot">
+                <div class="hero-row">
+                  <div class="hero-num">230</div>
+                  <div>
+                    <div class="nmain">licences consommées</div>
+                    <div class="nsub">sur un total de 2 500</div>
+                  </div>
+                </div>
+                <div class="meter"><div class="meter-fill" style="width:9.2%"></div></div>
+                <table class="mini">
+                  <thead>
+                    <tr><th>Structures</th><th class="num">Consommation</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="cn"><span class="cn-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V6a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v15"/><path d="M13 10h5a1 1 0 0 1 1 1v10"/><line x1="8" y1="9" x2="10" y2="9"/><line x1="8" y1="13" x2="10" y2="13"/></svg></span>ANRH</div>
+                      </td>
+                      <td class="num">
+                        <div class="meter"><div class="meter-fill ok" style="width:78%"></div></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="cn"><span class="cn-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V6a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v15"/><path d="M13 10h5a1 1 0 0 1 1 1v10"/><line x1="8" y1="9" x2="10" y2="9"/><line x1="8" y1="13" x2="10" y2="13"/></svg></span>Direction régionale Aquitaine</div>
+                      </td>
+                      <td class="num">
+                        <div class="meter"><div class="meter-fill ok" style="width:54%"></div></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="cn"><span class="cn-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V6a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v15"/><path d="M13 10h5a1 1 0 0 1 1 1v10"/><line x1="8" y1="9" x2="10" y2="9"/><line x1="8" y1="13" x2="10" y2="13"/></svg></span>Direction régionale Centre</div>
+                      </td>
+                      <td class="num">
+                        <div class="meter"><div class="meter-fill ok" style="width:31%"></div></div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                      <div class="w-dd-wrap">
+                        <button class="w-dd-btn" onclick="toggleDD(this)"><span>Ajouter une structure au comparatif</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                        <div class="w-dd-menu">
+                          <div class="w-dd-item active">Choisir une structure</div>
+                          <div class="w-dd-item">ANRH</div>
+                          <div class="w-dd-item">INFREP</div>
+                        </div>
+                      </div>
+              </div>
+            </div>
+          </div>
+          <div class="wcol">
+            <div class="w">
+              <div class="w-head">
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+                <span class="w-title">Évolution des résultats aux évaluations</span>
+              </div>
+              <div class="w-plot">
+                <svg class="chart" viewBox="0 0 330 190" role="img" aria-label="Résultats aux évaluations par mois, de février à septembre">
+                  <line class="grid" x1="34" y1="134.0" x2="320" y2="134.0"/>
+                  <text class="tick y" x="26" y="138.0">10</text>
+                  <line class="grid" x1="34" y1="120.0" x2="320" y2="120.0"/>
+                  <text class="tick y" x="26" y="124.0">20</text>
+                  <line class="grid" x1="34" y1="78.0" x2="320" y2="78.0"/>
+                  <text class="tick y" x="26" y="82.0">50</text>
+                  <line class="grid" x1="34" y1="50.0" x2="320" y2="50.0"/>
+                  <text class="tick y" x="26" y="54.0">70</text>
+                  <line class="grid" x1="34" y1="8.0" x2="320" y2="8.0"/>
+                  <text class="tick y" x="26" y="12.0">100</text>
+                  <path class="area" d="M 34.0 71.0 C 54.4 71.0 54.4 61.2 74.9 61.2 C 95.3 61.2 95.3 24.8 115.7 24.8 C 136.1 24.8 136.1 50.0 156.6 50.0 C 177.0 50.0 177.0 80.8 197.4 80.8 C 217.9 80.8 217.9 92.0 238.3 92.0 C 258.7 92.0 258.7 75.2 279.1 75.2 C 299.6 75.2 299.6 85.0 320.0 85.0 L 320.0 148.0 L 34.0 148.0 Z"/>
+                  <path class="line" d="M 34.0 71.0 C 54.4 71.0 54.4 61.2 74.9 61.2 C 95.3 61.2 95.3 24.8 115.7 24.8 C 136.1 24.8 136.1 50.0 156.6 50.0 C 177.0 50.0 177.0 80.8 197.4 80.8 C 217.9 80.8 217.9 92.0 238.3 92.0 C 258.7 92.0 258.7 75.2 279.1 75.2 C 299.6 75.2 299.6 85.0 320.0 85.0"/>
+                  <circle class="dot" cx="34.0" cy="71.0" r="4"><title>fév : 55 % de réussite</title></circle>
+                  <text class="tick mid" x="34.0" y="166">fév</text>
+                  <circle class="dot" cx="74.9" cy="61.2" r="4"><title>mar : 62 % de réussite</title></circle>
+                  <text class="tick mid" x="74.9" y="166">mar</text>
+                  <circle class="dot" cx="115.7" cy="24.8" r="4"><title>avr : 88 % de réussite</title></circle>
+                  <text class="tick mid" x="115.7" y="166">avr</text>
+                  <circle class="dot" cx="156.6" cy="50.0" r="4"><title>mai : 70 % de réussite</title></circle>
+                  <text class="tick mid" x="156.6" y="166">mai</text>
+                  <circle class="dot" cx="197.4" cy="80.8" r="4"><title>juin : 48 % de réussite</title></circle>
+                  <text class="tick mid" x="197.4" y="166">juin</text>
+                  <circle class="dot" cx="238.3" cy="92.0" r="4"><title>juil : 40 % de réussite</title></circle>
+                  <text class="tick mid" x="238.3" y="166">juil</text>
+                  <circle class="dot" cx="279.1" cy="75.2" r="4"><title>août : 52 % de réussite</title></circle>
+                  <text class="tick mid" x="279.1" y="166">août</text>
+                  <circle class="dot" cx="320.0" cy="85.0" r="4"><title>sept : 45 % de réussite</title></circle>
+                  <text class="tick mid" x="320.0" y="166">sept</text>
+                </svg>
+                      <div class="w-dd-wrap">
+                        <button class="w-dd-btn" onclick="toggleDD(this)"><span>Évaluations : toutes</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                        <div class="w-dd-menu">
+                          <div class="w-dd-item active">Toutes</div>
+                          <div class="w-dd-item">Positionnement</div>
+                          <div class="w-dd-item">Fin de parcours</div>
+                        </div>
+                      </div>
+              </div>
+            </div>
+            <div class="w">
+              <div class="w-head">
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V6a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v15"/><path d="M13 10h5a1 1 0 0 1 1 1v10"/><line x1="8" y1="9" x2="10" y2="9"/><line x1="8" y1="13" x2="10" y2="13"/></svg></div>
+                <span class="w-title">Structures les plus actives</span>
+              </div>
+              <div class="w-plot">
+                <table class="mini">
+                  <thead>
+                    <tr><th>Structures</th><th class="num">État</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="cn"><span class="cn-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V6a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v15"/><path d="M13 10h5a1 1 0 0 1 1 1v10"/><line x1="8" y1="9" x2="10" y2="9"/><line x1="8" y1="13" x2="10" y2="13"/></svg></span>ANRH</div>
+                      </td>
+                      <td class="num"><span class="stb ston"><span class="stdon"></span>Très active</span></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="cn"><span class="cn-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V6a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v15"/><path d="M13 10h5a1 1 0 0 1 1 1v10"/><line x1="8" y1="9" x2="10" y2="9"/><line x1="8" y1="13" x2="10" y2="13"/></svg></span>Direction régionale Aquitaine</div>
+                      </td>
+                      <td class="num"><span class="stb ston"><span class="stdon"></span>Très active</span></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="cn"><span class="cn-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V6a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v15"/><path d="M13 10h5a1 1 0 0 1 1 1v10"/><line x1="8" y1="9" x2="10" y2="9"/><line x1="8" y1="13" x2="10" y2="13"/></svg></span>Direction régionale Centre</div>
+                      </td>
+                      <td class="num"><span class="stb ston"><span class="stdon"></span>Active</span></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="cn"><span class="cn-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V6a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v15"/><path d="M13 10h5a1 1 0 0 1 1 1v10"/><line x1="8" y1="9" x2="10" y2="9"/><line x1="8" y1="13" x2="10" y2="13"/></svg></span>Direction régionale Grand Ouest</div>
+                      </td>
+                      <td class="num"><span class="stb stoff"><span class="stdoff"></span>Inactive</span></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="cn"><span class="cn-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V6a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v15"/><path d="M13 10h5a1 1 0 0 1 1 1v10"/><line x1="8" y1="9" x2="10" y2="9"/><line x1="8" y1="13" x2="10" y2="13"/></svg></span>Direction régionale Grand Sud</div>
+                      </td>
+                      <td class="num"><span class="stb stoff"><span class="stdoff"></span>Inactive</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+                      <div class="w-dd-wrap">
+                        <button class="w-dd-btn" onclick="toggleDD(this)"><span>Ajouter une structure à la liste</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                        <div class="w-dd-menu">
+                          <div class="w-dd-item active">Choisir une structure</div>
+                          <div class="w-dd-item">ANRH</div>
+                          <div class="w-dd-item">INFREP</div>
+                        </div>
+                      </div>
+              </div>
+            </div>
+            <div class="w">
+              <div class="w-head">
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg></div>
+                <span class="w-title">Thèmes de formation les plus suivis</span>
+              </div>
+              <div class="w-plot">
+                <svg class="chart ring" viewBox="0 0 140 140" role="img" aria-label="Répartition des thèmes de formation suivis">
+                  <circle class="arc c4" cx="70" cy="70" r="52" stroke-dasharray="144.03 182.70" transform="rotate(-90.0 70 70)"><title>MS Office 2024 — Excel : 45 %</title></circle>
+                  <circle class="arc c1" cx="70" cy="70" r="52" stroke-dasharray="46.01 280.72" transform="rotate(72.0 70 70)"><title>Programmation HTML/CSS : 15 %</title></circle>
+                  <circle class="arc c2" cx="70" cy="70" r="52" stroke-dasharray="46.01 280.72" transform="rotate(126.0 70 70)"><title>Microsoft Office Outlook : 15 %</title></circle>
+                  <circle class="arc c3" cx="70" cy="70" r="52" stroke-dasharray="46.01 280.72" transform="rotate(180.0 70 70)"><title>Microsoft Office Powerpoint : 15 %</title></circle>
+                  <circle class="arc c5" cx="70" cy="70" r="52" stroke-dasharray="29.67 297.05" transform="rotate(234.0 70 70)"><title>Microsoft Office Word : 10 %</title></circle>
+                </svg>
+                <div class="legend">
+                  <div class="legend-item"><span class="legend-dot c4"></span>MS Office 2024 — Excel<span class="legend-val">45 %</span></div>
+                  <div class="legend-item"><span class="legend-dot c1"></span>Programmation HTML/CSS<span class="legend-val">15 %</span></div>
+                  <div class="legend-item"><span class="legend-dot c2"></span>Microsoft Office Outlook<span class="legend-val">15 %</span></div>
+                  <div class="legend-item"><span class="legend-dot c3"></span>Microsoft Office Powerpoint<span class="legend-val">15 %</span></div>
+                  <div class="legend-item"><span class="legend-dot c5"></span>Microsoft Office Word<span class="legend-val">10 %</span></div>
+                </div>
+                      <div class="w-dd-wrap">
+                        <button class="w-dd-btn" onclick="toggleDD(this)"><span>Toutes les thématiques</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                        <div class="w-dd-menu">
+                          <div class="w-dd-item active">Toutes</div>
+                          <div class="w-dd-item">Bureautique</div>
+                          <div class="w-dd-item">Développement web</div>
+                        </div>
+                      </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="../../dist/components.js" defer></script>
+</body>
+
+</html>
