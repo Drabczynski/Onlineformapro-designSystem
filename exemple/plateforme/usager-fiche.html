@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nora RIVIÈRE — OnlineManager</title>
+  <!-- Le système : on l'importe, on ne le recopie pas, on ne le surcharge pas. -->
+  <link rel="stylesheet" href="../../dist/components.css">
+</head>
+
+<body class="app">
+  <header class="topbar">
+  <div class="tb-slot">
+  <span class="tb-appn">Online<b>Manager</b></span>
+  <button class="tb-burger" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+  </div>
+  <div class="tb-body">
+  <span class="tb-store">Onlineformapro</span>
+  <div class="tb-cw"><span class="tb-cl">Comptes :</span>
+  <div class="w-dd-wrap">
+  <button class="w-dd-btn tb" onclick="toggleDD(this)"><span class="dd-ph">Sélectionnez un compte</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  <div class="w-dd-menu">
+  <div class="w-dd-item">INFREP</div>
+  <div class="w-dd-item">OCB Formation</div>
+  <div class="w-dd-item">Cap Petite Enfance</div>
+  </div>
+  </div>
+  </div>
+
+  <div class="tb-ics">
+  <button aria-label="Accueil" class="tbi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+  stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+  <polyline points="9 22 9 12 15 12 15 22" />
+  </svg></button>
+  <button aria-label="Rechercher" class="tbi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+  stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="11" cy="11" r="8" />
+  <path d="m21 21-4.35-4.35" />
+  </svg></button>
+  <button aria-label="Changer de langue" class="tbi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+  stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="12" cy="12" r="10" />
+  <line x1="2" y1="12" x2="22" y2="12" />
+  <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
+  </svg></button>
+  <div class="tbsep"></div>
+  <div class="apps-wrap">
+  <button aria-label="Applications" class="tbi">
+  <svg viewBox="0 0 24 24" fill="currentColor">
+  <circle cx="5" cy="5" r="1.8" />
+  <circle cx="12" cy="5" r="1.8" />
+  <circle cx="19" cy="5" r="1.8" />
+  <circle cx="5" cy="12" r="1.8" />
+  <circle cx="12" cy="12" r="1.8" />
+  <circle cx="19" cy="12" r="1.8" />
+  <circle cx="5" cy="19" r="1.8" />
+  <circle cx="12" cy="19" r="1.8" />
+  <circle cx="19" cy="19" r="1.8" />
+  </svg>
+  </button>
+  <div class="apps-drop">
+  <div class="apps-hd">Applications</div>
+  <div class="app-row">
+  <div class="app-ic" style="background:#7C3AED"><svg viewBox="0 0 24 24">
+  <path
+  d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
+  </svg></div>
+  <div>
+  <div class="app-nm">OnlineAuteur</div>
+  <div class="app-sub">Création de contenus</div>
+  </div>
+  </div>
+  <div class="app-row">
+  <div class="app-ic" style="background:#059669"><svg viewBox="0 0 24 24">
+  <path
+  d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5zm15 8a2 2 0 012 2v4a2 2 0 01-2 2h-2l-3 3v-3H9a2 2 0 01-2-2v-1h1a3 3 0 003-3V9h8a2 2 0 012 2z" />
+  </svg></div>
+  <div>
+  <div class="app-nm">OnlineAgora</div>
+  <div class="app-sub">Espace collaboratif</div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <button aria-label="Se déconnecter" class="tbi red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+  stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
+  <polyline points="16 17 21 12 16 7" />
+  <line x1="21" y1="12" x2="9" y2="12" />
+  </svg></button>
+  <div class="tb-av">AL</div>
+  </div>
+  </div>
+  </header>
+  <div class="layout">
+    <aside class="sidebar">
+    <div class="sb-toggle">
+    <div class="sbt-btn on">Gestion</div>
+    <div class="sbt-btn">Reporting</div>
+    </div>
+    <nav class="nav">
+    <a class="ni" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="8" cy="12" r="2.2"/><line x1="14" y1="10" x2="18" y2="10"/><line x1="14" y1="14" x2="18" y2="14"/></svg>Carte de visite</a>
+    <a class="ni" href="coordonnees.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Coordonnées</a>
+    <a class="ni act" href="usagers.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>Usagers</a>
+    <a class="ni" href="entites-lister.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg>Entités</a>
+    <a class="ni" href="entites-creer.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>Créer une entité</a>
+    <a class="ni" href="entites-importer.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>Importer un CSV</a>
+    </nav>
+    </aside>
+    <main class="main">
+      <div class="content">
+        <div class="ph">
+          <div class="ph-l">
+            <h1 class="ph-title">Nora RIVIÈRE</h1>
+            <span class="ph-ct">Fiche apprenant · <strong>APP-2026-0148</strong></span>
+          </div>
+          <div class="ph-actions">
+            <a class="btn" href="usagers.html">Retour à la liste</a>
+            <button class="btn secondary">Envoyer un message</button>
+            <button class="btn primary">Modifier la fiche</button>
+          </div>
+        </div>
+
+        <div class="form-body">
+          <div class="full">
+            <div class="pcard">
+              <div class="cn">
+                <div class="ava" style="background:#F8F1FB;color:#8A3AAF;">NR</div>
+                <div>
+                  <div class="nmain">Nora RIVIÈRE</div>
+                  <div class="nsub">Gestionnaire · n.riviere@onlineformapro.com</div>
+                </div>
+                <span class="stb ston"><span class="stdon"></span>Actif</span>
+                <span class="pbadge gray">Groupe Maintenance</span>
+                <span class="pbadge outline">Marque blanche</span>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="fs-block">
+              <div class="fs-header">
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+                <div class="fs-title">État civil</div>
+              </div>
+              <div class="fs-card">
+                <div class="form-grid">
+                  <div class="form-field">
+                    <label>Civilité</label>
+                    <input type="text" class="form-input ro" value="Mme" readonly>
+                  </div>
+                  <div class="form-field">
+                    <label>N° unique</label>
+                    <input type="text" class="form-input ro" value="APP-2026-0148" readonly>
+                  </div>
+                </div>
+                <div class="form-grid">
+                  <div class="form-field">
+                    <label>Nom</label>
+                    <input type="text" class="form-input ro" value="RIVIÈRE" readonly>
+                  </div>
+                  <div class="form-field">
+                    <label>Prénom</label>
+                    <input type="text" class="form-input ro" value="Nora" readonly>
+                  </div>
+                </div>
+                <div class="form-grid col-full">
+                  <div class="form-field">
+                    <label>Langue</label>
+                    <input type="text" class="form-input ro" value="Français" readonly>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="fs-block">
+              <div class="fs-header">
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+                <div class="fs-title">Coordonnées</div>
+              </div>
+              <div class="fs-card">
+                <div class="form-grid col-full">
+                  <div class="form-field">
+                    <label>Adresse</label>
+                    <input type="text" class="form-input ro" value="12 rue des Grands Champs" readonly>
+                  </div>
+                </div>
+                <div class="form-grid cols-3">
+                  <div class="form-field">
+                    <label>Code postal</label>
+                    <input type="text" class="form-input ro" value="70000" readonly>
+                  </div>
+                  <div class="form-field">
+                    <label>Ville</label>
+                    <input type="text" class="form-input ro" value="Vesoul" readonly>
+                  </div>
+                  <div class="form-field">
+                    <label>Pays</label>
+                    <input type="text" class="form-input ro" value="France" readonly>
+                  </div>
+                </div>
+                <div class="form-grid">
+                  <div class="form-field">
+                    <label>Téléphone</label>
+                    <input type="text" class="form-input ro" value="03 84 75 40 40" readonly>
+                  </div>
+                  <div class="form-field">
+                    <label>Portable</label>
+                    <input type="text" class="form-input ro" value="06 22 41 88 03" readonly>
+                  </div>
+                </div>
+                <div class="form-grid col-full">
+                  <div class="form-field">
+                    <label>E-mail</label>
+                    <input type="text" class="form-input ro" value="n.riviere@onlineformapro.com" readonly>
+                  </div>
+                </div>
+                <div class="form-grid">
+                  <div class="form-field">
+                    <label>LinkedIn</label>
+                    <input type="text" class="form-input ro" value="linkedin.com/in/nriviere" readonly>
+                  </div>
+                  <div class="form-field">
+                    <label>Viadeo</label>
+                    <input type="text" class="form-input ro" value="—" readonly>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="fs-block">
+              <div class="fs-header">
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+                <div class="fs-title">Profils</div>
+              </div>
+              <div class="fs-card">
+                <div class="form-grid">
+                  <div class="form-field">
+                    <label>Profils de formation</label>
+                    <div><span class="pbadge outline">Marque blanche</span></div>
+                  </div>
+                  <div class="form-field">
+                    <label>Profils d'évaluation</label>
+                    <div><span class="pbadge outline">Marque blanche</span></div>
+                  </div>
+                </div>
+                <div class="form-grid col-full">
+                  <div class="form-field">
+                    <label>Profils de parcours</label>
+                    <input type="text" class="form-input ro" value="Aucun" readonly>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="fs-block">
+              <div class="fs-header">
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><circle cx="9" cy="11" r="2.2"/><path d="M5.5 17a3.5 3.5 0 0 1 7 0"/><line x1="15" y1="9" x2="19" y2="9"/><line x1="15" y1="13" x2="19" y2="13"/></svg></div>
+                <div class="fs-title">Identification</div>
+              </div>
+              <div class="fs-card">
+                <div class="form-grid col-full">
+                  <div class="form-field">
+                    <label>Identifiant</label>
+                    <input type="text" class="form-input ro" value="n.riviere@onlineformapro.com" readonly>
+                    <span class="form-hint">Sert d'identifiant de connexion</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="fs-block">
+              <div class="fs-header">
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+                <div class="fs-title">Durée de validité du compte</div>
+              </div>
+              <div class="fs-card">
+                <div class="form-grid cols-3">
+                  <div class="form-field">
+                    <label>Inscription</label>
+                    <input type="text" class="form-input ro" value="14 sept. 2026" readonly>
+                  </div>
+                  <div class="form-field">
+                    <label>Date de début</label>
+                    <input type="text" class="form-input ro" value="14 sept. 2026" readonly>
+                  </div>
+                  <div class="form-field">
+                    <label>Date de fin</label>
+                    <input type="text" class="form-input ro" value="Permanent" readonly>
+                  </div>
+                </div>
+                <div class="form-grid col-full">
+                  <div class="form-field">
+                    <label>Durée de formation</label>
+                    <input type="text" class="form-input ro" value="Illimitée" readonly>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="fs-block">
+              <div class="fs-header">
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+                <div class="fs-title">Environnement de l'usager</div>
+              </div>
+              <div class="fs-card">
+                <div class="form-grid col-full">
+                  <div class="form-field">
+                    <label>Plateformes affectées</label>
+                    <div><span class="pbadge gray">OnlineCompétences</span> <span class="pbadge gray">OnlineAgora</span></div>
+                  </div>
+                </div>
+                <div class="form-grid col-full">
+                  <div class="form-field">
+                    <label>Accueil par défaut</label>
+                    <input type="text" class="form-input ro" value="OnlineCompétences" readonly>
+                  </div>
+                </div>
+                <div class="form-grid col-full">
+                  <label class="form-check-inline">
+                    <input type="checkbox" checked disabled> Visible dans l'annuaire par défaut
+                  </label>
+                  <label class="form-check-inline">
+                    <input type="checkbox" checked disabled> Possibilité de se retirer de l'annuaire
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="fs-block">
+              <div class="fs-header">
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
+                <div class="fs-title">Rattachement</div>
+              </div>
+              <div class="fs-card">
+                <div class="form-grid col-full">
+                  <div class="form-field">
+                    <label>Inscrit dans le compte</label>
+                    <input type="text" class="form-input ro" value="ONLINEFORMAPRO" readonly>
+                  </div>
+                </div>
+                <div class="form-grid">
+                  <div class="form-field">
+                    <label>Membre du groupe</label>
+                    <input type="text" class="form-input ro" value="Maintenance" readonly>
+                  </div>
+                  <div class="form-field">
+                    <label>Tuteurs</label>
+                    <input type="text" class="form-input ro" value="Michèle GUERRIN" readonly>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="full">
+            <div class="fs-block">
+              <div class="fs-header">
+                <div class="fs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+                <div class="fs-title">Formations suivies</div>
+              </div>
+              <div class="tcard">
+                <div class="tw">
+                  <table>
+                    <thead>
+                      <tr class="thr">
+                        <th class="srt" data-col="formation">Formation<span class="rez"></span></th>
+                        <th class="srt" data-col="statut">Statut<span class="rez"></span></th>
+                        <th class="srt" data-col="avancement">Avancement<span class="rez"></span></th>
+                        <th class="srt" data-col="activite">Dernière activité<span class="rez"></span></th>
+                        <th class="srt" data-col="echeance">Échéance<span class="rez"></span></th>
+                        <th class="cgear-th"></th>
+                      </tr>
+                      <tr class="thr-filter">
+                        <th data-col="formation"><input type="search" class="th-search" placeholder="Rechercher"></th>
+                        <th data-col="statut">
+                          <div class="w-dd-wrap block">
+                            <button class="w-dd-btn sm" onclick="toggleDD(this)"><span>Tous</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                            <div class="w-dd-menu">
+                            <div class="w-dd-item active">Tous</div>
+                            <div class="w-dd-item">Terminé</div>
+                            <div class="w-dd-item">En cours</div>
+                            <div class="w-dd-item">Non commencé</div>
+                            </div>
+                          </div>
+                        </th>
+                        <th data-col="avancement">
+                          <div class="w-dd-wrap block">
+                            <button class="w-dd-btn sm" onclick="toggleDD(this)"><span>Tous</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                            <div class="w-dd-menu">
+                            <div class="w-dd-item active">Tous</div>
+                            <div class="w-dd-item">Moins de 50 %</div>
+                            <div class="w-dd-item">50 % et plus</div>
+                            <div class="w-dd-item">Terminé</div>
+                            </div>
+                          </div>
+                        </th>
+                        <th data-col="activite"><input type="search" class="th-search" placeholder="Rechercher"></th>
+                        <th data-col="echeance"><input type="search" class="th-search" placeholder="Rechercher"></th>
+                        <th class="cgear-th">
+                          <button class="cgear" aria-label="Choisir les colonnes du suivi" onclick="togCols(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
+                          <div class="cpanel">
+                            <div class="cph">
+                              <span class="cpt">Colonnes</span>
+                              <button class="cprst" onclick="colReset(this)">Réinitialiser</button>
+                            </div>
+                            <div class="cplist">
+                              <div class="crow lk">
+                                <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                                <input type="checkbox" class="cck" data-col="formation" checked disabled onchange="colToggle(this)">
+                                <span class="clbl">Formation</span>
+                              </div>
+                              <div class="crow">
+                                <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                                <input type="checkbox" class="cck" data-col="statut" checked onchange="colToggle(this)">
+                                <span class="clbl">Statut</span>
+                              </div>
+                              <div class="crow">
+                                <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                                <input type="checkbox" class="cck" data-col="avancement" checked onchange="colToggle(this)">
+                                <span class="clbl">Avancement</span>
+                              </div>
+                              <div class="crow">
+                                <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                                <input type="checkbox" class="cck" data-col="activite" checked onchange="colToggle(this)">
+                                <span class="clbl">Dernière activité</span>
+                              </div>
+                              <div class="crow">
+                                <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                                <input type="checkbox" class="cck" data-col="echeance" checked onchange="colToggle(this)">
+                                <span class="clbl">Échéance</span>
+                              </div>
+                            </div>
+                          </div>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-col="formation">
+                          <div class="cn">
+                            <div class="ava" style="background:#F8F1FB;color:#8A3AAF;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+                            <div>
+                              <div class="nmain">Prévention des risques professionnels</div>
+                              <div class="nsub">Module e-learning · 8 h</div>
+                            </div>
+                          </div>
+                        </td>
+                        <td data-col="statut"><span class="pbadge outline">En cours</span></td>
+                        <td class="cv" data-col="avancement">72 %</td>
+                        <td class="dc" data-col="activite">15 sept. 2026</td>
+                        <td class="dc" data-col="echeance">31 déc. 2026</td>
+                        <td class="catd">
+                          <button class="rdots" aria-label="Actions sur Prévention des risques professionnels" onclick="togRow(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+                                            <div class="rmenu">
+                                              <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Ouvrir la formation</div>
+                                              <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Relancer l'apprenant</div>
+                                              <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg> Éditer l'attestation</div>
+                                              <div class="rmdiv"></div>
+                                              <div class="rmi dn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg> Retirer la formation</div>
+                                            </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-col="formation">
+                          <div class="cn">
+                            <div class="ava" style="background:#F8F1FB;color:#8A3AAF;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+                            <div>
+                              <div class="nmain">Habilitation électrique B1V</div>
+                              <div class="nsub">Présentiel · 21 h</div>
+                            </div>
+                          </div>
+                        </td>
+                        <td data-col="statut"><span class="pbadge green">Terminé</span></td>
+                        <td class="cv" data-col="avancement">100 %</td>
+                        <td class="dc" data-col="activite">2 sept. 2026</td>
+                        <td class="dc" data-col="echeance">—</td>
+                        <td class="catd">
+                          <button class="rdots" aria-label="Actions sur Habilitation électrique B1V" onclick="togRow(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+                                            <div class="rmenu">
+                                              <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Ouvrir la formation</div>
+                                              <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Relancer l'apprenant</div>
+                                              <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg> Éditer l'attestation</div>
+                                              <div class="rmdiv"></div>
+                                              <div class="rmi dn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg> Retirer la formation</div>
+                                            </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-col="formation">
+                          <div class="cn">
+                            <div class="ava" style="background:#F8F1FB;color:#8A3AAF;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+                            <div>
+                              <div class="nmain">Gestes et postures</div>
+                              <div class="nsub">Module e-learning · 4 h</div>
+                            </div>
+                          </div>
+                        </td>
+                        <td data-col="statut"><span class="pbadge green">Terminé</span></td>
+                        <td class="cv" data-col="avancement">100 %</td>
+                        <td class="dc" data-col="activite">18 août 2026</td>
+                        <td class="dc" data-col="echeance">—</td>
+                        <td class="catd">
+                          <button class="rdots" aria-label="Actions sur Gestes et postures" onclick="togRow(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+                                            <div class="rmenu">
+                                              <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Ouvrir la formation</div>
+                                              <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Relancer l'apprenant</div>
+                                              <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg> Éditer l'attestation</div>
+                                              <div class="rmdiv"></div>
+                                              <div class="rmi dn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg> Retirer la formation</div>
+                                            </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-col="formation">
+                          <div class="cn">
+                            <div class="ava" style="background:#F8F1FB;color:#8A3AAF;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+                            <div>
+                              <div class="nmain">Sauveteur secouriste du travail</div>
+                              <div class="nsub">Présentiel · 14 h</div>
+                            </div>
+                          </div>
+                        </td>
+                        <td data-col="statut"><span class="pbadge outline">En cours</span></td>
+                        <td class="cv" data-col="avancement">34 %</td>
+                        <td class="dc" data-col="activite">12 sept. 2026</td>
+                        <td class="dc" data-col="echeance">30 nov. 2026</td>
+                        <td class="catd">
+                          <button class="rdots" aria-label="Actions sur Sauveteur secouriste du travail" onclick="togRow(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+                                            <div class="rmenu">
+                                              <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Ouvrir la formation</div>
+                                              <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Relancer l'apprenant</div>
+                                              <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg> Éditer l'attestation</div>
+                                              <div class="rmdiv"></div>
+                                              <div class="rmi dn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg> Retirer la formation</div>
+                                            </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-col="formation">
+                          <div class="cn">
+                            <div class="ava" style="background:#F8F1FB;color:#8A3AAF;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+                            <div>
+                              <div class="nmain">Accueil et relation client</div>
+                              <div class="nsub">Parcours mixte · 12 h</div>
+                            </div>
+                          </div>
+                        </td>
+                        <td data-col="statut"><span class="pbadge gray">Non commencé</span></td>
+                        <td class="cv" data-col="avancement">0 %</td>
+                        <td class="dc" data-col="activite">—</td>
+                        <td class="dc" data-col="echeance">28 févr. 2027</td>
+                        <td class="catd">
+                          <button class="rdots" aria-label="Actions sur Accueil et relation client" onclick="togRow(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+                                            <div class="rmenu">
+                                              <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Ouvrir la formation</div>
+                                              <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Relancer l'apprenant</div>
+                                              <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg> Éditer l'attestation</div>
+                                              <div class="rmdiv"></div>
+                                              <div class="rmi dn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg> Retirer la formation</div>
+                                            </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="tfoot">
+                  <span class="fi">5 formations affectées · 2 terminées</span>
+                  <div class="pgn">
+                    <button class="pb" disabled>Précédent</button>
+                    <button class="pb on">1</button>
+                    <button class="pb" disabled>Suivant</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="../../dist/components.js" defer></script>
+</body>
+
+</html>

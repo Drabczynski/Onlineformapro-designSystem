@@ -30,6 +30,7 @@ La référence des composants est `index.html` : chaque section montre le rendu,
 - Aucun `<select>` natif : le sélecteur du système est `.w-dd-wrap`.
 - Aucune icône sans `aria-label` sur le bouton qui la porte quand elle est seule.
 - Aucun `opacity` pour simuler un état désactivé : l'attribut `disabled`.
+- Aucune `.form-switch` dans un `.form-field` : une bascule n'est pas un champ de saisie, son libellé ne s'empile pas au-dessus d'elle.
 - Aucun bouton bleu, vert ou rose. La couleur d'action est le violet ; le rouge `--nav-act` n'existe que dans le menu gauche.
 - Une seule action `.btn.primary` par écran.
 - Un formulaire n'est jamais un bloc sur toute la largeur : deux colonnes de `.fs-block` dans `.form-body`.
@@ -49,6 +50,7 @@ La référence des composants est `index.html` : chaque section montre le rendu,
 | Un champ obligatoire | `<span class="req">*</span>` collé au label |
 | Un champ en lecture seule | `input.form-input.ro` + attribut `readonly` |
 | Une liste de choix | `.w-dd-wrap.block > .w-dd-btn.field + .w-dd-menu > .w-dd-item` |
+| Un réglage qui s'applique tout de suite | `.form-toggle > .form-toggle-txt (.form-toggle-lbl + .form-hint) + .form-switch` — le libellé à gauche, l'interrupteur à droite |
 | Deux champs côte à côte | `.form-grid` ; un seul : `.form-grid.col-full` ; trois : `.form-grid.cols-3` |
 | Un groupe de champs | `.fs-block > .fs-header (.fs-icon + .fs-title) + .fs-card` |
 | Une page de réglages | `.form-body > .col + .col`, chaque `.col` contient des `.fs-block` |

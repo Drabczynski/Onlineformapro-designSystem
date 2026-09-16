@@ -551,6 +551,34 @@
   flex: 1;
 }
 
+/* Entree de page : seul le contenu apparait, la topbar et le menu restent
+   en place. La navigation se lit comme un changement de contenu, pas comme
+   un rechargement. */
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Pas de fill-mode : l'etat au repos du contenu reste visible. Une
+   animation qui ne demarre pas (impression, moteur sans animation,
+   extension) laisserait sinon la page vide. */
+.main > .content {
+  animation: page-in 0.32s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .main > .content {
+    animation: none;
+  }
+}
+
 /* En-tete de page */
 .ph {
   display: flex;
@@ -835,10 +863,25 @@
   box-shadow: 0 0 0 1.5px var(--bd);
 }
 
+/* La pastille porte des initiales, ou une icone quand la ligne designe une
+   chose et non une personne : une entite, un lieu, un service. */
+.ava svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* Le nom d'une ligne peut ouvrir la fiche correspondante. Il reste du texte
+   de tableau : pas de soulignement, la couleur d'action au survol suffit. */
 .nmain {
   font-size: 13px;
   font-weight: 500;
   white-space: nowrap;
+  color: inherit;
+  text-decoration: none;
+}
+
+a.nmain:hover {
+  color: var(--a);
 }
 
 .nsub {
@@ -1028,6 +1071,7 @@
   color: var(--t1);
   cursor: pointer;
   transition: background .08s;
+  text-decoration: none;
 }
 
 .rmi:hover {
@@ -1952,7 +1996,9 @@ textarea.form-input {
   grid-template-columns: repeat(3, 1fr);
 }
 
-.form-grid+.form-grid {
+.form-grid+.form-grid,
+.form-grid+.form-toggle,
+.form-toggle+.form-grid {
   margin-top: 18px;
 }
 
@@ -2745,6 +2791,45 @@ textarea.form-input {
 
 .form-switch.sm input:checked+.slider:before {
   transform: translateX(13px);
+}
+
+/* --- Ligne de bascule --- */
+/* Une bascule est un interrupteur, pas un champ de saisie : son libelle se
+   lit sur la meme ligne, a gauche, et l'interrupteur se tient a droite au
+   meme endroit d'une ligne a l'autre. Empile sous un label comme un champ
+   texte, il n'a plus rien a quoi se rattacher. Toute la ligne est
+   cliquable : le libelle sert d'etiquette a la case qu'il enveloppe. */
+.form-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  cursor: pointer;
+}
+
+.form-toggle-txt {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.form-toggle-lbl {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--t1);
+}
+
+.form-toggle .form-switch {
+  flex: none;
+}
+
+/* Plusieurs reglages a la suite forment une liste : un filet les separe
+   pour que chaque libelle reste rattache a son interrupteur. */
+.form-toggle+.form-toggle {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--bd);
 }
 
 /* ── MODAL STYLES ── */
