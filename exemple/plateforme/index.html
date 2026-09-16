@@ -4,9 +4,482 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Plateforme — OnlineManager</title>
+  <title>Tableau de bord — OnlineManager</title>
   <!-- Le système : on l'importe, on ne le recopie pas, on ne le surcharge pas. -->
   <link rel="stylesheet" href="../../dist/components.css">
+  <style>
+    /* ==========================================================
+       TABLEAU DE BORD — en attente de validation.
+       Rien de tout ceci n'est encore dans le design system : ces regles
+       vivent dans la page le temps que la maquette soit validee, puis
+       elles rejoindront index.html et dist/components.css.
+       ========================================================== */
+
+    /* Palette des series, validee (ecart daltonien et contraste sur blanc) */
+    .dash {
+      --c1: #8A3AAF;
+      --c2: #D9731A;
+      --c3: #118A6E;
+      --up: #067A53;
+      --down: #B42318;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* --- Indicateurs cles --- */
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .kpi {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .kpi-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .kpi-val {
+      font-family: Geist, 'Inter', sans-serif;
+      font-size: 30px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--t1);
+      line-height: 1.1;
+    }
+
+    .kpi-lbl {
+      font-size: 13px;
+      color: var(--t2);
+      margin-top: 4px;
+    }
+
+    .kpi-ic {
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      background: var(--a1);
+      color: var(--a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .kpi-ic svg {
+      width: 17px;
+      height: 17px;
+      stroke-width: 1.8;
+    }
+
+    .kpi-foot {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .kpi-tr {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .kpi-tr svg {
+      width: 14px;
+      height: 14px;
+      stroke-width: 2.2;
+    }
+
+    .kpi-tr.up {
+      color: var(--up);
+    }
+
+    .kpi-tr.down {
+      color: var(--down);
+    }
+
+    .kpi-since {
+      font-size: 11.5px;
+      color: var(--t3);
+      margin-top: 3px;
+    }
+
+    .kpi-spark {
+      width: 88px;
+      height: 30px;
+      flex-shrink: 0;
+    }
+
+    /* Dans un en-tete en flex, le dropdown garde sa largeur. */
+    .ph-actions .w-dd-wrap,
+    .dc-head .w-dd-wrap {
+      flex: 0 0 auto;
+      width: max-content;
+    }
+
+    /* --- Grilles du tableau de bord --- */
+    .dash-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .dash-3 {
+      display: grid;
+      grid-template-columns: 1.15fr 1.35fr 1fr;
+      gap: 20px;
+    }
+
+    /* --- Carte de graphique --- */
+    .dcard {
+      background: #fff;
+      border: 1px solid var(--bd);
+      border-radius: var(--rl);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, .04);
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .dc-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 20px 12px;
+    }
+
+    .dc-title {
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--t1);
+      flex: 1;
+      min-width: 0;
+    }
+
+    .dc-sub {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--t3);
+      margin-top: 2px;
+    }
+
+    .dc-body {
+      padding: 0 20px 18px;
+    }
+
+    .dc-body.flush {
+      padding: 0 0 4px;
+    }
+
+    /* --- Legende --- */
+    .lg {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 18px;
+      padding: 0 20px 10px;
+    }
+
+    .lg-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12.5px;
+      color: var(--t2);
+    }
+
+    .lg-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .lg-dot.s1 { background: var(--c1); }
+    .lg-dot.s2 { background: var(--c2); }
+    .lg-dot.s3 { background: var(--c3); }
+
+    /* --- Graphique --- */
+    .chart {
+      position: relative;
+    }
+
+    .chart svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      overflow: visible;
+    }
+
+    .ch-grid {
+      stroke: var(--bg);
+      stroke-width: 1;
+    }
+
+    .ch-axis {
+      fill: var(--t3);
+      font-size: 10px;
+    }
+
+    .ch-line {
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .ch-dot {
+      stroke: #fff;
+      stroke-width: 2;
+    }
+
+    .ch-peak {
+      font-size: 10.5px;
+      font-weight: 700;
+    }
+
+    .ch-hit {
+      fill: transparent;
+      cursor: crosshair;
+    }
+
+    .ch-cross {
+      stroke: var(--t3);
+      stroke-width: 1;
+      stroke-dasharray: 3 3;
+      opacity: 0;
+    }
+
+    .chart.on .ch-cross {
+      opacity: 1;
+    }
+
+    .ch-tip {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: none;
+      min-width: 150px;
+      padding: 9px 11px;
+      background: var(--t1);
+      border-radius: 9px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .2);
+      pointer-events: none;
+      z-index: 50;
+    }
+
+    .chart.on .ch-tip {
+      display: block;
+    }
+
+    .ch-tip-h {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: var(--t3);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-bottom: 6px;
+    }
+
+    .ch-tip-r {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+      color: #fff;
+      padding: 2px 0;
+    }
+
+    .ch-tip-r b {
+      margin-left: auto;
+      font-weight: 600;
+    }
+
+    /* --- Chiffre de synthese sous un graphique --- */
+    .dc-total {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 10px;
+      margin: 4px 20px 0;
+      padding: 12px;
+      border-radius: var(--r);
+      background: var(--a1);
+    }
+
+    .dc-total .lbl {
+      font-size: 12.5px;
+      color: var(--t2);
+    }
+
+    .dc-total .val {
+      font-family: Geist, 'Inter', sans-serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--a-p);
+    }
+
+    /* --- Classement --- */
+    .rk {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 20px;
+    }
+
+    .rk + .rk {
+      border-top: 1px solid var(--bg);
+    }
+
+    .rk-n {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      background: var(--ps);
+      border: 1px solid var(--bd);
+      color: var(--t2);
+      font-size: 11.5px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .rk-txt {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .rk-name {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--t1);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .rk-sub {
+      display: block;
+      font-size: 11.5px;
+      color: var(--t3);
+      margin-top: 1px;
+    }
+
+    .rk-bar {
+      display: block;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--bg);
+      margin-top: 6px;
+      overflow: hidden;
+    }
+
+    .rk-bar i {
+      display: block;
+      height: 100%;
+      border-radius: 2px;
+      background: var(--a);
+    }
+
+    .rk-val {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--t1);
+      flex-shrink: 0;
+    }
+
+    /* --- Petits multiples : une echelle par serie --- */
+    .mults {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .mult-h {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12.5px;
+      color: var(--t2);
+    }
+
+    .mult-h b {
+      margin-left: auto;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--t1);
+    }
+
+    /* --- Carte de chaleur --- */
+    .hm {
+      display: grid;
+      grid-template-columns: 30px repeat(13, 1fr);
+      gap: 3px;
+      align-items: center;
+    }
+
+    .hm-h,
+    .hm-d {
+      font-size: 10px;
+      color: var(--t3);
+    }
+
+    .hm-h {
+      text-align: center;
+    }
+
+    .hm-c {
+      aspect-ratio: 1;
+      border-radius: 3px;
+      background: var(--bg);
+    }
+
+    .hm-c.l1 { background: #EFE0F5; }
+    .hm-c.l2 { background: #D5B4E4; }
+    .hm-c.l3 { background: #A96CC8; }
+    .hm-c.l4 { background: var(--a); }
+
+    .hm-leg {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      justify-content: flex-end;
+      margin-top: 12px;
+      font-size: 11px;
+      color: var(--t3);
+    }
+
+    .hm-leg i {
+      width: 13px;
+      height: 13px;
+      border-radius: 3px;
+      display: inline-block;
+    }
+
+    @media (max-width: 1280px) {
+      .kpi-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .dash-2,
+      .dash-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 
 <body class="app">
@@ -138,41 +611,373 @@
       <div class="content">
         <div class="ph">
           <div class="ph-l">
-            <h1 class="ph-title">Plateforme</h1>
-            <span class="ph-ct"><strong>3</strong> écrans construits</span>
+            <h1 class="ph-title">Tableau de bord</h1>
+            <span class="ph-ct">Onlineformapro</span>
           </div>
           <div class="ph-actions">
-            <a class="btn primary" href="usagers.html">Entrer dans la plateforme</a>
+            <div class="w-dd-wrap">
+          <button class="w-dd-btn sm" onclick="toggleDD(this)"><span>Année en cours</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="w-dd-menu">
+            <div class="w-dd-item active">Année en cours</div>
+            <div class="w-dd-item">Douze derniers mois</div>
+            <div class="w-dd-item">Trimestre</div>
+            <div class="w-dd-item">Mois</div>
+          </div>
+        </div>
+            <button class="btn">Exporter</button>
+            <button class="btn primary">Générer un rapport</button>
           </div>
         </div>
 
-        <div class="wgrid">
-            <div class="pcard">
-              <div class="form-field">
-                <div class="fs-title">Usagers</div>
-                <span class="form-hint">La liste des apprenants : filtres de colonne, édition des colonnes, actions de ligne, pagination.</span>
-                <a class="btn" href="usagers.html">Ouvrir</a>
+        <div class="dash">
+          <div class="kpi-row">
+          <div class="pcard kpi">
+            <div class="kpi-top">
+              <div>
+                <div class="kpi-val">118</div>
+                <div class="kpi-lbl">Apprenants actifs</div>
+              </div>
+              <div class="kpi-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/></svg></div>
+            </div>
+            <div class="kpi-foot">
+              <div>
+                <span class="kpi-tr up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>+62 %</span>
+                <div class="kpi-since">sur les douze derniers mois</div>
+              </div>
+              <svg class="kpi-spark" viewBox="0 0 88 30" aria-hidden="true"><path d="M2 28 L9.6 24.3 L17.3 27.1 L24.9 19.2 L32.5 22.4 L40.2 15.9 L47.8 20.1 L55.5 12.7 L63.1 15.9 L70.7 9.9 L78.4 6.2 L86 2" fill="none" stroke="var(--up)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/><circle cx="86" cy="2" r="2.6" fill="var(--up)"/></svg>
+            </div>
+          </div>
+          <div class="pcard kpi">
+            <div class="kpi-top">
+              <div>
+                <div class="kpi-val">149</div>
+                <div class="kpi-lbl">Parcours terminés</div>
+              </div>
+              <div class="kpi-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+            </div>
+            <div class="kpi-foot">
+              <div>
+                <span class="kpi-tr up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>+247 %</span>
+                <div class="kpi-since">sur les douze derniers mois</div>
+              </div>
+              <svg class="kpi-spark" viewBox="0 0 88 30" aria-hidden="true"><path d="M2 28 L9.6 25.8 L17.3 26.8 L24.9 23.6 L32.5 24.6 L40.2 20.9 L47.8 22.4 L55.5 17 L63.1 14.8 L70.7 11.1 L78.4 6.4 L86 2" fill="none" stroke="var(--up)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/><circle cx="86" cy="2" r="2.6" fill="var(--up)"/></svg>
+            </div>
+          </div>
+          <div class="pcard kpi">
+            <div class="kpi-top">
+              <div>
+                <div class="kpi-val">4 h 11 min</div>
+                <div class="kpi-lbl">Temps moyen de formation</div>
+              </div>
+              <div class="kpi-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            </div>
+            <div class="kpi-foot">
+              <div>
+                <span class="kpi-tr up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>+1 h 55 min</span>
+                <div class="kpi-since">sur les douze derniers mois</div>
+              </div>
+              <svg class="kpi-spark" viewBox="0 0 88 30" aria-hidden="true"><path d="M2 28 L9.6 25.3 L17.3 26.9 L24.9 22.1 L32.5 23.7 L40.2 20.1 L47.8 21.2 L55.5 16 L63.1 12.9 L70.7 8.8 L78.4 4.9 L86 2" fill="none" stroke="var(--up)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/><circle cx="86" cy="2" r="2.6" fill="var(--up)"/></svg>
+            </div>
+          </div>
+          <div class="pcard kpi">
+            <div class="kpi-top">
+              <div>
+                <div class="kpi-val">51 %</div>
+                <div class="kpi-lbl">Réussite aux évaluations</div>
+              </div>
+              <div class="kpi-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+            </div>
+            <div class="kpi-foot">
+              <div>
+                <span class="kpi-tr down"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg>-22 %</span>
+                <div class="kpi-since">sur les douze derniers mois</div>
+              </div>
+              <svg class="kpi-spark" viewBox="0 0 88 30" aria-hidden="true"><path d="M2 3.1 L9.6 5.4 L17.3 2 L24.9 7.7 L32.5 4.3 L40.2 11 L47.8 8.8 L55.5 16.7 L63.1 19 L70.7 23.5 L78.4 25.7 L86 28" fill="none" stroke="var(--down)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/><circle cx="86" cy="28" r="2.6" fill="var(--down)"/></svg>
+            </div>
+          </div>
+          </div>
+
+          <div class="dash-2">
+            <div class="dcard">
+              <div class="dc-head">
+                <div class="dc-title">Activité des apprenants<div class="dc-sub">Douze derniers mois</div></div>
+                <div class="w-dd-wrap">
+          <button class="w-dd-btn sm" onclick="toggleDD(this)"><span>Mensuel</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="w-dd-menu">
+            <div class="w-dd-item active">Mensuel</div>
+            <div class="w-dd-item">Hebdomadaire</div>
+            <div class="w-dd-item">Trimestriel</div>
+          </div>
+        </div>
+              </div>
+              <div class="dc-body">
+                <div class="mults">
+                <div>
+                  <div class="mult-h"><span class="lg-dot s1"></span>Connexions<b>621</b></div>
+                  <div class="chart" data-chart='{"w": 560, "x": [46.0, 91.8, 137.6, 183.5, 229.3, 275.1, 320.9, 366.7, 412.5, 458.4, 504.2, 550.0], "labels": ["Oct.", "Nov.", "Déc.", "Janv.", "Févr.", "Mars", "Avr.", "Mai", "Juin", "Juil.", "Août", "Sept."], "series": [{"n": "Connexions", "c": "var(--c1)", "v": [544, 1883, 553, 1071, 1331, 1352, 545, 298, 657, 485, 273, 621]}]}'><svg viewBox="0 0 560 80" role="img" aria-label="Connexions sur douze mois"><line class="ch-grid" x1="46" y1="72" x2="550" y2="72"/><text class="ch-axis" x="38" y="75.5" text-anchor="end">0</text><text class="ch-axis" x="38" y="24.7" text-anchor="end">1 883</text><line class="ch-cross" x1="0" y1="9" x2="0" y2="72"/><path class="ch-line" d="M46 57.3 L91.8 21.2 L137.6 57.1 L183.5 43.1 L229.3 36.1 L275.1 35.5 L320.9 57.3 L366.7 64 L412.5 54.3 L458.4 58.9 L504.2 64.6 L550 55.2" stroke="var(--c1)"/><circle class="ch-dot" cx="46" cy="57.3" r="3" fill="var(--c1)"/><circle class="ch-dot" cx="91.8" cy="21.2" r="3" fill="var(--c1)"/><circle class="ch-dot" cx="137.6" cy="57.1" r="3" fill="var(--c1)"/><circle class="ch-dot" cx="183.5" cy="43.1" r="3" fill="var(--c1)"/><circle class="ch-dot" cx="229.3" cy="36.1" r="3" fill="var(--c1)"/><circle class="ch-dot" cx="275.1" cy="35.5" r="3" fill="var(--c1)"/><circle class="ch-dot" cx="320.9" cy="57.3" r="3" fill="var(--c1)"/><circle class="ch-dot" cx="366.7" cy="64" r="3" fill="var(--c1)"/><circle class="ch-dot" cx="412.5" cy="54.3" r="3" fill="var(--c1)"/><circle class="ch-dot" cx="458.4" cy="58.9" r="3" fill="var(--c1)"/><circle class="ch-dot" cx="504.2" cy="64.6" r="3" fill="var(--c1)"/><circle class="ch-dot" cx="550" cy="55.2" r="3" fill="var(--c1)"/><rect class="ch-hit" x="0" y="0" width="560" height="80"/></svg><div class="ch-tip"></div></div>
+                </div>
+                <div>
+                  <div class="mult-h"><span class="lg-dot s2"></span>Modules suivis<b>117</b></div>
+                  <div class="chart" data-chart='{"w": 560, "x": [46.0, 91.8, 137.6, 183.5, 229.3, 275.1, 320.9, 366.7, 412.5, 458.4, 504.2, 550.0], "labels": ["Oct.", "Nov.", "Déc.", "Janv.", "Févr.", "Mars", "Avr.", "Mai", "Juin", "Juil.", "Août", "Sept."], "series": [{"n": "Modules suivis", "c": "var(--c2)", "v": [149, 156, 167, 236, 151, 230, 176, 116, 106, 153, 120, 117]}]}'><svg viewBox="0 0 560 80" role="img" aria-label="Modules suivis sur douze mois"><line class="ch-grid" x1="46" y1="72" x2="550" y2="72"/><text class="ch-axis" x="38" y="75.5" text-anchor="end">0</text><text class="ch-axis" x="38" y="24.7" text-anchor="end">236</text><line class="ch-cross" x1="0" y1="9" x2="0" y2="72"/><path class="ch-line" d="M46 39.9 L91.8 38.4 L137.6 36 L183.5 21.2 L229.3 39.5 L275.1 22.4 L320.9 34.1 L366.7 47 L412.5 49.2 L458.4 39 L504.2 46.1 L550 46.8" stroke="var(--c2)"/><circle class="ch-dot" cx="46" cy="39.9" r="3" fill="var(--c2)"/><circle class="ch-dot" cx="91.8" cy="38.4" r="3" fill="var(--c2)"/><circle class="ch-dot" cx="137.6" cy="36" r="3" fill="var(--c2)"/><circle class="ch-dot" cx="183.5" cy="21.2" r="3" fill="var(--c2)"/><circle class="ch-dot" cx="229.3" cy="39.5" r="3" fill="var(--c2)"/><circle class="ch-dot" cx="275.1" cy="22.4" r="3" fill="var(--c2)"/><circle class="ch-dot" cx="320.9" cy="34.1" r="3" fill="var(--c2)"/><circle class="ch-dot" cx="366.7" cy="47" r="3" fill="var(--c2)"/><circle class="ch-dot" cx="412.5" cy="49.2" r="3" fill="var(--c2)"/><circle class="ch-dot" cx="458.4" cy="39" r="3" fill="var(--c2)"/><circle class="ch-dot" cx="504.2" cy="46.1" r="3" fill="var(--c2)"/><circle class="ch-dot" cx="550" cy="46.8" r="3" fill="var(--c2)"/><rect class="ch-hit" x="0" y="0" width="560" height="80"/></svg><div class="ch-tip"></div></div>
+                </div>
+                <div>
+                  <div class="mult-h"><span class="lg-dot s3"></span>Évaluations réalisées<b>79</b></div>
+                  <div class="chart" data-chart='{"w": 560, "x": [46.0, 91.8, 137.6, 183.5, 229.3, 275.1, 320.9, 366.7, 412.5, 458.4, 504.2, 550.0], "labels": ["Oct.", "Nov.", "Déc.", "Janv.", "Févr.", "Mars", "Avr.", "Mai", "Juin", "Juil.", "Août", "Sept."], "series": [{"n": "Évaluations réalisées", "c": "var(--c3)", "v": [149, 87, 109, 158, 117, 162, 96, 74, 88, 46, 61, 79]}]}'><svg viewBox="0 0 560 96" role="img" aria-label="Évaluations réalisées sur douze mois"><line class="ch-grid" x1="46" y1="72" x2="550" y2="72"/><text class="ch-axis" x="38" y="75.5" text-anchor="end">0</text><text class="ch-axis" x="38" y="24.7" text-anchor="end">162</text><text class="ch-axis" x="46" y="89" text-anchor="middle">Oct.</text><text class="ch-axis" x="137.6" y="89" text-anchor="middle">Déc.</text><text class="ch-axis" x="229.3" y="89" text-anchor="middle">Févr.</text><text class="ch-axis" x="320.9" y="89" text-anchor="middle">Avr.</text><text class="ch-axis" x="412.5" y="89" text-anchor="middle">Juin</text><text class="ch-axis" x="504.2" y="89" text-anchor="middle">Août</text><line class="ch-cross" x1="0" y1="9" x2="0" y2="72"/><path class="ch-line" d="M46 25.2 L91.8 44.7 L137.6 37.8 L183.5 22.4 L229.3 35.3 L275.1 21.2 L320.9 41.9 L366.7 48.8 L412.5 44.4 L458.4 57.6 L504.2 52.9 L550 47.2" stroke="var(--c3)"/><circle class="ch-dot" cx="46" cy="25.2" r="3" fill="var(--c3)"/><circle class="ch-dot" cx="91.8" cy="44.7" r="3" fill="var(--c3)"/><circle class="ch-dot" cx="137.6" cy="37.8" r="3" fill="var(--c3)"/><circle class="ch-dot" cx="183.5" cy="22.4" r="3" fill="var(--c3)"/><circle class="ch-dot" cx="229.3" cy="35.3" r="3" fill="var(--c3)"/><circle class="ch-dot" cx="275.1" cy="21.2" r="3" fill="var(--c3)"/><circle class="ch-dot" cx="320.9" cy="41.9" r="3" fill="var(--c3)"/><circle class="ch-dot" cx="366.7" cy="48.8" r="3" fill="var(--c3)"/><circle class="ch-dot" cx="412.5" cy="44.4" r="3" fill="var(--c3)"/><circle class="ch-dot" cx="458.4" cy="57.6" r="3" fill="var(--c3)"/><circle class="ch-dot" cx="504.2" cy="52.9" r="3" fill="var(--c3)"/><circle class="ch-dot" cx="550" cy="47.2" r="3" fill="var(--c3)"/><rect class="ch-hit" x="0" y="0" width="560" height="96"/></svg><div class="ch-tip"></div></div>
+                </div>
+                </div>
               </div>
             </div>
-            <div class="pcard">
-              <div class="form-field">
-                <div class="fs-title">Carte de visite</div>
-                <span class="form-hint">L'identité de l'entité, répartie par fréquence de modification.</span>
-                <a class="btn" href="carte-de-visite.html">Ouvrir</a>
+
+            <div class="dcard">
+              <div class="dc-head">
+                <div class="dc-title">Temps de formation<div class="dc-sub">Heures réalisées par mois</div></div>
+                <div class="w-dd-wrap">
+          <button class="w-dd-btn sm" onclick="toggleDD(this)"><span>Mensuel</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="w-dd-menu">
+            <div class="w-dd-item active">Mensuel</div>
+            <div class="w-dd-item">Hebdomadaire</div>
+            <div class="w-dd-item">Trimestriel</div>
+          </div>
+        </div>
+              </div>
+              <div class="dc-body">
+                <div class="chart" data-chart='{"w": 560, "x": [44.0, 89.6, 135.3, 180.9, 226.5, 272.2, 317.8, 363.5, 409.1, 454.7, 500.4, 546.0], "labels": ["Oct.", "Nov.", "Déc.", "Janv.", "Févr.", "Mars", "Avr.", "Mai", "Juin", "Juil.", "Août", "Sept."], "series": [{"n": "Temps réalisé", "c": "var(--c1)", "v": [302, 848, 431, 562, 638, 1012, 384, 251, 297, 312, 198, 421], "u": " h"}]}'><svg viewBox="0 0 560 232" role="img" aria-label="Temps de formation réalisé sur douze mois"><defs><linearGradient id="gTemps" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--c1)" stop-opacity=".22"/><stop offset="1" stop-color="var(--c1)" stop-opacity="0"/></linearGradient></defs><line class="ch-grid" x1="44" y1="204" x2="546" y2="204"/><text class="ch-axis" x="36" y="207.5" text-anchor="end">0 h</text><line class="ch-grid" x1="44" y1="142.7" x2="546" y2="142.7"/><text class="ch-axis" x="36" y="146.2" text-anchor="end">350 h</text><line class="ch-grid" x1="44" y1="81.3" x2="546" y2="81.3"/><text class="ch-axis" x="36" y="84.8" text-anchor="end">700 h</text><line class="ch-grid" x1="44" y1="20" x2="546" y2="20"/><text class="ch-axis" x="36" y="23.5" text-anchor="end">1050 h</text><text class="ch-axis" x="44" y="224" text-anchor="middle">Oct.</text><text class="ch-axis" x="135.3" y="224" text-anchor="middle">Déc.</text><text class="ch-axis" x="226.5" y="224" text-anchor="middle">Févr.</text><text class="ch-axis" x="317.8" y="224" text-anchor="middle">Avr.</text><text class="ch-axis" x="409.1" y="224" text-anchor="middle">Juin</text><text class="ch-axis" x="500.4" y="224" text-anchor="middle">Août</text><path d="M44 151.1 L89.6 55.4 L135.3 128.5 L180.9 105.5 L226.5 92.2 L272.2 26.7 L317.8 136.7 L363.5 160 L409.1 152 L454.7 149.3 L500.4 169.3 L546 130.2 L546 204 L44 204 Z" fill="url(#gTemps)"/><line class="ch-cross" x1="0" y1="16" x2="0" y2="204"/><path class="ch-line" d="M44 151.1 L89.6 55.4 L135.3 128.5 L180.9 105.5 L226.5 92.2 L272.2 26.7 L317.8 136.7 L363.5 160 L409.1 152 L454.7 149.3 L500.4 169.3 L546 130.2" stroke="var(--c1)"/><circle class="ch-dot" cx="44" cy="151.1" r="3.2" fill="var(--c1)"/><circle class="ch-dot" cx="89.6" cy="55.4" r="3.2" fill="var(--c1)"/><circle class="ch-dot" cx="135.3" cy="128.5" r="3.2" fill="var(--c1)"/><circle class="ch-dot" cx="180.9" cy="105.5" r="3.2" fill="var(--c1)"/><circle class="ch-dot" cx="226.5" cy="92.2" r="3.2" fill="var(--c1)"/><circle class="ch-dot" cx="272.2" cy="26.7" r="3.2" fill="var(--c1)"/><circle class="ch-dot" cx="317.8" cy="136.7" r="3.2" fill="var(--c1)"/><circle class="ch-dot" cx="363.5" cy="160" r="3.2" fill="var(--c1)"/><circle class="ch-dot" cx="409.1" cy="152" r="3.2" fill="var(--c1)"/><circle class="ch-dot" cx="454.7" cy="149.3" r="3.2" fill="var(--c1)"/><circle class="ch-dot" cx="500.4" cy="169.3" r="3.2" fill="var(--c1)"/><circle class="ch-dot" cx="546" cy="130.2" r="3.2" fill="var(--c1)"/><text class="ch-peak" x="272.2" y="17.7" text-anchor="middle" fill="var(--c1)">1 012 h</text><rect class="ch-hit" x="0" y="0" width="560" height="232"/></svg><div class="ch-tip"></div></div>
+              </div>
+              <div class="dc-total"><span class="lbl">Total réalisé sur la période</span><span class="val">5 656 h</span></div>
+            </div>
+          </div>
+
+          <div class="dash-3">
+            <div class="dcard">
+              <div class="dc-head">
+                <div class="dc-title">Modules les plus suivis<div class="dc-sub">Par nombre de connexions</div></div>
+              </div>
+              <div class="dc-body flush">
+            <div class="rk">
+              <span class="rk-n">1</span>
+              <span class="rk-txt">
+                <span class="rk-name">Prise en main</span>
+                <span class="rk-sub">Excel 2016</span>
+                <span class="rk-bar"><i style="width:100%"></i></span>
+              </span>
+              <span class="rk-val">1 234</span>
+            </div>
+            <div class="rk">
+              <span class="rk-n">2</span>
+              <span class="rk-txt">
+                <span class="rk-name">Les bases du HTML</span>
+                <span class="rk-sub">Langages HTML/CSS</span>
+                <span class="rk-bar"><i style="width:76%"></i></span>
+              </span>
+              <span class="rk-val">935</span>
+            </div>
+            <div class="rk">
+              <span class="rk-n">3</span>
+              <span class="rk-txt">
+                <span class="rk-name">Prise en main</span>
+                <span class="rk-sub">Excel 2021</span>
+                <span class="rk-bar"><i style="width:71%"></i></span>
+              </span>
+              <span class="rk-val">879</span>
+            </div>
+            <div class="rk">
+              <span class="rk-n">4</span>
+              <span class="rk-txt">
+                <span class="rk-name">Sélectionner une cellule, une plage de cellules</span>
+                <span class="rk-sub">Excel 2021</span>
+                <span class="rk-bar"><i style="width:68%"></i></span>
+              </span>
+              <span class="rk-val">834</span>
+            </div>
+            <div class="rk">
+              <span class="rk-n">5</span>
+              <span class="rk-txt">
+                <span class="rk-name">Pour commencer</span>
+                <span class="rk-sub">Word 2021</span>
+                <span class="rk-bar"><i style="width:66%"></i></span>
+              </span>
+              <span class="rk-val">812</span>
+            </div>
               </div>
             </div>
-            <div class="pcard">
-              <div class="form-field">
-                <div class="fs-title">Personnalisation des coordonnées</div>
-                <span class="form-hint">L'écran de Paramétrages, refait à l'identique avec les composants du système.</span>
-                <a class="btn" href="coordonnees.html">Ouvrir</a>
+
+            <div class="dcard">
+              <div class="dc-head">
+                <div class="dc-title">Périodes d'activité<div class="dc-sub">Connexions par jour et par heure</div></div>
+              </div>
+              <div class="dc-body">
+            <div class="hm">
+              <span></span>
+              <span class="hm-h">08h</span>
+              <span class="hm-h">09h</span>
+              <span class="hm-h">10h</span>
+              <span class="hm-h">11h</span>
+              <span class="hm-h">12h</span>
+              <span class="hm-h">13h</span>
+              <span class="hm-h">14h</span>
+              <span class="hm-h">15h</span>
+              <span class="hm-h">16h</span>
+              <span class="hm-h">17h</span>
+              <span class="hm-h">18h</span>
+              <span class="hm-h">19h</span>
+              <span class="hm-h">20h</span>
+              <span class="hm-d">Lun.</span>
+              <span class="hm-c l1"></span>
+              <span class="hm-c l4"></span>
+              <span class="hm-c l4"></span>
+              <span class="hm-c l3"></span>
+              <span class="hm-c l1"></span>
+              <span class="hm-c l1"></span>
+              <span class="hm-c l3"></span>
+              <span class="hm-c l4"></span>
+              <span class="hm-c l3"></span>
+              <span class="hm-c l2"></span>
+              <span class="hm-c l1"></span>
+              <span class="hm-c"></span>
+              <span class="hm-c"></span>
+              <span class="hm-d">Mar.</span>
+              <span class="hm-c l1"></span>
+              <span class="hm-c l3"></span>
+              <span class="hm-c l4"></span>
+              <span class="hm-c l4"></span>
+              <span class="hm-c l2"></span>
+              <span class="hm-c l1"></span>
+              <span class="hm-c l3"></span>
+              <span class="hm-c l4"></span>
+              <span class="hm-c l4"></span>
+              <span class="hm-c l2"></span>
+              <span class="hm-c l1"></span>
+              <span class="hm-c l1"></span>
+              <span class="hm-c"></span>
+              <span class="hm-d">Mer.</span>
+              <span class="hm-c l2"></span>
+              <span class="hm-c l4"></span>
+              <span class="hm-c l4"></span>
+              <span class="hm-c l3"></span>
+              <span class="hm-c l1"></span>
+              <span class="hm-c l2"></span>
+              <span class="hm-c l4"></span>
+              <span class="hm-c l4"></span>
+              <span class="hm-c l3"></span>
+              <span class="hm-c l2"></span>
+              <span class="hm-c l1"></span>
+              <span class="hm-c"></span>
+              <span class="hm-c"></span>
+              <span class="hm-d">Jeu.</span>
+              <span class="hm-c l1"></span>
+              <span class="hm-c l3"></span>
+              <span class="hm-c l4"></span>
+              <span class="hm-c l4"></span>
+              <span class="hm-c l2"></span>
+              <span class="hm-c l1"></span>
+              <span class="hm-c l3"></span>
+              <span class="hm-c l3"></span>
+              <span class="hm-c l4"></span>
+              <span class="hm-c l3"></span>
+              <span class="hm-c l1"></span>
+              <span class="hm-c l1"></span>
+              <span class="hm-c"></span>
+              <span class="hm-d">Ven.</span>
+              <span class="hm-c l1"></span>
+              <span class="hm-c l3"></span>
+              <span class="hm-c l3"></span>
+              <span class="hm-c l3"></span>
+              <span class="hm-c l2"></span>
+              <span class="hm-c l1"></span>
+              <span class="hm-c l3"></span>
+              <span class="hm-c l3"></span>
+              <span class="hm-c l2"></span>
+              <span class="hm-c l1"></span>
+              <span class="hm-c l1"></span>
+              <span class="hm-c"></span>
+              <span class="hm-c"></span>
+              <span class="hm-d">Sam.</span>
+              <span class="hm-c"></span>
+              <span class="hm-c l1"></span>
+              <span class="hm-c l1"></span>
+              <span class="hm-c l2"></span>
+              <span class="hm-c l1"></span>
+              <span class="hm-c"></span>
+              <span class="hm-c l1"></span>
+              <span class="hm-c l1"></span>
+              <span class="hm-c l1"></span>
+              <span class="hm-c"></span>
+              <span class="hm-c"></span>
+              <span class="hm-c"></span>
+              <span class="hm-c"></span>
+              <span class="hm-d">Dim.</span>
+              <span class="hm-c"></span>
+              <span class="hm-c"></span>
+              <span class="hm-c l1"></span>
+              <span class="hm-c l1"></span>
+              <span class="hm-c l1"></span>
+              <span class="hm-c l1"></span>
+              <span class="hm-c l1"></span>
+              <span class="hm-c l1"></span>
+              <span class="hm-c"></span>
+              <span class="hm-c"></span>
+              <span class="hm-c"></span>
+              <span class="hm-c"></span>
+              <span class="hm-c"></span>
+            </div>
+            <div class="hm-leg">Moins<i class="hm-c"></i><i class="hm-c l1"></i><i class="hm-c l2"></i><i class="hm-c l3"></i><i class="hm-c l4"></i>Plus</div>
               </div>
             </div>
-          <div class="pcard full">
-            <div class="form-field">
-              <div class="fs-title">La suite</div>
-              <span class="form-hint">Les autres entrées du menu restent inertes tant que leur écran
-                n'est pas construit. Elles s'allument au fur et à mesure.</span>
+
+            <div class="dcard">
+              <div class="dc-head">
+                <div class="dc-title">Structures les plus actives<div class="dc-sub">Sur les trente derniers jours</div></div>
+              </div>
+              <div class="dc-body flush">
+            <div class="rk">
+              <span class="rk-txt">
+                <span class="rk-name">DECIVISION</span>
+                <span class="rk-sub"><span class="stb ston"><span class="stdon"></span>Très active</span></span>
+                <span class="rk-bar"><i style="width:100%"></i></span>
+              </span>
+              <span class="rk-val">1 842</span>
+            </div>
+            <div class="rk">
+              <span class="rk-txt">
+                <span class="rk-name">CIBC Bourgogne Sud</span>
+                <span class="rk-sub"><span class="stb ston"><span class="stdon"></span>Très active</span></span>
+                <span class="rk-bar"><i style="width:71%"></i></span>
+              </span>
+              <span class="rk-val">1 317</span>
+            </div>
+            <div class="rk">
+              <span class="rk-txt">
+                <span class="rk-name">COALLIA</span>
+                <span class="rk-sub"><span class="stb ston"><span class="stdon"></span>Active</span></span>
+                <span class="rk-bar"><i style="width:51%"></i></span>
+              </span>
+              <span class="rk-val">948</span>
+            </div>
+            <div class="rk">
+              <span class="rk-txt">
+                <span class="rk-name">Apolline Kamdom</span>
+                <span class="rk-sub"><span class="stb ston"><span class="stdon"></span>Active</span></span>
+                <span class="rk-bar"><i style="width:33%"></i></span>
+              </span>
+              <span class="rk-val">612</span>
+            </div>
+            <div class="rk">
+              <span class="rk-txt">
+                <span class="rk-name">Claudine Mapella</span>
+                <span class="rk-sub"><span class="stb stoff"><span class="stdoff"></span>Peu active</span></span>
+                <span class="rk-bar"><i style="width:15%"></i></span>
+              </span>
+              <span class="rk-val">274</span>
+            </div>
+            <div class="rk">
+              <span class="rk-txt">
+                <span class="rk-name">INFREP Besançon</span>
+                <span class="rk-sub"><span class="stb stoff"><span class="stdoff"></span>Peu active</span></span>
+                <span class="rk-bar"><i style="width:7%"></i></span>
+              </span>
+              <span class="rk-val">131</span>
+            </div>
+              </div>
             </div>
           </div>
         </div>
@@ -180,6 +985,45 @@
     </main>
   </div>
   <script src="../../dist/components.js" defer></script>
+  <script defer>
+    document.addEventListener('DOMContentLoaded', function () {
+    // Survol des graphiques : reticule + infobulle sur le point le plus proche.
+    // Provisoire dans la page, comme le CSS : rejoindra components.js apres validation.
+    document.querySelectorAll('.chart[data-chart]').forEach(function (ch) {
+      var cfg = JSON.parse(ch.dataset.chart);
+      var svg = ch.querySelector('svg');
+      var cross = ch.querySelector('.ch-cross');
+      var tip = ch.querySelector('.ch-tip');
+
+      ch.addEventListener('pointermove', function (e) {
+        var box = svg.getBoundingClientRect();
+        var vx = (e.clientX - box.left) / box.width * cfg.w;
+        var k = 0, best = Infinity;
+        cfg.x.forEach(function (x, i) {
+          var d = Math.abs(x - vx);
+          if (d < best) { best = d; k = i; }
+        });
+        cross.setAttribute('x1', cfg.x[k]);
+        cross.setAttribute('x2', cfg.x[k]);
+        tip.innerHTML = '<div class="ch-tip-h">' + cfg.labels[k] + '</div>' +
+          cfg.series.map(function (s) {
+            return '<div class="ch-tip-r"><span class="lg-dot"></span>' + s.n +
+                   '<b>' + s.v[k].toLocaleString('fr-FR') + (s.u || '') + '</b></div>';
+          }).join('');
+        tip.querySelectorAll('.lg-dot').forEach(function (d, i) {
+          d.style.background = cfg.series[i].c;
+        });
+        ch.classList.add('on');
+        var px = cfg.x[k] / cfg.w * box.width;
+        var w = tip.offsetWidth;
+        tip.style.left = Math.max(0, Math.min(box.width - w, px - w / 2)) + 'px';
+        tip.style.top = '6px';
+      });
+
+      ch.addEventListener('pointerleave', function () { ch.classList.remove('on'); });
+    });
+    });
+  </script>
 </body>
 
 </html>
