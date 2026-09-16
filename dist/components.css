@@ -576,6 +576,14 @@
   flex: 1;
 }
 
+/* Un ecran de lecture n'a pas a s'etaler sur toute la largeur d'un grand
+   ecran : passe une certaine longueur de ligne on ne lit plus, on balaie. */
+.content.tight {
+  max-width: 1240px;
+  margin: 0 auto;
+  width: 100%;
+}
+
 /* Entree de page : seul le contenu apparait, la topbar et le menu restent
    en place. La navigation se lit comme un changement de contenu, pas comme
    un rechargement. */
@@ -1848,10 +1856,26 @@ a.nmain:hover {
   gap: 12px;
 }
 
+/* Sans cadre : le titre annonce la carte, rien ne les entoure. Quand une
+   page enchaine les groupes, le cadre de chacun devient un encart de plus
+   a regarder. */
+.fs-block.plain {
+  background: none;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+  gap: 10px;
+}
+
 .fs-header {
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+/* Un en-tete sans icone garde le titre au bord de la carte. */
+.fs-block.plain .fs-title {
+  font-size: 14.5px;
 }
 
 .fs-icon {
@@ -2491,18 +2515,53 @@ textarea.form-input {
   stroke-width: 1;
 }
 
-.chart .tick {
-  fill: var(--t3);
+.chart .base {
+  stroke: var(--bd);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+/* Le trait garde sa largeur reelle : sans cela il epaissit avec l'echelle. */
+.chart .grid,
+.chart .line {
+  vector-effect: non-scaling-stroke;
+}
+
+.plot {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.plot .chart {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Les graduations se repartissent sur la hauteur du trace ; la marge
+   negative pose le milieu de chaque libelle sur sa ligne de grille. */
+.ax-y {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: -8px 0;
   font-size: 11px;
-  font-family: inherit;
+  line-height: 16px;
+  color: var(--t3);
+  text-align: right;
+  flex: none;
 }
 
-.chart .tick.y {
-  text-anchor: end;
+.ax-x {
+  display: flex;
+  font-size: 11px;
+  color: var(--t3);
 }
 
-.chart .tick.mid {
-  text-anchor: middle;
+.ax-x span {
+  flex: 1;
+  text-align: center;
+  min-width: 0;
 }
 
 /* La marque est fine et son bout est arrondi ; le pied reste carre, pose
@@ -2728,6 +2787,20 @@ textarea.form-input {
 .mini td.num {
   color: var(--t2);
   font-weight: 500;
+}
+
+.mini .nmain {
+  white-space: normal;
+}
+
+/* Les colonnes de droite se serrent sur leur contenu et laissent le reste
+   a la premiere : sinon le nom se coupe en trois lignes pendant qu'un
+   pourcentage s'etale, et deux colonnes voisines finissent par se toucher. */
+.mini th+th,
+.mini td+td {
+  width: 1%;
+  padding-left: 14px;
+  white-space: nowrap;
 }
 
 /* Vignette d'un module. Le fond tient la place avant que l'image arrive. */
