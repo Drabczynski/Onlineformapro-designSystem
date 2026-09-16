@@ -7219,7 +7219,7 @@
           </div>
           <nav class="nav">
           <div class="ni-group">
-          <div class="ni">
+          <div class="ni" role="button" tabindex="0" aria-expanded="false" onclick="toggleNav(this)">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
           stroke-linejoin="round">
           <circle cx="12" cy="12" r="3" />
@@ -7386,7 +7386,7 @@
           </div>
           <nav class="nav">
           <div class="ni-group open">
-          <div class="ni">
+          <div class="ni" role="button" tabindex="0" aria-expanded="true" onclick="toggleNav(this)">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
           stroke-linejoin="round">
           <circle cx="12" cy="12" r="3" />
@@ -7777,7 +7777,7 @@
         </div>
         <nav class="nav">
         <div class="ni-group">
-        <div class="ni">
+        <div class="ni" role="button" tabindex="0" aria-expanded="false" onclick="toggleNav(this)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
         stroke-linejoin="round">
         <circle cx="12" cy="12" r="3" />
@@ -7996,7 +7996,7 @@
           </div>
           <nav class="nav">
           <div class="ni-group">
-          <div class="ni">
+          <div class="ni" role="button" tabindex="0" aria-expanded="false" onclick="toggleNav(this)">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
           stroke-linejoin="round">
           <circle cx="12" cy="12" r="3" />
@@ -8808,6 +8808,22 @@
     });
 
     document.querySelectorAll('.drp-pop.pin').forEach(pop => { drpSuggestions(pop); drpRender(pop); });
+
+    // ---- Menu gauche : ouvrir et refermer un groupe ----
+    function toggleNav(el) {
+      const groupe = el.closest('.ni-group');
+      const ouvert = groupe.classList.toggle('open');
+      el.setAttribute('aria-expanded', ouvert ? 'true' : 'false');
+    }
+
+    // Au clavier : l'en-tete de groupe repond a Entree et a la barre d'espace.
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      const el = e.target.closest ? e.target.closest('.ni-group > .ni[role="button"]') : null;
+      if (!el) return;
+      e.preventDefault();
+      toggleNav(el);
+    });
 
     /* @components:end */
 

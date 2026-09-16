@@ -337,3 +337,19 @@ document.addEventListener('click', (e) => {
 });
 
 document.querySelectorAll('.drp-pop.pin').forEach(pop => { drpSuggestions(pop); drpRender(pop); });
+
+// ---- Menu gauche : ouvrir et refermer un groupe ----
+function toggleNav(el) {
+  const groupe = el.closest('.ni-group');
+  const ouvert = groupe.classList.toggle('open');
+  el.setAttribute('aria-expanded', ouvert ? 'true' : 'false');
+}
+
+// Au clavier : l'en-tete de groupe repond a Entree et a la barre d'espace.
+document.addEventListener('keydown', (e) => {
+  if (e.key !== 'Enter' && e.key !== ' ') return;
+  const el = e.target.closest ? e.target.closest('.ni-group > .ni[role="button"]') : null;
+  if (!el) return;
+  e.preventDefault();
+  toggleNav(el);
+});
