@@ -86,6 +86,15 @@ function togRow(btn) {
   if (!open) { menu.classList.add('oo'); cell.classList.add('oo'); }
 }
 
+// Tant que rien n'a defile sous elle, la colonne figee n'a pas a porter
+// d'ombre : elle n'est alors que la premiere colonne. L'evenement scroll
+// ne remonte pas, on l'ecoute donc a la capture.
+document.addEventListener('scroll', (e) => {
+  const tw = e.target;
+  if (!tw.classList || !tw.classList.contains('tw')) return;
+  tw.classList.toggle('decale', tw.scrollLeft > 0);
+}, true);
+
 // Une grille groupee : replier un groupe cache ses lignes, le chevron
 // pivote, et le bouton dit lui-meme dans quel etat il est.
 function grilleReplie(btn) {
@@ -96,35 +105,6 @@ function grilleReplie(btn) {
   const cle = ligne.dataset.grp;
   ligne.closest('table').querySelectorAll('tr.sub[data-grp="' + cle + '"]')
     .forEach(r => r.classList.toggle('plie', plie));
-}
-
-// L'index alphabetique : une lettre ne filtre pas les groupes, seulement
-// les lignes qu'ils contiennent. Re-cliquer sur la lettre active la rend.
-function alphaFiltre(btn) {
-  const barre = btn.closest('.alpha');
-  const encore = btn.classList.contains('on');
-  barre.querySelectorAll('.alpha-b').forEach(b => b.classList.remove('on'));
-  const lettre = encore ? '' : (btn.dataset.alpha || '');
-  if (!encore) btn.classList.add('on');
-  else barre.querySelector('.alpha-b[data-alpha=""]').classList.add('on');
-  const grille = document.querySelector(barre.dataset.cible);
-  if (!grille) return;
-  grille.querySelectorAll('tbody tr.sub').forEach(r => {
-    const nom = (r.dataset.nom || '').toUpperCase();
-    r.hidden = lettre !== '' && !nom.startsWith(lettre);
-  });
-  let total = 0;
-  grille.querySelectorAll('tbody tr.grp').forEach(g => {
-    const cle = g.dataset.grp;
-    const vus = [...grille.querySelectorAll('tr.sub[data-grp="' + cle + '"]')]
-      .filter(r => !r.hidden).length;
-    g.hidden = vus === 0;
-    total += vus;
-    const ct = g.querySelector('.grp-ct');
-    if (ct) ct.textContent = vus + ' usagers';
-  });
-  const vide = grille.querySelector('tbody tr.vide');
-  if (vide) vide.hidden = total > 0;
 }
 
 // Replier un chapitre : la liste disparait, le chevron pivote, et le
@@ -166,7 +146,7 @@ function closePanels() {
 }
 
 document.addEventListener('click', (e) => {
-  if (!e.target.closest('.cgear-th')) closePanels();
+  if (!e.target.closest('.cgear-th, .cgear-wrap')) closePanels();
 });
 
 document.addEventListener('keydown', (e) => {

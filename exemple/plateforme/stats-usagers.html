@@ -113,7 +113,7 @@
     </nav>
     </aside>
     <main class="main">
-      <div class="content">
+      <div class="content plein">
         <div class="ph">
           <div class="ph-l">
             <h1 class="ph-title">Statistiques par usager</h1>
@@ -168,37 +168,63 @@
             <label class="form-check-inline"><input type="checkbox"> Inclure les comptes archivés</label>
             <span class="spacer"></span>
             <span class="tbar-lbl">19 usagers · 3 comptes</span>
-            <button class="btn sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg> Colonnes (10)</button>
-          </div>
-          <div class="tbar">
-            <div class="alpha" data-cible="#grille">
-              <button class="alpha-b on" data-alpha="" onclick="alphaFiltre(this)">Tous</button>
-              <button class="alpha-b" data-alpha="A" onclick="alphaFiltre(this)">A</button>
-              <button class="alpha-b" data-alpha="B" onclick="alphaFiltre(this)">B</button>
-              <button class="alpha-b" data-alpha="C" onclick="alphaFiltre(this)">C</button>
-              <button class="alpha-b" data-alpha="D" onclick="alphaFiltre(this)">D</button>
-              <button class="alpha-b" data-alpha="E" onclick="alphaFiltre(this)">E</button>
-              <button class="alpha-b" data-alpha="F" onclick="alphaFiltre(this)">F</button>
-              <button class="alpha-b" data-alpha="G" onclick="alphaFiltre(this)">G</button>
-              <button class="alpha-b" data-alpha="H" onclick="alphaFiltre(this)">H</button>
-              <button class="alpha-b" data-alpha="I" onclick="alphaFiltre(this)">I</button>
-              <button class="alpha-b" data-alpha="J" onclick="alphaFiltre(this)">J</button>
-              <button class="alpha-b" data-alpha="K" onclick="alphaFiltre(this)">K</button>
-              <button class="alpha-b" data-alpha="L" onclick="alphaFiltre(this)">L</button>
-              <button class="alpha-b" data-alpha="M" onclick="alphaFiltre(this)">M</button>
-              <button class="alpha-b" data-alpha="N" onclick="alphaFiltre(this)">N</button>
-              <button class="alpha-b" data-alpha="O" onclick="alphaFiltre(this)">O</button>
-              <button class="alpha-b" data-alpha="P" onclick="alphaFiltre(this)">P</button>
-              <button class="alpha-b" data-alpha="Q" onclick="alphaFiltre(this)">Q</button>
-              <button class="alpha-b" data-alpha="R" onclick="alphaFiltre(this)">R</button>
-              <button class="alpha-b" data-alpha="S" onclick="alphaFiltre(this)">S</button>
-              <button class="alpha-b" data-alpha="T" onclick="alphaFiltre(this)">T</button>
-              <button class="alpha-b" data-alpha="U" onclick="alphaFiltre(this)">U</button>
-              <button class="alpha-b" data-alpha="V" onclick="alphaFiltre(this)">V</button>
-              <button class="alpha-b" data-alpha="W" onclick="alphaFiltre(this)">W</button>
-              <button class="alpha-b" data-alpha="X" onclick="alphaFiltre(this)">X</button>
-              <button class="alpha-b" data-alpha="Y" onclick="alphaFiltre(this)">Y</button>
-              <button class="alpha-b" data-alpha="Z" onclick="alphaFiltre(this)">Z</button>
+            <div class="cgear-wrap">
+              <button class="cgear" aria-label="Choisir les colonnes" onclick="togCols(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.821.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
+              <div class="cpanel">
+                <div class="cph"><span class="cpt">Colonnes</span><button class="cprst">Réinitialiser</button></div>
+                <div class="cplist">
+                  <div class="crow lk">
+                    <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                    <input type="checkbox" class="cck" data-col="usager" checked disabled>
+                    <span class="clbl">Usager</span>
+                  </div>
+                  <div class="crow">
+                    <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                    <input type="checkbox" class="cck" data-col="entite" checked>
+                    <span class="clbl">Entité</span>
+                  </div>
+                  <div class="crow">
+                    <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                    <input type="checkbox" class="cck" data-col="derniere" checked>
+                    <span class="clbl">Dernière activité</span>
+                  </div>
+                  <div class="crow">
+                    <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                    <input type="checkbox" class="cck" data-col="ev-n" checked>
+                    <span class="clbl">Évaluation — séances</span>
+                  </div>
+                  <div class="crow">
+                    <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                    <input type="checkbox" class="cck" data-col="ev-t" checked>
+                    <span class="clbl">Évaluation — temps</span>
+                  </div>
+                  <div class="crow">
+                    <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                    <input type="checkbox" class="cck" data-col="fo-n" checked>
+                    <span class="clbl">Formation — séances</span>
+                  </div>
+                  <div class="crow">
+                    <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                    <input type="checkbox" class="cck" data-col="fo-t" checked>
+                    <span class="clbl">Formation — temps</span>
+                  </div>
+                  <div class="crow">
+                    <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                    <input type="checkbox" class="cck" data-col="re-n" checked>
+                    <span class="clbl">Ressource — séances</span>
+                  </div>
+                  <div class="crow">
+                    <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                    <input type="checkbox" class="cck" data-col="re-t" checked>
+                    <span class="clbl">Ressource — temps</span>
+                  </div>
+                  <div class="crow">
+                    <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                    <input type="checkbox" class="cck" data-col="total" checked>
+                    <span class="clbl">Temps total</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="tw">
@@ -213,16 +239,16 @@
                   <th></th>
                 </tr>
                 <tr class="thr">
-                  <th class="anc srt">Usager</th>
-                  <th class="srt">Entité</th>
-                  <th class="num srt">Dernière activité</th>
-                  <th class="num gc1">Séances</th>
-                  <th class="num gc1 srt">Temps</th>
-                  <th class="num gc2">Séances</th>
-                  <th class="num gc2 srt">Temps</th>
-                  <th class="num gc3">Séances</th>
-                  <th class="num gc3 srt">Temps</th>
-                  <th class="num srt">Temps total</th>
+                  <th class="anc srt" data-col="usager">Usager<span class="rez"></span></th>
+                  <th class="srt" data-col="entite">Entité<span class="rez"></span></th>
+                  <th class="num srt" data-col="derniere">Dernière activité<span class="rez"></span></th>
+                  <th class="num gc1 srt" data-col="ev-n">Séances<span class="rez"></span></th>
+                  <th class="num gc1 srt" data-col="ev-t">Temps<span class="rez"></span></th>
+                  <th class="num gc2 srt" data-col="fo-n">Séances<span class="rez"></span></th>
+                  <th class="num gc2 srt" data-col="fo-t">Temps<span class="rez"></span></th>
+                  <th class="num gc3 srt" data-col="re-n">Séances<span class="rez"></span></th>
+                  <th class="num gc3 srt" data-col="re-t">Temps<span class="rez"></span></th>
+                  <th class="num srt" data-col="total">Temps total</th>
                 </tr>
                 <tr class="thr-filter">
                   <th class="anc"><input class="th-search" type="search" aria-label="Filtrer les usagers" placeholder="Filtrer…"></th>
@@ -612,9 +638,6 @@
                   <td class="num gc3">0 h 28</td>
                   <td class="num fort"><span class="cbar">6 h 18<span class="cbar-fill" style="width:56%"></span></span></td>
                 </tr>
-                <tr class="vide" hidden>
-                  <td colspan="10"><span class="empty-msg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg> Aucun usager pour cette lettre</span></td>
-                </tr>
               </tbody>
               <tfoot>
                 <tr>
@@ -633,14 +656,8 @@
             </table>
           </div>
           <div class="tfoot">
-            <span class="fi">19 usagers affichés sur 248 · période du 1 janv. au 30 sept. 2026</span>
-            <div class="pgn">
-              <button class="pb">Précédent</button>
-              <button class="pb on">1</button>
-              <button class="pb">2</button>
-              <button class="pb">3</button>
-              <button class="pb">Suivant</button>
-            </div>
+            <span class="fi">19 usagers · 3 comptes · période du 1 janv. au 30 sept. 2026</span>
+            <span class="fi">Temps cumulé : 62 h 57</span>
           </div>
         </div>
       </div>

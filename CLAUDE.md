@@ -71,10 +71,11 @@ La référence des composants est `index.html` : chaque section montre le rendu,
 | Une page de réglages | `.form-body > .col + .col`, chaque `.col` contient des `.fs-block` |
 | Un sujet et ce qui l'entoure | `.form-body.main-side` — colonne principale large, colonne de côté étroite |
 | Un tableau | `.tcard > .tw > table` avec `tr.thr` (libellés) puis `tr.thr-filter` (filtres), puis `.tfoot` |
-| Une grille de données | `.tcard.grid > .tbar + .tw > table` — l'en-tête et la colonne `.anc` se figent, `tfoot` colle en bas. `tr.thg` porte les groupes de colonnes, `.gc1`/`.gc2`/`.gc3` leur teinte, `td.num` les chiffres |
+| Une grille de données | `.tcard.grid > .tbar + .tw > table` — l'en-tête et la colonne `.anc` se figent, `tfoot` colle en bas. `tr.thg` porte les groupes de colonnes, `.gc1`/`.gc2`/`.gc3` leur teinte, `td.num` les chiffres. Un `<span class="rez">` dans chaque `th` de `.thr` rend la colonne redimensionnable |
+| Une grille qui occupe l'écran | `.content.plein` — la grille file jusqu'au bord droit et jusqu'en bas, c'est elle qui défile et non la page. Pas de pagination : on descend |
+| Choisir ses colonnes hors d'un en-tête | `.cgear-wrap > .cgear + .cpanel` dans la `.tbar` — dans une grille qui défile, la roue crantée doit rester hors du cadre, sinon son panneau s'y trouve coupé |
 | Un groupe de lignes repliable | `tr.grp[data-grp]` + `tr.sub[data-grp][data-nom]`, `grilleReplie(this)` sur le `.grp-tog` |
 | Comparer une valeur d'une ligne à l'autre | `.cbar > .cbar-fill` dans la cellule, largeur en `style="width:NN%"` |
-| Entrer dans une longue liste de noms | `.alpha[data-cible="#id"] > .alpha-b[data-alpha]`, `alphaFiltre(this)` — l'index mord sur `data-nom` |
 | Un filtre de colonne | `input.th-search` ou `.w-dd-wrap.block > .w-dd-btn.sm` |
 | Les actions d'une ligne | dernière cellule `td.catd > button.rdots + .rmenu > .rmi` |
 | Un statut dans une cellule | `<span class="stb ston"><span class="stdon"></span>Actif</span>` |

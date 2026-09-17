@@ -731,6 +731,46 @@
   margin-bottom: 0;
 }
 
+/* Ecran plein : la grille n'est pas une carte posee dans une page, elle
+   est la page. Elle file jusqu'au bord droit et jusqu'au bas de la
+   fenetre, et c'est elle qui defile — pas l'ecran autour. Une marge a
+   droite ne ferait qu'amputer les colonnes qu'on cherche a voir. */
+.content.plein {
+  padding: 24px 0 0 32px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* Le titre, lui, garde sa marge : il se lit, il ne defile pas. */
+.content.plein>.ph {
+  padding-right: 32px;
+}
+
+.content.plein>.tcard.grid>.tbar:first-child {
+  border-radius: var(--rl) 0 0 0;
+}
+
+.content.plein>.tcard.grid {
+  flex: 1;
+  min-height: 0;
+  border-right: 0;
+  border-bottom: 0;
+  border-radius: var(--rl) 0 0 0;
+  box-shadow: none;
+}
+
+.content.plein>.tcard.grid>.tw {
+  max-height: none;
+  flex: 1;
+  min-height: 0;
+  border-radius: var(--rl) 0 0 0;
+}
+
+.content.plein>.tcard.grid>.tfoot {
+  border-radius: 0;
+}
+
 /* Un ecran de lecture n'a pas a s'etaler sur toute la largeur d'un grand
    ecran : passe une certaine longueur de ligne on ne lit plus, on balaie. */
 .content.tight {
@@ -1058,8 +1098,17 @@
    mesure la colonne, et de qui parle la ligne. L'en-tete et la premiere
    colonne se figent donc pendant que le reste defile.
    ========================================================== */
+/* overflow visible : le panneau de colonnes s'ouvre depuis la barre
+   d'outils et doit pouvoir recouvrir la grille. C'est .tw qui coupe, et
+   les arrondis sont portes par les elements de bord. */
 .tcard.grid {
-  overflow: hidden;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+}
+
+.tcard.grid>.tbar:first-child {
+  border-radius: var(--rl) var(--rl) 0 0;
 }
 
 /* La barre d'outils appartient a la grille, pas a la page : filtrer,
@@ -1091,6 +1140,22 @@
   overflow: auto;
   max-height: 64vh;
   border-radius: var(--rl) var(--rl) 0 0;
+}
+
+/* Le tableau s'etire quand il tient dans la largeur, et deborde quand il
+   n'y tient pas : les colonnes gardent une largeur lisible plutot que de
+   se serrer jusqu'a l'illisible. */
+.tcard.grid table {
+  width: 100%;
+}
+
+.tcard.grid .anc {
+  min-width: 320px;
+}
+
+.tcard.grid th.num,
+.tcard.grid td.num {
+  min-width: 124px;
 }
 
 /* separate, et non collapse : en collapse une bordure appartient a deux
@@ -1151,15 +1216,26 @@
   background: #fff;
 }
 
+/* .tcard thead th porte position:relative pour la poignee de
+   redimensionnement, et gagne sur .anc : sans ce rappel, l'en-tete de la
+   colonne d'ancrage part avec le defilement pendant que ses cellules
+   restent — l'en-tete ne nomme plus la bonne colonne. */
 .tcard.grid thead .anc {
+  position: sticky;
+  left: 0;
   z-index: 4;
 }
 
 /* Ce qui detache la colonne figee, c'est l'ombre qu'elle porte sur ce qui
-   passe dessous, pas un trait plus noir que les autres. */
+   passe dessous, pas un trait plus noir que les autres. Et elle ne la
+   porte que quand quelque chose passe dessous : tant que rien n'a defile,
+   la colonne est une colonne comme les autres. */
 .tcard.grid .anc {
   border-right: 1px solid var(--bd);
-  box-shadow: 5px 0 9px -7px rgba(17, 24, 39, .45);
+}
+
+.tcard.grid .tw.decale .anc {
+  box-shadow: 7px 0 12px -8px rgba(17, 24, 39, .55);
 }
 
 .tcard.grid tbody tr:hover .anc {
@@ -1310,14 +1386,6 @@
   display: none;
 }
 
-/* Un filtre qui ne rend rien doit le dire : une grille vide sans un mot
-   laisse croire a une panne. */
-.tcard.grid tbody tr.vide td {
-  text-align: center;
-  padding: 30px 14px;
-  border-right: 0;
-}
-
 /* --- Ligne de totaux, collee en bas --- */
 /* Les totaux ne sont pas la derniere ligne des donnees : ils restent
    visibles pendant qu'on parcourt, comme l'en-tete en haut. */
@@ -1339,41 +1407,6 @@
 .tcard.grid tfoot .anc {
   background: var(--a1);
   z-index: 4;
-}
-
-/* --- Index alphabetique --- */
-/* Une liste de milliers de noms ne se parcourt pas a la molette : on y
-   entre par une lettre. */
-.alpha {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 3px;
-}
-
-.alpha-b {
-  height: 26px;
-  min-width: 26px;
-  padding: 0 6px;
-  font-family: inherit;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--t2);
-  background: #fff;
-  border: 1px solid var(--bd);
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background .1s, color .1s, border-color .1s;
-}
-
-.alpha-b:hover {
-  background: var(--ps);
-  color: var(--t1);
-}
-
-.alpha-b.on {
-  background: var(--a);
-  border-color: var(--a);
-  color: #fff;
 }
 
 /* --- Contenu de cellule --- */
@@ -1661,6 +1694,14 @@ a.nmain:hover {
   width: 44px;
   text-align: center !important;
   position: relative;
+}
+
+/* La roue crantee ne vit pas que dans un en-tete de tableau : dans une
+   grille qui defile elle doit rester hors du cadre de defilement, sinon le
+   panneau qu'elle ouvre s'y trouve coupe. */
+.cgear-wrap {
+  position: relative;
+  display: inline-flex;
 }
 
 .cgear {
