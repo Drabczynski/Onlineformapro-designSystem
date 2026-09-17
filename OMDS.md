@@ -58,6 +58,7 @@ La référence des composants est `index.html` : chaque section montre le rendu,
 | Une fenêtre modale | `.modal-veil[hidden] > .modal (.modal-header + .modal-body + .modal-footer)`, ouverte par `modalOuvre('id')`, fermée par `modalFerme(this)` |
 | Un panneau latéral | `.modal-veil.side[hidden] > .drawer (.drawer-head + .drawer-body)` — même ouverture, même fermeture |
 | Un widget qu'on peut ranger | `.w-grip` dans son `.w-head` : glisser-déposer entre `.wcol`, et flèches au clavier |
+| Un widget qu'on peut retirer | `.w-close` dans son `.w-head`, `onclick="widgetRetire(this)"` |
 | Un widget à poser depuis un panneau | une `<template>` qui contient le `.w`, posée par `widgetAjoute('id', this)` |
 | Une liste de choix | `.w-dd-wrap.block > .w-dd-btn.field + .w-dd-menu > .w-dd-item` |
 | Un réglage qui s'applique tout de suite | `.form-toggle > .form-toggle-txt (.form-toggle-lbl + .form-hint) + .form-switch` — le libellé à gauche, l'interrupteur à droite |

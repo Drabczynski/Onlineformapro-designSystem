@@ -2627,9 +2627,32 @@ textarea.form-input {
   cursor: grabbing;
 }
 
-.w-grip svg {
+.w-grip svg,
+.w-close svg {
   width: 14px;
   height: 14px;
+}
+
+/* Retirer le widget. Le rouge n'arrive qu'au survol : une croix rouge en
+   permanence sur chaque carte donnerait un tableau de bord en alerte. */
+.w-close {
+  width: 24px;
+  height: 24px;
+  border: 0;
+  background: none;
+  color: var(--t3);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  padding: 0;
+}
+
+.w-close:hover {
+  background: var(--d1);
+  color: var(--d);
 }
 
 /* La carte quitte le flux et suit le doigt : elle se souleve d'un cheveu et

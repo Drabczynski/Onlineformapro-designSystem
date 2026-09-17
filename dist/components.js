@@ -500,6 +500,34 @@ document.addEventListener('keydown', (e) => {
   widgetDeplace(poignee, pas[0], pas[1]);
 });
 
+// ---- Retirer un widget ----
+function widgetRetire(btn) {
+  const w = btn.closest('.w');
+  if (!w || !w.parentElement) return;
+  const colonnes = colonnesDe(w);
+  const cle = w.dataset.wg;
+
+  // Le retrait se fait une fois, que l'animation ait joue ou non : sans ce
+  // filet, un onglet en arriere-plan garderait le widget a l'ecran.
+  let fait = false;
+  const enlever = () => {
+    if (fait) return;
+    fait = true;
+    glisse(colonnes, () => w.remove());
+    // Le catalogue le repropose : on vient de liberer la place.
+    if (cle) {
+      const ajout = document.querySelector(`[onclick*="widgetAjoute('${cle}'"]`);
+      if (ajout) { ajout.disabled = false; ajout.textContent = 'Ajouter'; }
+    }
+  };
+
+  const sortie = w.animate(
+    [{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'scale(0.97)' }],
+    { duration: 140, easing: 'ease-in' });
+  sortie.onfinish = enlever;
+  setTimeout(enlever, 260);
+}
+
 // ---- Ajouter un widget depuis le panneau ----
 // L'apercu est une copie du modele : rien a redessiner quand le widget
 // change, et ce qu'on montre est exactement ce qu'on pose.
@@ -521,6 +549,8 @@ function widgetAjoute(cle, btn) {
   // a choisir ou poser le widget.
   const cible = colonnes.reduce((a, b) => (a.offsetHeight <= b.offsetHeight ? a : b));
   const neuf = modele.content.firstElementChild.cloneNode(true);
+  // On retient d'ou il vient : retire, le catalogue pourra le reproposer.
+  neuf.dataset.wg = cle;
   cible.appendChild(neuf);
   neuf.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   btn.disabled = true;
