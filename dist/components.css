@@ -1175,6 +1175,8 @@
 
 .tcard.grid thead th {
   background: var(--ps);
+  padding-left: 18px;
+  padding-right: 18px;
 }
 
 .tcard.grid th,
@@ -1189,8 +1191,8 @@
 }
 
 .tcard.grid td {
-  padding: 0 14px;
-  height: 38px;
+  padding: 0 18px;
+  height: 48px;
   white-space: nowrap;
 }
 
@@ -1223,7 +1225,10 @@
 .tcard.grid thead .anc {
   position: sticky;
   left: 0;
-  z-index: 4;
+  /* au-dessus des poignees de redimensionnement (z-index 10), sinon
+     celles des colonnes qui defilent passent par-dessus la colonne figee
+     et y laissent des traits verticaux. */
+  z-index: 12;
 }
 
 /* Ce qui detache la colonne figee, c'est l'ombre qu'elle porte sur ce qui
@@ -1251,7 +1256,7 @@
   letter-spacing: .06em;
   text-transform: uppercase;
   color: var(--t2);
-  padding: 8px 14px 7px;
+  padding: 8px 18px 7px;
 }
 
 .gc1 {

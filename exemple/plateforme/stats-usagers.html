@@ -185,8 +185,23 @@
                   </div>
                   <div class="crow">
                     <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                    <input type="checkbox" class="cck" data-col="groupe" checked>
+                    <span class="clbl">Groupe</span>
+                  </div>
+                  <div class="crow">
+                    <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                    <input type="checkbox" class="cck" data-col="inscrit" checked>
+                    <span class="clbl">Inscrit le</span>
+                  </div>
+                  <div class="crow">
+                    <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
                     <input type="checkbox" class="cck" data-col="derniere" checked>
                     <span class="clbl">Dernière activité</span>
+                  </div>
+                  <div class="crow">
+                    <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                    <input type="checkbox" class="cck" data-col="cx" checked>
+                    <span class="clbl">Connexions</span>
                   </div>
                   <div class="crow">
                     <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
@@ -200,6 +215,11 @@
                   </div>
                   <div class="crow">
                     <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                    <input type="checkbox" class="cck" data-col="ev-r" checked>
+                    <span class="clbl">Évaluation — réussite</span>
+                  </div>
+                  <div class="crow">
+                    <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
                     <input type="checkbox" class="cck" data-col="fo-n" checked>
                     <span class="clbl">Formation — séances</span>
                   </div>
@@ -207,6 +227,11 @@
                     <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
                     <input type="checkbox" class="cck" data-col="fo-t" checked>
                     <span class="clbl">Formation — temps</span>
+                  </div>
+                  <div class="crow">
+                    <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
+                    <input type="checkbox" class="cck" data-col="fo-p" checked>
+                    <span class="clbl">Formation — progression</span>
                   </div>
                   <div class="crow">
                     <span class="cdg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>
@@ -232,20 +257,25 @@
               <thead>
                 <tr class="thg">
                   <th class="anc"></th>
-                  <th colspan="2"></th>
-                  <th class="gc1" colspan="2">Évaluation</th>
-                  <th class="gc2" colspan="2">Formation</th>
+                  <th colspan="5"></th>
+                  <th class="gc1" colspan="3">Évaluation</th>
+                  <th class="gc2" colspan="3">Formation</th>
                   <th class="gc3" colspan="2">Ressource</th>
                   <th></th>
                 </tr>
                 <tr class="thr">
                   <th class="anc srt" data-col="usager">Usager<span class="rez"></span></th>
                   <th class="srt" data-col="entite">Entité<span class="rez"></span></th>
+                  <th class="srt" data-col="groupe">Groupe<span class="rez"></span></th>
+                  <th class="num srt" data-col="inscrit">Inscrit le<span class="rez"></span></th>
                   <th class="num srt" data-col="derniere">Dernière activité<span class="rez"></span></th>
+                  <th class="num srt" data-col="cx">Connexions<span class="rez"></span></th>
                   <th class="num gc1 srt" data-col="ev-n">Séances<span class="rez"></span></th>
                   <th class="num gc1 srt" data-col="ev-t">Temps<span class="rez"></span></th>
+                  <th class="num gc1 srt" data-col="ev-r">Réussite<span class="rez"></span></th>
                   <th class="num gc2 srt" data-col="fo-n">Séances<span class="rez"></span></th>
                   <th class="num gc2 srt" data-col="fo-t">Temps<span class="rez"></span></th>
+                  <th class="num gc2 srt" data-col="fo-p">Progression<span class="rez"></span></th>
                   <th class="num gc3 srt" data-col="re-n">Séances<span class="rez"></span></th>
                   <th class="num gc3 srt" data-col="re-t">Temps<span class="rez"></span></th>
                   <th class="num srt" data-col="total">Temps total</th>
@@ -253,9 +283,10 @@
                 <tr class="thr-filter">
                   <th class="anc"><input class="th-search" type="search" aria-label="Filtrer les usagers" placeholder="Filtrer…"></th>
                   <th><input class="th-search" type="search" aria-label="Filtrer les entités" placeholder="Filtrer…"></th>
-                  <th></th>
-                  <th class="gc1" colspan="2"></th>
-                  <th class="gc2" colspan="2"></th>
+                  <th><input class="th-search" type="search" aria-label="Filtrer les groupes" placeholder="Filtrer…"></th>
+                  <th colspan="3"></th>
+                  <th class="gc1" colspan="3"></th>
+                  <th class="gc2" colspan="3"></th>
                   <th class="gc3" colspan="2"></th>
                   <th></th>
                 </tr>
@@ -271,12 +302,12 @@
                   </td>
                   <td class="nil">Compte principal</td>
                   <td class="nil">—</td>
-                  <td class="num gc1">6</td>
-                  <td class="num gc1">2 h 22</td>
-                  <td class="num gc2">33</td>
-                  <td class="num gc2">20 h 18</td>
-                  <td class="num gc3">3</td>
-                  <td class="num gc3">1 h 03</td>
+                  <td class="num nil">—</td>
+                  <td class="num nil">—</td>
+                  <td class="num">493</td>
+                  <td class="num gc1">6</td><td class="num gc1">2 h 22</td><td class="num gc1">74 %</td>
+                  <td class="num gc2">33</td><td class="num gc2">20 h 18</td><td class="num gc2">40 %</td>
+                  <td class="num gc3">3</td><td class="num gc3">1 h 03</td>
                   <td class="num fort">23 h 43</td>
                 </tr>
                 <tr class="sub" data-grp="c1" data-nom="CARON">
@@ -287,13 +318,13 @@
                     </div>
                   </td>
                   <td>RH Central</td>
+                  <td>Juridique</td>
+                  <td class="num">15/01/2025</td>
                   <td class="num">10 sept.</td>
-                  <td class="num gc1">1</td>
-                  <td class="num gc1">0 h 07</td>
-                  <td class="num gc2">2</td>
-                  <td class="num gc2">0 h 58</td>
-                  <td class="num gc3">1</td>
-                  <td class="num gc3">0 h 12</td>
+                  <td class="num">31</td>
+                  <td class="num gc1">1</td><td class="num gc1">0 h 07</td><td class="num gc1">61 %</td>
+                  <td class="num gc2">2</td><td class="num gc2">0 h 58</td><td class="num gc2">19 %</td>
+                  <td class="num gc3">1</td><td class="num gc3">0 h 12</td>
                   <td class="num fort"><span class="cbar">1 h 17<span class="cbar-fill" style="width:11%"></span></span></td>
                 </tr>
                 <tr class="sub" data-grp="c1" data-nom="CHEVALIER">
@@ -304,13 +335,13 @@
                     </div>
                   </td>
                   <td>Direction</td>
+                  <td>Management</td>
+                  <td class="num">19/11/2023</td>
                   <td class="num">8 sept.</td>
-                  <td class="num gc1">2</td>
-                  <td class="num gc1">1 h 03</td>
-                  <td class="num gc2">11</td>
-                  <td class="num gc2">7 h 01</td>
-                  <td class="num gc3">1</td>
-                  <td class="num gc3">0 h 33</td>
+                  <td class="num">216</td>
+                  <td class="num gc1">2</td><td class="num gc1">1 h 03</td><td class="num gc1">88 %</td>
+                  <td class="num gc2">11</td><td class="num gc2">7 h 01</td><td class="num gc2">64 %</td>
+                  <td class="num gc3">1</td><td class="num gc3">0 h 33</td>
                   <td class="num fort"><span class="cbar">8 h 37<span class="cbar-fill" style="width:77%"></span></span></td>
                 </tr>
                 <tr class="sub" data-grp="c1" data-nom="FERRAND">
@@ -321,13 +352,13 @@
                     </div>
                   </td>
                   <td>RH Central</td>
+                  <td>Management</td>
+                  <td class="num">22/03/2024</td>
                   <td class="num">11 sept.</td>
-                  <td class="num gc1">1</td>
-                  <td class="num gc1">0 h 19</td>
-                  <td class="num gc2">3</td>
-                  <td class="num gc2">1 h 41</td>
-                  <td class="num gc3 nil">—</td>
-                  <td class="num gc3 nil">—</td>
+                  <td class="num">54</td>
+                  <td class="num gc1">1</td><td class="num gc1">0 h 19</td><td class="num gc1">74 %</td>
+                  <td class="num gc2">3</td><td class="num gc2">1 h 41</td><td class="num gc2">31 %</td>
+                  <td class="num gc3 nil">—</td><td class="num gc3 nil">—</td>
                   <td class="num fort"><span class="cbar">2 h 00<span class="cbar-fill" style="width:18%"></span></span></td>
                 </tr>
                 <tr class="sub" data-grp="c1" data-nom="GIRAUD">
@@ -338,13 +369,13 @@
                     </div>
                   </td>
                   <td>Sécurité au travail</td>
+                  <td>Sécurité</td>
+                  <td class="num">02/05/2024</td>
                   <td class="num">5 sept.</td>
-                  <td class="num gc1">1</td>
-                  <td class="num gc1">0 h 12</td>
-                  <td class="num gc2 nil">—</td>
-                  <td class="num gc2 nil">—</td>
-                  <td class="num gc3 nil">—</td>
-                  <td class="num gc3 nil">—</td>
+                  <td class="num">23</td>
+                  <td class="num gc1">1</td><td class="num gc1">0 h 12</td><td class="num gc1">55 %</td>
+                  <td class="num gc2 nil">—</td><td class="num gc2 nil">—</td><td class="num gc2 nil">—</td>
+                  <td class="num gc3 nil">—</td><td class="num gc3 nil">—</td>
                   <td class="num fort"><span class="cbar">0 h 12<span class="cbar-fill" style="width:2%"></span></span></td>
                 </tr>
                 <tr class="sub" data-grp="c1" data-nom="MARTINEZ">
@@ -355,13 +386,13 @@
                     </div>
                   </td>
                   <td>Réseau Est</td>
+                  <td>Bureautique</td>
+                  <td class="num">27/08/2025</td>
                   <td class="num">2 sept.</td>
-                  <td class="num gc1 nil">—</td>
-                  <td class="num gc1 nil">—</td>
-                  <td class="num gc2 nil">—</td>
-                  <td class="num gc2 nil">—</td>
-                  <td class="num gc3 nil">—</td>
-                  <td class="num gc3 nil">—</td>
+                  <td class="num">3</td>
+                  <td class="num gc1 nil">—</td><td class="num gc1 nil">—</td><td class="num gc1 nil">—</td>
+                  <td class="num gc2 nil">—</td><td class="num gc2 nil">—</td><td class="num gc2 nil">—</td>
+                  <td class="num gc3 nil">—</td><td class="num gc3 nil">—</td>
                   <td class="num fort"><span class="nil">—</span></td>
                 </tr>
                 <tr class="sub" data-grp="c1" data-nom="MASSON">
@@ -372,13 +403,13 @@
                     </div>
                   </td>
                   <td>Maintenance</td>
+                  <td>Sécurité</td>
+                  <td class="num">08/06/2024</td>
                   <td class="num">9 sept.</td>
-                  <td class="num gc1 nil">—</td>
-                  <td class="num gc1 nil">—</td>
-                  <td class="num gc2">1</td>
-                  <td class="num gc2">0 h 26</td>
-                  <td class="num gc3 nil">—</td>
-                  <td class="num gc3 nil">—</td>
+                  <td class="num">12</td>
+                  <td class="num gc1 nil">—</td><td class="num gc1 nil">—</td><td class="num gc1 nil">—</td>
+                  <td class="num gc2">1</td><td class="num gc2">0 h 26</td><td class="num gc2">9 %</td>
+                  <td class="num gc3 nil">—</td><td class="num gc3 nil">—</td>
                   <td class="num fort"><span class="cbar">0 h 26<span class="cbar-fill" style="width:4%"></span></span></td>
                 </tr>
                 <tr class="sub" data-grp="c1" data-nom="RENARD">
@@ -389,13 +420,13 @@
                     </div>
                   </td>
                   <td>Produit</td>
+                  <td>Bureautique</td>
+                  <td class="num">11/09/2024</td>
                   <td class="num">12 sept.</td>
-                  <td class="num gc1 nil">—</td>
-                  <td class="num gc1 nil">—</td>
-                  <td class="num gc2 nil">—</td>
-                  <td class="num gc2 nil">—</td>
-                  <td class="num gc3 nil">—</td>
-                  <td class="num gc3 nil">—</td>
+                  <td class="num">6</td>
+                  <td class="num gc1 nil">—</td><td class="num gc1 nil">—</td><td class="num gc1 nil">—</td>
+                  <td class="num gc2 nil">—</td><td class="num gc2 nil">—</td><td class="num gc2 nil">—</td>
+                  <td class="num gc3 nil">—</td><td class="num gc3 nil">—</td>
                   <td class="num fort"><span class="nil">—</span></td>
                 </tr>
                 <tr class="sub" data-grp="c1" data-nom="RIVIÈRE">
@@ -406,13 +437,13 @@
                     </div>
                   </td>
                   <td>RH Central</td>
+                  <td>Bureautique</td>
+                  <td class="num">04/02/2024</td>
                   <td class="num">14 sept.</td>
-                  <td class="num gc1">1</td>
-                  <td class="num gc1">0 h 41</td>
-                  <td class="num gc2">16</td>
-                  <td class="num gc2">10 h 12</td>
-                  <td class="num gc3">1</td>
-                  <td class="num gc3">0 h 18</td>
+                  <td class="num">148</td>
+                  <td class="num gc1">1</td><td class="num gc1">0 h 41</td><td class="num gc1">92 %</td>
+                  <td class="num gc2">16</td><td class="num gc2">10 h 12</td><td class="num gc2">78 %</td>
+                  <td class="num gc3">1</td><td class="num gc3">0 h 18</td>
                   <td class="num fort"><span class="cbar">11 h 11<span class="cbar-fill" style="width:100%"></span></span></td>
                 </tr>
                 <tr class="grp" data-grp="c2">
@@ -425,12 +456,12 @@
                   </td>
                   <td class="nil">244 inscrits sur la période</td>
                   <td class="nil">—</td>
-                  <td class="num gc1">6</td>
-                  <td class="num gc1">3 h 31</td>
-                  <td class="num gc2">35</td>
-                  <td class="num gc2">22 h 07</td>
-                  <td class="num gc3">4</td>
-                  <td class="num gc3">1 h 21</td>
+                  <td class="num nil">—</td>
+                  <td class="num nil">—</td>
+                  <td class="num">523</td>
+                  <td class="num gc1">6</td><td class="num gc1">3 h 31</td><td class="num gc1">81 %</td>
+                  <td class="num gc2">35</td><td class="num gc2">22 h 07</td><td class="num gc2">47 %</td>
+                  <td class="num gc3">4</td><td class="num gc3">1 h 21</td>
                   <td class="num fort">26 h 59</td>
                 </tr>
                 <tr class="sub" data-grp="c2" data-nom="BONNET">
@@ -441,13 +472,13 @@
                     </div>
                   </td>
                   <td>Réseau Ouest</td>
+                  <td>Vente</td>
+                  <td class="num">24/03/2026</td>
                   <td class="num">11 sept.</td>
-                  <td class="num gc1 nil">—</td>
-                  <td class="num gc1 nil">—</td>
-                  <td class="num gc2 nil">—</td>
-                  <td class="num gc2 nil">—</td>
-                  <td class="num gc3 nil">—</td>
-                  <td class="num gc3 nil">—</td>
+                  <td class="num">8</td>
+                  <td class="num gc1 nil">—</td><td class="num gc1 nil">—</td><td class="num gc1 nil">—</td>
+                  <td class="num gc2 nil">—</td><td class="num gc2 nil">—</td><td class="num gc2 nil">—</td>
+                  <td class="num gc3 nil">—</td><td class="num gc3 nil">—</td>
                   <td class="num fort"><span class="nil">—</span></td>
                 </tr>
                 <tr class="sub" data-grp="c2" data-nom="DRABCZYNSKI">
@@ -458,13 +489,13 @@
                     </div>
                   </td>
                   <td>Réseau Sud</td>
+                  <td>Bureautique</td>
+                  <td class="num">12/01/2026</td>
                   <td class="num">15 sept.</td>
-                  <td class="num gc1">1</td>
-                  <td class="num gc1">0 h 55</td>
-                  <td class="num gc2">9</td>
-                  <td class="num gc2">5 h 40</td>
-                  <td class="num gc3">1</td>
-                  <td class="num gc3">0 h 21</td>
+                  <td class="num">132</td>
+                  <td class="num gc1">1</td><td class="num gc1">0 h 55</td><td class="num gc1">90 %</td>
+                  <td class="num gc2">9</td><td class="num gc2">5 h 40</td><td class="num gc2">71 %</td>
+                  <td class="num gc3">1</td><td class="num gc3">0 h 21</td>
                   <td class="num fort"><span class="cbar">6 h 56<span class="cbar-fill" style="width:62%"></span></span></td>
                 </tr>
                 <tr class="sub" data-grp="c2" data-nom="FERRAND">
@@ -475,13 +506,13 @@
                     </div>
                   </td>
                   <td>RH Central</td>
+                  <td>Management</td>
+                  <td class="num">05/01/2026</td>
                   <td class="num">13 sept.</td>
-                  <td class="num gc1">2</td>
-                  <td class="num gc1">1 h 30</td>
-                  <td class="num gc2">13</td>
-                  <td class="num gc2">8 h 28</td>
-                  <td class="num gc3">1</td>
-                  <td class="num gc3">0 h 47</td>
+                  <td class="num">198</td>
+                  <td class="num gc1">2</td><td class="num gc1">1 h 30</td><td class="num gc1">95 %</td>
+                  <td class="num gc2">13</td><td class="num gc2">8 h 28</td><td class="num gc2">83 %</td>
+                  <td class="num gc3">1</td><td class="num gc3">0 h 47</td>
                   <td class="num fort"><span class="cbar">10 h 45<span class="cbar-fill" style="width:96%"></span></span></td>
                 </tr>
                 <tr class="sub" data-grp="c2" data-nom="HAMDI">
@@ -492,13 +523,13 @@
                     </div>
                   </td>
                   <td>Réseau Sud</td>
+                  <td>Vente</td>
+                  <td class="num">12/01/2026</td>
                   <td class="num">15 sept.</td>
-                  <td class="num gc1">1</td>
-                  <td class="num gc1">0 h 28</td>
-                  <td class="num gc2">5</td>
-                  <td class="num gc2">3 h 07</td>
-                  <td class="num gc3">1</td>
-                  <td class="num gc3">0 h 09</td>
+                  <td class="num">77</td>
+                  <td class="num gc1">1</td><td class="num gc1">0 h 28</td><td class="num gc1">81 %</td>
+                  <td class="num gc2">5</td><td class="num gc2">3 h 07</td><td class="num gc2">42 %</td>
+                  <td class="num gc3">1</td><td class="num gc3">0 h 09</td>
                   <td class="num fort"><span class="cbar">3 h 44<span class="cbar-fill" style="width:33%"></span></span></td>
                 </tr>
                 <tr class="sub" data-grp="c2" data-nom="LEGRAND">
@@ -509,13 +540,13 @@
                     </div>
                   </td>
                   <td>Maintenance</td>
+                  <td>Sécurité</td>
+                  <td class="num">16/02/2026</td>
                   <td class="num">9 sept.</td>
-                  <td class="num gc1">1</td>
-                  <td class="num gc1">0 h 22</td>
-                  <td class="num gc2">3</td>
-                  <td class="num gc2">1 h 36</td>
-                  <td class="num gc3 nil">—</td>
-                  <td class="num gc3 nil">—</td>
+                  <td class="num">35</td>
+                  <td class="num gc1">1</td><td class="num gc1">0 h 22</td><td class="num gc1">70 %</td>
+                  <td class="num gc2">3</td><td class="num gc2">1 h 36</td><td class="num gc2">27 %</td>
+                  <td class="num gc3 nil">—</td><td class="num gc3 nil">—</td>
                   <td class="num fort"><span class="cbar">1 h 58<span class="cbar-fill" style="width:18%"></span></span></td>
                 </tr>
                 <tr class="sub" data-grp="c2" data-nom="LEROY">
@@ -526,13 +557,13 @@
                     </div>
                   </td>
                   <td>Sécurité au travail</td>
+                  <td>Sécurité</td>
+                  <td class="num">03/02/2026</td>
                   <td class="num">14 sept.</td>
-                  <td class="num gc1 nil">—</td>
-                  <td class="num gc1 nil">—</td>
-                  <td class="num gc2">2</td>
-                  <td class="num gc2">1 h 14</td>
-                  <td class="num gc3 nil">—</td>
-                  <td class="num gc3 nil">—</td>
+                  <td class="num">29</td>
+                  <td class="num gc1 nil">—</td><td class="num gc1 nil">—</td><td class="num gc1 nil">—</td>
+                  <td class="num gc2">2</td><td class="num gc2">1 h 14</td><td class="num gc2">24 %</td>
+                  <td class="num gc3 nil">—</td><td class="num gc3 nil">—</td>
                   <td class="num fort"><span class="cbar">1 h 14<span class="cbar-fill" style="width:11%"></span></span></td>
                 </tr>
                 <tr class="sub" data-grp="c2" data-nom="PAYET">
@@ -543,13 +574,13 @@
                     </div>
                   </td>
                   <td>Produit</td>
+                  <td>Vente</td>
+                  <td class="num">19/02/2026</td>
                   <td class="num">13 sept.</td>
-                  <td class="num gc1">1</td>
-                  <td class="num gc1">0 h 16</td>
-                  <td class="num gc2">3</td>
-                  <td class="num gc2">2 h 02</td>
-                  <td class="num gc3">1</td>
-                  <td class="num gc3">0 h 04</td>
+                  <td class="num">44</td>
+                  <td class="num gc1">1</td><td class="num gc1">0 h 16</td><td class="num gc1">68 %</td>
+                  <td class="num gc2">3</td><td class="num gc2">2 h 02</td><td class="num gc2">35 %</td>
+                  <td class="num gc3">1</td><td class="num gc3">0 h 04</td>
                   <td class="num fort"><span class="cbar">2 h 22<span class="cbar-fill" style="width:21%"></span></span></td>
                 </tr>
                 <tr class="grp" data-grp="c3">
@@ -562,12 +593,12 @@
                   </td>
                   <td class="nil">13 inscrits</td>
                   <td class="nil">—</td>
-                  <td class="num gc1">2</td>
-                  <td class="num gc1">1 h 22</td>
-                  <td class="num gc2">16</td>
-                  <td class="num gc2">10 h 10</td>
-                  <td class="num gc3">2</td>
-                  <td class="num gc3">0 h 43</td>
+                  <td class="num nil">—</td>
+                  <td class="num nil">—</td>
+                  <td class="num">237</td>
+                  <td class="num gc1">2</td><td class="num gc1">1 h 22</td><td class="num gc1">86 %</td>
+                  <td class="num gc2">16</td><td class="num gc2">10 h 10</td><td class="num gc2">46 %</td>
+                  <td class="num gc3">2</td><td class="num gc3">0 h 43</td>
                   <td class="num fort">12 h 15</td>
                 </tr>
                 <tr class="sub" data-grp="c3" data-nom="BENALI">
@@ -578,13 +609,13 @@
                     </div>
                   </td>
                   <td>Services techniques</td>
+                  <td>Sécurité</td>
+                  <td class="num">02/09/2025</td>
                   <td class="num">4 sept.</td>
-                  <td class="num gc1 nil">—</td>
-                  <td class="num gc1 nil">—</td>
-                  <td class="num gc2 nil">—</td>
-                  <td class="num gc2 nil">—</td>
-                  <td class="num gc3 nil">—</td>
-                  <td class="num gc3 nil">—</td>
+                  <td class="num">2</td>
+                  <td class="num gc1 nil">—</td><td class="num gc1 nil">—</td><td class="num gc1 nil">—</td>
+                  <td class="num gc2 nil">—</td><td class="num gc2 nil">—</td><td class="num gc2 nil">—</td>
+                  <td class="num gc3 nil">—</td><td class="num gc3 nil">—</td>
                   <td class="num fort"><span class="nil">—</span></td>
                 </tr>
                 <tr class="sub" data-grp="c3" data-nom="MOREAU">
@@ -595,13 +626,13 @@
                     </div>
                   </td>
                   <td>Services techniques</td>
+                  <td>Bureautique</td>
+                  <td class="num">07/04/2025</td>
                   <td class="num">15 sept.</td>
-                  <td class="num gc1">1</td>
-                  <td class="num gc1">0 h 34</td>
-                  <td class="num gc2">7</td>
-                  <td class="num gc2">4 h 25</td>
-                  <td class="num gc3">1</td>
-                  <td class="num gc3">0 h 15</td>
+                  <td class="num">96</td>
+                  <td class="num gc1">1</td><td class="num gc1">0 h 34</td><td class="num gc1">84 %</td>
+                  <td class="num gc2">7</td><td class="num gc2">4 h 25</td><td class="num gc2">58 %</td>
+                  <td class="num gc3">1</td><td class="num gc3">0 h 15</td>
                   <td class="num fort"><span class="cbar">5 h 14<span class="cbar-fill" style="width:47%"></span></span></td>
                 </tr>
                 <tr class="sub" data-grp="c3" data-nom="PETIT">
@@ -612,13 +643,13 @@
                     </div>
                   </td>
                   <td>État civil</td>
+                  <td>Juridique</td>
+                  <td class="num">07/04/2025</td>
                   <td class="num">12 sept.</td>
-                  <td class="num gc1 nil">—</td>
-                  <td class="num gc1 nil">—</td>
-                  <td class="num gc2">1</td>
-                  <td class="num gc2">0 h 43</td>
-                  <td class="num gc3 nil">—</td>
-                  <td class="num gc3 nil">—</td>
+                  <td class="num">18</td>
+                  <td class="num gc1 nil">—</td><td class="num gc1 nil">—</td><td class="num gc1 nil">—</td>
+                  <td class="num gc2">1</td><td class="num gc2">0 h 43</td><td class="num gc2">14 %</td>
+                  <td class="num gc3 nil">—</td><td class="num gc3 nil">—</td>
                   <td class="num fort"><span class="cbar">0 h 43<span class="cbar-fill" style="width:6%"></span></span></td>
                 </tr>
                 <tr class="sub" data-grp="c3" data-nom="ROUSSEAU">
@@ -629,13 +660,13 @@
                     </div>
                   </td>
                   <td>Direction</td>
+                  <td>Management</td>
+                  <td class="num">07/04/2025</td>
                   <td class="num">10 sept.</td>
-                  <td class="num gc1">1</td>
-                  <td class="num gc1">0 h 48</td>
-                  <td class="num gc2">8</td>
-                  <td class="num gc2">5 h 02</td>
-                  <td class="num gc3">1</td>
-                  <td class="num gc3">0 h 28</td>
+                  <td class="num">121</td>
+                  <td class="num gc1">1</td><td class="num gc1">0 h 48</td><td class="num gc1">87 %</td>
+                  <td class="num gc2">8</td><td class="num gc2">5 h 02</td><td class="num gc2">66 %</td>
+                  <td class="num gc3">1</td><td class="num gc3">0 h 28</td>
                   <td class="num fort"><span class="cbar">6 h 18<span class="cbar-fill" style="width:56%"></span></span></td>
                 </tr>
               </tbody>
@@ -644,10 +675,15 @@
                   <td class="anc">Tous les comptes</td>
                   <td class="nil">—</td>
                   <td class="nil">—</td>
+                  <td class="num nil">—</td>
+                  <td class="num nil">—</td>
+                  <td class="num">1253</td>
                   <td class="num gc1">14</td>
                   <td class="num gc1">7 h 15</td>
+                  <td class="num gc1">79 %</td>
                   <td class="num gc2">84</td>
                   <td class="num gc2">52 h 35</td>
+                  <td class="num gc2">44 %</td>
                   <td class="num gc3">9</td>
                   <td class="num gc3">3 h 07</td>
                   <td class="num">62 h 57</td>
