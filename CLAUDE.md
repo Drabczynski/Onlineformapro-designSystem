@@ -72,7 +72,7 @@ La référence des composants est `index.html` : chaque section montre le rendu,
 | Un sujet et ce qui l'entoure | `.form-body.main-side` — colonne principale large, colonne de côté étroite |
 | Un tableau | `.tcard > .tw > table` avec `tr.thr` (libellés) puis `tr.thr-filter` (filtres), puis `.tfoot` |
 | Une grille de données | `.tcard.grid > .tbar + .tw > table` — l'en-tête et la colonne `.anc` se figent, `tfoot` colle en bas. `tr.thg` porte les groupes de colonnes, `.gc1`/`.gc2`/`.gc3` leur teinte, `td.num` les chiffres. Un `<span class="rez">` dans chaque `th` de `.thr` rend la colonne redimensionnable |
-| Une grille qui occupe l'écran | `.content.plein` — la grille file jusqu'au bord droit et jusqu'en bas, c'est elle qui défile et non la page. Pas de pagination : on descend |
+| Une grille qui occupe l'écran | `.content.plein` — la grille n'a plus de cadre : elle touche le menu à gauche, la fenêtre à droite et en bas, et c'est elle qui défile, pas la page. Le titre garde sa marge. Pas de pied de carte ni de pagination : la ligne de totaux ferme l'écran |
 | Choisir ses colonnes hors d'un en-tête | `.cgear-wrap > .cgear + .cpanel` dans la `.tbar` — dans une grille qui défile, la roue crantée doit rester hors du cadre, sinon son panneau s'y trouve coupé |
 | Un groupe de lignes repliable | `tr.grp[data-grp]` + `tr.sub[data-grp][data-nom]`, `grilleReplie(this)` sur le `.grp-tog` |
 | Comparer une valeur d'une ligne à l'autre | `.cbar > .cbar-fill` dans la cellule, largeur en `style="width:NN%"` |

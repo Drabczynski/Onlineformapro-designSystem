@@ -86,15 +86,6 @@ function togRow(btn) {
   if (!open) { menu.classList.add('oo'); cell.classList.add('oo'); }
 }
 
-// Tant que rien n'a defile sous elle, la colonne figee n'a pas a porter
-// d'ombre : elle n'est alors que la premiere colonne. L'evenement scroll
-// ne remonte pas, on l'ecoute donc a la capture.
-document.addEventListener('scroll', (e) => {
-  const tw = e.target;
-  if (!tw.classList || !tw.classList.contains('tw')) return;
-  tw.classList.toggle('decale', tw.scrollLeft > 0);
-}, true);
-
 // Une grille groupee : replier un groupe cache ses lignes, le chevron
 // pivote, et le bouton dit lui-meme dans quel etat il est.
 function grilleReplie(btn) {

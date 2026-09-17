@@ -736,7 +736,7 @@
    fenetre, et c'est elle qui defile — pas l'ecran autour. Une marge a
    droite ne ferait qu'amputer les colonnes qu'on cherche a voir. */
 .content.plein {
-  padding: 24px 0 0 32px;
+  padding: 24px 0 0;
   display: flex;
   flex-direction: column;
   min-height: 0;
@@ -744,30 +744,28 @@
 
 /* Le titre, lui, garde sa marge : il se lit, il ne defile pas. */
 .content.plein>.ph {
-  padding-right: 32px;
+  padding: 0 32px;
 }
 
-.content.plein>.tcard.grid>.tbar:first-child {
-  border-radius: var(--rl) 0 0 0;
-}
-
+/* La grille n'a plus de bord a elle : elle touche le menu a gauche, la
+   fenetre a droite et en bas. Un cadre autour d'un plan de travail ne fait
+   que retrancher de la place a ce qu'on y regarde. */
 .content.plein>.tcard.grid {
   flex: 1;
   min-height: 0;
-  border-right: 0;
-  border-bottom: 0;
-  border-radius: var(--rl) 0 0 0;
+  border: 0;
+  border-radius: 0;
   box-shadow: none;
+}
+
+.content.plein>.tcard.grid>.tbar:first-child {
+  border-radius: 0;
 }
 
 .content.plein>.tcard.grid>.tw {
   max-height: none;
   flex: 1;
   min-height: 0;
-  border-radius: var(--rl) 0 0 0;
-}
-
-.content.plein>.tcard.grid>.tfoot {
   border-radius: 0;
 }
 
@@ -1231,16 +1229,12 @@
   z-index: 12;
 }
 
-/* Ce qui detache la colonne figee, c'est l'ombre qu'elle porte sur ce qui
-   passe dessous, pas un trait plus noir que les autres. Et elle ne la
-   porte que quand quelque chose passe dessous : tant que rien n'a defile,
-   la colonne est une colonne comme les autres. */
+/* Ce qui detache la colonne figee : le meme trait que partout ailleurs,
+   a peine plus epais. Une ombre portee se dessine cellule par cellule, et
+   ce qui devrait etre un bord continu se lit alors comme une succession
+   de petites ombres dures le long de la colonne. */
 .tcard.grid .anc {
-  border-right: 1px solid var(--bd);
-}
-
-.tcard.grid .tw.decale .anc {
-  box-shadow: 7px 0 12px -8px rgba(17, 24, 39, .55);
+  border-right: 2px solid var(--bd);
 }
 
 .tcard.grid tbody tr:hover .anc {
