@@ -1048,13 +1048,13 @@
       padding: 0;
       display: flex;
       flex-direction: column;
+      min-height: 0;
     }
 
     /* Le titre habite le rail : c'est lui qui nomme l'ecran, et le rail peut
        alors remonter jusqu'a la barre du haut sans rien au-dessus de lui. */
     .pal-head {
-      padding-bottom: 20px;
-      border-bottom: 1px solid var(--bd);
+      padding-bottom: 4px;
     }
 
     .pal-head .ph-title {
@@ -1065,6 +1065,33 @@
     .content.rail .form-body.side-main {
       gap: 0;
       flex: 1;
+      min-height: 0;
+      grid-template-rows: minmax(0, 1fr);
+    }
+
+    /* Deux zones de defilement, une par colonne : on descend dans la liste des
+       outils sans emporter le document, et l'inverse. Sans cela un rail long
+       oblige a faire defiler tout l'ecran pour atteindre le dernier outil. */
+    .content.rail .pal,
+    .content.rail .rail-body {
+      overflow-y: auto;
+      min-height: 0;
+    }
+
+    /* Le rail defile, son titre non : il nomme l'ecran, il doit rester lisible
+       quand on descend dans les outils. Le rembourrage haut passe du rail au
+       titre : le titre part alors du bord du cadre de defilement, et s'y fige
+       exactement ou il etait au repos. */
+    .content.rail .pal {
+      padding-top: 0;
+    }
+
+    .content.rail .pal-head {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: #fff;
+      padding: 24px 0 4px;
     }
 
     .content.rail .pal {
@@ -3353,10 +3380,10 @@
       border: 0;
       border-radius: 8px;
       box-shadow: 0 1px 2px rgba(17, 24, 39, .06);
-      padding: 10px 14px;
+      padding: 16px 18px;
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 16px;
       transition: box-shadow .12s;
     }
 
@@ -4204,7 +4231,7 @@
 
     .thumb.wide {
       width: 100%;
-      height: 170px;
+      height: 230px;
       border-radius: var(--rl);
       border: 1px solid var(--bd);
     }
