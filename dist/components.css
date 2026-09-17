@@ -343,6 +343,23 @@
   --btn-radius: 999px;
 }
 
+/* Pose sur une image : le fond est un voile sombre, pas une couleur. Un
+   bouton plein masquerait la photo sous lui ; un bouton clair se perdrait
+   sur une zone claire. */
+.btn.overlay {
+  background: rgba(17, 24, 39, 0.45);
+  border-color: transparent;
+  color: #fff;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.btn.overlay:hover {
+  background: rgba(17, 24, 39, 0.62);
+  border-color: transparent;
+  color: #fff;
+}
+
 /* --- États --- */
 /* .btn.btn double la spécificité (0,3,0) : sans cela .btn.primary.critical
    resterait rouge une fois désactivé. */
@@ -588,6 +605,32 @@
 .content {
   padding: 24px 32px;
   flex: 1;
+}
+
+/* Ecran a rail : le contenu ne porte plus la marge, c'est le canevas qui
+   la porte. Le rail vient alors toucher le menu de gauche et la barre du
+   haut, au lieu de flotter a 24px de chacun. */
+.content.rail {
+  padding: 0;
+  display: flex;
+}
+
+.content.rail .form-body.side-main {
+  gap: 0;
+  flex: 1;
+}
+
+.content.rail .pal {
+  border-radius: 0;
+  border-top: 0;
+  border-bottom: 0;
+  border-left: 0;
+  box-shadow: none;
+}
+
+/* Le canevas reprend la marge que .content a laissee. */
+.rail-body {
+  padding: 24px 32px 40px;
 }
 
 /* Un ecran de lecture n'a pas a s'etaler sur toute la largeur d'un grand
@@ -2588,7 +2631,7 @@ textarea.form-input {
   border: 1px solid var(--bd);
   border-radius: var(--rl);
   box-shadow: 0 1px 3px rgba(0, 0, 0, .04);
-  padding: 14px 18px;
+  padding: 15px 18px;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -2612,10 +2655,10 @@ textarea.form-input {
   border: 1px solid var(--bd);
   border-radius: var(--rl);
   box-shadow: 0 1px 3px rgba(0, 0, 0, .04);
-  padding: 14px 16px;
+  padding: 10px 14px;
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
   transition: border-color .12s, box-shadow .12s;
 }
 
@@ -2646,9 +2689,13 @@ textarea.form-input {
   min-width: 0;
 }
 
-.elt+.elt,
-.elt-head+.elt {
-  margin-top: 12px;
+.elt+.elt {
+  margin-top: 8px;
+}
+
+.elt-head+.elt,
+.elt-head+.elt-list {
+  margin-top: 18px;
 }
 
 /* Zone de depot : c'est elle qui accueille les lignes deplacees. */
