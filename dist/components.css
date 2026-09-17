@@ -2784,7 +2784,7 @@ textarea.form-input {
 .elt .thumb.lg {
   width: 120px;
   height: 80px;
-  border-radius: 10px;
+  border-radius: 6px;
 }
 
 /* Le titre du module porte la ligne : il passe devant sa description, et
