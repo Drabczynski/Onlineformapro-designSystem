@@ -1485,6 +1485,298 @@
       padding: 5px 14px;
     }
 
+    /* ==========================================================
+       TABLEAU EN GRILLE — une matrice, pas une liste
+       Un tableau ordinaire tient dans la largeur : on le lit ligne par ligne.
+       Une grille ne tient pas : elle a trop de colonnes, et on la lit en la
+       parcourant. Il faut alors qu'a tout moment deux choses restent : ce que
+       mesure la colonne, et de qui parle la ligne. L'en-tete et la premiere
+       colonne se figent donc pendant que le reste defile.
+       ========================================================== */
+    .tcard.grid {
+      overflow: hidden;
+    }
+
+    .tcard.grid>.tw {
+      overflow: auto;
+      max-height: 64vh;
+      border-radius: var(--rl) var(--rl) 0 0;
+    }
+
+    /* separate, et non collapse : en collapse une bordure appartient a deux
+       cellules a la fois, et celle de la colonne figee passe sous celles qui
+       defilent — la colonne perd son trait des qu'on bouge. */
+    .tcard.grid table {
+      border-collapse: separate;
+      border-spacing: 0;
+      min-width: max-content;
+    }
+
+    .tcard.grid thead {
+      position: sticky;
+      top: 0;
+      z-index: 3;
+    }
+
+    .tcard.grid thead th {
+      background: var(--ps);
+    }
+
+    .tcard.grid th,
+    .tcard.grid td {
+      border-right: 1px solid var(--bd);
+      border-bottom: 1px solid var(--bd);
+    }
+
+    .tcard.grid th:last-child,
+    .tcard.grid td:last-child {
+      border-right: 0;
+    }
+
+    .tcard.grid td {
+      padding: 0 14px;
+      height: 38px;
+      white-space: nowrap;
+    }
+
+    /* Une grille se lit aussi en colonnes : le zebrage y tire l'oeil en
+       travers de la lecture. Le survol suffit a tenir la ligne. */
+    .tcard.grid tbody tr:nth-child(even) {
+      background: transparent;
+    }
+
+    .tcard.grid .thr th {
+      padding-bottom: 10px;
+    }
+
+    .tcard.grid .thr-filter th {
+      padding-bottom: 10px;
+    }
+
+    /* --- La colonne d'ancrage : celle qui nomme la ligne --- */
+    .anc {
+      position: sticky;
+      left: 0;
+      z-index: 2;
+      background: #fff;
+    }
+
+    .tcard.grid thead .anc {
+      z-index: 4;
+    }
+
+    /* Le trait de separation appartient a la colonne figee, pas au contenu
+       qui passe dessous : il la detache du defilement. */
+    .tcard.grid .anc {
+      border-right: 1px solid var(--t3);
+    }
+
+    .tcard.grid tbody tr:hover .anc {
+      background: var(--row-hover);
+    }
+
+    /* --- En-tete de groupe de colonnes --- */
+    /* Trois mesures du meme geste : les rassembler sous un titre evite de
+       repeter « suivi de » dans chaque libelle. */
+    .tcard.grid .thg th {
+      text-align: center;
+      font-size: 11px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--t2);
+      padding: 8px 14px 7px;
+    }
+
+    .gc1 {
+      background: var(--ch1-w);
+    }
+
+    .gc2 {
+      background: var(--ch2-w);
+    }
+
+    .gc3 {
+      background: var(--ch3-w);
+    }
+
+    .tcard.grid thead th.gc1 {
+      background: var(--ch1-w);
+    }
+
+    .tcard.grid thead th.gc2 {
+      background: var(--ch2-w);
+    }
+
+    .tcard.grid thead th.gc3 {
+      background: var(--ch3-w);
+    }
+
+    /* --- Chiffres --- */
+    /* Des chiffres qu'on compare se lisent alignes a droite, et sur une chasse
+       fixe : sinon le 1 est plus etroit que le 8 et les colonnes ondulent. */
+    .tcard.grid td.num,
+    .tcard.grid th.num {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .tcard.grid td.num {
+      color: var(--t2);
+    }
+
+    .tcard.grid td.fort {
+      color: var(--t1);
+      font-weight: 600;
+    }
+
+    /* Une case vide n'est pas une valeur : elle ne doit pas peser autant. */
+    .nil {
+      color: var(--t3);
+    }
+
+    /* --- Barre dans la cellule --- */
+    /* Le total se compare d'une ligne a l'autre ; un trait sous le chiffre le
+       donne sans qu'on ait a lire toute la colonne. */
+    .cbar {
+      position: relative;
+      display: block;
+      padding-bottom: 7px;
+    }
+
+    .cbar::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 2px;
+      height: 3px;
+      border-radius: 2px;
+      background: var(--bd);
+    }
+
+    .cbar-fill {
+      position: absolute;
+      right: 0;
+      bottom: 2px;
+      height: 3px;
+      border-radius: 2px;
+      background: var(--a);
+      z-index: 1;
+    }
+
+    /* --- Ligne de groupe --- */
+    .grp td {
+      background: var(--ps);
+      font-weight: 600;
+      color: var(--t1);
+    }
+
+    .tcard.grid .grp .anc {
+      background: var(--ps);
+    }
+
+    .tcard.grid tbody tr.grp:hover .anc {
+      background: var(--row-hover);
+    }
+
+    .grp-tog {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      border: 0;
+      border-radius: 5px;
+      background: transparent;
+      color: var(--t3);
+      cursor: pointer;
+    }
+
+    .grp-tog:hover {
+      background: var(--bd);
+      color: var(--t1);
+    }
+
+    .grp-tog svg {
+      width: 14px;
+      height: 14px;
+      transition: transform .16s;
+    }
+
+    .grp.plie .grp-tog svg {
+      transform: rotate(-90deg);
+    }
+
+    .grp-ct {
+      font-weight: 400;
+      color: var(--t3);
+      margin-left: 8px;
+    }
+
+    .tcard.grid tbody tr.sub.plie {
+      display: none;
+    }
+
+    /* --- Ligne de totaux, collee en bas --- */
+    /* Les totaux ne sont pas la derniere ligne des donnees : ils restent
+       visibles pendant qu'on parcourt, comme l'en-tete en haut. */
+    .tcard.grid tfoot {
+      position: sticky;
+      bottom: 0;
+      z-index: 3;
+    }
+
+    .tcard.grid tfoot td {
+      background: var(--a1);
+      font-weight: 600;
+      color: var(--t1);
+      border-top: 1px solid var(--a2);
+      border-bottom: 0;
+      height: 40px;
+    }
+
+    .tcard.grid tfoot .anc {
+      background: var(--a1);
+      z-index: 4;
+    }
+
+    /* --- Index alphabetique --- */
+    /* Une liste de milliers de noms ne se parcourt pas a la molette : on y
+       entre par une lettre. */
+    .alpha {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3px;
+    }
+
+    .alpha-b {
+      height: 26px;
+      min-width: 26px;
+      padding: 0 6px;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--t2);
+      background: #fff;
+      border: 1px solid var(--bd);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background .1s, color .1s, border-color .1s;
+    }
+
+    .alpha-b:hover {
+      background: var(--ps);
+      color: var(--t1);
+    }
+
+    .alpha-b.on {
+      background: var(--a);
+      border-color: var(--a);
+      color: #fff;
+    }
+
     /* --- Contenu de cellule --- */
     .cn {
       display: flex;
@@ -3338,14 +3630,14 @@
       gap: 10px;
     }
 
-    /* La tuile porte la teinte du service et le bloc porte sa couleur pleine :
-       les deux arrivent d'une seule declaration, comme la couleur d'une
-       pastille d'usager. Le bloc occupe la carte — une pastille de 34px au
-       milieu d'une tuile de 82 ne fait que souligner le vide autour d'elle. */
+    /* La tuile reste neutre : teinter la carte ET la marque donnait douze
+       aplats de couleur les uns a cote des autres, et plus rien ne ressortait.
+       La couleur n'appartient qu'au signe du service, pose comme une icone
+       d'application au milieu d'une carte grise. */
     .pal-item {
       border: 0;
-      border-radius: 14px;
-      padding: 12px 10px 11px;
+      border-radius: 12px;
+      padding: 14px 8px 11px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -3367,31 +3659,31 @@
       transform: translateY(0);
     }
 
-    /* currentColor : le bloc reprend la couleur du service posee sur la tuile,
-       et le glyphe repasse en blanc par-dessus. */
+    /* La marque arrive entiere, fond compris : le cadre ne fait que la poser
+       et l'ombrer, comme une icone sur un bureau. */
     .pal-vis {
-      width: 100%;
-      height: 54px;
-      border-radius: 9px;
-      background: currentColor;
+      width: 46px;
+      height: 46px;
+      border-radius: 11px;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 8px rgba(17, 24, 39, 0.14);
+      box-shadow: 0 1px 2px rgba(17, 24, 39, 0.12), 0 5px 12px rgba(17, 24, 39, 0.10);
     }
 
     .pal-vis svg {
-      width: 22px;
-      height: 22px;
-      color: #fff;
+      width: 100%;
+      height: 100%;
+      display: block;
     }
 
     .pal-lbl {
       font-size: 11px;
-      font-weight: 600;
-      color: inherit;
+      font-weight: 500;
+      color: var(--t2);
       text-align: center;
-      line-height: 1.2;
+      line-height: 1.25;
     }
 
     /* --- Banniere d'un document --- */
@@ -3488,21 +3780,20 @@
       white-space: nowrap;
     }
 
-    /* D'ou vient le media : la marque, a sa couleur, plutot qu'un mot dans une
-       pastille grise. */
+    /* D'ou vient le media : la meme marque que dans la palette, en plus petit.
+       Elle porte son fond, la pastille ne fait que la contenir. */
     .elt-src {
       width: 30px;
       height: 30px;
-      border-radius: 9px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      border-radius: 8px;
+      overflow: hidden;
       flex-shrink: 0;
     }
 
     .elt-src svg {
-      width: 16px;
-      height: 16px;
+      width: 100%;
+      height: 100%;
+      display: block;
     }
 
     .elt-txt {
@@ -10175,6 +10466,43 @@
       const open = menu.classList.contains('oo');
       closeRowMenus();
       if (!open) { menu.classList.add('oo'); cell.classList.add('oo'); }
+    }
+
+    // Une grille groupee : replier un groupe cache ses lignes, le chevron
+    // pivote, et le bouton dit lui-meme dans quel etat il est.
+    function grilleReplie(btn) {
+      const ligne = btn.closest('tr');
+      if (!ligne) return;
+      const plie = ligne.classList.toggle('plie');
+      btn.setAttribute('aria-expanded', plie ? 'false' : 'true');
+      const cle = ligne.dataset.grp;
+      ligne.closest('table').querySelectorAll('tr.sub[data-grp="' + cle + '"]')
+        .forEach(r => r.classList.toggle('plie', plie));
+    }
+
+    // L'index alphabetique : une lettre ne filtre pas les groupes, seulement
+    // les lignes qu'ils contiennent. Re-cliquer sur la lettre active la rend.
+    function alphaFiltre(btn) {
+      const barre = btn.closest('.alpha');
+      const encore = btn.classList.contains('on');
+      barre.querySelectorAll('.alpha-b').forEach(b => b.classList.remove('on'));
+      const lettre = encore ? '' : (btn.dataset.alpha || '');
+      if (!encore) btn.classList.add('on');
+      else barre.querySelector('.alpha-b[data-alpha=""]').classList.add('on');
+      const grille = document.querySelector(barre.dataset.cible);
+      if (!grille) return;
+      grille.querySelectorAll('tbody tr.sub').forEach(r => {
+        const nom = (r.dataset.nom || '').toUpperCase();
+        r.hidden = lettre !== '' && !nom.startsWith(lettre);
+      });
+      grille.querySelectorAll('tbody tr.grp').forEach(g => {
+        const cle = g.dataset.grp;
+        const vus = [...grille.querySelectorAll('tr.sub[data-grp="' + cle + '"]')]
+          .filter(r => !r.hidden).length;
+        g.hidden = vus === 0;
+        const ct = g.querySelector('.grp-ct');
+        if (ct) ct.textContent = vus + ' usagers';
+      });
     }
 
     // Replier un chapitre : la liste disparait, le chevron pivote, et le

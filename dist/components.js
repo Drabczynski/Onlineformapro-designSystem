@@ -86,6 +86,43 @@ function togRow(btn) {
   if (!open) { menu.classList.add('oo'); cell.classList.add('oo'); }
 }
 
+// Une grille groupee : replier un groupe cache ses lignes, le chevron
+// pivote, et le bouton dit lui-meme dans quel etat il est.
+function grilleReplie(btn) {
+  const ligne = btn.closest('tr');
+  if (!ligne) return;
+  const plie = ligne.classList.toggle('plie');
+  btn.setAttribute('aria-expanded', plie ? 'false' : 'true');
+  const cle = ligne.dataset.grp;
+  ligne.closest('table').querySelectorAll('tr.sub[data-grp="' + cle + '"]')
+    .forEach(r => r.classList.toggle('plie', plie));
+}
+
+// L'index alphabetique : une lettre ne filtre pas les groupes, seulement
+// les lignes qu'ils contiennent. Re-cliquer sur la lettre active la rend.
+function alphaFiltre(btn) {
+  const barre = btn.closest('.alpha');
+  const encore = btn.classList.contains('on');
+  barre.querySelectorAll('.alpha-b').forEach(b => b.classList.remove('on'));
+  const lettre = encore ? '' : (btn.dataset.alpha || '');
+  if (!encore) btn.classList.add('on');
+  else barre.querySelector('.alpha-b[data-alpha=""]').classList.add('on');
+  const grille = document.querySelector(barre.dataset.cible);
+  if (!grille) return;
+  grille.querySelectorAll('tbody tr.sub').forEach(r => {
+    const nom = (r.dataset.nom || '').toUpperCase();
+    r.hidden = lettre !== '' && !nom.startsWith(lettre);
+  });
+  grille.querySelectorAll('tbody tr.grp').forEach(g => {
+    const cle = g.dataset.grp;
+    const vus = [...grille.querySelectorAll('tr.sub[data-grp="' + cle + '"]')]
+      .filter(r => !r.hidden).length;
+    g.hidden = vus === 0;
+    const ct = g.querySelector('.grp-ct');
+    if (ct) ct.textContent = vus + ' usagers';
+  });
+}
+
 // Replier un chapitre : la liste disparait, le chevron pivote, et le
 // bouton dit lui-meme dans quel etat il est.
 function chapPlie(btn) {

@@ -23,7 +23,7 @@ La référence des composants est `index.html` : chaque section montre le rendu,
 ## Interdits
 
 - Aucune couleur écrite en dur (`#…`, `rgb(…)`, noms de couleur). Les seules couleurs sont `var(--…)`, et uniquement dans les cas prévus par les composants.
-- Aucun attribut `style=""` sauf : la hauteur d'une `.empty-bar`, la largeur d'un `.meter-fill`, le `background` d'une `.w-ico`, et la couleur d'un `.ava`, d'un `.pal-item` ou d'un `.elt-src` — la teinte d'un service ou d'une personne est une donnée, pas une mise en forme.
+- Aucun attribut `style=""` sauf : la hauteur d'une `.empty-bar`, la largeur d'un `.meter-fill` ou d'un `.cbar-fill`, le `background` d'une `.w-ico` et la couleur d'une `.ava` — la teinte d'une personne est une donnée, pas une mise en forme. La couleur d'un service, elle, vit dans son `<svg>` : c'est la marque qui la porte.
 - Aucune balise `<style>` dans la page. Aucune classe inventée. Aucun `!important`.
 - Aucun `<select>` natif : le sélecteur du système est `.w-dd-wrap`.
 - Aucun `<input type="date">` : son calendrier est celui du navigateur, pas celui du système. Le composant est `.dp`.
@@ -56,11 +56,11 @@ La référence des composants est `index.html` : chaque section montre le rendu,
 | Une fenêtre modale | `.modal-veil[hidden] > .modal (.modal-header + .modal-body + .modal-footer)`, ouverte par `modalOuvre('id')`, fermée par `modalFerme(this)` |
 | Un panneau latéral | `.modal-veil.side[hidden] > .drawer (.drawer-head + .drawer-body)` — même ouverture, même fermeture |
 | Quelque chose qu'on peut ranger | `.w-grip` dans la ligne : `.w` entre `.wcol`, `.elt` dans une `.elt-list`. Glisser-déposer et flèches au clavier |
-| Une palette de ressources | `.pal > div (.pal-title + .pal-grid > .pal-item (.pal-vis + .pal-lbl))` — `style="background:<teinte>;color:<marque>;"` sur la tuile, le bloc et le libellé la reprennent |
+| Une palette de ressources | `.pal > div (.pal-title + .pal-grid > .pal-item (.pal-vis + .pal-lbl))` — la tuile reste neutre, le `<svg>` de `.pal-vis` arrive entier, fond compris, comme une icône d'application |
 | Un outillage à gauche, un document à droite | `.form-body.side-main` ; pour que le rail touche le menu et la barre du haut : `.content.rail` et `.col.rail-body` sur le canevas. Le titre de l'écran vit dans `.pal > .pal-head` ; le `.ph` du canevas nomme le document qu'on y compose, pas l'écran |
 | Un bouton posé sur une image | `.btn.overlay.pill` — voile sombre et flou, jamais une couleur pleine |
 | Une bannière avec une action posée dessus | `.banner > img.thumb.wide + .banner-act` — l'action ne se montre qu'au survol de l'image |
-| Une ligne d'un parcours | `.elt > .w-grip + .thumb.lg + .elt-txt (.nmain + .nsub) + .elt-src + .rmenu-wrap (.rdots + .rmenu)` |
+| Une ligne d'un parcours | `.elt > .w-grip + .thumb.lg + .elt-txt (.nmain + .nsub) + .elt-src + .rmenu-wrap (.rdots + .rmenu)` — `.elt-src` contient la même marque que la palette, en 30px |
 | Un chapitre dans un parcours | `.chap > .chap-head (.chap-tog + .chap-title + .chap-ct) + .elt-list` — `chapPlie(this)` sur le chevron ; chaque chapitre est sa propre zone de dépôt, donc un module passe d'un chapitre à l'autre |
 | Un widget qu'on peut retirer | `.w-close` dans son `.w-head`, `onclick="widgetRetire(this)"` |
 | Un widget à poser depuis un panneau | une `<template>` qui contient le `.w`, posée par `widgetAjoute('id', this)` |
