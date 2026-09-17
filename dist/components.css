@@ -677,6 +677,14 @@
   grid-template-columns: repeat(3, 1fr);
 }
 
+.wgrid.cols-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.wgrid+.wgrid {
+  margin-top: 24px;
+}
+
 .wgrid > .full {
   grid-column: 1 / -1;
 }
@@ -2593,6 +2601,8 @@ textarea.form-input {
   --wash: var(--ch1-w);
 }
 
+.chart.t1 { --mark: var(--ch1); --wash: var(--ch1-w); }
+
 .chart.t2 { --mark: var(--ch2); --wash: var(--ch2-w); }
 
 .chart.t3 { --mark: var(--ch3); --wash: var(--ch3-w); }
@@ -2714,6 +2724,141 @@ textarea.form-input {
 .meter-fill.c3 { background: var(--ch3); }
 
 .meter-fill.c4 { background: var(--ch4); }
+
+/* --- Tuile de statistique --- */
+/* Un chiffre, ce qu'il mesure, et de combien il a bouge. La teinte se
+   declare sur la tuile : la valeur, la pastille et la tendance la suivent,
+   de sorte qu'une rangee se lise comme quatre mesures et non comme quatre
+   cartes identiques. */
+.stat {
+  --mark: var(--ch1);
+  --wash: var(--ch1-w);
+  background: #fff;
+  border: 1px solid var(--bd);
+  border-radius: 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  padding: 16px 18px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.stat.t1 { --mark: var(--ch1); --wash: var(--ch1-w); }
+
+.stat.t2 { --mark: var(--ch2); --wash: var(--ch2-w); }
+
+.stat.t3 { --mark: var(--ch3); --wash: var(--ch3-w); }
+
+.stat.t4 { --mark: var(--ch4); --wash: var(--ch4-w); }
+
+.stat.t5 { --mark: var(--ch5); --wash: var(--ch5-w); }
+
+.stat-head {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+}
+
+.stat-ico {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: var(--wash);
+  color: var(--mark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stat-ico svg {
+  width: 14px;
+  height: 14px;
+}
+
+.stat-lbl {
+  font-size: 12.5px;
+  color: var(--t2);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.stat-body {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* Chiffres proportionnels : a cette taille, tabular-nums donne a chaque
+   chiffre la largeur d'un zero et le nombre parait desserre. */
+.stat-val {
+  font-family: Geist, 'Inter', sans-serif;
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--mark);
+  white-space: nowrap;
+}
+
+/* Tendance : la courbe reste en retrait, seul le dernier point est en
+   couleur — c'est la periode en cours. */
+.spark {
+  width: 78px;
+  height: 26px;
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+.spark .sl {
+  fill: none;
+  stroke: var(--mark);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.35;
+  vector-effect: non-scaling-stroke;
+}
+
+.spark .sd {
+  fill: var(--mark);
+}
+
+.stat-foot {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  font-size: 12px;
+}
+
+/* La couleur dit le sens, la fleche le redit : un ecart ne se lit pas a la
+   couleur seule. */
+.stat-delta {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+  color: var(--ok);
+}
+
+.stat-delta.down {
+  color: var(--d);
+}
+
+.stat-delta svg {
+  width: 13px;
+  height: 13px;
+  stroke-width: 2.2;
+}
+
+.stat-vs {
+  color: var(--t3);
+}
 
 /* --- Le chiffre seul --- */
 /* Quand une donnee tient en un nombre, elle n'a pas besoin d'un graphique. */

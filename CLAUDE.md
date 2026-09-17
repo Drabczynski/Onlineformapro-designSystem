@@ -73,6 +73,7 @@ La référence des composants est `index.html` : chaque section montre le rendu,
 | Une légende | `.legend > .legend-item (.legend-dot.cN + libellé + .legend-val)` — obligatoire dès deux séries |
 | Une jauge | `.meter > .meter-fill` (`.ok`, `.c2`…`.c4` pour la teinte), largeur en `style="width:NN%"` |
 | Un chiffre seul | `.hero-row > .hero-num + …` — quand la donnée tient en un nombre, pas de graphique |
+| Une tuile de statistique | `.stat.tN > .stat-head (.stat-ico + .stat-lbl) + .stat-body (.stat-val + .spark) + .stat-foot (.stat-delta(.down) + .stat-vs)`, dans une `.wgrid.cols-4` |
 | Une carte de chaleur | `.hmap.j5 > .hmap-lbl + .hmap-c.s1`…`.s6`, avec une `.hmap-scale` sous la grille |
 | Un tableau dans un widget | `.mini > thead + tbody`, colonnes de chiffres en `.num` |
 | Un en-tête de page | `.ph > .ph-l (h1.ph-title + .ph-ct) + .ph-actions` |
