@@ -1047,6 +1047,14 @@
     .content.rail {
       padding: 0;
       display: flex;
+      flex-direction: column;
+    }
+
+    /* Le titre coiffe l'ecran, le rail commence dessous : il touche encore le
+       menu de gauche, mais il n'a plus a porter l'en-tete de la page. */
+    .ph.rail-head {
+      padding: 24px 32px 18px;
+      margin-bottom: 0;
     }
 
     .content.rail .form-body.side-main {
@@ -2883,7 +2891,7 @@
        et le rail descend jusqu'en bas au lieu de s'arreter sous sa derniere
        tuile. */
     .form-body.side-main {
-      grid-template-columns: 276px 1fr;
+      grid-template-columns: 340px 1fr;
       gap: 28px;
       min-height: 100%;
       align-items: stretch;
@@ -3216,12 +3224,12 @@
     .pal {
       display: flex;
       flex-direction: column;
-      gap: 22px;
+      gap: 24px;
       background: #fff;
       border: 1px solid var(--bd);
       border-radius: var(--rl);
       box-shadow: 0 1px 3px rgba(0, 0, 0, .04);
-      padding: 20px 16px;
+      padding: 24px 22px;
       height: 100%;
     }
 
@@ -3236,7 +3244,7 @@
 
     .pal-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 10px;
     }
 
@@ -3247,11 +3255,11 @@
     .pal-item {
       border: 0;
       border-radius: 14px;
-      padding: 11px 10px 10px;
+      padding: 12px 10px 11px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 9px;
+      gap: 10px;
       cursor: grab;
       font-family: inherit;
       background: var(--ps);
@@ -3273,7 +3281,7 @@
        et le glyphe repasse en blanc par-dessus. */
     .pal-vis {
       width: 100%;
-      height: 50px;
+      height: 54px;
       border-radius: 9px;
       background: currentColor;
       display: flex;
@@ -3283,8 +3291,8 @@
     }
 
     .pal-vis svg {
-      width: 24px;
-      height: 24px;
+      width: 22px;
+      height: 22px;
       color: #fff;
     }
 
@@ -3308,11 +3316,14 @@
     }
 
     /* --- Ligne d'element d'un parcours --- */
+    /* Sans filet : une carte blanche sur un fond gris se detache deja. Le trait
+       en plus, repete sur chaque ligne, dessine une grille dont personne n'a
+       besoin. */
     .elt-head {
       background: #fff;
-      border: 1px solid var(--bd);
-      border-radius: var(--rl);
-      box-shadow: 0 1px 3px rgba(0, 0, 0, .04);
+      border: 0;
+      border-radius: 8px;
+      box-shadow: 0 1px 2px rgba(17, 24, 39, .06);
       padding: 15px 18px;
       display: flex;
       align-items: center;
@@ -3334,19 +3345,18 @@
 
     .elt {
       background: #fff;
-      border: 1px solid var(--bd);
-      border-radius: var(--rl);
-      box-shadow: 0 1px 3px rgba(0, 0, 0, .04);
+      border: 0;
+      border-radius: 8px;
+      box-shadow: 0 1px 2px rgba(17, 24, 39, .06);
       padding: 10px 14px;
       display: flex;
       align-items: center;
       gap: 14px;
-      transition: border-color .12s, box-shadow .12s;
+      transition: box-shadow .12s;
     }
 
     .elt:hover {
-      border-color: var(--a2);
-      box-shadow: 0 4px 14px rgba(17, 24, 39, 0.06);
+      box-shadow: 0 4px 14px rgba(17, 24, 39, 0.10);
     }
 
     /* D'ou vient le media : la marque, a sa couleur, plutot qu'un mot dans une
