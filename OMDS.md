@@ -76,9 +76,6 @@ La référence des composants est `index.html` : chaque section montre le rendu,
 | Une grille de données | `.tcard.grid > .tbar + .tw > table` — l'en-tête et la colonne `.anc` se figent, `tfoot` colle en bas. `tr.thg` porte les groupes de colonnes, `.gc1`/`.gc2`/`.gc3` leur teinte, `td.num` les chiffres. Un `<span class="rez">` dans chaque `th` de `.thr` rend la colonne redimensionnable |
 | Une grille qui occupe l'écran | `.content.plein` — la grille n'a plus de cadre : elle touche le menu à gauche, la fenêtre à droite et en bas, et c'est elle qui défile, pas la page. Le titre garde sa marge. Pas de pied de carte ni de pagination : la ligne de totaux ferme l'écran |
 | Choisir ses colonnes hors d'un en-tête | `.cgear-wrap > .cgear + .cpanel` dans la `.tbar` — dans une grille qui défile, la roue crantée doit rester hors du cadre, sinon son panneau s'y trouve coupé |
-| Le suivi d'une personne | `.arbo > .arb-leg + .arb-c` — une fiche par personne, détachée sur le fond de la page. Dedans : `.arb.n1` sa tête, `.arb.n2` ce qu'elle a suivi, `.arb.n3` le détail. `arboPlie(this)` sur le `.arb-tog` replie la branche, `.arb-vide` garde la place du chevron sans enfant |
-| Où en est un contenu | `.stb` avec `.ston` (terminé), `.stenc` (en cours · NN %) ou `.stoff` (non commencé) — un état se lit, une barre remplie à 1 % ne se lit pas. La barre `.arb-prog` ne sert que sur la tête de fiche, là où l'on compare une personne à l'autre |
-| Séparer deux jeux de filtres dans une barre | `.tbar-sep` |
 | Un groupe de lignes repliable | `tr.grp[data-grp]` + `tr.sub[data-grp][data-nom]`, `grilleReplie(this)` sur le `.grp-tog` |
 | Comparer une valeur d'une ligne à l'autre | `.cbar > .cbar-fill` dans la cellule, largeur en `style="width:NN%"` |
 | Un filtre de colonne | `input.th-search` ou `.w-dd-wrap.block > .w-dd-btn.sm` |

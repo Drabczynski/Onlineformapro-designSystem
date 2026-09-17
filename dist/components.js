@@ -86,40 +86,6 @@ function togRow(btn) {
   if (!open) { menu.classList.add('oo'); cell.classList.add('oo'); }
 }
 
-// Une branche d'arborescence : replier une ligne cache tout ce qui est
-// plus profond qu'elle, jusqu'a la prochaine ligne de meme niveau ou
-// moins. Replier un usager emporte donc ses categories et leurs contenus.
-function arboPlie(btn) {
-  const ligne = btn.closest('.arb');
-  if (!ligne) return;
-  const plie = ligne.classList.toggle('plie');
-  btn.setAttribute('aria-expanded', plie ? 'false' : 'true');
-  const niv = [...ligne.classList].find(c => /^n\d$/.test(c));
-  if (!niv) return;
-  const mien = +niv.slice(1);
-  let n = ligne.nextElementSibling;
-  while (n && n.classList.contains('arb')) {
-    const s = [...n.classList].find(c => /^n\d$/.test(c));
-    if (!s || +s.slice(1) <= mien) break;
-    n.classList.toggle('masque', plie);
-    // Une branche repliee le reste : on ne la rouvre pas en rouvrant
-    // son parent.
-    if (!plie && n.classList.contains('plie')) {
-      let p = n.nextElementSibling;
-      const sien = +s.slice(1);
-      while (p && p.classList.contains('arb')) {
-        const q = [...p.classList].find(c => /^n\d$/.test(c));
-        if (!q || +q.slice(1) <= sien) break;
-        p.classList.add('masque');
-        p = p.nextElementSibling;
-      }
-      n = p;
-      continue;
-    }
-    n = n.nextElementSibling;
-  }
-}
-
 // Une grille groupee : replier un groupe cache ses lignes, le chevron
 // pivote, et le bouton dit lui-meme dans quel etat il est.
 function grilleReplie(btn) {
