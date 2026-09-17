@@ -1513,6 +1513,19 @@ a.nmain:hover {
   color: var(--t3);
 }
 
+/* Un troisieme etat : ni fait, ni pas commence. */
+.stenc {
+  color: var(--a);
+}
+
+.stdenc {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--a);
+}
+
 .cv {
   color: var(--t2);
   font-size: 13px;
@@ -3111,25 +3124,38 @@ textarea.form-input {
 }
 
 /* ==========================================================
-   ARBORESCENCE DE SUIVI — un usager, ce qu'il a suivi, dedans
-   Trois niveaux, pas quatre : l'usager, le contenu, la sequence. La
-   nature du contenu tenait une ligne entiere pour n'y porter qu'un mot
-   et une duree ; elle est devenue une pastille sur la ligne du contenu,
-   et un decompte sur celle de l'usager. Chaque ligne dit son avancement
-   en toutes lettres a cote de sa barre : une barre seule ne se lit pas
-   sans les yeux, et a zero elle ne se lit pas du tout.
+   SUIVI D'UN USAGER — une liste de fiches, pas un tableau
+   Un tableau met toutes ses lignes sur le meme plan : l'usager, ce qu'il
+   a suivi et le detail de ce qu'il a suivi s'y ressemblent, et l'oeil
+   n'a plus rien ou se poser. Chaque usager devient donc une fiche
+   detachee sur le fond de la page ; ce qu'il a suivi vit dedans.
+   Et l'avancement d'un contenu n'est pas une quantite qu'on compare,
+   c'est un etat : commence, en cours, termine. Vingt barres remplies a
+   1 % ne disent rien que vingt pastilles ne disent mieux.
    ========================================================== */
 .arbo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 22px 28px;
+  background: var(--bg);
+  min-height: 100%;
+}
+
+.arb-c {
   background: #fff;
+  border: 1px solid var(--bd);
+  border-radius: var(--rl);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .04);
+  overflow: hidden;
 }
 
 .arb {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 118px 196px 88px 128px;
+  grid-template-columns: minmax(0, 1fr) 164px 88px 116px;
   align-items: center;
   gap: 20px;
-  padding: 0 22px;
-  border-bottom: 1px solid var(--bd);
+  padding: 0 20px;
 }
 
 .arb-main {
@@ -3137,11 +3163,24 @@ textarea.form-input {
   align-items: center;
   gap: 13px;
   min-width: 0;
-  position: relative;
 }
 
-/* Le chevron ouvre et ferme ; les lignes sans enfant gardent sa place
-   pour que les vignettes restent alignees. */
+/* La legende, au-dessus des fiches : elle nomme les colonnes sans peser
+   comme une ligne de tableau. */
+.arb-leg {
+  color: var(--t3);
+  font-size: 11.5px;
+  font-weight: 500;
+  padding-bottom: 2px;
+}
+
+.arb-leg .arb-time,
+.arb-leg .arb-date {
+  color: var(--t3);
+  font-size: 11.5px;
+  font-weight: 500;
+}
+
 .arb-tog {
   width: 22px;
   height: 22px;
@@ -3189,15 +3228,8 @@ textarea.form-input {
   white-space: nowrap;
 }
 
-.arb .thumb {
-  width: 62px;
-  height: 42px;
-  border-radius: 6px;
-}
-
-/* La barre et son chiffre forment un bloc : la barre situe, le chiffre
-   dit. Separes par la moitie de la ligne, aucun des deux ne renseigne
-   l'autre. */
+/* La barre et son chiffre forment un bloc. Elle ne sert que sur la fiche
+   d'un usager, la ou l'on compare un usager a l'autre. */
 .arb-prog {
   display: flex;
   align-items: center;
@@ -3206,14 +3238,15 @@ textarea.form-input {
 
 .arb-prog .meter {
   flex: 1;
+  height: 6px;
 }
 
 .arb-pct {
-  width: 44px;
+  width: 40px;
   flex-shrink: 0;
-  font-size: 12.5px;
+  font-size: 13px;
   font-weight: 600;
-  color: var(--t2);
+  color: var(--t1);
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
@@ -3222,101 +3255,70 @@ textarea.form-input {
 .arb-date {
   font-size: 12.5px;
   color: var(--t2);
-  text-align: right;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
 
+.arb-time {
+  text-align: right;
+  font-weight: 500;
+}
+
 .arb-date {
-  text-align: left;
   color: var(--t3);
 }
 
-/* --- Niveau 1 : l'usager --- */
+/* --- La tete de fiche : l'usager --- */
 .arb.n1 {
-  background: var(--ps);
-  min-height: 62px;
+  min-height: 68px;
+  cursor: pointer;
 }
 
 .arb.n1 .nmain {
-  font-size: 14px;
+  font-size: 14.5px;
   font-weight: 600;
 }
 
-.arb.n1 .arb-pct,
-.arb.n1 .arb-time {
-  color: var(--t1);
-  font-weight: 600;
+.arb.n1:hover {
+  background: var(--ps);
 }
 
-/* --- Niveau 2 : le contenu suivi --- */
+/* --- Ce qu'il a suivi --- */
 .arb.n2 {
-  min-height: 62px;
+  min-height: 50px;
+  border-top: 1px solid var(--bd);
 }
 
 .arb.n2 .arb-main {
-  padding-left: 34px;
+  padding-left: 46px;
 }
 
-/* --- Niveau 3 : la sequence, dans son contenu --- */
-/* Un seul rail, celui qui rattache les sequences a leur contenu : au-dela
-   il ne guide plus, il quadrille. */
+.arb.n2 .nmain {
+  font-size: 13px;
+}
+
+.arb.n2:hover {
+  background: var(--ps);
+}
+
+/* --- Le detail d'un contenu --- */
 .arb.n3 {
-  min-height: 46px;
+  min-height: 40px;
+  border-top: 1px solid var(--bd);
   background: var(--ps);
 }
 
 .arb.n3 .arb-main {
-  padding-left: 130px;
-}
-
-.arb.n3 .arb-main::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 103px;
-  width: 1px;
-  background: var(--bd);
+  padding-left: 90px;
 }
 
 .arb.n3 .nmain {
-  font-weight: 400;
-  color: var(--t2);
   font-size: 12.5px;
-}
-
-.arb:hover {
-  background: var(--row-hover);
+  color: var(--t2);
 }
 
 .arb.masque {
   display: none;
-}
-
-/* --- En-tete de l'arbre --- */
-.arb.arb-hd {
-  position: sticky;
-  top: 0;
-  z-index: 2;
-  min-height: 40px;
-  background: var(--ps);
-  border-bottom: 1px solid var(--bd);
-  font-size: 11.5px;
-  font-weight: 600;
-  color: var(--t2);
-}
-
-.arb.arb-hd:hover {
-  background: var(--ps);
-}
-
-.arb-hd .arb-pct,
-.arb-hd .arb-time,
-.arb-hd .arb-date {
-  font-size: 11.5px;
-  font-weight: 600;
-  color: var(--t2);
 }
 
 /* --- Ligne d'element d'un parcours --- */
