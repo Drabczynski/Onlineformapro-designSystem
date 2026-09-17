@@ -113,14 +113,18 @@ function alphaFiltre(btn) {
     const nom = (r.dataset.nom || '').toUpperCase();
     r.hidden = lettre !== '' && !nom.startsWith(lettre);
   });
+  let total = 0;
   grille.querySelectorAll('tbody tr.grp').forEach(g => {
     const cle = g.dataset.grp;
     const vus = [...grille.querySelectorAll('tr.sub[data-grp="' + cle + '"]')]
       .filter(r => !r.hidden).length;
     g.hidden = vus === 0;
+    total += vus;
     const ct = g.querySelector('.grp-ct');
     if (ct) ct.textContent = vus + ' usagers';
   });
+  const vide = grille.querySelector('tbody tr.vide');
+  if (vide) vide.hidden = total > 0;
 }
 
 // Replier un chapitre : la liste disparait, le chevron pivote, et le

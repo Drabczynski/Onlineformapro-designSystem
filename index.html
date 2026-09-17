@@ -1497,6 +1497,31 @@
       overflow: hidden;
     }
 
+    /* La barre d'outils appartient a la grille, pas a la page : filtrer,
+       chercher et choisir ses colonnes se fait au bord de ce qu'on regarde. */
+    .tbar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 10px 14px;
+      background: #fff;
+      border-bottom: 1px solid var(--bd);
+    }
+
+    .tbar .spacer {
+      flex: 1;
+    }
+
+    .tbar .th-search {
+      width: 250px;
+    }
+
+    .tbar-lbl {
+      font-size: 12.5px;
+      color: var(--t3);
+    }
+
     .tcard.grid>.tw {
       overflow: auto;
       max-height: 64vh;
@@ -1565,10 +1590,11 @@
       z-index: 4;
     }
 
-    /* Le trait de separation appartient a la colonne figee, pas au contenu
-       qui passe dessous : il la detache du defilement. */
+    /* Ce qui detache la colonne figee, c'est l'ombre qu'elle porte sur ce qui
+       passe dessous, pas un trait plus noir que les autres. */
     .tcard.grid .anc {
-      border-right: 1px solid var(--t3);
+      border-right: 1px solid var(--bd);
+      box-shadow: 5px 0 9px -7px rgba(17, 24, 39, .45);
     }
 
     .tcard.grid tbody tr:hover .anc {
@@ -1717,6 +1743,14 @@
 
     .tcard.grid tbody tr.sub.plie {
       display: none;
+    }
+
+    /* Un filtre qui ne rend rien doit le dire : une grille vide sans un mot
+       laisse croire a une panne. */
+    .tcard.grid tbody tr.vide td {
+      text-align: center;
+      padding: 30px 14px;
+      border-right: 0;
     }
 
     /* --- Ligne de totaux, collee en bas --- */
@@ -10495,14 +10529,18 @@
         const nom = (r.dataset.nom || '').toUpperCase();
         r.hidden = lettre !== '' && !nom.startsWith(lettre);
       });
+      let total = 0;
       grille.querySelectorAll('tbody tr.grp').forEach(g => {
         const cle = g.dataset.grp;
         const vus = [...grille.querySelectorAll('tr.sub[data-grp="' + cle + '"]')]
           .filter(r => !r.hidden).length;
         g.hidden = vus === 0;
+        total += vus;
         const ct = g.querySelector('.grp-ct');
         if (ct) ct.textContent = vus + ' usagers';
       });
+      const vide = grille.querySelector('tbody tr.vide');
+      if (vide) vide.hidden = total > 0;
     }
 
     // Replier un chapitre : la liste disparait, le chevron pivote, et le
