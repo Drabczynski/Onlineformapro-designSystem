@@ -36,7 +36,7 @@ La référence des composants est `index.html` : chaque section montre le rendu,
 - Aucun bouton bleu, vert ou rose. La couleur d'action est le violet ; le rouge `--nav-act` n'existe que dans le menu gauche.
 - Aucune couleur de série inventée : la 6<sup>e</sup> série se replie sur « Autres ». Aucun double axe vertical : deux mesures, deux graphiques.
 - Aucun graphique dessiné avec des `<div>` : la géométrie va dans un `<svg>`, donc dans des attributs et non dans des styles.
-- Une seule action `.btn.primary` par écran. Une modale est un écran à part : elle a droit à la sienne.
+- Une seule action `.btn.primary` par écran. Une modale, un panneau latéral, un calendrier : autant de surfaces à part, chacune a droit à la sienne.
 - Un formulaire n'est jamais un bloc sur toute la largeur : deux colonnes de `.fs-block` dans `.form-body`.
 
 ## Intention → classe
@@ -56,6 +56,9 @@ La référence des composants est `index.html` : chaque section montre le rendu,
 | Un champ de date | `.dp > input.form-input + .dp-btn + .dp-pop` — le calendrier du système |
 | Un champ au format connu | `type="email"`, ou `data-fmt="tel"` / `cp` / `siret` / `naf` — le système met en forme pendant la frappe et affiche l'erreur à la sortie du champ |
 | Une fenêtre modale | `.modal-veil[hidden] > .modal (.modal-header + .modal-body + .modal-footer)`, ouverte par `modalOuvre('id')`, fermée par `modalFerme(this)` |
+| Un panneau latéral | `.modal-veil.side[hidden] > .drawer (.drawer-head + .drawer-body)` — même ouverture, même fermeture |
+| Un widget qu'on peut ranger | `.w-grip` dans son `.w-head` : glisser-déposer entre `.wcol`, et flèches au clavier |
+| Un widget à poser depuis un panneau | une `<template>` qui contient le `.w`, posée par `widgetAjoute('id', this)` |
 | Une liste de choix | `.w-dd-wrap.block > .w-dd-btn.field + .w-dd-menu > .w-dd-item` |
 | Un réglage qui s'applique tout de suite | `.form-toggle > .form-toggle-txt (.form-toggle-lbl + .form-hint) + .form-switch` — le libellé à gauche, l'interrupteur à droite |
 | Deux champs côte à côte | `.form-grid` ; un seul : `.form-grid.col-full` ; trois : `.form-grid.cols-3` |

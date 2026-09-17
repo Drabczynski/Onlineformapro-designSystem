@@ -286,6 +286,17 @@ function drpSuggestions(pop) {
   });
 }
 
+// Le panneau tient-il a droite du declencheur ? Sinon il s'aligne sur son
+// bord droit. Mesure a l'ouverture : la place depend de la fenetre, pas du
+// gabarit.
+function popCadre(decl, pop) {
+  pop.classList.remove('fin');
+  const r = decl.getBoundingClientRect();
+  if (r.left + pop.offsetWidth > document.documentElement.clientWidth - 8) {
+    pop.classList.add('fin');
+  }
+}
+
 function drpOpen(btn) {
   const w = btn.closest('.drp');
   const open = w.classList.contains('open');
@@ -295,6 +306,7 @@ function drpOpen(btn) {
     const pop = w.querySelector('.drp-pop');
     drpSuggestions(pop);
     drpRender(pop);
+    popCadre(w, pop);
   }
 }
 
@@ -343,6 +355,103 @@ document.addEventListener('click', (e) => {
 });
 
 document.querySelectorAll('.drp-pop.pin').forEach(pop => { drpSuggestions(pop); drpRender(pop); });
+
+// ---- Ranger les widgets ----
+// On ne rend un widget deplacable qu'au moment ou on le prend par sa
+// poignee : draggable pose en permanence empecherait de selectionner le
+// texte qu'il contient.
+let widgetTire = null;
+
+document.addEventListener('pointerdown', (e) => {
+  const poignee = e.target.closest('.w-grip');
+  if (!poignee) return;
+  const w = poignee.closest('.w');
+  if (w) w.draggable = true;
+});
+
+document.addEventListener('dragstart', (e) => {
+  const w = e.target.closest ? e.target.closest('.w[draggable="true"]') : null;
+  if (!w) return;
+  widgetTire = w;
+  w.classList.add('tire');
+  e.dataTransfer.effectAllowed = 'move';
+  e.dataTransfer.setData('text/plain', '');
+});
+
+function widgetAvant(col, y) {
+  // Le widget devant lequel deposer : le premier dont on a depasse le
+  // milieu par le haut.
+  let proche = null, ecart = -Infinity;
+  for (const w of col.querySelectorAll(':scope > .w')) {
+    if (w === widgetTire) continue;
+    const r = w.getBoundingClientRect();
+    const d = y - r.top - r.height / 2;
+    if (d < 0 && d > ecart) { ecart = d; proche = w; }
+  }
+  return proche;
+}
+
+document.addEventListener('dragover', (e) => {
+  if (!widgetTire) return;
+  const col = e.target.closest ? e.target.closest('.wcol') : null;
+  if (!col) return;
+  e.preventDefault();
+  document.querySelectorAll('.wcol.cible').forEach(c => c.classList.remove('cible'));
+  col.classList.add('cible');
+  const avant = widgetAvant(col, e.clientY);
+  if (avant) col.insertBefore(widgetTire, avant);
+  else col.appendChild(widgetTire);
+});
+
+document.addEventListener('dragend', () => {
+  if (!widgetTire) return;
+  widgetTire.classList.remove('tire');
+  widgetTire.draggable = false;
+  widgetTire = null;
+  document.querySelectorAll('.wcol.cible').forEach(c => c.classList.remove('cible'));
+});
+
+// Le glisser-deposer n'existe pas au clavier : les fleches font le meme
+// travail depuis la poignee, qui est un bouton.
+function widgetDeplace(poignee, dx, dy) {
+  const w = poignee.closest('.w'), col = w.parentElement;
+  const colonnes = [...col.parentElement.querySelectorAll(':scope > .wcol')];
+  if (dy) {
+    const frere = dy < 0 ? w.previousElementSibling : w.nextElementSibling;
+    if (!frere) return;
+    if (dy < 0) col.insertBefore(w, frere);
+    else col.insertBefore(frere, w);
+  } else {
+    const i = colonnes.indexOf(col) + dx;
+    if (i < 0 || i >= colonnes.length) return;
+    colonnes[i].appendChild(w);
+  }
+  poignee.focus();
+}
+
+document.addEventListener('keydown', (e) => {
+  const poignee = e.target.closest ? e.target.closest('.w-grip') : null;
+  if (!poignee) return;
+  const pas = { ArrowUp: [0, -1], ArrowDown: [0, 1], ArrowLeft: [-1, 0], ArrowRight: [1, 0] }[e.key];
+  if (!pas) return;
+  e.preventDefault();
+  widgetDeplace(poignee, pas[0], pas[1]);
+});
+
+// ---- Ajouter un widget depuis le panneau ----
+function widgetAjoute(cle, btn) {
+  const modele = document.getElementById(cle);
+  const colonnes = [...document.querySelectorAll('.wgrid.cols-3 > .wcol')];
+  if (!modele || !colonnes.length) return;
+  // La colonne la plus courte : la grille reste equilibree sans qu'on ait
+  // a choisir ou poser le widget.
+  const cible = colonnes.reduce((a, b) => (a.offsetHeight <= b.offsetHeight ? a : b));
+  const neuf = modele.content.firstElementChild.cloneNode(true);
+  cible.appendChild(neuf);
+  neuf.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  btn.disabled = true;
+  btn.textContent = 'Ajouté';
+}
 
 // ---- Champs : mise en forme et verification ----
 // Le format se corrige pendant la frappe, l'erreur ne s'affiche qu'en
@@ -485,7 +594,9 @@ function dpOpen(el) {
   document.querySelectorAll('.dp.open').forEach(x => x.classList.remove('open'));
   if (!ouvert) {
     w.classList.add('open');
-    dpRender(w.querySelector('.dp-pop'));
+    const pop = w.querySelector('.dp-pop');
+    dpRender(pop);
+    popCadre(w, pop);
   }
 }
 
