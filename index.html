@@ -34,7 +34,7 @@
       --t2: #4B5563;
       --t3: #9CA3AF;
       --bd: #E5E7EB;
-      --bg: #F3F4F6;
+      --bg: #F5F7FC;
       --ps: #F7F8FA;
 
       /* Graphiques — couleurs de serie.
@@ -1099,26 +1099,28 @@
     /* Une glissiere permanente trace un filet gris sur toute la hauteur du
        rail, juste a cote des tuiles. Ici elle n'existe que sous le curseur :
        au repos la colonne est blanche, au survol un trait fin apparait.
-       Version standard, pour les moteurs sans glissiere dessinable. */
-    .content.rail .pal {
-      scrollbar-width: thin;
-      scrollbar-color: transparent transparent;
-    }
 
-    .content.rail .pal:hover {
-      scrollbar-color: rgba(17, 24, 39, 0.20) transparent;
+       Les deux versions s'excluent. Poser scrollbar-color quelque part, meme
+       au survol, suffit a faire ignorer tout le dessin qui suit : le moteur
+       repasse a sa glissiere standard, d'une autre largeur, et la colonne
+       entiere se decale sous le curseur. La version standard ne sert donc
+       que la ou la glissiere ne se dessine pas. */
+    @supports not selector(::-webkit-scrollbar) {
+
+      .content.rail .pal {
+        scrollbar-width: thin;
+        scrollbar-color: transparent transparent;
+      }
+
+      .content.rail .pal:hover {
+        scrollbar-color: rgba(17, 24, 39, 0.20) transparent;
+      }
     }
 
     /* La ou la glissiere se dessine, on la dessine : un batonnet arrondi,
-       sans fleches, detache du bord par une bordure transparente. Les deux
-       proprietes standard repassent a auto car elles desactivent, a elles
-       seules, tout le dessin qui suit. */
+       sans fleches, detache du bord par une bordure transparente. La gouttiere
+       fait 12px en permanence, visible ou non : rien ne bouge au survol. */
     @supports selector(::-webkit-scrollbar) {
-
-      .content.rail .pal {
-        scrollbar-width: auto;
-        scrollbar-color: auto;
-      }
 
       .content.rail .pal::-webkit-scrollbar {
         width: 12px;
@@ -4359,6 +4361,15 @@
 
     .mini .nmain {
       white-space: normal;
+    }
+
+    /* Dans un widget la vignette n'est pas un reperage non plus : elle montre
+       le module. Les coins se resserrent, une image large et arrondie comme un
+       bouton flotte au milieu du tableau. */
+    .mini .thumb.lg {
+      width: 110px;
+      height: 72px;
+      border-radius: 5px;
     }
 
     /* Les colonnes de droite se serrent sur leur contenu et laissent le reste
