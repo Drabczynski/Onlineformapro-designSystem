@@ -59,7 +59,7 @@ La référence des composants est `index.html` : chaque section montre le rendu,
 | Un panneau latéral | `.modal-veil.side[hidden] > .drawer (.drawer-head + .drawer-body)` — même ouverture, même fermeture |
 | Quelque chose qu'on peut ranger | `.w-grip` dans la ligne : `.w` entre `.wcol`, `.elt` dans une `.elt-list`. Glisser-déposer et flèches au clavier |
 | Une palette de ressources | `.pal > div (.pal-title + .pal-grid > .pal-item (.pal-vis + .pal-lbl))` — `style="background:<teinte>;color:<marque>;"` sur la tuile, le bloc et le libellé la reprennent |
-| Un outillage à gauche, un document à droite | `.form-body.side-main` ; pour que le rail touche le menu et la barre du haut : `.content.rail` et `.col.rail-body` sur le canevas |
+| Un outillage à gauche, un document à droite | `.form-body.side-main` ; pour que le rail touche le menu et la barre du haut : `.content.rail` et `.col.rail-body` sur le canevas. Le titre de l'écran vit dans `.pal > .pal-head`, pas dans un `.ph` au-dessus |
 | Un bouton posé sur une image | `.btn.overlay.pill` — voile sombre et flou, jamais une couleur pleine |
 | Une bannière avec une action posée dessus | `.banner > img.thumb.wide + .banner-act` |
 | Une ligne d'un parcours | `.elt > .w-grip + .thumb.lg + .elt-txt (.nmain + .nsub) + .pbadge + .rmenu-wrap (.rdots + .rmenu)` |
