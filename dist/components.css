@@ -3112,11 +3112,12 @@ textarea.form-input {
 
 /* ==========================================================
    ARBORESCENCE DE SUIVI — un usager, ce qu'il a suivi, dedans
-   Une grille montre une matrice ; un arbre montre un contenu dans un
-   contenu. Les colonnes y sont toujours les memes — de quoi il s'agit,
-   ou en est-on, combien de temps — et ce qui change d'une ligne a
-   l'autre, c'est la profondeur. Un rail vertical la donne d'un coup
-   d'oeil, la ou l'indentation seule oblige a compter.
+   Trois niveaux, pas quatre : l'usager, le contenu, la sequence. La
+   nature du contenu tenait une ligne entiere pour n'y porter qu'un mot
+   et une duree ; elle est devenue une pastille sur la ligne du contenu,
+   et un decompte sur celle de l'usager. Chaque ligne dit son avancement
+   en toutes lettres a cote de sa barre : une barre seule ne se lit pas
+   sans les yeux, et a zero elle ne se lit pas du tout.
    ========================================================== */
 .arbo {
   background: #fff;
@@ -3124,58 +3125,23 @@ textarea.form-input {
 
 .arb {
   display: grid;
-  grid-template-columns: 1fr 168px 54px 96px;
+  grid-template-columns: minmax(0, 1fr) 118px 196px 88px 128px;
   align-items: center;
-  gap: 18px;
+  gap: 20px;
   padding: 0 22px;
-  min-height: 54px;
   border-bottom: 1px solid var(--bd);
 }
 
 .arb-main {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 13px;
   min-width: 0;
   position: relative;
 }
 
-/* Le rail : un trait continu d'une ligne a l'autre, a l'aplomb du niveau
-   parent. Chaque ligne n'en dessine qu'un fragment, ils se rejoignent. */
-.arb.n2 .arb-main::before,
-.arb.n3 .arb-main::before,
-.arb.n4 .arb-main::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background: var(--bd);
-}
-
-.arb.n2 .arb-main {
-  padding-left: 34px;
-}
-
-.arb.n3 .arb-main {
-  padding-left: 62px;
-}
-
-.arb.n4 .arb-main {
-  padding-left: 122px;
-}
-
-.arb.n2 .arb-main::before {
-  left: 15px;
-}
-
-.arb.n3 .arb-main::before,
-.arb.n4 .arb-main::before {
-  left: 43px;
-}
-
 /* Le chevron ouvre et ferme ; les lignes sans enfant gardent sa place
-   pour que les pastilles et les vignettes restent alignees. */
+   pour que les vignettes restent alignees. */
 .arb-tog {
   width: 22px;
   height: 22px;
@@ -3224,12 +3190,27 @@ textarea.form-input {
 }
 
 .arb .thumb {
-  width: 64px;
-  height: 44px;
+  width: 62px;
+  height: 42px;
   border-radius: 6px;
 }
 
+/* La barre et son chiffre forment un bloc : la barre situe, le chiffre
+   dit. Separes par la moitie de la ligne, aucun des deux ne renseigne
+   l'autre. */
+.arb-prog {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.arb-prog .meter {
+  flex: 1;
+}
+
 .arb-pct {
+  width: 44px;
+  flex-shrink: 0;
   font-size: 12.5px;
   font-weight: 600;
   color: var(--t2);
@@ -3237,7 +3218,8 @@ textarea.form-input {
   font-variant-numeric: tabular-nums;
 }
 
-.arb-time {
+.arb-time,
+.arb-date {
   font-size: 12.5px;
   color: var(--t2);
   text-align: right;
@@ -3245,11 +3227,15 @@ textarea.form-input {
   white-space: nowrap;
 }
 
+.arb-date {
+  text-align: left;
+  color: var(--t3);
+}
+
 /* --- Niveau 1 : l'usager --- */
 .arb.n1 {
   background: var(--ps);
-  min-height: 60px;
-  border-bottom: 1px solid var(--bd);
+  min-height: 62px;
 }
 
 .arb.n1 .nmain {
@@ -3263,29 +3249,47 @@ textarea.form-input {
   font-weight: 600;
 }
 
-/* --- Niveau 2 : la nature du contenu --- */
-.arb.n2 .nmain {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--t2);
-  letter-spacing: .02em;
+/* --- Niveau 2 : le contenu suivi --- */
+.arb.n2 {
+  min-height: 62px;
 }
 
-/* --- Niveau 4 : la sequence, dans son module --- */
-.arb.n4 .nmain {
+.arb.n2 .arb-main {
+  padding-left: 34px;
+}
+
+/* --- Niveau 3 : la sequence, dans son contenu --- */
+/* Un seul rail, celui qui rattache les sequences a leur contenu : au-dela
+   il ne guide plus, il quadrille. */
+.arb.n3 {
+  min-height: 46px;
+  background: var(--ps);
+}
+
+.arb.n3 .arb-main {
+  padding-left: 130px;
+}
+
+.arb.n3 .arb-main::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 103px;
+  width: 1px;
+  background: var(--bd);
+}
+
+.arb.n3 .nmain {
   font-weight: 400;
   color: var(--t2);
+  font-size: 12.5px;
 }
 
 .arb:hover {
   background: var(--row-hover);
 }
 
-.arb.n1:hover {
-  background: var(--row-active);
-}
-
-.arb.plie+.arb.masque,
 .arb.masque {
   display: none;
 }
@@ -3301,7 +3305,6 @@ textarea.form-input {
   font-size: 11.5px;
   font-weight: 600;
   color: var(--t2);
-  letter-spacing: .01em;
 }
 
 .arb.arb-hd:hover {
@@ -3309,7 +3312,8 @@ textarea.form-input {
 }
 
 .arb-hd .arb-pct,
-.arb-hd .arb-time {
+.arb-hd .arb-time,
+.arb-hd .arb-date {
   font-size: 11.5px;
   font-weight: 600;
   color: var(--t2);
