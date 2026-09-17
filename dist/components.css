@@ -2155,7 +2155,7 @@ textarea.form-input {
 
 /* L'inverse : un outillage etroit a gauche, le document a droite. */
 .form-body.side-main {
-  grid-template-columns: 260px 1fr;
+  grid-template-columns: 300px 1fr;
   gap: 24px;
 }
 
@@ -2469,21 +2469,30 @@ textarea.form-input {
 }
 
 /* --- Palette de ressources --- */
-/* Ce qu'on peut deposer dans un document, range par nature. Les tuiles
-   sont carrees et de meme taille : aucune ressource n'est mise en avant
-   par son gabarit. */
+/* Ce qu'on peut deposer dans un document, range par nature. Chaque tuile
+   porte la couleur de son service : c'est une donnee du service, pas une
+   decision de mise en page — au meme titre que la couleur d'une pastille
+   d'usager. Le systeme fournit la forme, la marque fournit la teinte. */
+/* La palette est un panneau : sans fond, ses tuiles teintees flottaient
+   sur le gris de la page sans qu'on voie ou commence l'outillage. */
 .pal {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  background: #fff;
+  border: 1px solid var(--bd);
+  border-radius: var(--rl);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .04);
+  padding: 18px 16px;
+  align-self: start;
 }
 
 .pal-title {
-  font-size: 11.5px;
+  font-size: 11px;
   font-weight: 600;
   color: var(--t3);
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.07em;
   margin-bottom: 10px;
 }
 
@@ -2494,66 +2503,60 @@ textarea.form-input {
 }
 
 .pal-item {
-  --mark: var(--ch1);
-  --wash: var(--ch1-w);
-  aspect-ratio: 1;
-  border: 1px solid var(--bd);
-  border-radius: 10px;
-  background: #fff;
+  border: 0;
+  border-radius: 12px;
+  height: 84px;
+  padding: 8px 4px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 7px;
-  padding: 6px;
   cursor: grab;
   font-family: inherit;
-  transition: border-color .12s, box-shadow .12s, transform .12s;
+  /* La teinte et la marque arrivent en style, la transition est au systeme. */
+  background: var(--ps);
+  color: var(--t2);
+  transition: transform .14s cubic-bezier(.22,.61,.36,1), box-shadow .14s;
 }
 
-.pal-item.t1 { --mark: var(--ch1); --wash: var(--ch1-w); }
-
-.pal-item.t2 { --mark: var(--ch2); --wash: var(--ch2-w); }
-
-.pal-item.t3 { --mark: var(--ch3); --wash: var(--ch3-w); }
-
-.pal-item.t4 { --mark: var(--ch4); --wash: var(--ch4-w); }
-
-.pal-item.t5 { --mark: var(--ch5); --wash: var(--ch5-w); }
-
 .pal-item:hover {
-  border-color: var(--a2);
-  box-shadow: 0 4px 12px rgba(17, 24, 39, 0.06);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(17, 24, 39, 0.10);
 }
 
 .pal-item:active {
   cursor: grabbing;
+  transform: translateY(0);
 }
 
+/* La pastille est blanche : la marque s'y detache quelle que soit la
+   teinte du fond. */
 .pal-ico {
-  width: 30px;
-  height: 30px;
-  border-radius: 9px;
-  background: var(--wash);
-  color: var(--mark);
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: #fff;
+  color: inherit;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  box-shadow: 0 1px 3px rgba(17, 24, 39, 0.08);
 }
 
 .pal-ico svg {
-  width: 16px;
-  height: 16px;
+  width: 17px;
+  height: 17px;
 }
 
 .pal-lbl {
   font-size: 10.5px;
-  font-weight: 500;
-  color: var(--t2);
+  font-weight: 600;
+  color: inherit;
   text-align: center;
-  line-height: 1.25;
+  line-height: 1.2;
+  padding: 0 2px;
 }
 
 /* --- Banniere d'un document --- */
@@ -2597,10 +2600,33 @@ textarea.form-input {
   border: 1px solid var(--bd);
   border-radius: var(--rl);
   box-shadow: 0 1px 3px rgba(0, 0, 0, .04);
-  padding: 12px 14px;
+  padding: 14px 16px;
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
+  transition: border-color .12s, box-shadow .12s;
+}
+
+.elt:hover {
+  border-color: var(--a2);
+  box-shadow: 0 4px 14px rgba(17, 24, 39, 0.06);
+}
+
+/* D'ou vient le media : la marque, a sa couleur, plutot qu'un mot dans une
+   pastille grise. */
+.elt-src {
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.elt-src svg {
+  width: 17px;
+  height: 17px;
 }
 
 .elt-txt {
@@ -2610,7 +2636,7 @@ textarea.form-input {
 
 .elt+.elt,
 .elt-head+.elt {
-  margin-top: 10px;
+  margin-top: 12px;
 }
 
 /* Zone de depot : c'est elle qui accueille les lignes deplacees. */

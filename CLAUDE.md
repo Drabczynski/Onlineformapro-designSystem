@@ -23,7 +23,7 @@ La référence des composants est `index.html` : chaque section montre le rendu,
 ## Interdits
 
 - Aucune couleur écrite en dur (`#…`, `rgb(…)`, noms de couleur). Les seules couleurs sont `var(--…)`, et uniquement dans les cas prévus par les composants.
-- Aucun attribut `style=""` sauf : la hauteur d'une `.empty-bar`, la largeur d'un `.meter-fill`, le `background` d'une `.w-ico` et la couleur d'un `.ava`, qui sont des valeurs de données.
+- Aucun attribut `style=""` sauf : la hauteur d'une `.empty-bar`, la largeur d'un `.meter-fill`, le `background` d'une `.w-ico`, et la couleur d'un `.ava`, d'un `.pal-item` ou d'un `.elt-src` — la teinte d'un service ou d'une personne est une donnée, pas une mise en forme.
 - Aucune balise `<style>` dans la page. Aucune classe inventée. Aucun `!important`.
 - Aucun `<select>` natif : le sélecteur du système est `.w-dd-wrap`.
 - Aucun `<input type="date">` : son calendrier est celui du navigateur, pas celui du système. Le composant est `.dp`.
@@ -56,7 +56,7 @@ La référence des composants est `index.html` : chaque section montre le rendu,
 | Une fenêtre modale | `.modal-veil[hidden] > .modal (.modal-header + .modal-body + .modal-footer)`, ouverte par `modalOuvre('id')`, fermée par `modalFerme(this)` |
 | Un panneau latéral | `.modal-veil.side[hidden] > .drawer (.drawer-head + .drawer-body)` — même ouverture, même fermeture |
 | Quelque chose qu'on peut ranger | `.w-grip` dans la ligne : `.w` entre `.wcol`, `.elt` dans une `.elt-list`. Glisser-déposer et flèches au clavier |
-| Une palette de ressources | `.pal > div (.pal-title + .pal-grid > .pal-item.tN (.pal-ico + .pal-lbl))` |
+| Une palette de ressources | `.pal > div (.pal-title + .pal-grid > .pal-item (.pal-ico + .pal-lbl))`, la teinte du service en `style="background:#…;color:#…;"` |
 | Un outillage à gauche, un document à droite | `.form-body.side-main` |
 | Une bannière avec une action posée dessus | `.banner > img.thumb.wide + .banner-act` |
 | Une ligne d'un parcours | `.elt > .w-grip + .thumb.lg + .elt-txt (.nmain + .nsub) + .pbadge + .rmenu-wrap (.rdots + .rmenu)` |
