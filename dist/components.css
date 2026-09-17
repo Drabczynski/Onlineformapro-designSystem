@@ -84,6 +84,7 @@
 
   /* Sizes & Radius */
   --sw: 220px;
+  --tbh: 56px;
   --ch: 36px;
   --r: 8px;
   --rl: 12px;
@@ -599,7 +600,7 @@
   flex-direction: column;
   min-width: 0;
   overflow: auto;
-  padding-top: 56px;
+  padding-top: var(--tbh);
 }
 
 .content {
@@ -614,7 +615,6 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  min-height: 0;
 }
 
 /* Le titre habite le rail : c'est lui qui nomme l'ecran, et le rail peut
@@ -631,17 +631,19 @@
 .content.rail .form-body.side-main {
   gap: 0;
   flex: 1;
-  min-height: 0;
-  grid-template-rows: minmax(0, 1fr);
 }
 
-/* Deux zones de defilement, une par colonne : on descend dans la liste des
-   outils sans emporter le document, et l'inverse. Sans cela un rail long
-   oblige a faire defiler tout l'ecran pour atteindre le dernier outil. */
-.content.rail .pal,
-.content.rail .rail-body {
+/* Le document defile avec la page, comme partout ailleurs. Un cadre de
+   defilement pose au milieu de la page obligerait a viser la colonne pour
+   que la molette reponde, et l'ascenseur de la fenetre ne menerait plus
+   nulle part. Seul le rail garde le sien, parce qu'il reste en place :
+   il se fige sous la barre du haut et descend jusqu'en bas de l'ecran. */
+.content.rail .pal {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  height: calc(100vh - var(--tbh));
   overflow-y: auto;
-  min-height: 0;
 }
 
 /* Le rail defile, son titre non : il nomme l'ecran, il doit rester lisible
@@ -664,14 +666,12 @@
    rail, juste a cote des tuiles. Ici elle n'existe que sous le curseur :
    au repos la colonne est blanche, au survol un trait fin apparait.
    Version standard, pour les moteurs sans glissiere dessinable. */
-.content.rail .pal,
-.content.rail .rail-body {
+.content.rail .pal {
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
 }
 
-.content.rail .pal:hover,
-.content.rail .rail-body:hover {
+.content.rail .pal:hover {
   scrollbar-color: rgba(17, 24, 39, 0.20) transparent;
 }
 
@@ -681,37 +681,31 @@
    seules, tout le dessin qui suit. */
 @supports selector(::-webkit-scrollbar) {
 
-  .content.rail .pal,
-  .content.rail .rail-body {
+  .content.rail .pal {
     scrollbar-width: auto;
     scrollbar-color: auto;
   }
 
-  .content.rail .pal::-webkit-scrollbar,
-  .content.rail .rail-body::-webkit-scrollbar {
+  .content.rail .pal::-webkit-scrollbar {
     width: 12px;
   }
 
-  .content.rail .pal::-webkit-scrollbar-track,
-  .content.rail .rail-body::-webkit-scrollbar-track {
+  .content.rail .pal::-webkit-scrollbar-track {
     background: transparent;
   }
 
-  .content.rail .pal::-webkit-scrollbar-thumb,
-  .content.rail .rail-body::-webkit-scrollbar-thumb {
+  .content.rail .pal::-webkit-scrollbar-thumb {
     background-color: transparent;
     background-clip: content-box;
     border: 3px solid transparent;
     border-radius: 999px;
   }
 
-  .content.rail .pal:hover::-webkit-scrollbar-thumb,
-  .content.rail .rail-body:hover::-webkit-scrollbar-thumb {
+  .content.rail .pal:hover::-webkit-scrollbar-thumb {
     background-color: rgba(17, 24, 39, 0.20);
   }
 
-  .content.rail .pal::-webkit-scrollbar-thumb:hover,
-  .content.rail .rail-body::-webkit-scrollbar-thumb:hover {
+  .content.rail .pal::-webkit-scrollbar-thumb:hover {
     background-color: rgba(17, 24, 39, 0.34);
   }
 }
@@ -1581,7 +1575,7 @@ a.nmain:hover {
 
 /* --- Topbar --- */
 .topbar {
-  height: 56px;
+  height: var(--tbh);
   display: flex;
   align-items: stretch;
   background: rgba(255, 255, 255, 0.7);
@@ -2889,11 +2883,9 @@ textarea.form-input {
 }
 
 .chap-title {
-  font-size: 11px;
+  font-size: 14.5px;
   font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--t2);
+  color: var(--t1);
 }
 
 .chap-ct {
