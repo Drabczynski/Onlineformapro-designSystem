@@ -1184,19 +1184,22 @@
     /* La grille n'a plus de bord a elle : elle touche le menu a gauche, la
        fenetre a droite et en bas. Un cadre autour d'un plan de travail ne fait
        que retrancher de la place a ce qu'on y regarde. */
-    .content.plein>.tcard.grid {
+    .content.plein>.tcard {
       flex: 1;
       min-height: 0;
+      display: flex;
+      flex-direction: column;
       border: 0;
       border-radius: 0;
       box-shadow: none;
     }
 
-    .content.plein>.tcard.grid>.tbar:first-child {
+    .content.plein>.tcard>.tbar:first-child {
       border-radius: 0;
     }
 
-    .content.plein>.tcard.grid>.tw {
+    .content.plein>.tcard>.tw {
+      overflow: auto;
       max-height: none;
       flex: 1;
       min-height: 0;
@@ -1567,6 +1570,15 @@
     .tbar-lbl {
       font-size: 12.5px;
       color: var(--t3);
+    }
+
+    /* Deux jeux de filtres a la suite se lisent comme un seul : un filet les
+       separe mieux qu'un espace de plus. */
+    .tbar-sep {
+      width: 1px;
+      height: 18px;
+      background: var(--bd);
+      margin: 0 4px;
     }
 
     .tcard.grid>.tw {
@@ -3780,6 +3792,212 @@
     .banner:hover .banner-act,
     .banner:focus-within .banner-act {
       opacity: 1;
+    }
+
+
+    /* ==========================================================
+       ARBORESCENCE DE SUIVI — un usager, ce qu'il a suivi, dedans
+       Une grille montre une matrice ; un arbre montre un contenu dans un
+       contenu. Les colonnes y sont toujours les memes — de quoi il s'agit,
+       ou en est-on, combien de temps — et ce qui change d'une ligne a
+       l'autre, c'est la profondeur. Un rail vertical la donne d'un coup
+       d'oeil, la ou l'indentation seule oblige a compter.
+       ========================================================== */
+    .arbo {
+      background: #fff;
+    }
+
+    .arb {
+      display: grid;
+      grid-template-columns: 1fr 168px 54px 96px;
+      align-items: center;
+      gap: 18px;
+      padding: 0 22px;
+      min-height: 54px;
+      border-bottom: 1px solid var(--bd);
+    }
+
+    .arb-main {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      position: relative;
+    }
+
+    /* Le rail : un trait continu d'une ligne a l'autre, a l'aplomb du niveau
+       parent. Chaque ligne n'en dessine qu'un fragment, ils se rejoignent. */
+    .arb.n2 .arb-main::before,
+    .arb.n3 .arb-main::before,
+    .arb.n4 .arb-main::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: var(--bd);
+    }
+
+    .arb.n2 .arb-main {
+      padding-left: 34px;
+    }
+
+    .arb.n3 .arb-main {
+      padding-left: 62px;
+    }
+
+    .arb.n4 .arb-main {
+      padding-left: 122px;
+    }
+
+    .arb.n2 .arb-main::before {
+      left: 15px;
+    }
+
+    .arb.n3 .arb-main::before,
+    .arb.n4 .arb-main::before {
+      left: 43px;
+    }
+
+    /* Le chevron ouvre et ferme ; les lignes sans enfant gardent sa place
+       pour que les pastilles et les vignettes restent alignees. */
+    .arb-tog {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      border: 0;
+      border-radius: 5px;
+      background: transparent;
+      color: var(--t3);
+      cursor: pointer;
+    }
+
+    .arb-tog:hover {
+      background: var(--bd);
+      color: var(--t1);
+    }
+
+    .arb-tog svg {
+      width: 15px;
+      height: 15px;
+      transition: transform .16s;
+    }
+
+    .arb.plie .arb-tog svg {
+      transform: rotate(-90deg);
+    }
+
+    .arb-vide {
+      width: 22px;
+      flex-shrink: 0;
+    }
+
+    .arb-txt {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .arb-txt .nmain,
+    .arb-txt .nsub {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .arb .thumb {
+      width: 64px;
+      height: 44px;
+      border-radius: 6px;
+    }
+
+    .arb-pct {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--t2);
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .arb-time {
+      font-size: 12.5px;
+      color: var(--t2);
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    /* --- Niveau 1 : l'usager --- */
+    .arb.n1 {
+      background: var(--ps);
+      min-height: 60px;
+      border-bottom: 1px solid var(--bd);
+    }
+
+    .arb.n1 .nmain {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .arb.n1 .arb-pct,
+    .arb.n1 .arb-time {
+      color: var(--t1);
+      font-weight: 600;
+    }
+
+    /* --- Niveau 2 : la nature du contenu --- */
+    .arb.n2 .nmain {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--t2);
+      letter-spacing: .02em;
+    }
+
+    /* --- Niveau 4 : la sequence, dans son module --- */
+    .arb.n4 .nmain {
+      font-weight: 400;
+      color: var(--t2);
+    }
+
+    .arb:hover {
+      background: var(--row-hover);
+    }
+
+    .arb.n1:hover {
+      background: var(--row-active);
+    }
+
+    .arb.plie+.arb.masque,
+    .arb.masque {
+      display: none;
+    }
+
+    /* --- En-tete de l'arbre --- */
+    .arb.arb-hd {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      min-height: 40px;
+      background: var(--ps);
+      border-bottom: 1px solid var(--bd);
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--t2);
+      letter-spacing: .01em;
+    }
+
+    .arb.arb-hd:hover {
+      background: var(--ps);
+    }
+
+    .arb-hd .arb-pct,
+    .arb-hd .arb-time {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--t2);
     }
 
     /* --- Ligne d'element d'un parcours --- */
@@ -10542,6 +10760,40 @@
       const open = menu.classList.contains('oo');
       closeRowMenus();
       if (!open) { menu.classList.add('oo'); cell.classList.add('oo'); }
+    }
+
+    // Une branche d'arborescence : replier une ligne cache tout ce qui est
+    // plus profond qu'elle, jusqu'a la prochaine ligne de meme niveau ou
+    // moins. Replier un usager emporte donc ses categories et leurs contenus.
+    function arboPlie(btn) {
+      const ligne = btn.closest('.arb');
+      if (!ligne) return;
+      const plie = ligne.classList.toggle('plie');
+      btn.setAttribute('aria-expanded', plie ? 'false' : 'true');
+      const niv = [...ligne.classList].find(c => /^n\d$/.test(c));
+      if (!niv) return;
+      const mien = +niv.slice(1);
+      let n = ligne.nextElementSibling;
+      while (n && n.classList.contains('arb')) {
+        const s = [...n.classList].find(c => /^n\d$/.test(c));
+        if (!s || +s.slice(1) <= mien) break;
+        n.classList.toggle('masque', plie);
+        // Une branche repliee le reste : on ne la rouvre pas en rouvrant
+        // son parent.
+        if (!plie && n.classList.contains('plie')) {
+          let p = n.nextElementSibling;
+          const sien = +s.slice(1);
+          while (p && p.classList.contains('arb')) {
+            const q = [...p.classList].find(c => /^n\d$/.test(c));
+            if (!q || +q.slice(1) <= sien) break;
+            p.classList.add('masque');
+            p = p.nextElementSibling;
+          }
+          n = p;
+          continue;
+        }
+        n = n.nextElementSibling;
+      }
     }
 
     // Une grille groupee : replier un groupe cache ses lignes, le chevron
