@@ -59,8 +59,9 @@ La référence des composants est `index.html` : chaque section montre le rendu,
 | Une palette de ressources | `.pal > div (.pal-title + .pal-grid > .pal-item (.pal-vis + .pal-lbl))` — `style="background:<teinte>;color:<marque>;"` sur la tuile, le bloc et le libellé la reprennent |
 | Un outillage à gauche, un document à droite | `.form-body.side-main` ; pour que le rail touche le menu et la barre du haut : `.content.rail` et `.col.rail-body` sur le canevas. Le titre de l'écran vit dans `.pal > .pal-head` ; le `.ph` du canevas nomme le document qu'on y compose, pas l'écran |
 | Un bouton posé sur une image | `.btn.overlay.pill` — voile sombre et flou, jamais une couleur pleine |
-| Une bannière avec une action posée dessus | `.banner > img.thumb.wide + .banner-act` |
-| Une ligne d'un parcours | `.elt > .w-grip + .thumb.lg + .elt-txt (.nmain + .nsub) + .pbadge + .rmenu-wrap (.rdots + .rmenu)` |
+| Une bannière avec une action posée dessus | `.banner > img.thumb.wide + .banner-act` — l'action ne se montre qu'au survol de l'image |
+| Une ligne d'un parcours | `.elt > .w-grip + .thumb.lg + .elt-txt (.nmain + .nsub) + .elt-src + .rmenu-wrap (.rdots + .rmenu)` |
+| Un chapitre dans un parcours | `.chap > .chap-head (.chap-tog + .chap-title + .chap-ct) + .elt-list` — `chapPlie(this)` sur le chevron ; chaque chapitre est sa propre zone de dépôt, donc un module passe d'un chapitre à l'autre |
 | Un widget qu'on peut retirer | `.w-close` dans son `.w-head`, `onclick="widgetRetire(this)"` |
 | Un widget à poser depuis un panneau | une `<template>` qui contient le `.w`, posée par `widgetAjoute('id', this)` |
 | Une liste de choix | `.w-dd-wrap.block > .w-dd-btn.field + .w-dd-menu > .w-dd-item` |

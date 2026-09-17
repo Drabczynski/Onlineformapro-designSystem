@@ -86,6 +86,15 @@ function togRow(btn) {
   if (!open) { menu.classList.add('oo'); cell.classList.add('oo'); }
 }
 
+// Replier un chapitre : la liste disparait, le chevron pivote, et le
+// bouton dit lui-meme dans quel etat il est.
+function chapPlie(btn) {
+  const chap = btn.closest('.chap');
+  if (!chap) return;
+  const plie = chap.classList.toggle('plie');
+  btn.setAttribute('aria-expanded', plie ? 'false' : 'true');
+}
+
 function closeRowMenus() {
   document.querySelectorAll('.rmenu.oo').forEach(m => m.classList.remove('oo'));
   document.querySelectorAll('.catd.oo, .rmenu-wrap.oo').forEach(c => c.classList.remove('oo'));
