@@ -58,7 +58,7 @@ La référence des composants est `index.html` : chaque section montre le rendu,
 | Une fenêtre modale | `.modal-veil[hidden] > .modal (.modal-header + .modal-body + .modal-footer)`, ouverte par `modalOuvre('id')`, fermée par `modalFerme(this)` |
 | Un panneau latéral | `.modal-veil.side[hidden] > .drawer (.drawer-head + .drawer-body)` — même ouverture, même fermeture |
 | Quelque chose qu'on peut ranger | `.w-grip` dans la ligne : `.w` entre `.wcol`, `.elt` dans une `.elt-list`. Glisser-déposer et flèches au clavier |
-| Une palette de ressources | `.pal > div (.pal-title + .pal-grid > .pal-item (.pal-ico + .pal-lbl))`, la teinte du service en `style="background:#…;color:#…;"` |
+| Une palette de ressources | `.pal > div (.pal-title + .pal-grid > .pal-item (.pal-ico + .pal-lbl))`, la couleur du service sur le `.pal-ico`, glyphe en blanc |
 | Un outillage à gauche, un document à droite | `.form-body.side-main` |
 | Une bannière avec une action posée dessus | `.banner > img.thumb.wide + .banner-act` |
 | Une ligne d'un parcours | `.elt > .w-grip + .thumb.lg + .elt-txt (.nmain + .nsub) + .pbadge + .rmenu-wrap (.rdots + .rmenu)` |

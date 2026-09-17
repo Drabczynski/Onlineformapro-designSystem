@@ -2835,10 +2835,23 @@
       grid-template-columns: 1.7fr 1fr;
     }
 
-    /* L'inverse : un outillage etroit a gauche, le document a droite. */
+    /* L'inverse : un outillage etroit a gauche, le document a droite.
+       .content remplit deja la hauteur de la fenetre ; la grille la reprend,
+       et le rail descend jusqu'en bas au lieu de s'arreter sous sa derniere
+       tuile. */
     .form-body.side-main {
-      grid-template-columns: 300px 1fr;
-      gap: 24px;
+      grid-template-columns: 276px 1fr;
+      gap: 28px;
+      min-height: 100%;
+      align-items: stretch;
+    }
+
+    /* Le document ne s'etale pas : au-dela, une ligne de parcours devient une
+       barre vide avec un titre a un bout et un menu a l'autre. */
+    .form-body.side-main>.col:last-child {
+      max-width: 880px;
+      width: 100%;
+      justify-self: center;
     }
 
     /* --- Import de fichier : ligne compacte --- */
@@ -3160,22 +3173,22 @@
     .pal {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 22px;
       background: #fff;
       border: 1px solid var(--bd);
       border-radius: var(--rl);
       box-shadow: 0 1px 3px rgba(0, 0, 0, .04);
-      padding: 18px 16px;
-      align-self: start;
+      padding: 20px 18px;
+      height: 100%;
     }
 
     .pal-title {
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 600;
       color: var(--t3);
       text-transform: uppercase;
-      letter-spacing: 0.07em;
-      margin-bottom: 10px;
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
     }
 
     .pal-grid {
@@ -3184,27 +3197,29 @@
       gap: 8px;
     }
 
+    /* La tuile reste blanche : la couleur est concentree dans le badge, la ou
+       elle identifie. Teinter la tuile, le badge et le libelle diluait la
+       marque sur trois surfaces et n'en laissait aucune franche. */
     .pal-item {
-      border: 0;
+      border: 1px solid transparent;
       border-radius: 12px;
-      height: 84px;
+      height: 82px;
       padding: 8px 4px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 7px;
+      gap: 8px;
       cursor: grab;
       font-family: inherit;
-      /* La teinte et la marque arrivent en style, la transition est au systeme. */
-      background: var(--ps);
-      color: var(--t2);
-      transition: transform .14s cubic-bezier(.22,.61,.36,1), box-shadow .14s;
+      background: none;
+      transition: border-color .14s, background .14s, transform .14s cubic-bezier(.22,.61,.36,1);
     }
 
     .pal-item:hover {
+      background: #fff;
+      border-color: var(--bd);
       transform: translateY(-2px);
-      box-shadow: 0 8px 18px rgba(17, 24, 39, 0.10);
     }
 
     .pal-item:active {
@@ -3212,30 +3227,27 @@
       transform: translateY(0);
     }
 
-    /* La pastille est blanche : la marque s'y detache quelle que soit la
-       teinte du fond. */
+    /* Le badge porte la couleur du service, le glyphe est en blanc dessus. */
     .pal-ico {
-      width: 32px;
-      height: 32px;
+      width: 34px;
+      height: 34px;
       border-radius: 10px;
-      background: #fff;
-      color: inherit;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      box-shadow: 0 1px 3px rgba(17, 24, 39, 0.08);
+      box-shadow: 0 2px 6px rgba(17, 24, 39, 0.14);
     }
 
     .pal-ico svg {
-      width: 17px;
-      height: 17px;
+      width: 19px;
+      height: 19px;
     }
 
     .pal-lbl {
       font-size: 10.5px;
-      font-weight: 600;
-      color: inherit;
+      font-weight: 500;
+      color: var(--t2);
       text-align: center;
       line-height: 1.2;
       padding: 0 2px;
@@ -3307,8 +3319,8 @@
     }
 
     .elt-src svg {
-      width: 17px;
-      height: 17px;
+      width: 16px;
+      height: 16px;
     }
 
     .elt-txt {
