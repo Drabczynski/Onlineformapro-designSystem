@@ -3931,9 +3931,16 @@ textarea.form-input {
 /* ═══════════════════════════════════════
    ── DROPDOWNS STYLE (from statistiques.html) ──
 ═══════════════════════════════════════ */
+/* Le menu s'aligne sur le bord droit de son enveloppe : celle-ci doit donc
+   s'arreter au bouton. inline-block n'y suffit pas — posee dans une colonne
+   flex, l'enveloppe s'etire sur toute la largeur et le menu s'ouvre a
+   plusieurs centaines de pixels de ce qu'il deroule. Une largeur explicite
+   annule cet etirement (stretch ne joue que sur une taille automatique). */
 .w-dd-wrap {
   position: relative;
   display: inline-block;
+  width: max-content;
+  max-width: 100%;
 }
 
 .w-dd-btn {
