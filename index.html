@@ -3209,17 +3209,44 @@
 
     .dw-item {
       display: flex;
-      align-items: center;
+      flex-direction: column;
       gap: 12px;
       padding: 12px;
       border: 1px solid var(--bd);
-      border-radius: 10px;
+      border-radius: 12px;
       transition: border-color .12s, background .12s;
     }
 
     .dw-item:hover {
       border-color: var(--a2);
       background: var(--ps);
+    }
+
+    /* L'apercu est le widget lui-meme, reduit : il n'y a pas d'image a tenir a
+       jour, et ce qu'on voit est exactement ce qu'on posera. */
+    .dw-vue {
+      height: 132px;
+      border-radius: 9px;
+      overflow: hidden;
+      background: var(--ps);
+      border: 1px solid var(--bd);
+      position: relative;
+      pointer-events: none;
+    }
+
+    .dw-vue-in {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 660px;
+      transform: scale(0.5);
+      transform-origin: top left;
+    }
+
+    .dw-bas {
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
     .dw-ico {
@@ -3287,16 +3314,30 @@
       height: 14px;
     }
 
-    /* Le widget tire s'efface pour laisser voir la place qu'il prendra ; ce
-       n'est pas un etat desactive, c'est un fantome de deplacement. */
-    .w.tire {
-      opacity: 0.35;
+    /* La carte quitte le flux et suit le doigt : elle se souleve d'un cheveu et
+       porte une ombre portee, de sorte qu'on la voit passer au-dessus des
+       autres plutot que disparaitre puis reapparaitre ailleurs. */
+    .w.vole {
+      position: fixed;
+      z-index: 400;
+      margin: 0;
+      pointer-events: none;
+      box-shadow: 0 22px 48px rgba(17, 24, 39, 0.16), 0 3px 10px rgba(17, 24, 39, 0.08);
+      cursor: grabbing;
     }
 
-    .wcol.cible {
-      outline: 2px dashed var(--a2);
-      outline-offset: 5px;
+    /* La place que la carte laisse, et celle qu'elle prendra : c'est le meme
+       creux, il se deplace pendant qu'on cherche. */
+    .w-creux {
+      border: 2px dashed var(--a2);
       border-radius: 14px;
+      background: var(--a1);
+      flex-shrink: 0;
+    }
+
+    body.range {
+      cursor: grabbing;
+      user-select: none;
     }
 
     /* --- Choix d'une date --- */
@@ -9900,33 +9941,39 @@
     document.querySelectorAll('.drp-pop.pin').forEach(pop => { drpSuggestions(pop); drpRender(pop); });
 
     // ---- Ranger les widgets ----
-    // On ne rend un widget deplacable qu'au moment ou on le prend par sa
-    // poignee : draggable pose en permanence empecherait de selectionner le
-    // texte qu'il contient.
-    let widgetTire = null;
+    // Pas de glisser-deposer natif : son image de traine est une capture
+    // translucide sur laquelle on n'a pas la main, et les voisins sautent d'un
+    // coup a leur nouvelle place. Ici la carte suit le doigt et les voisins
+    // glissent.
+    let tirage = null;
 
-    document.addEventListener('pointerdown', (e) => {
-      const poignee = e.target.closest('.w-grip');
-      if (!poignee) return;
-      const w = poignee.closest('.w');
-      if (w) w.draggable = true;
-    });
+    // FLIP : on releve les positions, on reordonne, puis on rejoue l'ecart.
+    // C'est ce qui remplace le saut par un glissement.
+    function glisse(colonnes, action) {
+      const avant = new Map();
+      for (const col of colonnes) {
+        for (const w of col.querySelectorAll(':scope > .w')) avant.set(w, w.getBoundingClientRect());
+      }
+      action();
+      for (const [w, a] of avant) {
+        const b = w.getBoundingClientRect();
+        const dx = a.left - b.left, dy = a.top - b.top;
+        if (!dx && !dy) continue;
+        w.animate([{ transform: `translate(${dx}px, ${dy}px)` }, { transform: 'none' }],
+          { duration: 220, easing: 'cubic-bezier(0.22, 0.61, 0.36, 1)' });
+      }
+    }
 
-    document.addEventListener('dragstart', (e) => {
-      const w = e.target.closest ? e.target.closest('.w[draggable="true"]') : null;
-      if (!w) return;
-      widgetTire = w;
-      w.classList.add('tire');
-      e.dataTransfer.effectAllowed = 'move';
-      e.dataTransfer.setData('text/plain', '');
-    });
+    function colonnesDe(el) {
+      const grille = el.closest('.wgrid');
+      return grille ? [...grille.querySelectorAll(':scope > .wcol')] : [];
+    }
 
-    function widgetAvant(col, y) {
-      // Le widget devant lequel deposer : le premier dont on a depasse le
-      // milieu par le haut.
+    function creuxAvant(col, y) {
+      // Le widget devant lequel poser : le premier dont on a depasse le milieu
+      // par le haut.
       let proche = null, ecart = -Infinity;
       for (const w of col.querySelectorAll(':scope > .w')) {
-        if (w === widgetTire) continue;
         const r = w.getBoundingClientRect();
         const d = y - r.top - r.height / 2;
         if (d < 0 && d > ecart) { ecart = d; proche = w; }
@@ -9934,41 +9981,97 @@
       return proche;
     }
 
-    document.addEventListener('dragover', (e) => {
-      if (!widgetTire) return;
-      const col = e.target.closest ? e.target.closest('.wcol') : null;
-      if (!col) return;
+    function widgetPrend(e) {
+      const poignee = e.target.closest ? e.target.closest('.w-grip') : null;
+      if (!poignee || tirage || (e.button !== undefined && e.button !== 0)) return;
+      const w = poignee.closest('.w');
+      if (!w) return;
       e.preventDefault();
-      document.querySelectorAll('.wcol.cible').forEach(c => c.classList.remove('cible'));
-      col.classList.add('cible');
-      const avant = widgetAvant(col, e.clientY);
-      if (avant) col.insertBefore(widgetTire, avant);
-      else col.appendChild(widgetTire);
+
+      const r = w.getBoundingClientRect();
+      const creux = document.createElement('div');
+      creux.className = 'w-creux';
+      creux.style.height = r.height + 'px';
+      w.after(creux);
+
+      w.classList.add('vole');
+      w.style.width = r.width + 'px';
+      w.style.height = r.height + 'px';
+      w.style.left = r.left + 'px';
+      w.style.top = r.top + 'px';
+      document.body.appendChild(w);
+      document.body.classList.add('range');
+
+      tirage = {
+        w, creux, poignee,
+        colonnes: colonnesDe(creux),
+        ox: e.clientX - r.left, oy: e.clientY - r.top,
+        x0: r.left, y0: r.top,
+      };
+      bouge(e.clientX, e.clientY);
+      try { poignee.setPointerCapture(e.pointerId); } catch (x) { /* pointeur deja relache */ }
+    }
+
+    function bouge(cx, cy) {
+      const t = tirage;
+      t.w.style.transform =
+        `translate(${cx - t.ox - t.x0}px, ${cy - t.oy - t.y0}px) scale(1.02)`;
+    }
+
+    document.addEventListener('pointerdown', widgetPrend);
+
+    document.addEventListener('pointermove', (e) => {
+      if (!tirage) return;
+      bouge(e.clientX, e.clientY);
+      const sous = document.elementFromPoint(e.clientX, e.clientY);
+      const col = sous && sous.closest ? sous.closest('.wcol') : null;
+      if (!col) return;
+      const avant = creuxAvant(col, e.clientY);
+      if (avant === tirage.creux.nextElementSibling && col === tirage.creux.parentElement) return;
+      glisse(tirage.colonnes, () => {
+        if (avant) col.insertBefore(tirage.creux, avant);
+        else col.appendChild(tirage.creux);
+      });
     });
 
-    document.addEventListener('dragend', () => {
-      if (!widgetTire) return;
-      widgetTire.classList.remove('tire');
-      widgetTire.draggable = false;
-      widgetTire = null;
-      document.querySelectorAll('.wcol.cible').forEach(c => c.classList.remove('cible'));
-    });
+    function widgetPose() {
+      const t = tirage;
+      if (!t) return;
+      tirage = null;
+      const depart = t.w.getBoundingClientRect();
+      t.w.classList.remove('vole');
+      t.w.removeAttribute('style');
+      t.creux.replaceWith(t.w);
+      document.body.classList.remove('range');
+
+      const arrivee = t.w.getBoundingClientRect();
+      const dx = depart.left - arrivee.left, dy = depart.top - arrivee.top;
+      t.w.animate(
+        [{ transform: `translate(${dx}px, ${dy}px) scale(1.02)`, boxShadow: '0 22px 48px rgba(17, 24, 39, 0.16)' },
+         { transform: 'none', boxShadow: 'none' }],
+        { duration: 200, easing: 'cubic-bezier(0.22, 0.61, 0.36, 1)' });
+    }
+
+    document.addEventListener('pointerup', widgetPose);
+    document.addEventListener('pointercancel', widgetPose);
 
     // Le glisser-deposer n'existe pas au clavier : les fleches font le meme
     // travail depuis la poignee, qui est un bouton.
     function widgetDeplace(poignee, dx, dy) {
       const w = poignee.closest('.w'), col = w.parentElement;
-      const colonnes = [...col.parentElement.querySelectorAll(':scope > .wcol')];
-      if (dy) {
-        const frere = dy < 0 ? w.previousElementSibling : w.nextElementSibling;
-        if (!frere) return;
-        if (dy < 0) col.insertBefore(w, frere);
-        else col.insertBefore(frere, w);
-      } else {
-        const i = colonnes.indexOf(col) + dx;
-        if (i < 0 || i >= colonnes.length) return;
-        colonnes[i].appendChild(w);
-      }
+      const colonnes = colonnesDe(w);
+      glisse(colonnes, () => {
+        if (dy) {
+          const frere = dy < 0 ? w.previousElementSibling : w.nextElementSibling;
+          if (!frere) return;
+          if (dy < 0) col.insertBefore(w, frere);
+          else col.insertBefore(frere, w);
+        } else {
+          const i = colonnes.indexOf(col) + dx;
+          if (i < 0 || i >= colonnes.length) return;
+          colonnes[i].appendChild(w);
+        }
+      });
       poignee.focus();
     }
 
@@ -9982,6 +10085,18 @@
     });
 
     // ---- Ajouter un widget depuis le panneau ----
+    // L'apercu est une copie du modele : rien a redessiner quand le widget
+    // change, et ce qu'on montre est exactement ce qu'on pose.
+    document.querySelectorAll('.dw-item template').forEach((modele) => {
+      const vue = modele.closest('.dw-item').querySelector('.dw-vue-in');
+      if (!vue || vue.children.length) return;
+      const copie = modele.content.firstElementChild.cloneNode(true);
+      copie.querySelectorAll('button, input, a, [tabindex]')
+        .forEach(el => el.setAttribute('tabindex', '-1'));
+      vue.parentElement.setAttribute('aria-hidden', 'true');
+      vue.appendChild(copie);
+    });
+
     function widgetAjoute(cle, btn) {
       const modele = document.getElementById(cle);
       const colonnes = [...document.querySelectorAll('.wgrid.cols-3 > .wcol')];

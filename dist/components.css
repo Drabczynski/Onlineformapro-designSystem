@@ -2527,17 +2527,44 @@ textarea.form-input {
 
 .dw-item {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 12px;
   padding: 12px;
   border: 1px solid var(--bd);
-  border-radius: 10px;
+  border-radius: 12px;
   transition: border-color .12s, background .12s;
 }
 
 .dw-item:hover {
   border-color: var(--a2);
   background: var(--ps);
+}
+
+/* L'apercu est le widget lui-meme, reduit : il n'y a pas d'image a tenir a
+   jour, et ce qu'on voit est exactement ce qu'on posera. */
+.dw-vue {
+  height: 132px;
+  border-radius: 9px;
+  overflow: hidden;
+  background: var(--ps);
+  border: 1px solid var(--bd);
+  position: relative;
+  pointer-events: none;
+}
+
+.dw-vue-in {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 660px;
+  transform: scale(0.5);
+  transform-origin: top left;
+}
+
+.dw-bas {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .dw-ico {
@@ -2605,16 +2632,25 @@ textarea.form-input {
   height: 14px;
 }
 
-/* Le widget tire s'efface pour laisser voir la place qu'il prendra ; ce
-   n'est pas un etat desactive, c'est un fantome de deplacement. */
-.w.tire {
-  opacity: 0.35;
+/* La carte quitte le flux et suit le doigt : elle se souleve d'un cheveu et
+   porte une ombre portee, de sorte qu'on la voit passer au-dessus des
+   autres plutot que disparaitre puis reapparaitre ailleurs. */
+.w.vole {
+  position: fixed;
+  z-index: 400;
+  margin: 0;
+  pointer-events: none;
+  box-shadow: 0 22px 48px rgba(17, 24, 39, 0.16), 0 3px 10px rgba(17, 24, 39, 0.08);
+  cursor: grabbing;
 }
 
-.wcol.cible {
-  outline: 2px dashed var(--a2);
-  outline-offset: 5px;
+/* La place que la carte laisse, et celle qu'elle prendra : c'est le meme
+   creux, il se deplace pendant qu'on cherche. */
+.w-creux {
+  border: 2px dashed var(--a2);
   border-radius: 14px;
+  background: var(--a1);
+  flex-shrink: 0;
 }
 
 /* --- Choix d'une date --- */

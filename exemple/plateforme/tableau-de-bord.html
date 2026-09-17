@@ -659,12 +659,15 @@
       </div>
       <div class="drawer-body">
         <div class="dw-item">
-          <div class="dw-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-          <div class="dw-txt">
-            <div class="dw-nm">Sessions à venir</div>
-            <div class="dw-sub">Les prochaines dates et le nombre d’inscrits</div>
+          <div class="dw-vue"><div class="dw-vue-in"></div></div>
+          <div class="dw-bas">
+            <div class="dw-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+            <div class="dw-txt">
+              <div class="dw-nm">Sessions à venir</div>
+              <div class="dw-sub">Les prochaines dates et le nombre d’inscrits</div>
+            </div>
+            <button class="btn sm" onclick="widgetAjoute('wg-sessions', this)">Ajouter</button>
           </div>
-          <button class="btn sm" onclick="widgetAjoute('wg-sessions', this)">Ajouter</button>
           <template id="wg-sessions">
             <div class="w">
               <div class="w-head">
@@ -687,12 +690,15 @@
           </template>
         </div>
         <div class="dw-item">
-          <div class="dw-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><polyline points="8.2 13.4 7 22 12 19 17 22 15.8 13.4"/></svg></div>
-          <div class="dw-txt">
-            <div class="dw-nm">Certifications délivrées</div>
-            <div class="dw-sub">Le volume délivré et le taux de réussite au titre</div>
+          <div class="dw-vue"><div class="dw-vue-in"></div></div>
+          <div class="dw-bas">
+            <div class="dw-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><polyline points="8.2 13.4 7 22 12 19 17 22 15.8 13.4"/></svg></div>
+            <div class="dw-txt">
+              <div class="dw-nm">Certifications délivrées</div>
+              <div class="dw-sub">Le volume délivré et le taux de réussite au titre</div>
+            </div>
+            <button class="btn sm" onclick="widgetAjoute('wg-certifs', this)">Ajouter</button>
           </div>
-          <button class="btn sm" onclick="widgetAjoute('wg-certifs', this)">Ajouter</button>
           <template id="wg-certifs">
             <div class="w">
               <div class="w-head">
@@ -715,12 +721,15 @@
           </template>
         </div>
         <div class="dw-item">
-          <div class="dw-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></div>
-          <div class="dw-txt">
-            <div class="dw-nm">Taux d'abandon par formation</div>
-            <div class="dw-sub">Où les apprenants s’arrêtent avant la fin</div>
+          <div class="dw-vue"><div class="dw-vue-in"></div></div>
+          <div class="dw-bas">
+            <div class="dw-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></div>
+            <div class="dw-txt">
+              <div class="dw-nm">Taux d'abandon par formation</div>
+              <div class="dw-sub">Où les apprenants s’arrêtent avant la fin</div>
+            </div>
+            <button class="btn sm" onclick="widgetAjoute('wg-abandon', this)">Ajouter</button>
           </div>
-          <button class="btn sm" onclick="widgetAjoute('wg-abandon', this)">Ajouter</button>
           <template id="wg-abandon">
             <div class="w">
               <div class="w-head">
@@ -749,12 +758,15 @@
           </template>
         </div>
         <div class="dw-item">
-          <div class="dw-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.1 8.3 22 9.3 17 14.1 18.2 21 12 17.8 5.8 21 7 14.1 2 9.3 8.9 8.3 12 2"/></svg></div>
-          <div class="dw-txt">
-            <div class="dw-nm">Formations les mieux notées</div>
-            <div class="dw-sub">Le classement par note moyenne des apprenants</div>
+          <div class="dw-vue"><div class="dw-vue-in"></div></div>
+          <div class="dw-bas">
+            <div class="dw-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.1 8.3 22 9.3 17 14.1 18.2 21 12 17.8 5.8 21 7 14.1 2 9.3 8.9 8.3 12 2"/></svg></div>
+            <div class="dw-txt">
+              <div class="dw-nm">Formations les mieux notées</div>
+              <div class="dw-sub">Le classement par note moyenne des apprenants</div>
+            </div>
+            <button class="btn sm" onclick="widgetAjoute('wg-notes', this)">Ajouter</button>
           </div>
-          <button class="btn sm" onclick="widgetAjoute('wg-notes', this)">Ajouter</button>
           <template id="wg-notes">
             <div class="w">
               <div class="w-head">
@@ -778,12 +790,15 @@
           </template>
         </div>
         <div class="dw-item">
-          <div class="dw-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V6a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v15"/><path d="M13 10h5a1 1 0 0 1 1 1v10"/></svg></div>
-          <div class="dw-txt">
-            <div class="dw-nm">Répartition des heures par entité</div>
-            <div class="dw-sub">Quelle structure consomme la formation</div>
+          <div class="dw-vue"><div class="dw-vue-in"></div></div>
+          <div class="dw-bas">
+            <div class="dw-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V6a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v15"/><path d="M13 10h5a1 1 0 0 1 1 1v10"/></svg></div>
+            <div class="dw-txt">
+              <div class="dw-nm">Répartition des heures par entité</div>
+              <div class="dw-sub">Quelle structure consomme la formation</div>
+            </div>
+            <button class="btn sm" onclick="widgetAjoute('wg-entites', this)">Ajouter</button>
           </div>
-          <button class="btn sm" onclick="widgetAjoute('wg-entites', this)">Ajouter</button>
           <template id="wg-entites">
             <div class="w">
               <div class="w-head">
@@ -811,12 +826,15 @@
           </template>
         </div>
         <div class="dw-item">
-          <div class="dw-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h12M6 22h12M6 2c0 5 6 5 6 10 0-5 6-5 6-10M6 22c0-5 6-5 6-10 0 5 6 5 6 10"/></svg></div>
-          <div class="dw-txt">
-            <div class="dw-nm">Heures de formation par mois</div>
-            <div class="dw-sub">Le volume horaire suivi, mois par mois</div>
+          <div class="dw-vue"><div class="dw-vue-in"></div></div>
+          <div class="dw-bas">
+            <div class="dw-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h12M6 22h12M6 2c0 5 6 5 6 10 0-5 6-5 6-10M6 22c0-5 6-5 6-10 0 5 6 5 6 10"/></svg></div>
+            <div class="dw-txt">
+              <div class="dw-nm">Heures de formation par mois</div>
+              <div class="dw-sub">Le volume horaire suivi, mois par mois</div>
+            </div>
+            <button class="btn sm" onclick="widgetAjoute('wg-heures', this)">Ajouter</button>
           </div>
-          <button class="btn sm" onclick="widgetAjoute('wg-heures', this)">Ajouter</button>
           <template id="wg-heures">
             <div class="w">
               <div class="w-head">
