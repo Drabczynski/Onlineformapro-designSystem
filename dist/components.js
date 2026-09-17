@@ -78,7 +78,8 @@ function segPick(btn) {
 
 // ---- Tableaux : menu d'actions de ligne ----
 function togRow(btn) {
-  const cell = btn.closest('.catd');
+  const cell = btn.closest('.catd, .rmenu-wrap');
+  if (!cell) return;
   const menu = cell.querySelector('.rmenu');
   const open = menu.classList.contains('oo');
   closeRowMenus();
@@ -87,7 +88,7 @@ function togRow(btn) {
 
 function closeRowMenus() {
   document.querySelectorAll('.rmenu.oo').forEach(m => m.classList.remove('oo'));
-  document.querySelectorAll('.catd.oo').forEach(c => c.classList.remove('oo'));
+  document.querySelectorAll('.catd.oo, .rmenu-wrap.oo').forEach(c => c.classList.remove('oo'));
 }
 
 document.addEventListener('click', (e) => {
@@ -361,6 +362,11 @@ document.querySelectorAll('.drp-pop.pin').forEach(pop => { drpSuggestions(pop); 
 // translucide sur laquelle on n'a pas la main, et les voisins sautent d'un
 // coup a leur nouvelle place. Ici la carte suit le doigt et les voisins
 // glissent.
+// Ce qui se range, et ou. Un widget dans une colonne, une ligne de parcours
+// dans sa liste : meme poignee, meme mecanique.
+const RANGEABLE = '.w, .elt';
+const ZONE = '.wcol, .elt-list';
+
 let tirage = null;
 
 // FLIP : on releve les positions, on reordonne, puis on rejoue l'ecart.
@@ -368,7 +374,9 @@ let tirage = null;
 function glisse(colonnes, action) {
   const avant = new Map();
   for (const col of colonnes) {
-    for (const w of col.querySelectorAll(':scope > .w')) avant.set(w, w.getBoundingClientRect());
+    for (const w of col.querySelectorAll(':scope > .w, :scope > .elt')) {
+      avant.set(w, w.getBoundingClientRect());
+    }
   }
   action();
   for (const [w, a] of avant) {
@@ -381,15 +389,19 @@ function glisse(colonnes, action) {
 }
 
 function colonnesDe(el) {
-  const grille = el.closest('.wgrid');
-  return grille ? [...grille.querySelectorAll(':scope > .wcol')] : [];
+  const zone = el.closest(ZONE);
+  if (!zone) return [];
+  // Une grille de widgets a plusieurs colonnes ; une liste d'elements n'en
+  // a qu'une, et c'est elle-meme.
+  const grille = zone.closest('.wgrid');
+  return grille ? [...grille.querySelectorAll(':scope > .wcol')] : [zone];
 }
 
 function creuxAvant(col, y) {
   // Le widget devant lequel poser : le premier dont on a depasse le milieu
   // par le haut.
   let proche = null, ecart = -Infinity;
-  for (const w of col.querySelectorAll(':scope > .w')) {
+  for (const w of col.querySelectorAll(':scope > .w, :scope > .elt')) {
     const r = w.getBoundingClientRect();
     const d = y - r.top - r.height / 2;
     if (d < 0 && d > ecart) { ecart = d; proche = w; }
@@ -400,7 +412,7 @@ function creuxAvant(col, y) {
 function widgetPrend(e) {
   const poignee = e.target.closest ? e.target.closest('.w-grip') : null;
   if (!poignee || tirage || (e.button !== undefined && e.button !== 0)) return;
-  const w = poignee.closest('.w');
+  const w = poignee.closest(RANGEABLE);
   if (!w) return;
   e.preventDefault();
 
@@ -440,7 +452,7 @@ document.addEventListener('pointermove', (e) => {
   if (!tirage) return;
   bouge(e.clientX, e.clientY);
   const sous = document.elementFromPoint(e.clientX, e.clientY);
-  const col = sous && sous.closest ? sous.closest('.wcol') : null;
+  const col = sous && sous.closest ? sous.closest(ZONE) : null;
   if (!col) return;
   const avant = creuxAvant(col, e.clientY);
   if (avant === tirage.creux.nextElementSibling && col === tirage.creux.parentElement) return;
@@ -474,7 +486,7 @@ document.addEventListener('pointercancel', widgetPose);
 // Le glisser-deposer n'existe pas au clavier : les fleches font le meme
 // travail depuis la poignee, qui est un bouton.
 function widgetDeplace(poignee, dx, dy) {
-  const w = poignee.closest('.w'), col = w.parentElement;
+  const w = poignee.closest(RANGEABLE), col = w.parentElement;
   const colonnes = colonnesDe(w);
   glisse(colonnes, () => {
     if (dy) {
@@ -502,7 +514,7 @@ document.addEventListener('keydown', (e) => {
 
 // ---- Retirer un widget ----
 function widgetRetire(btn) {
-  const w = btn.closest('.w');
+  const w = btn.closest(RANGEABLE);
   if (!w || !w.parentElement) return;
   const colonnes = colonnesDe(w);
   const cle = w.dataset.wg;

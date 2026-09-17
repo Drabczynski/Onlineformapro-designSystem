@@ -55,7 +55,11 @@ La référence des composants est `index.html` : chaque section montre le rendu,
 | Un champ au format connu | `type="email"`, ou `data-fmt="tel"` / `cp` / `siret` / `naf` — le système met en forme pendant la frappe et affiche l'erreur à la sortie du champ |
 | Une fenêtre modale | `.modal-veil[hidden] > .modal (.modal-header + .modal-body + .modal-footer)`, ouverte par `modalOuvre('id')`, fermée par `modalFerme(this)` |
 | Un panneau latéral | `.modal-veil.side[hidden] > .drawer (.drawer-head + .drawer-body)` — même ouverture, même fermeture |
-| Un widget qu'on peut ranger | `.w-grip` dans son `.w-head` : glisser-déposer entre `.wcol`, et flèches au clavier |
+| Quelque chose qu'on peut ranger | `.w-grip` dans la ligne : `.w` entre `.wcol`, `.elt` dans une `.elt-list`. Glisser-déposer et flèches au clavier |
+| Une palette de ressources | `.pal > div (.pal-title + .pal-grid > .pal-item.tN (.pal-ico + .pal-lbl))` |
+| Un outillage à gauche, un document à droite | `.form-body.side-main` |
+| Une bannière avec une action posée dessus | `.banner > img.thumb.wide + .banner-act` |
+| Une ligne d'un parcours | `.elt > .w-grip + .thumb.lg + .elt-txt (.nmain + .nsub) + .pbadge + .rmenu-wrap (.rdots + .rmenu)` |
 | Un widget qu'on peut retirer | `.w-close` dans son `.w-head`, `onclick="widgetRetire(this)"` |
 | Un widget à poser depuis un panneau | une `<template>` qui contient le `.w`, posée par `widgetAjoute('id', this)` |
 | Une liste de choix | `.w-dd-wrap.block > .w-dd-btn.field + .w-dd-menu > .w-dd-item` |

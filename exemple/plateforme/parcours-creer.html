@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Créer un parcours — OnlineManager</title>
+  <!-- Le système : on l'importe, on ne le recopie pas, on ne le surcharge pas. -->
+  <link rel="stylesheet" href="../../dist/components.css">
+</head>
+
+<body class="app">
+  <header class="topbar">
+  <div class="tb-slot">
+  <span class="tb-appn">Online<b>Manager</b></span>
+  <button class="tb-burger" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+  </div>
+  <div class="tb-body">
+  <span class="tb-store">Onlineformapro</span>
+  <div class="tb-cw"><span class="tb-cl">Comptes :</span>
+  <div class="w-dd-wrap">
+  <button class="w-dd-btn tb" onclick="toggleDD(this)"><span class="dd-ph">Sélectionnez un compte</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+  <div class="w-dd-menu">
+  <div class="w-dd-item">INFREP</div>
+  <div class="w-dd-item">OCB Formation</div>
+  <div class="w-dd-item">Cap Petite Enfance</div>
+  </div>
+  </div>
+  </div>
+
+  <div class="tb-ics">
+  <button aria-label="Accueil" class="tbi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+  stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+  <polyline points="9 22 9 12 15 12 15 22" />
+  </svg></button>
+  <button aria-label="Rechercher" class="tbi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+  stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="11" cy="11" r="8" />
+  <path d="m21 21-4.35-4.35" />
+  </svg></button>
+  <button aria-label="Changer de langue" class="tbi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+  stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="12" cy="12" r="10" />
+  <line x1="2" y1="12" x2="22" y2="12" />
+  <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
+  </svg></button>
+  <div class="tbsep"></div>
+  <div class="apps-wrap">
+  <button aria-label="Applications" class="tbi">
+  <svg viewBox="0 0 24 24" fill="currentColor">
+  <circle cx="5" cy="5" r="1.8" />
+  <circle cx="12" cy="5" r="1.8" />
+  <circle cx="19" cy="5" r="1.8" />
+  <circle cx="5" cy="12" r="1.8" />
+  <circle cx="12" cy="12" r="1.8" />
+  <circle cx="19" cy="12" r="1.8" />
+  <circle cx="5" cy="19" r="1.8" />
+  <circle cx="12" cy="19" r="1.8" />
+  <circle cx="19" cy="19" r="1.8" />
+  </svg>
+  </button>
+  <div class="apps-drop">
+  <div class="apps-hd">Applications</div>
+  <div class="app-row">
+  <div class="app-ic" style="background:#7C3AED"><svg viewBox="0 0 24 24">
+  <path
+  d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
+  </svg></div>
+  <div>
+  <div class="app-nm">OnlineAuteur</div>
+  <div class="app-sub">Création de contenus</div>
+  </div>
+  </div>
+  <div class="app-row">
+  <div class="app-ic" style="background:#059669"><svg viewBox="0 0 24 24">
+  <path
+  d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5zm15 8a2 2 0 012 2v4a2 2 0 01-2 2h-2l-3 3v-3H9a2 2 0 01-2-2v-1h1a3 3 0 003-3V9h8a2 2 0 012 2z" />
+  </svg></div>
+  <div>
+  <div class="app-nm">OnlineAgora</div>
+  <div class="app-sub">Espace collaboratif</div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <button aria-label="Se déconnecter" class="tbi red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+  stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
+  <polyline points="16 17 21 12 16 7" />
+  <line x1="21" y1="12" x2="9" y2="12" />
+  </svg></button>
+  <div class="tb-av">AL</div>
+  </div>
+  </div>
+  </header>
+  <div class="layout">
+    <aside class="sidebar">
+    <div class="sb-toggle">
+    <div class="sbt-btn on">Gestion</div>
+    <div class="sbt-btn">Reporting</div>
+    </div>
+    <nav class="nav">
+    <a class="ni" href="tableau-de-bord.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>Tableau de bord</a>
+    <a class="ni" href="formations.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Formations</a>
+    <a class="ni act" href="parcours-creer.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h5l2 3h11a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1z"/><line x1="9" y1="14" x2="15" y2="14"/></svg>Créer un parcours</a>
+    <a class="ni" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="8" cy="12" r="2.2"/><line x1="14" y1="10" x2="18" y2="10"/><line x1="14" y1="14" x2="18" y2="14"/></svg>Carte de visite</a>
+    <a class="ni" href="coordonnees.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Coordonnées</a>
+    <a class="ni" href="usagers.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>Usagers</a>
+    <a class="ni" href="entites-lister.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg>Entités</a>
+    <a class="ni" href="entites-creer.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>Créer une entité</a>
+    <a class="ni" href="entites-importer.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>Importer un CSV</a>
+    </nav>
+    </aside>
+    <main class="main">
+      <div class="content">
+        <div class="ph">
+          <div class="ph-l">
+            <h1 class="ph-title">Créer un parcours</h1>
+            <span class="ph-ct">Brouillon · enregistré il y a 2 min</span>
+          </div>
+          <div class="ph-actions">
+            <button class="btn">Prévisualiser</button>
+            <button class="btn primary">Enregistrer le parcours</button>
+          </div>
+        </div>
+
+        <div class="form-body side-main">
+          <div class="col">
+            <div class="pal">
+              <div>
+                <div class="pal-title">Image</div>
+                <div class="pal-grid">
+                    <button class="pal-item t4"><span class="pal-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></span><span class="pal-lbl">Image</span></button>
+                    <button class="pal-item t3"><span class="pal-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M13 9h-2a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h1v-2"/><line x1="17" y1="9" x2="17" y2="15"/></svg></span><span class="pal-lbl">GIF</span></button>
+                    <button class="pal-item t2"><span class="pal-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.51"/></svg></span><span class="pal-lbl">Instagram</span></button>
+                </div>
+              </div>
+              <div>
+                <div class="pal-title">Vidéo</div>
+                <div class="pal-grid">
+                    <button class="pal-item t2"><span class="pal-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></span><span class="pal-lbl">Vidéo</span></button>
+                    <button class="pal-item t1"><span class="pal-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22.5 6.4a2.8 2.8 0 0 0-2-2C18.8 4 12 4 12 4s-6.8 0-8.5.4a2.8 2.8 0 0 0-2 2A29 29 0 0 0 1.1 12a29 29 0 0 0 .4 5.6 2.8 2.8 0 0 0 2 2C5.2 20 12 20 12 20s6.8 0 8.5-.4a2.8 2.8 0 0 0 2-2 29 29 0 0 0 .4-5.6 29 29 0 0 0-.4-5.6z"/><polygon points="9.9 15.1 15.1 12 9.9 8.9 9.9 15.1"/></svg></span><span class="pal-lbl">YouTube</span></button>
+                    <button class="pal-item t4"><span class="pal-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 8.4c-.1 2.1-1.6 5-4.4 8.6C14.7 20.7 12.3 22 10.4 22c-1.2 0-2.2-1.1-3-3.3l-1.6-6c-.6-2.2-1.3-3.3-2-3.3-.2 0-.7.3-1.6 1l-1-1.2 3-2.7C5.6 5.3 6.6 4.7 7.3 4.6c1.6-.2 2.6 1 3 3.5.4 2.8.7 4.5.9 5.2.5 2.1 1 3.2 1.6 3.2.5 0 1.2-.7 2.1-2.2.9-1.5 1.4-2.6 1.5-3.4.1-1.3-.4-2-1.5-2-.5 0-1 .1-1.6.4C14.2 6.3 16.3 4.6 19 4.7c2 .1 3 1.4 3 4z"/></svg></span><span class="pal-lbl">Vimeo</span></button>
+                </div>
+              </div>
+              <div>
+                <div class="pal-title">Animation</div>
+                <div class="pal-grid">
+                    <button class="pal-item t3"><span class="pal-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17c4 0 5-10 9-10s5 10 9 10"/></svg></span><span class="pal-lbl">Dot Lottie</span></button>
+                    <button class="pal-item t1"><span class="pal-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12a4 4 0 0 0 8 0"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></span><span class="pal-lbl">Lottie</span></button>
+                </div>
+              </div>
+              <div>
+                <div class="pal-title">Audio</div>
+                <div class="pal-grid">
+                    <button class="pal-item t3"><span class="pal-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M7 9.5c3.5-1 7.5-.7 10.5 1"/><path d="M7.5 13c3-.8 6.3-.5 8.8 1"/><path d="M8.5 16.3c2.3-.6 4.8-.4 6.8.8"/></svg></span><span class="pal-lbl">Spotify</span></button>
+                    <button class="pal-item t2"><span class="pal-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="3"/><path d="M12 14v6"/><path d="M6.5 15a7 7 0 1 1 11 0"/></svg></span><span class="pal-lbl">Apple Podcasts</span></button>
+                    <button class="pal-item t5"><span class="pal-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16v-4"/><path d="M7.5 16V9"/><path d="M11 16V7"/><path d="M14.5 16h4a2.5 2.5 0 0 0 0-5 4.5 4.5 0 0 0-4-4.3V16z"/></svg></span><span class="pal-lbl">SoundCloud</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="banner">
+              <img class="thumb wide" alt="Bannière du parcours Windows 11" src="img/formation-hero.svg">
+              <div class="banner-act">
+                <button class="btn sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/><circle cx="12" cy="12" r="3.2"/></svg> Générer une image</button>
+              </div>
+            </div>
+            <div>
+              <div class="elt-head">
+                <div class="elt-titre">Prise en main de Windows 11</div>
+                <button class="btn tertiary sm">Renommer</button>
+                <span class="elt-ct">4 éléments</span>
+                <button class="btn sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Paramètres</button>
+              </div>
+              <div class="elt-list">
+                <div class="elt">
+                  <button class="w-grip" aria-label="Déplacer « L'environnement de travail de Windows 11 » — flèches pour le ranger"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></button>
+                  <img class="thumb lg" loading="lazy" alt="L'environnement de travail de Windows 11" src="img/module-1.svg">
+                  <div class="elt-txt">
+                    <div class="nmain">L'environnement de travail de Windows 11</div>
+                    <div class="nsub">Vidéo · 6 min · déposée depuis YouTube</div>
+                  </div>
+                  <span class="pbadge gray">YouTube</span>
+                  <div class="rmenu-wrap">
+                    <button class="rdots" aria-label="Actions sur « L'environnement de travail de Windows 11 »" onclick="togRow(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+                  <div class="rmenu">
+                    <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> Ouvrir l'élément</div>
+                    <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.5 15a9 9 0 1 1-2.1-9.4L23 10"/></svg> Remplacer le média</div>
+                    <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Dupliquer</div>
+                    <div class="rmdiv"></div>
+                    <div class="rmi dn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg> Retirer du parcours</div>
+                  </div>
+                  </div>
+                </div>
+                <div class="elt">
+                  <button class="w-grip" aria-label="Déplacer « Personnaliser son environnement » — flèches pour le ranger"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></button>
+                  <img class="thumb lg" loading="lazy" alt="Personnaliser son environnement" src="img/module-2.svg">
+                  <div class="elt-txt">
+                    <div class="nmain">Personnaliser son environnement</div>
+                    <div class="nsub">Image commentée · déposée depuis la bibliothèque</div>
+                  </div>
+                  <span class="pbadge gray">Image</span>
+                  <div class="rmenu-wrap">
+                    <button class="rdots" aria-label="Actions sur « Personnaliser son environnement »" onclick="togRow(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+                  <div class="rmenu">
+                    <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> Ouvrir l'élément</div>
+                    <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.5 15a9 9 0 1 1-2.1-9.4L23 10"/></svg> Remplacer le média</div>
+                    <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Dupliquer</div>
+                    <div class="rmdiv"></div>
+                    <div class="rmi dn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg> Retirer du parcours</div>
+                  </div>
+                  </div>
+                </div>
+                <div class="elt">
+                  <button class="w-grip" aria-label="Déplacer « L'explorateur Windows » — flèches pour le ranger"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></button>
+                  <img class="thumb lg" loading="lazy" alt="L'explorateur Windows" src="img/module-3.svg">
+                  <div class="elt-txt">
+                    <div class="nmain">L'explorateur Windows</div>
+                    <div class="nsub">Animation Lottie · 40 s</div>
+                  </div>
+                  <span class="pbadge gray">Lottie</span>
+                  <div class="rmenu-wrap">
+                    <button class="rdots" aria-label="Actions sur « L'explorateur Windows »" onclick="togRow(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+                  <div class="rmenu">
+                    <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> Ouvrir l'élément</div>
+                    <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.5 15a9 9 0 1 1-2.1-9.4L23 10"/></svg> Remplacer le média</div>
+                    <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Dupliquer</div>
+                    <div class="rmdiv"></div>
+                    <div class="rmi dn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg> Retirer du parcours</div>
+                  </div>
+                  </div>
+                </div>
+                <div class="elt">
+                  <button class="w-grip" aria-label="Déplacer « Personnaliser le bureau » — flèches pour le ranger"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></button>
+                  <img class="thumb lg" loading="lazy" alt="Personnaliser le bureau" src="img/module-4.svg">
+                  <div class="elt-txt">
+                    <div class="nmain">Personnaliser le bureau</div>
+                    <div class="nsub">Épisode audio · 12 min · déposé depuis Spotify</div>
+                  </div>
+                  <span class="pbadge gray">Spotify</span>
+                  <div class="rmenu-wrap">
+                    <button class="rdots" aria-label="Actions sur « Personnaliser le bureau »" onclick="togRow(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+                  <div class="rmenu">
+                    <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> Ouvrir l'élément</div>
+                    <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.5 15a9 9 0 1 1-2.1-9.4L23 10"/></svg> Remplacer le média</div>
+                    <div class="rmi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Dupliquer</div>
+                    <div class="rmdiv"></div>
+                    <div class="rmi dn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg> Retirer du parcours</div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="../../dist/components.js" defer></script>
+</body>
+
+</html>

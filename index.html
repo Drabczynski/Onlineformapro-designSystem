@@ -1533,6 +1533,19 @@
     }
 
     /* --- Actions de ligne --- */
+    /* Le menu de ligne servait uniquement dans un tableau, ou il n'apparait
+       qu'au survol. Hors tableau il n'y a pas de ligne a survoler : le
+       conteneur le rend visible en permanence. */
+    .rmenu-wrap {
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .rmenu-wrap .rdots {
+      display: flex;
+      margin: 0;
+    }
+
     .rdots {
       width: 28px;
       height: 28px;
@@ -2822,6 +2835,12 @@
       grid-template-columns: 1.7fr 1fr;
     }
 
+    /* L'inverse : un outillage etroit a gauche, le document a droite. */
+    .form-body.side-main {
+      grid-template-columns: 260px 1fr;
+      gap: 24px;
+    }
+
     /* --- Import de fichier : ligne compacte --- */
     .upload-row {
       display: flex;
@@ -3129,6 +3148,161 @@
       gap: 10px;
       padding: 12px 16px 16px;
       border-top: 1px solid var(--bd);
+    }
+
+    /* --- Palette de ressources --- */
+    /* Ce qu'on peut deposer dans un document, range par nature. Les tuiles
+       sont carrees et de meme taille : aucune ressource n'est mise en avant
+       par son gabarit. */
+    .pal {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .pal-title {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--t3);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 10px;
+    }
+
+    .pal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .pal-item {
+      --mark: var(--ch1);
+      --wash: var(--ch1-w);
+      aspect-ratio: 1;
+      border: 1px solid var(--bd);
+      border-radius: 10px;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 6px;
+      cursor: grab;
+      font-family: inherit;
+      transition: border-color .12s, box-shadow .12s, transform .12s;
+    }
+
+    .pal-item.t1 { --mark: var(--ch1); --wash: var(--ch1-w); }
+    .pal-item.t2 { --mark: var(--ch2); --wash: var(--ch2-w); }
+    .pal-item.t3 { --mark: var(--ch3); --wash: var(--ch3-w); }
+    .pal-item.t4 { --mark: var(--ch4); --wash: var(--ch4-w); }
+    .pal-item.t5 { --mark: var(--ch5); --wash: var(--ch5-w); }
+
+    .pal-item:hover {
+      border-color: var(--a2);
+      box-shadow: 0 4px 12px rgba(17, 24, 39, 0.06);
+      transform: translateY(-1px);
+    }
+
+    .pal-item:active {
+      cursor: grabbing;
+    }
+
+    .pal-ico {
+      width: 30px;
+      height: 30px;
+      border-radius: 9px;
+      background: var(--wash);
+      color: var(--mark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .pal-ico svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .pal-lbl {
+      font-size: 10.5px;
+      font-weight: 500;
+      color: var(--t2);
+      text-align: center;
+      line-height: 1.25;
+    }
+
+    /* --- Banniere d'un document --- */
+    .banner {
+      position: relative;
+    }
+
+    .banner-act {
+      position: absolute;
+      right: 14px;
+      top: 14px;
+    }
+
+    /* --- Ligne d'element d'un parcours --- */
+    .elt-head {
+      background: #fff;
+      border: 1px solid var(--bd);
+      border-radius: var(--rl);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, .04);
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .elt-titre {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--t1);
+    }
+
+    .elt-ct {
+      margin-left: auto;
+      font-size: 12.5px;
+      color: var(--t3);
+    }
+
+    .elt {
+      background: #fff;
+      border: 1px solid var(--bd);
+      border-radius: var(--rl);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, .04);
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .elt-txt {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .elt+.elt,
+    .elt-head+.elt {
+      margin-top: 10px;
+    }
+
+    /* Zone de depot : c'est elle qui accueille les lignes deplacees. */
+    .elt-list {
+      display: block;
+    }
+
+    .elt.vole {
+      position: fixed;
+      z-index: 400;
+      margin: 0;
+      pointer-events: none;
+      box-shadow: 0 22px 48px rgba(17, 24, 39, 0.16), 0 3px 10px rgba(17, 24, 39, 0.08);
+      cursor: grabbing;
     }
 
     /* --- Panneau lateral --- */
@@ -9685,7 +9859,8 @@
 
     // ---- Tableaux : menu d'actions de ligne ----
     function togRow(btn) {
-      const cell = btn.closest('.catd');
+      const cell = btn.closest('.catd, .rmenu-wrap');
+      if (!cell) return;
       const menu = cell.querySelector('.rmenu');
       const open = menu.classList.contains('oo');
       closeRowMenus();
@@ -9694,7 +9869,7 @@
 
     function closeRowMenus() {
       document.querySelectorAll('.rmenu.oo').forEach(m => m.classList.remove('oo'));
-      document.querySelectorAll('.catd.oo').forEach(c => c.classList.remove('oo'));
+      document.querySelectorAll('.catd.oo, .rmenu-wrap.oo').forEach(c => c.classList.remove('oo'));
     }
 
     document.addEventListener('click', (e) => {
@@ -9968,6 +10143,11 @@
     // translucide sur laquelle on n'a pas la main, et les voisins sautent d'un
     // coup a leur nouvelle place. Ici la carte suit le doigt et les voisins
     // glissent.
+    // Ce qui se range, et ou. Un widget dans une colonne, une ligne de parcours
+    // dans sa liste : meme poignee, meme mecanique.
+    const RANGEABLE = '.w, .elt';
+    const ZONE = '.wcol, .elt-list';
+
     let tirage = null;
 
     // FLIP : on releve les positions, on reordonne, puis on rejoue l'ecart.
@@ -9975,7 +10155,9 @@
     function glisse(colonnes, action) {
       const avant = new Map();
       for (const col of colonnes) {
-        for (const w of col.querySelectorAll(':scope > .w')) avant.set(w, w.getBoundingClientRect());
+        for (const w of col.querySelectorAll(':scope > .w, :scope > .elt')) {
+          avant.set(w, w.getBoundingClientRect());
+        }
       }
       action();
       for (const [w, a] of avant) {
@@ -9988,15 +10170,19 @@
     }
 
     function colonnesDe(el) {
-      const grille = el.closest('.wgrid');
-      return grille ? [...grille.querySelectorAll(':scope > .wcol')] : [];
+      const zone = el.closest(ZONE);
+      if (!zone) return [];
+      // Une grille de widgets a plusieurs colonnes ; une liste d'elements n'en
+      // a qu'une, et c'est elle-meme.
+      const grille = zone.closest('.wgrid');
+      return grille ? [...grille.querySelectorAll(':scope > .wcol')] : [zone];
     }
 
     function creuxAvant(col, y) {
       // Le widget devant lequel poser : le premier dont on a depasse le milieu
       // par le haut.
       let proche = null, ecart = -Infinity;
-      for (const w of col.querySelectorAll(':scope > .w')) {
+      for (const w of col.querySelectorAll(':scope > .w, :scope > .elt')) {
         const r = w.getBoundingClientRect();
         const d = y - r.top - r.height / 2;
         if (d < 0 && d > ecart) { ecart = d; proche = w; }
@@ -10007,7 +10193,7 @@
     function widgetPrend(e) {
       const poignee = e.target.closest ? e.target.closest('.w-grip') : null;
       if (!poignee || tirage || (e.button !== undefined && e.button !== 0)) return;
-      const w = poignee.closest('.w');
+      const w = poignee.closest(RANGEABLE);
       if (!w) return;
       e.preventDefault();
 
@@ -10047,7 +10233,7 @@
       if (!tirage) return;
       bouge(e.clientX, e.clientY);
       const sous = document.elementFromPoint(e.clientX, e.clientY);
-      const col = sous && sous.closest ? sous.closest('.wcol') : null;
+      const col = sous && sous.closest ? sous.closest(ZONE) : null;
       if (!col) return;
       const avant = creuxAvant(col, e.clientY);
       if (avant === tirage.creux.nextElementSibling && col === tirage.creux.parentElement) return;
@@ -10081,7 +10267,7 @@
     // Le glisser-deposer n'existe pas au clavier : les fleches font le meme
     // travail depuis la poignee, qui est un bouton.
     function widgetDeplace(poignee, dx, dy) {
-      const w = poignee.closest('.w'), col = w.parentElement;
+      const w = poignee.closest(RANGEABLE), col = w.parentElement;
       const colonnes = colonnesDe(w);
       glisse(colonnes, () => {
         if (dy) {
@@ -10109,7 +10295,7 @@
 
     // ---- Retirer un widget ----
     function widgetRetire(btn) {
-      const w = btn.closest('.w');
+      const w = btn.closest(RANGEABLE);
       if (!w || !w.parentElement) return;
       const colonnes = colonnesDe(w);
       const cle = w.dataset.wg;
